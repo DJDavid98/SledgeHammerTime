@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\DiscordUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +18,13 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
+        $discordUsers = [];
+        $authUser = Auth::user();
+        if ($authUser) {
+            $discordUsers = $authUser->discordUsers()->get(['id', 'name', 'display_name', 'discriminator', 'avatar'])->map(fn(DiscordUser $du) => $du->mapToUiInfo());
+        }
         return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
+            'discordUsers' => $discordUsers,
         ]);
     }
 
@@ -30,10 +34,6 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
 
         $request->user()->save();
 

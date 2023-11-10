@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('scopes', 128)->nullable();
             $table->timestampTz('token_expires')->nullable();
             $table->uuid('user_id')->nullable();
-            $table->uuid('display_name')->nullable();
+            $table->string('display_name')->nullable();
             $table->timestampsTz();
         });
     }

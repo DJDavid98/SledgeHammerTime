@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --discord-color: #5865f2;
+    --bg-gradient-start: rgb(88 94 242 / 0.5);
+    --bg-gradient-mid: rgb(var(--discord-color) / 0.5);
+    --bg-gradient-end: rgb(165 94 165 / 0.5);
+}
+
+body {
+    --gradient-stops: var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%;
+    --gradient-angle: 15deg;
+}
+
+:root[dir='ltr'] body {
+    background-image: linear-gradient(calc(180deg - var(--gradient-angle)), var(--gradient-stops));
+}
+
+:root[dir='rtl'] body {
+    background-image: linear-gradient(calc(180deg + var(--gradient-angle)), var(--gradient-stops));
+}

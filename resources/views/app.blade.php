@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#5865F2" />
+    <meta name="color-scheme" content="dark" />
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="/logos/logo.png" />
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Scripts -->
-        @routes
-        @vite(['resources/js/app.ts', "resources/js/Pages/{$page['component']}.vue"])
-        @inertiaHead
-    </head>
-    <body class="font-sans antialiased">
-        @inertia
-    </body>
+    {{-- Fonts --}}
+    @googlefonts
+
+    {{-- Scripts --}}
+    @routes
+    @vite(['resources/js/app.ts', "resources/js/Pages/{$page['component']}.vue"])
+    @inertiaHead
+</head>
+<body class="font-sans antialiased">
+@inertia
+</body>
 </html>

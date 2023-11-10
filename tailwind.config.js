@@ -13,7 +13,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+                mono: ['Source Code Pro', 'Consolas', ...defaultTheme.fontFamily.mono],
             },
         },
     },
