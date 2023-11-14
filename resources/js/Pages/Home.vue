@@ -20,6 +20,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
                     :href="route('logout')"
                     method="post"
                     class="font-semibold text-gray-400 hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500"
+                    as="button"
                 >Log out
                 </Link>
             </template>

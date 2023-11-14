@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -34,7 +35,8 @@ class AuthController extends Controller
                 throw new NotFoundHttpException();
         }
         $driver->redirectUrl(self::createRedirectUrl($validated['provider']));
-        return $driver->redirect();
+        $redirect_response = $driver->redirect();
+        return Inertia::location($redirect_response->getTargetUrl());
     }
 
     public function callback(OauthProviderRequest $request)
