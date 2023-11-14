@@ -28,7 +28,7 @@ class AuthController extends Controller
         switch ($validated['provider']) {
             case SocialProvider::Discord->value:
                 // Overwrite scopes from socialite provider package, we do not need nor want user e-mails
-                $driver->scopes(['identify']);
+                $driver->setScopes(['identify']);
                 break;
             default:
                 throw new NotFoundHttpException();

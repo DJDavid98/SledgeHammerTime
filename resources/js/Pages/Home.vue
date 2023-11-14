@@ -16,10 +16,12 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
                     class="font-semibold text-gray-400 hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500"
                 >Settings
                 </Link>
-                <a
+                <Link
                     :href="route('logout')"
+                    method="post"
                     class="font-semibold text-gray-400 hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500"
-                >Log out</a>
+                >Log out
+                </Link>
             </template>
 
             <template v-else>
