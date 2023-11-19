@@ -47,7 +47,7 @@ defineExpose({
     </div>
     <div class="grid">
       <button @click="select" class="mb-0">{{ $t('global.form.select') }}</button>
-      <button @click="close" class="mb-0">{{ $t('global.form.cancel') }}</button>
+      <button @click="close" class="mb-0 secondary">{{ $t('global.form.cancel') }}</button>
     </div>
   </Popup>
 </template>
