@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import { getAppName } from '@/utils/app';
+
+const appName = getAppName();
 </script>
 
 <template>
@@ -9,7 +12,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
       <li>
         <Link :href="route('home')" class="brand fs-15">
           <ApplicationLogo />
-          <span class="ms-2">{{ $page.props.app.name }}</span>
+          <span class="ms-2">{{ appName }}</span>
         </Link>
       </li>
     </ul>
