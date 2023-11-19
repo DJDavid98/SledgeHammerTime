@@ -33,11 +33,11 @@ if [[ "$refname" ==  "$RUN_FOR_REF" ]]; then
         echo "# Skipping npm install, lockfile not modified"
     fi
 
-    if $GIT diff --name-only $oldrev $newrev | grep "^assets/"; then
+    if $GIT diff --name-only $oldrev $newrev | grep "^resource/"; then
         echo "$ $CMD_BUILD"
         eval $CMD_BUILD
     else
-        echo "# Skipping asset rebuild, no changes in assets folder"
+        echo "# Skipping asset rebuild, no changes in resource folder"
     fi
 else
     echo "Ref does not match $RUN_FOR_REF, exiting."

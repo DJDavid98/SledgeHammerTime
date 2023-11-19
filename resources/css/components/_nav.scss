@@ -1,0 +1,29 @@
+@use '../mixins/if';
+
+nav.sticky {
+    position: sticky;
+    top: 0;
+}
+
+nav.backdrop {
+    $bg-opacity: .75;
+    --bg-color: #{rgba($primary-100, $bg-opacity)};
+    background-color: var(--bg-color);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 10px var(--bg-color);
+
+    @include if.dark {
+        --bg-color: #{rgba($black, $bg-opacity)};
+    }
+}
+
+nav .brand {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    color: $primary-800;
+
+    @include if.dark {
+        color: $primary-300;
+    }
+}

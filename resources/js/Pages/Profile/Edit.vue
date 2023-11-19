@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import { Head } from '@inertiajs/vue3';
 import ConnectedAccounts from '@/Pages/Profile/Partials/ConnectedAccounts.vue';
 import { DiscordUserInfoProps } from '@/Components/DiscordUserInfo.vue';
+import Layout from '@/Layouts/Layout.vue';
 
 defineProps<{
     discordUsers: DiscordUserInfoProps[];
@@ -12,27 +12,23 @@ defineProps<{
 </script>
 
 <template>
-    <Head title="Profile" />
+    <Head :title="$t('profile.title')" />
 
-    <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-200 leading-tight">Profile</h2>
-        </template>
+    <Layout>
+        <header>
+            <h2>{{ $t('profile.title') }}</h2>
+        </header>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-gray-800 shadow sm:rounded-lg">
-                    <UpdateProfileInformationForm class="max-w-xl" />
-                </div>
+        <article>
+            <UpdateProfileInformationForm />
+        </article>
 
-                <div class="p-4 sm:p-8 bg-gray-800 shadow sm:rounded-lg">
-                    <ConnectedAccounts class="max-w-xl" :discord-users="discordUsers" />
-                </div>
+        <article>
+            <ConnectedAccounts :discord-users="discordUsers" />
+        </article>
 
-                <div class="p-4 sm:p-8 bg-gray-800 shadow sm:rounded-lg">
-                    <DeleteUserForm class="max-w-xl" />
-                </div>
-            </div>
-        </div>
-    </AuthenticatedLayout>
+        <article>
+            <DeleteUserForm />
+        </article>
+    </Layout>
 </template>

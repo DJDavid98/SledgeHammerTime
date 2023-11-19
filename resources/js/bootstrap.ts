@@ -5,21 +5,11 @@
  */
 
 import axios from 'axios';
+import './moment';
 
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-/**
- * Patch to always send Cookie header with XMLHttpRequests made by Inertia
- */
-(() => {
-    const originalSend = XMLHttpRequest.prototype.send;
-    XMLHttpRequest.prototype.send = function (...args) {
-        this.withCredentials = true;
-        return originalSend.apply(this, args);
-    };
-})();
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

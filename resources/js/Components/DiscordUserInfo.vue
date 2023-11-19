@@ -26,8 +26,8 @@ defineProps<DiscordUserInfoProps>();
 </script>
 
 <template>
-    <figure class="flex items-center">
-        <img :alt="`Avatar of ${name}`" v-bind:src="getAvatarLink($props)" class="w-10 h-10 me-3 rounded-full" />
+    <figure>
+        <img :alt="`Avatar of ${name}`" v-bind:src="getAvatarLink($props)" class="s-20 me-3 br-50" />
         <span class="font-medium text-xl">{{ name }}</span>
     </figure>
 </template>

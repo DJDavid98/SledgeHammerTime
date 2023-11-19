@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\BotSettingsController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +16,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', fn() => Inertia::render('Home'))->name('home');
-
 
 Route::middleware('auth')->group(function () {
-    Route::get('/settings', [SettingsController::class, 'edit'])->name('settings');
+    Route::get('/settings', [BotSettingsController::class, 'edit'])->name('settings');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -28,3 +26,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+Route::get('/{locale?}', [HomeController::class, 'index'])->name('home');

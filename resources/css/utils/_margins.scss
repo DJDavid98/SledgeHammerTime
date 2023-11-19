@@ -1,0 +1,34 @@
+@use '../mixins/if';
+
+@each $key, $size in $spacing {
+    .mt-#{$key} {
+        margin-top: $size;
+    }
+    .mb-#{$key} {
+        margin-bottom: $size;
+    }
+    .my-#{$key} {
+        margin-top: $size;
+        margin-bottom: $size;
+    }
+    .mx-#{$key} {
+        margin-left: $size;
+        margin-right: $size;
+    }
+    .ms-#{$key} {
+        @include if.ltr {
+            margin-left: $size;
+        }
+        @include if.rtl {
+            margin-right: $size;
+        }
+    }
+    .me-#{$key} {
+        @include if.ltr {
+            margin-right: $size;
+        }
+        @include if.rtl {
+            margin-left: $size;
+        }
+    }
+}

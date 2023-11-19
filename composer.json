@@ -11,6 +11,8 @@
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6.8",
+        "laravel-lang/common": "^5.3",
+        "laravel-lang/native-locale-names": "^1.4",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/socialite": "^5.10",
@@ -20,7 +22,6 @@
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
         "barryvdh/laravel-ide-helper": "^2.13",
         "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.26",
@@ -29,6 +30,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.1",
+        "roave/security-advisories": "dev-latest",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {

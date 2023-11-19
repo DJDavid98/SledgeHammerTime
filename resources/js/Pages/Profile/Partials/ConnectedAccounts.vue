@@ -7,20 +7,17 @@ defineProps<{
 </script>
 
 <template>
-    <section class="space-y-6">
-        <header>
-            <h2 class="text-lg font-medium text-gray-100">Connected Accounts</h2>
+    <header>
+        <h2>{{ $t('profile.accounts.heading') }}</h2>
 
-            <p class="mt-1 text-sm text-gray-400">
-                A Hammertime account is going to let you link multiple Discord accounts to be able to manage their resources in one place in the future.
-            </p>
+        <p class="mt-1">
+            {{ $t('profile.accounts.description.0') }}
+        </p>
 
-            <p class="mt-1 text-sm text-gray-400">
-                Below you can find a list of all Discord accounts associated with this HammerTime account.
-            </p>
+        <p class="mt-1 mb-3">
+            {{ $t('profile.accounts.description.1') }}
+        </p>
+    </header>
 
-
-            <DiscordUserInfo v-for="info of discordUsers" v-bind="info" />
-        </header>
-    </section>
+    <DiscordUserInfo v-for="info of discordUsers" v-bind="info" />
 </template>

@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import DangerButton from '@/Components/DangerButton.vue';
 import Modal from '@/Components/Modal.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
+import Button from '@/Components/Button.vue';
 import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
 
 const confirmingUserDeletion = ref(false);
 const passwordInput = ref<HTMLInputElement | null>(null);
 
-const form = useForm({
-    password: '',
-});
+const form = useForm({});
 
 const confirmUserDeletion = () => {
     confirmingUserDeletion.value = true;
@@ -36,41 +33,30 @@ const closeModal = () => {
 </script>
 
 <template>
-    <section class="space-y-6">
-        <header>
-            <h2 class="text-lg font-medium text-gray-100">Delete Account</h2>
+    <h2>{{ $t('profile.deletion.heading') }}</h2>
 
-            <p class="mt-1 text-sm text-gray-400">
-                Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting
-                your account, please download any data or information that you wish to retain.
-            </p>
-        </header>
+    <p class="mt-1">{{ $t('profile.deletion.description') }}</p>
 
-        <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
+    <Button @click="confirmUserDeletion">{{ $t('profile.deletion.deleteButton') }}</Button>
 
-        <Modal :show="confirmingUserDeletion" @close="closeModal">
-            <div class="p-6">
-                <h2 class="text-lg font-medium text-gray-100">
-                    Are you sure you want to delete your account?
-                </h2>
+    <Modal :show="confirmingUserDeletion" @close="closeModal">
+        <template #header>
+            {{ $t('profile.deletion.confirmDialog.header') }}
+        </template>
 
-                <p class="mt-1 text-sm text-gray-400">
-                    Once your account is deleted, all of its resources and data will be permanently deleted.
-                </p>
+        <p class="mt-1">
+            {{ $t('profile.deletion.confirmDialog.body') }}
+        </p>
 
-                <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="closeModal"> Cancel</SecondaryButton>
+        <template #footer>
+            <Button @click="closeModal">{{ $t('global.form.cancel') }}</Button>
 
-                    <DangerButton
-                        class="ms-3"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                        @click="deleteUser"
-                    >
-                        Delete Account
-                    </DangerButton>
-                </div>
-            </div>
-        </Modal>
-    </section>
+            <Button
+                :disabled="form.processing"
+                :aria-busy="form.processing ? 'true' : undefined"
+                @click="deleteUser"
+            >{{ $t('global.form.confirm') }}
+            </Button>
+        </template>
+    </Modal>
 </template>

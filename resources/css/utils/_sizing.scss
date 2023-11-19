@@ -1,0 +1,13 @@
+@use "sass:math";
+
+@each $size in $sizing {
+    $size-in-em: 0.1em * $size;
+    .s-#{$size} {
+        width: $size-in-em;
+        height: $size-in-em;
+    }
+    .fs-#{$size} {
+        font-size: $size-in-em;
+    }
+}
+
