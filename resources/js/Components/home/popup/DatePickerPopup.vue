@@ -40,10 +40,10 @@ defineExpose({
 
 <template>
   <Popup :show="show" @close="close">
-    <div class="grid">
-      <input v-model="year" type="number" placeholder="Year" />
-      <input v-model="month" type="number" placeholder="Month" />
-      <input v-model="day" type="number" placeholder="Day" />
+    <div class="grid-flex">
+      <input v-model="year" type="number" class="grid-flex-item flex-basis-40" />
+      <input v-model="month" type="number" class="grid-flex-item flex-basis-30" min="1" max="12" />
+      <input v-model="day" type="number" class="grid-flex-item flex-basis-30" min="1" max="31" />
     </div>
     <div class="grid">
       <button @click="select" class="mb-0">{{ $t('global.form.select') }}</button>

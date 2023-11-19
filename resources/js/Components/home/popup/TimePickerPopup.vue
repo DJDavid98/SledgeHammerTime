@@ -41,9 +41,9 @@ defineExpose({
 <template>
   <Popup :show="show" @close="close">
     <div class="grid">
-      <input v-model="hours" type="number" placeholder="Year" />
-      <input v-model="minutes" type="number" placeholder="Month" />
-      <input v-model="seconds" type="number" placeholder="Day" />
+      <input v-model="hours" type="number" min="0" max="23" />
+      <input v-model="minutes" type="number" min="0" max="59" />
+      <input v-model="seconds" type="number" min="0" max="59" />
     </div>
     <div class="grid">
       <button @click="select" class="mb-0">{{ $t('global.form.select') }}</button>

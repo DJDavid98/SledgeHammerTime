@@ -10,38 +10,39 @@ $gradient-stops: $bg-gradient-start 0%, $bg-gradient-mid 50%, $bg-gradient-end 1
 $bg-gradient-angle: 15deg;
 
 html, body {
-    min-height: 100%;
+  min-height: 100%;
 }
 
 html {
-    --bg-gradient-opacity: 1;
-    background-image: linear-gradient(#{180deg - $bg-gradient-angle}, #{$gradient-stops});
-    background-color: #000;
-    background-repeat: no-repeat;
+  --bg-gradient-opacity: 1;
+  background-image: linear-gradient(#{180deg - $bg-gradient-angle}, #{$gradient-stops});
+  background-color: #000;
+  background-repeat: no-repeat;
 
-    @include if.dark {
-        --bg-gradient-opacity: .5;
-    }
+  @include if.dark {
+    --bg-gradient-opacity: .5;
+  }
 }
 
 body {
-    font-family: $font-family-base;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  font-family: $font-family-base;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 
-    @include if.rtl {
-        background-image: linear-gradient(#{180deg + $bg-gradient-angle}, #{$gradient-stops});
-    }
+  @include if.rtl {
+    background-image: linear-gradient(#{180deg + $bg-gradient-angle}, #{$gradient-stops});
+  }
 }
 
 code {
-    font-family: $font-family-mono;
+  font-family: $font-family-mono;
 }
 
 @import 'components/nav';
 @import 'components/popup';
 @import 'utils/alignment';
 @import 'utils/borders';
+@import 'utils/grid';
 @import 'utils/margins';
 @import 'utils/sizing';
