@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Env;
 use Illuminate\Support\Facades\App;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -34,7 +35,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'app' => [
-                'name' => env('APP_NAME'),
+                'name' => Env::get('APP_NAME'),
                 'locale' => App::getLocale(),
             ],
             'auth' => [
