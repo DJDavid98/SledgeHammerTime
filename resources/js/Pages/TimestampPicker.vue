@@ -51,8 +51,8 @@ provide(timestamp, {
 
 watch(currentTimestamp, () => {
   const params = new URLSearchParams();
-  params.set('t', currentTimestamp.value.unix());
-  params.set('tz', currentTimestamp.value.tz());
+  params.set('t', currentTimestamp.value.unix().toString());
+  params.set('tz', currentTimezone.value.toString());
   history.replaceState({}, '', `${route('home')}?${params}`);
 });
 </script>
