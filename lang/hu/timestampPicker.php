@@ -14,5 +14,6 @@ return [
     'table' => [
         'syntaxColumn' => 'Üzenet formája',
         'resultColumn' => 'Példa megjelenés',
+        'clickToCopy' => 'Vágólapra másolás',
     ]
 ];

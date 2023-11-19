@@ -14,5 +14,6 @@ return [
     'table' => [
         'syntaxColumn' => 'Chat syntax',
         'resultColumn' => 'Example result',
+        'clickToCopy' => 'Copy to clipboard',
     ]
 ];

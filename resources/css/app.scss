@@ -39,10 +39,15 @@ code {
   font-family: $font-family-mono;
 }
 
+[data-tooltip]::before {
+  font-family: $font-family-base;
+}
+
 @import 'components/nav';
 @import 'components/popup';
 @import 'utils/alignment';
 @import 'utils/borders';
+@import 'utils/cursor';
 @import 'utils/grid';
 @import 'utils/margins';
 @import 'utils/sizing';

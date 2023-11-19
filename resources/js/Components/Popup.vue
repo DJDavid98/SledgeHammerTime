@@ -1,27 +1,27 @@
 <script setup lang="ts">
 defineProps<{
-    show: boolean;
+  show: boolean;
 }>();
 
 const emit = defineEmits<{
-    (e: 'close'): void
+  (e: 'close'): void
 }>();
 
 const close = () => {
-    emit('close');
+  emit('close');
 };
 
 defineExpose({
-    close,
+  close,
 });
 </script>
 
 
 <template>
-    <div class="popup" :hidden="!show">
-        <slot />
-    </div>
-    <Teleport to="body">
-        <div v-if="show" class="popup-close-backdrop" @click="close" />
-    </Teleport>
+  <div class="popup" :hidden="!show">
+    <slot />
+  </div>
+  <Teleport to="body">
+    <div v-if="show" class="popup-close-backdrop cursor-default" @click="close" />
+  </Teleport>
 </template>
