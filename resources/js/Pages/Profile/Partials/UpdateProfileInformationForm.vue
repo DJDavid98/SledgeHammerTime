@@ -7,40 +7,40 @@ import { useForm, usePage } from '@inertiajs/vue3';
 const user = usePage().props.auth.user;
 
 const form = useForm({
-    name: user.name,
+  name: user.name,
 });
 </script>
 
 <template>
-    <header>
-        <h2>{{ $t('profile.information.heading') }}</h2>
+  <header>
+    <h2>{{ $t('profile.information.heading') }}</h2>
 
-        <p class="mt-1">
-            {{ $t('profile.information.description') }}
-        </p>
-    </header>
+    <p class="mt-1">
+      {{ $t('profile.information.description') }}
+    </p>
+  </header>
 
-    <form @submit.prevent="form.patch(route('profile.update'))">
-        <div>
-            <label for="name">{{ $t('profile.information.displayName') }}</label>
+  <form @submit.prevent="form.patch(route('profile.update'))">
+    <div>
+      <label for="name">{{ $t('profile.information.displayName') }}</label>
 
-            <TextInput
-                id="name"
-                type="text"
-                class="mt-1"
-                v-model="form.name"
-                required
-                autofocus
-                autocomplete="name"
-            />
+      <TextInput
+          id="name"
+          type="text"
+          class="mt-1"
+          v-model="form.name"
+          required
+          autofocus
+          autocomplete="name"
+      />
 
-            <InputError class="mt-2" :message="form.errors.name" />
-        </div>
+      <InputError class="mt-2" :message="form.errors.name" />
+    </div>
 
-        <div>
-            <Button :disabled="form.processing" :aria-busy="form.processing ? 'true' : undefined">{{ $t('global.form.save') }}</Button>
+    <div>
+      <Button :disabled="form.processing" :aria-busy="form.processing ? 'true' : undefined" type="submit">{{ $t('global.form.save') }}</Button>
 
-            <p v-if="form.recentlySuccessful">{{ $t('global.form.saved') }}</p>
-        </div>
-    </form>
+      <p v-if="form.recentlySuccessful">{{ $t('global.form.saved') }}</p>
+    </div>
+  </form>
 </template>
