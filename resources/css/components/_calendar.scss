@@ -1,0 +1,96 @@
+@use '../mixins/if';
+@use '../variables';
+
+.calendar-controls, .calendar {
+  --gap: .25em;
+  --column-count: 7;
+  text-align: center;
+  font-size: .9em;
+}
+
+.calendar-controls {
+  --button-size: 1.75em;
+  display: grid;
+  grid-template-columns: repeat(2, var(--button-size)) auto repeat(2, var(--button-size));
+  width: 100%;
+  margin: .5em 0;
+  gap: var(--gap);
+
+  button {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.calendar {
+  display: grid;
+  grid-template-rows: auto;
+  gap: var(--gap);
+
+  .calendar-weekdays {
+    display: grid;
+    padding: 0 calc(var(--gap));
+    grid-template-columns: repeat(var(--column-count), calc(100% / var(--column-count)));
+  }
+
+  .calendar-week {
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: repeat(var(--column-count), calc((100% / var(--column-count)) - var(--gap)));
+  }
+
+  .red {
+    color: #c00;
+
+    @include if.dark {
+      color: #faa;
+    }
+  }
+
+  .blue {
+    color: #0af;
+
+    @include if.dark {
+      color: #adf;
+    }
+  }
+
+  .calendar-weekdays > * {
+    border-bottom: 1px solid;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .calendar-day {
+    padding: .1em;
+    border: 1px solid transparent;
+    border-radius: .15em;
+    box-sizing: border-box;
+    margin: 0;
+    background-color: transparent;
+
+    &.current {
+      border-color: currentColor;
+    }
+
+    &.different-month {
+      opacity: .5;
+    }
+
+    &.selected {
+      font-weight: bold;
+      background-color: $primary-200;
+
+
+      @include if.dark {
+        background-color: $primary-800;
+      }
+    }
+  }
+}
+
+.jump-to-today {
+  font-size: .75em;
+  padding: .1em .2em;
+  margin: .5em 0;
+}

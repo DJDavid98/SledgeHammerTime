@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
-import Layout from '@/Layouts/Layout.vue';
 import TimestampDisplay from '@/Components/home/TimestampDisplay.vue';
-import { computed, provide, ref, watch } from 'vue';
-import moment from 'moment';
 import { timestamp } from '@/injection-keys';
-import { isoFormattingDateFormat, isoTimeFormat } from '@/utils/timezone';
+import Layout from '@/Layouts/Layout.vue';
+import { isoFormattingDateFormat, isoParsingDateFormat, isoTimeFormat } from '@/utils/timezone';
+import { Head, usePage } from '@inertiajs/vue3';
+import moment from 'moment';
+import { computed, provide, ref, watch } from 'vue';
 
 const props = defineProps<{
   defaultTs?: number,
@@ -23,7 +23,7 @@ const initialDate = moment.tz(props.defaultTs ? new Date(props.defaultTs * 1e3) 
 const dateString = ref(initialDate.format(isoFormattingDateFormat));
 const timeString = ref(initialDate.format(isoTimeFormat));
 
-const currentTimestamp = computed(() => moment.tz(`${dateString.value} ${timeString.value}`, currentTimezone.value));
+const currentTimestamp = computed(() => moment.tz(`${dateString.value} ${timeString.value}`, `${isoParsingDateFormat} ${isoTimeFormat}`, currentTimezone.value));
 
 const changeDateString = (value: string) => {
   dateString.value = value;
@@ -40,6 +40,12 @@ const setCurrentTime = () => {
   changeTimeString(now.format(isoTimeFormat));
 };
 
+const locale = computed(() => {
+  const pageLocale = usePage().props.app.locale;
+  if (pageLocale === 'en') return undefined;
+  return pageLocale;
+});
+
 provide(timestamp, {
   currentTimestamp,
   currentTimezone,
@@ -53,7 +59,7 @@ watch(currentTimestamp, () => {
   const params = new URLSearchParams();
   params.set('t', currentTimestamp.value.unix().toString());
   params.set('tz', currentTimezone.value.toString());
-  history.replaceState({}, '', `${route('home')}?${params}`);
+  history.replaceState({}, '', `${route('home', { locale: locale.value })}?${params}`);
 });
 </script>
 

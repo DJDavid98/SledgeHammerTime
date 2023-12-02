@@ -4,9 +4,9 @@ import TimestampTable from '@/Components/home/table/TimestampTable.vue';
 </script>
 
 <template>
-    <article>
-        <DateTimePicker />
+  <article class="my-0">
+    <DateTimePicker />
 
-        <TimestampTable />
-    </article>
+    <TimestampTable />
+  </article>
 </template>

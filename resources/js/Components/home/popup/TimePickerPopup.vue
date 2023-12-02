@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Moment } from 'moment-timezone';
-import { pad } from '@/utils/pad';
 import Popup from '@/Components/Popup.vue';
+import { pad } from '@/utils/pad';
+import { Moment } from 'moment-timezone';
+import { ref } from 'vue';
 
 const hours = ref('');
 const minutes = ref('');
@@ -32,7 +32,11 @@ const open = (initialValue: Moment) => {
   seconds.value = initialValue.format('s');
 };
 
-defineExpose({
+export interface TimePickerPopupApi {
+  open: typeof open;
+}
+
+defineExpose<TimePickerPopupApi>({
   open,
 });
 </script>

@@ -1,0 +1,1196 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Calendar Utils > generateCalendar > should generate the correct calendar for a month that starts on Friday and the first day of week is Monday 1`] = `
+{
+  "days": [
+    [
+      {
+        "date": 27,
+        "month": 10,
+        "weekday": 1,
+      },
+      {
+        "date": 28,
+        "month": 10,
+        "weekday": 2,
+      },
+      {
+        "date": 29,
+        "month": 10,
+        "weekday": 3,
+      },
+      {
+        "date": 30,
+        "month": 10,
+        "weekday": 4,
+      },
+      {
+        "date": 1,
+        "month": 11,
+        "weekday": 5,
+      },
+      {
+        "date": 2,
+        "month": 11,
+        "weekday": 6,
+      },
+      {
+        "date": 3,
+        "month": 11,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 4,
+        "month": 11,
+        "weekday": 1,
+      },
+      {
+        "date": 5,
+        "month": 11,
+        "weekday": 2,
+      },
+      {
+        "date": 6,
+        "month": 11,
+        "weekday": 3,
+      },
+      {
+        "date": 7,
+        "month": 11,
+        "weekday": 4,
+      },
+      {
+        "date": 8,
+        "month": 11,
+        "weekday": 5,
+      },
+      {
+        "date": 9,
+        "month": 11,
+        "weekday": 6,
+      },
+      {
+        "date": 10,
+        "month": 11,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 11,
+        "month": 11,
+        "weekday": 1,
+      },
+      {
+        "date": 12,
+        "month": 11,
+        "weekday": 2,
+      },
+      {
+        "date": 13,
+        "month": 11,
+        "weekday": 3,
+      },
+      {
+        "date": 14,
+        "month": 11,
+        "weekday": 4,
+      },
+      {
+        "date": 15,
+        "month": 11,
+        "weekday": 5,
+      },
+      {
+        "date": 16,
+        "month": 11,
+        "weekday": 6,
+      },
+      {
+        "date": 17,
+        "month": 11,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 18,
+        "month": 11,
+        "weekday": 1,
+      },
+      {
+        "date": 19,
+        "month": 11,
+        "weekday": 2,
+      },
+      {
+        "date": 20,
+        "month": 11,
+        "weekday": 3,
+      },
+      {
+        "date": 21,
+        "month": 11,
+        "weekday": 4,
+      },
+      {
+        "date": 22,
+        "month": 11,
+        "weekday": 5,
+      },
+      {
+        "date": 23,
+        "month": 11,
+        "weekday": 6,
+      },
+      {
+        "date": 24,
+        "month": 11,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 25,
+        "month": 11,
+        "weekday": 1,
+      },
+      {
+        "date": 26,
+        "month": 11,
+        "weekday": 2,
+      },
+      {
+        "date": 27,
+        "month": 11,
+        "weekday": 3,
+      },
+      {
+        "date": 28,
+        "month": 11,
+        "weekday": 4,
+      },
+      {
+        "date": 29,
+        "month": 11,
+        "weekday": 5,
+      },
+      {
+        "date": 30,
+        "month": 11,
+        "weekday": 6,
+      },
+      {
+        "date": 31,
+        "month": 11,
+        "weekday": 0,
+      },
+    ],
+  ],
+  "firstDayOfWeek": 1,
+}
+`;
+
+exports[`Calendar Utils > generateCalendar > should generate the correct calendar for a month that starts on Monday and the first day of week is Monday 1`] = `
+{
+  "days": [
+    [
+      {
+        "date": 1,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 2,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 3,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 4,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 5,
+        "month": 4,
+        "weekday": 5,
+      },
+      {
+        "date": 6,
+        "month": 4,
+        "weekday": 6,
+      },
+      {
+        "date": 7,
+        "month": 4,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 8,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 9,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 10,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 11,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 12,
+        "month": 4,
+        "weekday": 5,
+      },
+      {
+        "date": 13,
+        "month": 4,
+        "weekday": 6,
+      },
+      {
+        "date": 14,
+        "month": 4,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 15,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 16,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 17,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 18,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 19,
+        "month": 4,
+        "weekday": 5,
+      },
+      {
+        "date": 20,
+        "month": 4,
+        "weekday": 6,
+      },
+      {
+        "date": 21,
+        "month": 4,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 22,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 23,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 24,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 25,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 26,
+        "month": 4,
+        "weekday": 5,
+      },
+      {
+        "date": 27,
+        "month": 4,
+        "weekday": 6,
+      },
+      {
+        "date": 28,
+        "month": 4,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 29,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 30,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 31,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 1,
+        "month": 5,
+        "weekday": 4,
+      },
+      {
+        "date": 2,
+        "month": 5,
+        "weekday": 5,
+      },
+      {
+        "date": 3,
+        "month": 5,
+        "weekday": 6,
+      },
+      {
+        "date": 4,
+        "month": 5,
+        "weekday": 0,
+      },
+    ],
+  ],
+  "firstDayOfWeek": 1,
+}
+`;
+
+exports[`Calendar Utils > generateCalendar > should generate the correct calendar for a month that starts on Monday and the first day of week is Saturday 1`] = `
+{
+  "days": [
+    [
+      {
+        "date": 29,
+        "month": 3,
+        "weekday": 6,
+      },
+      {
+        "date": 30,
+        "month": 3,
+        "weekday": 0,
+      },
+      {
+        "date": 1,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 2,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 3,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 4,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 5,
+        "month": 4,
+        "weekday": 5,
+      },
+    ],
+    [
+      {
+        "date": 6,
+        "month": 4,
+        "weekday": 6,
+      },
+      {
+        "date": 7,
+        "month": 4,
+        "weekday": 0,
+      },
+      {
+        "date": 8,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 9,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 10,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 11,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 12,
+        "month": 4,
+        "weekday": 5,
+      },
+    ],
+    [
+      {
+        "date": 13,
+        "month": 4,
+        "weekday": 6,
+      },
+      {
+        "date": 14,
+        "month": 4,
+        "weekday": 0,
+      },
+      {
+        "date": 15,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 16,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 17,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 18,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 19,
+        "month": 4,
+        "weekday": 5,
+      },
+    ],
+    [
+      {
+        "date": 20,
+        "month": 4,
+        "weekday": 6,
+      },
+      {
+        "date": 21,
+        "month": 4,
+        "weekday": 0,
+      },
+      {
+        "date": 22,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 23,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 24,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 25,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 26,
+        "month": 4,
+        "weekday": 5,
+      },
+    ],
+    [
+      {
+        "date": 27,
+        "month": 4,
+        "weekday": 6,
+      },
+      {
+        "date": 28,
+        "month": 4,
+        "weekday": 0,
+      },
+      {
+        "date": 29,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 30,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 31,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 1,
+        "month": 5,
+        "weekday": 4,
+      },
+      {
+        "date": 2,
+        "month": 5,
+        "weekday": 5,
+      },
+    ],
+  ],
+  "firstDayOfWeek": 6,
+}
+`;
+
+exports[`Calendar Utils > generateCalendar > should generate the correct calendar for a month that starts on Monday and the first day of week is Sunday 1`] = `
+{
+  "days": [
+    [
+      {
+        "date": 30,
+        "month": 3,
+        "weekday": 0,
+      },
+      {
+        "date": 1,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 2,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 3,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 4,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 5,
+        "month": 4,
+        "weekday": 5,
+      },
+      {
+        "date": 6,
+        "month": 4,
+        "weekday": 6,
+      },
+    ],
+    [
+      {
+        "date": 7,
+        "month": 4,
+        "weekday": 0,
+      },
+      {
+        "date": 8,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 9,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 10,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 11,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 12,
+        "month": 4,
+        "weekday": 5,
+      },
+      {
+        "date": 13,
+        "month": 4,
+        "weekday": 6,
+      },
+    ],
+    [
+      {
+        "date": 14,
+        "month": 4,
+        "weekday": 0,
+      },
+      {
+        "date": 15,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 16,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 17,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 18,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 19,
+        "month": 4,
+        "weekday": 5,
+      },
+      {
+        "date": 20,
+        "month": 4,
+        "weekday": 6,
+      },
+    ],
+    [
+      {
+        "date": 21,
+        "month": 4,
+        "weekday": 0,
+      },
+      {
+        "date": 22,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 23,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 24,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 25,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 26,
+        "month": 4,
+        "weekday": 5,
+      },
+      {
+        "date": 27,
+        "month": 4,
+        "weekday": 6,
+      },
+    ],
+    [
+      {
+        "date": 28,
+        "month": 4,
+        "weekday": 0,
+      },
+      {
+        "date": 29,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 30,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 31,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 1,
+        "month": 5,
+        "weekday": 4,
+      },
+      {
+        "date": 2,
+        "month": 5,
+        "weekday": 5,
+      },
+      {
+        "date": 3,
+        "month": 5,
+        "weekday": 6,
+      },
+    ],
+  ],
+  "firstDayOfWeek": 0,
+}
+`;
+
+exports[`Calendar Utils > generateCalendar > should generate the correct calendar for a month that starts on Saturday and the first day of week is Sunday 1`] = `
+{
+  "days": [
+    [
+      {
+        "date": 26,
+        "month": 2,
+        "weekday": 0,
+      },
+      {
+        "date": 27,
+        "month": 2,
+        "weekday": 1,
+      },
+      {
+        "date": 28,
+        "month": 2,
+        "weekday": 2,
+      },
+      {
+        "date": 29,
+        "month": 2,
+        "weekday": 3,
+      },
+      {
+        "date": 30,
+        "month": 2,
+        "weekday": 4,
+      },
+      {
+        "date": 31,
+        "month": 2,
+        "weekday": 5,
+      },
+      {
+        "date": 1,
+        "month": 3,
+        "weekday": 6,
+      },
+    ],
+    [
+      {
+        "date": 2,
+        "month": 3,
+        "weekday": 0,
+      },
+      {
+        "date": 3,
+        "month": 3,
+        "weekday": 1,
+      },
+      {
+        "date": 4,
+        "month": 3,
+        "weekday": 2,
+      },
+      {
+        "date": 5,
+        "month": 3,
+        "weekday": 3,
+      },
+      {
+        "date": 6,
+        "month": 3,
+        "weekday": 4,
+      },
+      {
+        "date": 7,
+        "month": 3,
+        "weekday": 5,
+      },
+      {
+        "date": 8,
+        "month": 3,
+        "weekday": 6,
+      },
+    ],
+    [
+      {
+        "date": 9,
+        "month": 3,
+        "weekday": 0,
+      },
+      {
+        "date": 10,
+        "month": 3,
+        "weekday": 1,
+      },
+      {
+        "date": 11,
+        "month": 3,
+        "weekday": 2,
+      },
+      {
+        "date": 12,
+        "month": 3,
+        "weekday": 3,
+      },
+      {
+        "date": 13,
+        "month": 3,
+        "weekday": 4,
+      },
+      {
+        "date": 14,
+        "month": 3,
+        "weekday": 5,
+      },
+      {
+        "date": 15,
+        "month": 3,
+        "weekday": 6,
+      },
+    ],
+    [
+      {
+        "date": 16,
+        "month": 3,
+        "weekday": 0,
+      },
+      {
+        "date": 17,
+        "month": 3,
+        "weekday": 1,
+      },
+      {
+        "date": 18,
+        "month": 3,
+        "weekday": 2,
+      },
+      {
+        "date": 19,
+        "month": 3,
+        "weekday": 3,
+      },
+      {
+        "date": 20,
+        "month": 3,
+        "weekday": 4,
+      },
+      {
+        "date": 21,
+        "month": 3,
+        "weekday": 5,
+      },
+      {
+        "date": 22,
+        "month": 3,
+        "weekday": 6,
+      },
+    ],
+    [
+      {
+        "date": 23,
+        "month": 3,
+        "weekday": 0,
+      },
+      {
+        "date": 24,
+        "month": 3,
+        "weekday": 1,
+      },
+      {
+        "date": 25,
+        "month": 3,
+        "weekday": 2,
+      },
+      {
+        "date": 26,
+        "month": 3,
+        "weekday": 3,
+      },
+      {
+        "date": 27,
+        "month": 3,
+        "weekday": 4,
+      },
+      {
+        "date": 28,
+        "month": 3,
+        "weekday": 5,
+      },
+      {
+        "date": 29,
+        "month": 3,
+        "weekday": 6,
+      },
+    ],
+    [
+      {
+        "date": 30,
+        "month": 3,
+        "weekday": 0,
+      },
+      {
+        "date": 1,
+        "month": 4,
+        "weekday": 1,
+      },
+      {
+        "date": 2,
+        "month": 4,
+        "weekday": 2,
+      },
+      {
+        "date": 3,
+        "month": 4,
+        "weekday": 3,
+      },
+      {
+        "date": 4,
+        "month": 4,
+        "weekday": 4,
+      },
+      {
+        "date": 5,
+        "month": 4,
+        "weekday": 5,
+      },
+      {
+        "date": 6,
+        "month": 4,
+        "weekday": 6,
+      },
+    ],
+  ],
+  "firstDayOfWeek": 0,
+}
+`;
+
+exports[`Calendar Utils > generateCalendar > should generate the correct calendar for a month that starts on Thursday and the first day of week is Monday 1`] = `
+{
+  "days": [
+    [
+      {
+        "date": 28,
+        "month": 10,
+        "weekday": 1,
+      },
+      {
+        "date": 29,
+        "month": 10,
+        "weekday": 2,
+      },
+      {
+        "date": 30,
+        "month": 10,
+        "weekday": 3,
+      },
+      {
+        "date": 1,
+        "month": 11,
+        "weekday": 4,
+      },
+      {
+        "date": 2,
+        "month": 11,
+        "weekday": 5,
+      },
+      {
+        "date": 3,
+        "month": 11,
+        "weekday": 6,
+      },
+      {
+        "date": 4,
+        "month": 11,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 5,
+        "month": 11,
+        "weekday": 1,
+      },
+      {
+        "date": 6,
+        "month": 11,
+        "weekday": 2,
+      },
+      {
+        "date": 7,
+        "month": 11,
+        "weekday": 3,
+      },
+      {
+        "date": 8,
+        "month": 11,
+        "weekday": 4,
+      },
+      {
+        "date": 9,
+        "month": 11,
+        "weekday": 5,
+      },
+      {
+        "date": 10,
+        "month": 11,
+        "weekday": 6,
+      },
+      {
+        "date": 11,
+        "month": 11,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 12,
+        "month": 11,
+        "weekday": 1,
+      },
+      {
+        "date": 13,
+        "month": 11,
+        "weekday": 2,
+      },
+      {
+        "date": 14,
+        "month": 11,
+        "weekday": 3,
+      },
+      {
+        "date": 15,
+        "month": 11,
+        "weekday": 4,
+      },
+      {
+        "date": 16,
+        "month": 11,
+        "weekday": 5,
+      },
+      {
+        "date": 17,
+        "month": 11,
+        "weekday": 6,
+      },
+      {
+        "date": 18,
+        "month": 11,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 19,
+        "month": 11,
+        "weekday": 1,
+      },
+      {
+        "date": 20,
+        "month": 11,
+        "weekday": 2,
+      },
+      {
+        "date": 21,
+        "month": 11,
+        "weekday": 3,
+      },
+      {
+        "date": 22,
+        "month": 11,
+        "weekday": 4,
+      },
+      {
+        "date": 23,
+        "month": 11,
+        "weekday": 5,
+      },
+      {
+        "date": 24,
+        "month": 11,
+        "weekday": 6,
+      },
+      {
+        "date": 25,
+        "month": 11,
+        "weekday": 0,
+      },
+    ],
+    [
+      {
+        "date": 26,
+        "month": 11,
+        "weekday": 1,
+      },
+      {
+        "date": 27,
+        "month": 11,
+        "weekday": 2,
+      },
+      {
+        "date": 28,
+        "month": 11,
+        "weekday": 3,
+      },
+      {
+        "date": 29,
+        "month": 11,
+        "weekday": 4,
+      },
+      {
+        "date": 30,
+        "month": 11,
+        "weekday": 5,
+      },
+      {
+        "date": 31,
+        "month": 11,
+        "weekday": 6,
+      },
+      {
+        "date": 1,
+        "month": 0,
+        "weekday": 0,
+      },
+    ],
+  ],
+  "firstDayOfWeek": 1,
+}
+`;

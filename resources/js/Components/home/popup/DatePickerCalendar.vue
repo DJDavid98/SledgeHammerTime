@@ -1,0 +1,170 @@
+<script setup lang="ts">
+import { useCurrentDate } from '@/hooks/useCurrentDate';
+import {
+  CalendarDay,
+  DayOfWeek,
+  generateCalendar,
+  getMomentForDate,
+  getWeekdayItems,
+  Month,
+  WeekdayItem,
+  WEEKEND_DAYS,
+} from '@/utils/calendar';
+import { useMomentLocale } from '@/utils/moment';
+import { usePage } from '@inertiajs/vue3';
+import classNames from 'classnames';
+import moment from 'moment';
+import { computed, ref } from 'vue';
+
+const props = defineProps<{
+  selectedYear: number,
+  selectedMonth: number,
+  selectedDate: number,
+}>();
+
+const emit = defineEmits<{
+  (e: 'setDate', year: number, month: number, date: number): void
+}>();
+
+const year = ref(props.selectedYear);
+const month = ref(props.selectedMonth);
+const date = ref(props.selectedDate);
+const momentLocaleData = ref<moment.Locale | null>(null);
+
+const locale = computed(() => usePage().props.app.locale);
+
+useMomentLocale(locale.value).then(() => {
+  momentLocaleData.value = moment.localeData(locale.value);
+});
+
+const firstDayOfWeek = computed(() => {
+  switch (locale.value) {
+    case 'ms':
+      return DayOfWeek.Sunday;
+    default:
+      return momentLocaleData.value?.firstDayOfWeek() as DayOfWeek;
+  }
+});
+
+const weekdaysItems = computed(() => getWeekdayItems(momentLocaleData.value?.weekdaysShort(), firstDayOfWeek.value));
+
+const calendar = computed(() => generateCalendar({
+  year: year.value,
+  month: month.value - 1,
+  firstDayOfWeek: firstDayOfWeek.value,
+}));
+
+const dateMoment = computed(() => {
+  return getMomentForDate(year.value, month.value - 1, date.value);
+});
+
+const currentDate = useCurrentDate();
+const contextFormat = 'MMMM YYYY';
+
+const isShowingCurrentMonth = computed(() => {
+  return month.value === currentDate.value.month + 1 && year.value === currentDate.value.year;
+});
+
+const getDayClasses = (calendarDay: CalendarDay) => {
+  const weekendDaysData = WEEKEND_DAYS[locale.value];
+  const weekdayClass = typeof calendarDay.weekday === 'number' ? weekendDaysData?.[calendarDay.weekday] : undefined;
+  return classNames('calendar-day contrast outline', weekdayClass, {
+    selected: calendarDay.date === props.selectedDate && calendarDay.month === props.selectedMonth - 1 && year.value === props.selectedYear,
+    'different-month': calendarDay.month !== month.value - 1,
+    current: calendarDay.date === currentDate.value.date && calendarDay.month === currentDate.value.month && year.value === currentDate.value.year,
+  });
+};
+
+const getWeekdayClasses = (weekdayItem: WeekdayItem) => {
+  const weekendDaysData = WEEKEND_DAYS[locale.value];
+  const weekdayClass = weekendDaysData?.[weekdayItem.index];
+  return classNames(weekdayClass);
+};
+
+const stepDate = (direction: -1 | 1, add: 'month' | 'year') => {
+  switch (add) {
+    case 'month':
+      if (direction > 0) {
+        if (month.value - 1 === Month.December) {
+          month.value = Month.January + 1;
+          year.value++;
+        } else {
+          month.value++;
+        }
+      } else {
+        if (month.value - 1 === Month.January) {
+          month.value = Month.December + 1;
+          year.value--;
+        } else {
+          month.value--;
+        }
+      }
+      break;
+    case 'year':
+      year.value += direction;
+      break;
+  }
+};
+
+const setDate = (calendarDay: CalendarDay) => {
+  month.value = calendarDay.month + 1;
+  date.value = calendarDay.date;
+  emit('setDate', year.value, month.value, date.value);
+};
+
+const setSelection = (newYear: number, newMonth: number, newDate: number) => {
+  year.value = newYear;
+  month.value = newMonth;
+  date.value = newDate;
+};
+
+const jumpToToday = () => {
+  setSelection(props.selectedYear, props.selectedMonth, props.selectedDate);
+};
+
+export interface DatePickerCalendarApi {
+  setSelection: typeof setSelection;
+}
+
+defineExpose<DatePickerCalendarApi>({
+  setSelection,
+});
+</script>
+
+<template>
+  <div class="calendar-controls">
+    <button
+        class=""
+        @click="stepDate(-1, 'year')"
+        :aria-label="$t('timestampPicker.picker.tooltip.previousYear')"
+    >
+      <span aria-hidden="true">⏮</span>
+    </button>
+    <button @click="stepDate(-1, 'month')" :aria-label="$t('timestampPicker.picker.tooltip.previousMonth')">
+      <span aria-hidden="true">◀</span>
+    </button>
+    <span class="calendar-context">{{ dateMoment.locale(locale).format(contextFormat) }}</span>
+    <button @click="stepDate(1, 'month')" :aria-label="$t('timestampPicker.picker.tooltip.nextMonth')">
+      <span aria-hidden="true">▶</span>
+    </button>
+    <button @click="stepDate(1, 'year')" :aria-label="$t('timestampPicker.picker.tooltip.nextYear')">
+      <span aria-hidden="true">⏭</span>
+    </button>
+  </div>
+  <button @click="jumpToToday" class="jump-to-today" :disabled="isShowingCurrentMonth">
+    {{ $t('timestampPicker.picker.button.jumpToToday') }}
+  </button>
+  <div class="calendar">
+    <div class="calendar-weekdays">
+      <div v-for="weekdayItem in weekdaysItems" :class="getWeekdayClasses(weekdayItem)">{{ weekdayItem.name }}</div>
+    </div>
+    <div v-for="calendarWeek in calendar.days" class="calendar-week">
+      <button
+          v-for="calendarDay in calendarWeek"
+          :class="getDayClasses(calendarDay)"
+          @click="setDate(calendarDay)"
+      >{{ calendarDay.date }}
+      </button>
+    </div>
+  </div>
+</template>
