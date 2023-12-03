@@ -9,7 +9,7 @@ defineProps<{
 
 const ts = inject(timestamp);
 
-const selectedDate = computed(() => ts?.currentTimestamp.value.format('YYYY-MM-DD'));
+const selectedDate = computed(() => ts?.currentTimestamp.value.format('LL'));
 const showPopup = ref(false);
 const datepicker = ref<DatePickerPopupApi | null>(null);
 
@@ -32,7 +32,7 @@ const changeDate = (value: string) => {
 
 <template>
   <div>
-    <input :id="id" v-model="selectedDate" @click="openPopup" class="mb-0" readonly />
+    <input :id="id" :value="selectedDate" @click="openPopup" class="mb-0" readonly />
     <DatePickerPopup :show="showPopup" @close="closePopup" @selected="changeDate" ref="datepicker" />
   </div>
 </template>

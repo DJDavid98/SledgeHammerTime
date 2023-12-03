@@ -9,7 +9,7 @@ defineProps<{
 
 const ts = inject(timestamp);
 
-const selectedDate = computed(() => ts?.currentTimestamp.value.format('HH:mm:ss'));
+const selectedDate = computed(() => ts?.currentTimestamp.value.format('LTS'));
 const showPopup = ref(false);
 const timepicker = ref<TimePickerPopupApi | null>(null);
 

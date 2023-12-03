@@ -119,7 +119,7 @@ const setSelection = (newYear: number, newMonth: number, newDate: number) => {
 };
 
 const jumpToToday = () => {
-  setSelection(props.selectedYear, props.selectedMonth, props.selectedDate);
+  setSelection(currentDate.value.year, currentDate.value.month + 1, currentDate.value.date);
 };
 
 export interface DatePickerCalendarApi {
