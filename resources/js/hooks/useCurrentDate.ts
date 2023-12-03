@@ -2,19 +2,19 @@ import moment from 'moment';
 import { computed, onUnmounted, ref } from 'vue';
 
 export function useCurrentDate() {
-    const currentDate = ref(moment());
+	const currentDate = ref(moment());
 
-    const intervalId = setInterval(() => {
-        currentDate.value = moment();
-    }, 60e3);
+	const intervalId = setInterval(() => {
+		currentDate.value = moment();
+	}, 60e3);
 
-    onUnmounted(() => {
-        clearInterval(intervalId);
-    });
+	onUnmounted(() => {
+		clearInterval(intervalId);
+	});
 
-    return computed(() => ({
-        year: currentDate.value.year(),
-        month: currentDate.value.month(),
-        date: currentDate.value.date(),
-    }));
+	return computed(() => ({
+		year: currentDate.value.year(),
+		month: currentDate.value.month(),
+		date: currentDate.value.date(),
+	}));
 }

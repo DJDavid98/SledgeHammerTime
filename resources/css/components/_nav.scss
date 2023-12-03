@@ -1,29 +1,57 @@
 @use '../mixins/if';
 
 nav.sticky {
-    position: sticky;
-    top: 0;
+  position: sticky;
+  top: 0;
 }
 
 nav.backdrop {
-    $bg-opacity: .75;
-    --bg-color: #{rgba($primary-100, $bg-opacity)};
-    background-color: var(--bg-color);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 0 10px var(--bg-color);
+  $bg-opacity: .75;
+  --bg-color: #{rgba($primary-100, $bg-opacity)};
+  background-color: var(--bg-color);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 10px var(--bg-color);
 
-    @include if.dark {
-        --bg-color: #{rgba($black, $bg-opacity)};
-    }
+  @include if.dark {
+    --bg-color: #{rgba($black, $bg-opacity)};
+  }
 }
 
-nav .brand {
+nav {
+  .brand {
     font-weight: bold;
     display: flex;
     align-items: center;
     color: $primary-800;
 
     @include if.dark {
-        color: $primary-300;
+      color: $primary-300;
     }
+  }
+
+  .language-dropdown {
+    max-height: 50vh;
+    overflow: auto;
+  }
+
+  .language-link {
+    display: flex !important;
+    flex-flow: row nowrap;
+    align-items: center;
+    font-size: 1rem;
+    direction: revert !important;
+
+    &[dir=ltr] .language-name {
+      margin-left: 1em;
+    }
+
+    &[dir=rtl] .language-name {
+      margin-right: 1em;
+    }
+
+    &[aria-haspopup="listbox"] > .normal-flag {
+      margin-top: -0.3em;
+      margin-bottom: -0.3em;
+    }
+  }
 }

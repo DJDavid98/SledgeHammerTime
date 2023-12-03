@@ -1,0 +1,587 @@
+{
+  "languages": {
+    "ar": {
+      "name": "Arabic",
+      "countryCode": "AE",
+      "emoji": "\uD83C\uDDF8\uD83C\uDDE6",
+      "rtl": true,
+      "calendarWeekdayFormat": "dddd",
+      "credits": [
+        {
+          "crowdin": "raphael.santiago.53",
+          "displayName": "Raphael Santiago"
+        }
+      ]
+    },
+    "bg": {
+      "name": "Bulgarian",
+      "countryCode": "BG",
+      "emoji": "\uD83C\uDDE7\uD83C\uDDEC",
+      "credits": [
+        {
+          "crowdin": "Rxshi"
+        }
+      ]
+    },
+    "ca": {
+      "name": "Catalan",
+      "countryCode": "CA",
+      "customFlag": true,
+      "credits": [
+        {
+          "crowdin": "sware"
+        }
+      ]
+    },
+    "zh": {
+      "name": "Chinese Simplified",
+      "countryCode": "CN",
+      "emoji": "\uD83C\uDDE8\uD83C\uDDF3",
+      "crowdinLocale": "zh-CN",
+      "momentLocale": "zh-cn",
+      "calendarLabelFormat": "YYYY年MMM",
+      "calendarYearLabelFormat": "YYYY年",
+      "credits": [
+        {
+          "crowdin": "CPYW_7226"
+        },
+        {
+          "crowdin": "User670"
+        },
+        {
+          "crowdin": "febilly",
+          "displayName": "姓甚名谁"
+        }
+      ]
+    },
+    "zh-TW": {
+      "name": "Chinese Traditional",
+      "countryCode": "TW",
+      "emoji": "\uD83C\uDDF9\uD83C\uDDFC",
+      "momentLocale": "zh-tw",
+      "calendarLabelFormat": "YYYY年MMM",
+      "calendarYearLabelFormat": "YYYY年",
+      "credits": [
+        {
+          "crowdin": "CPYW_7226"
+        },
+        {
+          "crowdin": "jackiecr2911",
+          "displayName": "Jackie"
+        },
+        {
+          "crowdin": "notlin4"
+        },
+        {
+          "crowdin": "ms.investigator",
+          "displayName": "investigator VT"
+        }
+      ]
+    },
+    "hr": {
+      "name": "Croatian",
+      "countryCode": "HR",
+      "emoji": "\uD83C\uDDED\uD83C\uDDF7",
+      "weekendDays": {
+        "0": "red"
+      },
+      "credits": [
+        {
+          "crowdin": "stjepanmih13x",
+          "displayName": "Volvone",
+          "url": "https://github.com/volvone"
+        }
+      ],
+      "percent": 98
+    },
+    "cs": {
+      "name": "Czech",
+      "countryCode": "CZ",
+      "emoji": "\uD83C\uDDE8\uD83C\uDDFF",
+      "credits": [
+        {
+          "crowdin": "klauny"
+        },
+        {
+          "crowdin": "Ethxrnity",
+          "displayName": "イーテルニティ ☄️"
+        },
+        {
+          "crowdin": "Blurplix"
+        }
+      ]
+    },
+    "nl": {
+      "name": "Dutch",
+      "countryCode": "NL",
+      "emoji": "\uD83C\uDDF3\uD83C\uDDF1",
+      "weekendDays": {
+        "6": "red",
+        "0": "red"
+      },
+      "credits": [
+        {
+          "crowdin": "Jessuh",
+          "displayName": "Jesse",
+          "url": "https://github.com/Jessuhh"
+        }
+      ]
+    },
+    "en-GB": {
+      "name": "English, United Kingdom",
+      "countryCode": "GB",
+      "emoji": "\uD83C\uDDEC\uD83C\uDDE7",
+      "momentLocale": "en-gb"
+    },
+    "en": {
+      "name": "English, United States",
+      "countryCode": "US",
+      "emoji": "\uD83C\uDDFA\uD83C\uDDF8"
+    },
+    "fr": {
+      "name": "French",
+      "countryCode": "FR",
+      "emoji": "\uD83C\uDDEB\uD83C\uDDF7",
+      "credits": [
+        {
+          "crowdin": "Cookikui",
+          "displayName": "Cookie Kiro"
+        },
+        {
+          "crowdin": "Ouiouibaguette"
+        },
+        {
+          "crowdin": "sivelswhy"
+        },
+        {
+          "crowdin": "ValouFCH"
+        },
+        {
+          "crowdin": "graffiti34",
+          "displayName": "James Roger"
+        },
+        {
+          "crowdin": "M4gicalCat"
+        },
+        {
+          "crowdin": "humain",
+          "displayName": "HumainAbsurde"
+        }
+      ]
+    },
+    "de": {
+      "name": "German",
+      "countryCode": "DE",
+      "emoji": "\uD83C\uDDE9\uD83C\uDDEA",
+      "credits": [
+        {
+          "crowdin": "carlos.diener",
+          "displayName": "Carlos Diener"
+        },
+        {
+          "crowdin": "Fabian9799"
+        },
+        {
+          "crowdin": "julix00"
+        }
+      ]
+    },
+    "el": {
+      "name": "Greek",
+      "countryCode": "GR",
+      "emoji": "\uD83C\uDDEC\uD83C\uDDF7",
+      "credits": [
+        {
+          "crowdin": "BelleBernice"
+        }
+      ]
+    },
+    "hi": {
+      "name": "Hindi",
+      "countryCode": "IN",
+      "emoji": "\uD83C\uDDEE\uD83C\uDDF3",
+      "credits": [
+        {
+          "crowdin": "Balajiasli"
+        }
+      ]
+    },
+    "he": {
+      "name": "Hebrew",
+      "countryCode": "IL",
+      "emoji": "\uD83C\uDDEE\uD83C\uDDF1",
+      "rtl": true,
+      "weekendDays": {"5": "red", "6": "red"},
+      "credits": [
+        {
+          "crowdin": "ZeRealOne",
+          "displayName": "Amit Cohen"
+        }
+      ],
+      "percent": 75
+    },
+    "hu": {
+      "name": "Hungarian",
+      "countryCode": "HU",
+      "emoji": "\uD83C\uDDED\uD83C\uDDFA",
+      "weekendDays": {"6": "red", "0": "red"}
+    },
+    "id": {
+      "name": "Indonesian",
+      "countryCode": "ID",
+      "emoji": "\uD83C\uDDEE\uD83C\uDDE9",
+      "credits": [
+        {
+          "crowdin": "jackiecr2911",
+          "displayName": "Jackie"
+        }
+      ]
+    },
+    "it": {
+      "name": "Italian",
+      "countryCode": "IT",
+      "emoji": "\uD83C\uDDEE\uD83C\uDDF9",
+      "weekendDays": {"6": "red", "0": "red"},
+      "credits": [
+        {
+          "crowdin": "pellilory126",
+          "displayName": "RVG|\uD835\uDCF5\uD835\uDCF8\uD835\uDCFB\uD835\uDD02",
+          "url": "https://top.gg/bot/1076200668810985634"
+        }
+      ]
+    },
+    "ja": {
+      "name": "Japanese",
+      "countryCode": "JP",
+      "emoji": "\uD83C\uDDEF\uD83C\uDDF5",
+      "calendarLabelFormat": "YYYY年MMMM",
+      "calendarYearLabelFormat": "YYYY年",
+      "credits": [
+        {
+          "crowdin": "TheOnlyRAK"
+        },
+        {
+          "crowdin": "sjkim04",
+          "displayName": "のむチュウ (sjk)",
+          "url": "https://github.com/sjkim04"
+        },
+        {
+          "crowdin": "eai04191"
+        }
+      ],
+      "percent": 78
+    },
+    "ko": {
+      "name": "Korean",
+      "countryCode": "KR",
+      "emoji": "\uD83C\uDDF0\uD83C\uDDF7",
+      "calendarLabelFormat": "YYYY년 MMMM",
+      "calendarYearLabelFormat": "YYYY년",
+      "credits": [
+        {
+          "crowdin": "cheesepickle12345678",
+          "displayName": "Bin"
+        },
+        {
+          "crowdin": "sjkim04",
+          "displayName": "김카츄 (sjk)",
+          "url": "https://github.com/sjkim04"
+        }
+      ]
+    },
+    "lv": {
+      "name": "Latvian",
+      "countryCode": "LV",
+      "emoji": "\uD83C\uDDF1\uD83C\uDDFB",
+      "credits": [
+        {
+          "crowdin": "JajarGG",
+          "displayName": "Casper"
+        }
+      ]
+    },
+    "lt": {
+      "name": "Lithuanian",
+      "countryCode": "LT",
+      "emoji": "\uD83C\uDDF1\uD83C\uDDF9",
+      "credits": [
+        {
+          "crowdin": "tayloryte"
+        },
+        {
+          "crowdin": "Seenoc"
+        }
+      ]
+    },
+    "ms": {
+      "name": "Malay",
+      "countryCode": "MY",
+      "emoji": "\uD83C\uDDF2\uD83C\uDDFE",
+      "firstDayOfWeek": 0,
+      "weekendDays": {
+        "0": "red",
+        "6": "blue"
+      },
+      "credits": [
+        {
+          "crowdin": "mnh48",
+          "displayName": "Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48.moe)"
+        }
+      ]
+    },
+    "fa": {
+      "name": "Persian",
+      "countryCode": "IR",
+      "emoji": "\uD83C\uDDEE\uD83C\uDDF7",
+      "rtl": true,
+      "credits": [
+        {
+          "crowdin": "DeadMarco",
+          "displayName": "Mohammad Safa Gray"
+        }
+      ],
+      "percent": 78
+    },
+    "pl": {
+      "name": "Polish",
+      "countryCode": "PL",
+      "emoji": "\uD83C\uDDF5\uD83C\uDDF1",
+      "weekendDays": {
+        "0": "red"
+      },
+      "credits": [
+        {
+          "crowdin": "MinerPL",
+          "url": "https://github.com/minerpl"
+        },
+        {
+          "crowdin": "sthakrk",
+          "displayName": "stha"
+        }
+      ]
+    },
+    "pt": {
+      "name": "Portuguese",
+      "countryCode": "PT",
+      "emoji": "\uD83C\uDDF5\uD83C\uDDF9",
+      "calendarWeekdayFormat": "ddd",
+      "credits": [
+        {
+          "crowdin": "JajarGG",
+          "displayName": "Casper"
+        },
+        {
+          "crowdin": "DemiCool",
+          "displayName": "Tiago"
+        },
+        {
+          "crowdin": "buckshot-"
+        },
+        {
+          "crowdin": "alexsav004",
+          "displayName": "Alexandre Savchyshkin"
+        }
+      ]
+    },
+    "pt-BR": {
+      "name": "Portuguese, Brazilian",
+      "countryCode": "BR",
+      "emoji": "\uD83C\uDDE7\uD83C\uDDF7",
+      "momentLocale": "pt-br",
+      "calendarWeekdayFormat": "ddd",
+      "credits": [
+        {
+          "crowdin": "leo0six"
+        },
+        {
+          "crowdin": "ShadowG"
+        },
+        {
+          "crowdin": "Chrisdbhr",
+          "displayName": "Chris"
+        }
+      ]
+    },
+    "ro": {
+      "name": "Romanian",
+      "countryCode": "RO",
+      "emoji": "\uD83C\uDDF7\uD83C\uDDF4",
+      "credits": [
+        {
+          "crowdin": "mihaiofficialRO",
+          "displayName": "mihai"
+        }
+      ]
+    },
+    "ru": {
+      "name": "Russian",
+      "countryCode": "RU",
+      "emoji": "\uD83C\uDDF7\uD83C\uDDFA",
+      "credits": [
+        {
+          "crowdin": "GameHacker"
+        },
+        {
+          "crowdin": "JudeDM"
+        },
+        {
+          "crowdin": "NightyCloud",
+          "displayName": "Luna"
+        },
+        {
+          "crowdin": "Aligatoor",
+          "displayName": "Nikita Sharikov"
+        },
+        {
+          "crowdin": "arturfomenko8",
+          "displayName": "Крутой Бо"
+        },
+        {
+          "crowdin": "helppriklreyta",
+          "displayName": "Рейт"
+        },
+        {
+          "crowdin": "JudDayLum",
+          "displayName": "JudDayLum Official"
+        },
+        {
+          "crowdin": "bill876",
+          "displayName": "Vladimir"
+        }
+      ]
+    },
+    "sr": {
+      "name": "Serbian (Latin)",
+      "countryCode": "RS",
+      "emoji": "\uD83C\uDDF7\uD83C\uDDF8",
+      "crowdinLocale": "sr-CS",
+      "weekendDays": {
+        "6": "red",
+        "0": "red"
+      },
+      "credits": [
+        {
+          "crowdin": "net-tech-",
+          "displayName": "net-tech-#7475",
+          "url": "https://nettech.dev/"
+        }
+      ]
+    },
+    "es": {
+      "name": "Spanish",
+      "countryCode": "ES",
+      "emoji": "\uD83C\uDDEA\uD83C\uDDF8",
+      "crowdinLocale": "es-ES",
+      "credits": [
+        {
+          "crowdin": "shaulyareaj",
+          "displayName": "Yareaj",
+          "url": "https://github.com/Yareaj/"
+        },
+        {
+          "crowdin": "DrakeZero"
+        }
+      ]
+    },
+    "sv": {
+      "name": "Swedish",
+      "countryCode": "SE",
+      "emoji": "\uD83C\uDDF8\uD83C\uDDEA",
+      "crowdinLocale": "sv-SE",
+      "weekendDays": {"0": "red"},
+      "credits": [
+        {
+          "crowdin": "joll05"
+        },
+        {
+          "crowdin": "Liggliluff",
+          "url": "https://github.com/Liggliluff"
+        },
+        {
+          "crowdin": "tunket"
+        },
+        {
+          "crowdin": "patricktobias",
+          "displayName": "Patrick Tobias"
+        }
+      ]
+    },
+    "th": {
+      "name": "Thai",
+      "countryCode": "TH",
+      "emoji": "\uD83C\uDDF9\uD83C\uDDED",
+      "credits": [
+        {
+          "crowdin": "unpredictable",
+          "displayName": "Rukchad Wongprayoon"
+        }
+      ]
+    },
+    "tr": {
+      "name": "Turkish",
+      "countryCode": "TR",
+      "emoji": "\uD83C\uDDF9\uD83C\uDDF7",
+      "credits": [
+        {
+          "crowdin": "tututuana",
+          "url": "https://github.com/tututuana"
+        }
+      ]
+    },
+    "uk": {
+      "name": "Ukrainian",
+      "countryCode": "UA",
+      "emoji": "\uD83C\uDDFA\uD83C\uDDE6",
+      "credits": [
+        {
+          "crowdin": "GameHacker"
+        },
+        {
+          "crowdin": "enky"
+        },
+        {
+          "crowdin": "WhiteBear60",
+          "displayName": "Myhailo Yaremenko"
+        }
+      ],
+      "percent": 78
+    },
+    "ur": {
+      "name": "Urdu (Pakistan)",
+      "countryCode": "PK",
+      "emoji": "\uD83C\uDDF5\uD83C\uDDF0",
+      "rtl": true,
+      "credits": [
+        {
+          "crowdin": "muharslan"
+        },
+        {
+          "crowdin": "Developer_X",
+          "displayName": "Muhammad Dawood"
+        }
+      ],
+      "percent": 98
+    },
+    "vi": {
+      "name": "Vietnamese",
+      "countryCode": "VN",
+      "emoji": "\uD83C\uDDFB\uD83C\uDDF3",
+      "credits": [
+        {
+          "crowdin": "quanonthecob",
+          "displayName": "Quan"
+        }
+      ]
+    },
+    "da": {
+      "name": "Danish",
+      "countryCode": "DK",
+      "emoji": "\uD83C\uDDE9\uD83C\uDDF0",
+      "credits": [
+        {
+          "crowdin": "jovictasor"
+        }
+      ]
+    }
+  }
+}

@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import Button from '@/Components/Button.vue';
 import DatePicker from '@/Components/home/pickers/DatePicker.vue';
 import TimePicker from '@/Components/home/pickers/TimePicker.vue';
 import TimeZonePicker from '@/Components/home/pickers/TimeZonePicker.vue';
-import Button from '@/Components/Button.vue';
-import { inject } from 'vue';
 import { timestamp } from '@/injection-keys';
+import { inject } from 'vue';
 
 const ts = inject(timestamp);
 </script>
@@ -24,7 +24,12 @@ const ts = inject(timestamp);
       <TimeZonePicker id="timezonepicker" />
     </div>
     <div>
-      <Button @click="ts?.setCurrentTime" :data-tooltip="$t('timestampPicker.picker.tooltip.setToCurrent')" class="mt-3 mb-0 secondary outline" role="button">
+      <Button
+          @click="ts?.setCurrentTime"
+          :data-tooltip="$t('timestampPicker.picker.tooltip.setToCurrent')"
+          class="mt-4 mb-0 secondary outline"
+          role="button"
+      >
         ⌚
       </Button>
     </div>

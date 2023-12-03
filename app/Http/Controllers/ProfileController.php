@@ -11,49 +11,46 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class ProfileController extends Controller
-{
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): Response
-    {
-        $discordUsers = [];
-        $authUser = Auth::user();
-        if ($authUser) {
-            $discordUsers = $authUser->discordUsers()->get(['id', 'name', 'display_name', 'discriminator', 'avatar'])->map(fn(DiscordUser $du) => $du->mapToUiInfo());
-        }
-        return Inertia::render('Profile/Edit', [
-            'discordUsers' => $discordUsers,
-        ]);
+class ProfileController extends Controller {
+  /**
+   * Display the user's profile form.
+   */
+  public function edit(Request $request):Response {
+    $discordUsers = [];
+    $authUser = Auth::user();
+    if ($authUser){
+      $discordUsers = $authUser->discordUsers()->get(['id', 'name', 'display_name', 'discriminator', 'avatar'])->map(fn(DiscordUser $du) => $du->mapToUiInfo());
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+    return Inertia::render('Profile/Edit', [
+      'discordUsers' => $discordUsers,
+    ]);
+  }
 
-        $request->user()->save();
+  /**
+   * Update the user's profile information.
+   */
+  public function update(ProfileUpdateRequest $request):RedirectResponse {
+    $request->user()->fill($request->validated());
 
-        return Redirect::route('profile.edit');
-    }
+    $request->user()->save();
 
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $user = $request->user();
+    return Redirect::route('profile.edit');
+  }
 
-        Auth::logout();
+  /**
+   * Delete the user's account.
+   */
+  public function destroy(Request $request):RedirectResponse {
+    $user = $request->user();
 
-        $user->delete();
+    Auth::logout();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+    $user->delete();
 
-        return Redirect::to('/');
-    }
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return Redirect::to('/');
+  }
 }

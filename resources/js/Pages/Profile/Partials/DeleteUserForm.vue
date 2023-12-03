@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Modal from '@/Components/Modal.vue';
 import Button from '@/Components/Button.vue';
+import Modal from '@/Components/Modal.vue';
 import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
 
@@ -10,53 +10,53 @@ const passwordInput = ref<HTMLInputElement | null>(null);
 const form = useForm({});
 
 const confirmUserDeletion = () => {
-    confirmingUserDeletion.value = true;
+  confirmingUserDeletion.value = true;
 
-    nextTick(() => passwordInput.value?.focus());
+  nextTick(() => passwordInput.value?.focus());
 };
 
 const deleteUser = () => {
-    form.delete(route('profile.destroy'), {
-        preserveScroll: true,
-        onSuccess: () => closeModal(),
-        onFinish: () => {
-            form.reset();
-        },
-    });
+  form.delete(route('profile.destroy'), {
+    preserveScroll: true,
+    onSuccess: () => closeModal(),
+    onFinish: () => {
+      form.reset();
+    },
+  });
 };
 
 const closeModal = () => {
-    confirmingUserDeletion.value = false;
+  confirmingUserDeletion.value = false;
 
-    form.reset();
+  form.reset();
 };
 </script>
 
 <template>
-    <h2>{{ $t('profile.deletion.heading') }}</h2>
+  <h2>{{ $t('profile.deletion.heading') }}</h2>
 
-    <p class="mt-1">{{ $t('profile.deletion.description') }}</p>
+  <p class="mt-1">{{ $t('profile.deletion.description') }}</p>
 
-    <Button @click="confirmUserDeletion">{{ $t('profile.deletion.deleteButton') }}</Button>
+  <Button @click="confirmUserDeletion">{{ $t('profile.deletion.deleteButton') }}</Button>
 
-    <Modal :show="confirmingUserDeletion" @close="closeModal">
-        <template #header>
-            {{ $t('profile.deletion.confirmDialog.header') }}
-        </template>
+  <Modal :show="confirmingUserDeletion" @close="closeModal">
+    <template #header>
+      {{ $t('profile.deletion.confirmDialog.header') }}
+    </template>
 
-        <p class="mt-1">
-            {{ $t('profile.deletion.confirmDialog.body') }}
-        </p>
+    <p class="mt-1">
+      {{ $t('profile.deletion.confirmDialog.body') }}
+    </p>
 
-        <template #footer>
-            <Button @click="closeModal">{{ $t('global.form.cancel') }}</Button>
+    <template #footer>
+      <Button @click="closeModal">{{ $t('global.form.cancel') }}</Button>
 
-            <Button
-                :disabled="form.processing"
-                :aria-busy="form.processing ? 'true' : undefined"
-                @click="deleteUser"
-            >{{ $t('global.form.confirm') }}
-            </Button>
-        </template>
-    </Modal>
+      <Button
+          :disabled="form.processing"
+          :aria-busy="form.processing ? 'true' : undefined"
+          @click="deleteUser"
+      >{{ $t('global.form.confirm') }}
+      </Button>
+    </template>
+  </Modal>
 </template>

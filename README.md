@@ -1,66 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1>HammerTime <a title="Crowdin" target="_blank" href="https://crowdin.com/project/hammertime"><img src="https://badges.crowdin.net/hammertime/localized.svg" alt=""></a></h1>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+I discovered [DiscordTimeStamper] through [this Reddit post] and immediately knew this could be turned into a website,
+so here it is.
 
-## About Laravel
+[discordtimestamper]: https://github.com/TimeTravelPenguin/DiscordTimeStamper/
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+[this reddit post]: https://www.reddit.com/r/discordapp/comments/oiv86b/i_made_a_tool_to_make_timestamps_for_discord/
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This project is not affiliated with Discord in any way shape or form.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Application logo based on [Hammer] by John Caserta, from The Noun Project licensed under [CC BY 3.0 Unported]
 
-## Learning Laravel
+[hammer]: https://meta.m.wikimedia.org/wiki/File:Hammer_-_Noun_project_1306.svg
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+[cc by 3.0 unported]: https://creativecommons.org/licenses/by/3.0/deed.en
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Translation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+New language contributions are welcome! They are handled through [Crowdin]. If you don't see your language listed,
+[join our Discord server] and ask for your language to be added to the project in the [#translator-signup] channel. You
+will be given the Translator role and granted access to a language-specific channel for further discussion. This is
+necessary so that when new translations are needed for any potential new site features, I have an easy way to reach
+everyone at once.
 
-## Laravel Sponsors
+[crowdin]: https://crowdin.com/project/sledgehammertime
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+[join our discord server]: https://sledgehammerti.me/discord
 
-### Premium Partners
+[#translator-signup]: https://discord.com/channels/952258283882819595/952292965211074650
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+English and Hungarian translations have been included, so no translators will be needed for these two languages.
 
-## Contributing
+### Credits
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- 🇸🇦 Arabic: [Raphael Santiago](https://crowdin.com/profile/raphael.santiago.53)
+- 🇧🇬 Bulgarian: [Rxshi](https://crowdin.com/profile/Rxshi)
+- Catalan: [sware](https://crowdin.com/profile/sware)
+- 🇨🇳 Chinese Simplified
+  - [CPYW_7226](https://crowdin.com/profile/CPYW_7226)
+  - [User670](https://crowdin.com/profile/User670)
+  - [姓甚名谁](https://crowdin.com/profile/febilly)
+- 🇹🇼 Chinese Traditional
+  - [CPYW_7226](https://crowdin.com/profile/CPYW_7226)
+  - [investigator VT](https://crowdin.com/profile/ms.investigator)
+  - [Jackie](https://crowdin.com/profile/jackiecr2911)
+  - [notlin4](https://crowdin.com/profile/notlin4)
+- 🇭🇷 Croatian: [Volvone](https://github.com/volvone)
+- 🇨🇿 Czech
+  - [Blurplix](https://crowdin.com/profile/Blurplix)
+  - [klauny](https://crowdin.com/profile/klauny)
+  - [イーテルニティ ☄️](https://crowdin.com/profile/Ethxrnity)
+- 🇩🇰 Danish: [jovictasor](https://crowdin.com/profile/jovictasor)
+- 🇳🇱 Dutch: [Jesse](https://github.com/Jessuhh)
+- 🇫🇷 French
+  - [Cookie Kiro](https://crowdin.com/profile/Cookikui)
+  - [HumainAbsurde](https://crowdin.com/profile/humain)
+  - [James Roger](https://crowdin.com/profile/graffiti34)
+  - [M4gicalCat](https://crowdin.com/profile/M4gicalCat)
+  - [Ouiouibaguette](https://crowdin.com/profile/Ouiouibaguette)
+  - [sivelswhy](https://crowdin.com/profile/sivelswhy)
+  - [ValouFCH](https://crowdin.com/profile/ValouFCH)
+- 🇩🇪 German
+  - [Carlos Diener](https://crowdin.com/profile/carlos.diener)
+  - [Fabian9799](https://crowdin.com/profile/Fabian9799)
+  - [julix00](https://crowdin.com/profile/julix00)
+- 🇬🇷 Greek: [BelleBernice](https://crowdin.com/profile/BelleBernice)
+- 🇮🇱 Hebrew: [Amit Cohen](https://crowdin.com/profile/ZeRealOne)
+- 🇮🇳 Hindi: [Balajiasli](https://crowdin.com/profile/Balajiasli)
+- 🇮🇩 Indonesian: [Jackie](https://crowdin.com/profile/jackiecr2911)
+- 🇮🇹 Italian: [RVG|𝓵𝓸𝓻𝔂](https://top.gg/bot/1076200668810985634)
+- 🇯🇵 Japanese
+  - [eai04191](https://crowdin.com/profile/eai04191)
+  - [TheOnlyRAK](https://crowdin.com/profile/TheOnlyRAK)
+  - [のむチュウ (sjk)](https://github.com/sjkim04)
+- 🇰🇷 Korean
+  - [Bin](https://crowdin.com/profile/cheesepickle12345678)
+  - [김카츄 (sjk)](https://github.com/sjkim04)
+- 🇱🇻 Latvian: [Casper](https://crowdin.com/profile/JajarGG)
+- 🇱🇹 Lithuanian
+  - [Seenoc](https://crowdin.com/profile/Seenoc)
+  - [tayloryte](https://crowdin.com/profile/tayloryte)
+- 🇲🇾 Malay: [Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48.moe)](https://crowdin.com/profile/mnh48)
+- 🇮🇷 Persian: [Mohammad Safa Gray](https://crowdin.com/profile/DeadMarco)
+- 🇵🇱 Polish
+  - [MinerPL](https://github.com/minerpl)
+  - [stha](https://crowdin.com/profile/sthakrk)
+- 🇵🇹 Portuguese
+  - [Alexandre Savchyshkin](https://crowdin.com/profile/alexsav004)
+  - [buckshot-](https://crowdin.com/profile/buckshot-)
+  - [Casper](https://crowdin.com/profile/JajarGG)
+  - [Tiago](https://crowdin.com/profile/DemiCool)
+- 🇧🇷 Portuguese, Brazilian
+  - [Chris](https://crowdin.com/profile/Chrisdbhr)
+  - [leo0six](https://crowdin.com/profile/leo0six)
+  - [ShadowG](https://crowdin.com/profile/ShadowG)
+- 🇷🇴 Romanian: [mihai](https://crowdin.com/profile/mihaiofficialRO)
+- 🇷🇺 Russian
+  - [GameHacker](https://crowdin.com/profile/GameHacker)
+  - [JudDayLum Official](https://crowdin.com/profile/JudDayLum)
+  - [JudeDM](https://crowdin.com/profile/JudeDM)
+  - [Luna](https://crowdin.com/profile/NightyCloud)
+  - [Nikita Sharikov](https://crowdin.com/profile/Aligatoor)
+  - [Vladimir](https://crowdin.com/profile/bill876)
+  - [Крутой Бо](https://crowdin.com/profile/arturfomenko8)
+  - [Рейт](https://crowdin.com/profile/helppriklreyta)
+- 🇷🇸 Serbian (Latin): [net-tech-#7475](https://nettech.dev/)
+- 🇪🇸 Spanish
+  - [DrakeZero](https://crowdin.com/profile/DrakeZero)
+  - [Yareaj](https://github.com/Yareaj/)
+- 🇸🇪 Swedish
+  - [joll05](https://crowdin.com/profile/joll05)
+  - [Liggliluff](https://github.com/Liggliluff)
+  - [Patrick Tobias](https://crowdin.com/profile/patricktobias)
+  - [tunket](https://crowdin.com/profile/tunket)
+- 🇹🇭 Thai: [Rukchad Wongprayoon](https://crowdin.com/profile/unpredictable)
+- 🇹🇷 Turkish: [tututuana](https://github.com/tututuana)
+- 🇺🇦 Ukrainian
+  - [enky](https://crowdin.com/profile/enky)
+  - [GameHacker](https://crowdin.com/profile/GameHacker)
+  - [Myhailo Yaremenko](https://crowdin.com/profile/WhiteBear60)
+- 🇵🇰 Urdu (Pakistan)
+  - [Muhammad Dawood](https://crowdin.com/profile/Developer_X)
+  - [muharslan](https://crowdin.com/profile/muharslan)
+- 🇻🇳 Vietnamese: [Quan](https://crowdin.com/profile/quanonthecob)

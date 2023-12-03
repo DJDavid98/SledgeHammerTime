@@ -4,7 +4,7 @@ import { timestamp } from '@/injection-keys';
 import { computed, inject, ref } from 'vue';
 
 defineProps<{
-    id: string;
+  id: string;
 }>();
 
 const ts = inject(timestamp);
@@ -14,25 +14,25 @@ const showPopup = ref(false);
 const timepicker = ref<TimePickerPopupApi | null>(null);
 
 const openPopup = () => {
-    showPopup.value = true;
-    if (ts) {
-        timepicker.value?.open(ts.currentTimestamp.value);
-    }
+  showPopup.value = true;
+  if (ts) {
+    timepicker.value?.open(ts.currentTimestamp.value);
+  }
 };
 
 const closePopup = () => {
-    showPopup.value = false;
+  showPopup.value = false;
 };
 
 const changeTime = (value: string) => {
-    ts?.changeTimeString(value);
+  ts?.changeTimeString(value);
 };
 </script>
 
 
 <template>
-    <div>
-        <input :id="id" v-model="selectedDate" @click="openPopup" class="mb-0" readonly />
-        <TimePickerPopup :show="showPopup" @close="closePopup" @selected="changeTime" ref="timepicker" />
-    </div>
+  <div>
+    <input :id="id" v-model="selectedDate" @click="openPopup" class="mb-0" readonly />
+    <TimePickerPopup :show="showPopup" @close="closePopup" @selected="changeTime" ref="timepicker" />
+  </div>
 </template>

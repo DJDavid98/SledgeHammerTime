@@ -3,7 +3,7 @@ import TimestampDisplay from '@/Components/home/TimestampDisplay.vue';
 import { timestamp } from '@/injection-keys';
 import Layout from '@/Layouts/Layout.vue';
 import { isoFormattingDateFormat, isoParsingDateFormat, isoTimeFormat } from '@/utils/timezone';
-import { Head, usePage } from '@inertiajs/vue3';
+import { Head, router, usePage } from '@inertiajs/vue3';
 import moment from 'moment';
 import { computed, provide, ref, watch } from 'vue';
 
@@ -59,7 +59,7 @@ watch(currentTimestamp, () => {
   const params = new URLSearchParams();
   params.set('t', currentTimestamp.value.unix().toString());
   params.set('tz', currentTimezone.value.toString());
-  history.replaceState({}, '', `${route('home', { locale: locale.value })}?${params}`);
+  router.get(`${route('home', { locale: locale.value })}?${params}`, undefined, { replace: true });
 });
 </script>
 

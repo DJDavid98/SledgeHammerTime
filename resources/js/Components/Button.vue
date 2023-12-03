@@ -1,16 +1,16 @@
 <script setup lang="ts">
 withDefaults(
     defineProps<{
-        type?: 'button' | 'submit' | 'reset';
+      type?: 'button' | 'submit' | 'reset';
     }>(),
     {
-        type: 'button',
+      type: 'button',
     },
 );
 </script>
 
 <template>
-    <button :type="type">
-        <slot />
-    </button>
+  <button :type="type">
+    <slot />
+  </button>
 </template>

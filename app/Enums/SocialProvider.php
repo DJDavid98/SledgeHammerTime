@@ -2,7 +2,6 @@
 
 namespace App\Enums;
 
-enum SocialProvider: string
-{
-    case Discord = 'discord';
+enum SocialProvider: string {
+  case Discord = 'discord';
 }
