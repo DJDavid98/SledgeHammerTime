@@ -1,12 +1,19 @@
 <script setup lang="ts">
+import TimePickerDial, { TimePickerDialAPI } from '@/Components/home/popup/TimePickerDial.vue';
 import Popup from '@/Components/Popup.vue';
+import { DialMode } from '@/utils/dial';
 import { pad } from '@/utils/pad';
 import { Moment } from 'moment-timezone';
-import { ref } from 'vue';
+import { onUpdated, ref } from 'vue';
 
-const hours = ref('');
-const minutes = ref('');
-const seconds = ref('');
+const hours = ref(0);
+const minutes = ref(0);
+const seconds = ref(0);
+const focusFirstInput = ref(false);
+const hoursInput = ref<HTMLInputElement>();
+const minutesInput = ref<HTMLInputElement>();
+const secondsInput = ref<HTMLInputElement>();
+const dial = ref<TimePickerDialAPI>();
 
 defineProps<{
   show: boolean;
@@ -27,9 +34,38 @@ const select = () => {
   close();
 };
 const open = (initialValue: Moment) => {
-  hours.value = initialValue.format('H');
-  minutes.value = initialValue.format('m');
-  seconds.value = initialValue.format('s');
+  hours.value = initialValue.hours();
+  minutes.value = initialValue.minutes();
+  seconds.value = initialValue.seconds();
+  // TODO 12h clock AM/PM selector
+  focusFirstInput.value = true;
+};
+
+const hoursFocused = () => dial.value?.setMode(DialMode.Hours);
+const minutesFocused = () => dial.value?.setMode(DialMode.Minutes);
+const secondsFocused = () => dial.value?.setMode(DialMode.Seconds);
+
+const setHours = (value: number) => {
+  hours.value = value;
+};
+const setMinutes = (value: number) => {
+  minutes.value = value;
+};
+const setSeconds = (value: number) => {
+  seconds.value = value;
+};
+const changeFocus = (mode: DialMode) => {
+  switch (mode) {
+    case DialMode.Hours:
+      hoursInput.value?.focus();
+      break;
+    case DialMode.Minutes:
+      minutesInput.value?.focus();
+      break;
+    case DialMode.Seconds:
+      secondsInput.value?.focus();
+      break;
+  }
 };
 
 export interface TimePickerPopupApi {
@@ -39,19 +75,37 @@ export interface TimePickerPopupApi {
 defineExpose<TimePickerPopupApi>({
   open,
 });
+
+onUpdated(() => {
+  if (focusFirstInput.value) {
+    changeFocus(DialMode.Hours);
+    focusFirstInput.value = false;
+  }
+});
 </script>
 
 
 <template>
   <Popup :show="show" @close="close">
     <div class="grid">
-      <input v-model="hours" type="number" min="0" max="23" />
-      <input v-model="minutes" type="number" min="0" max="59" />
-      <input v-model="seconds" type="number" min="0" max="59" />
+      <input ref="hoursInput" v-model="hours" type="number" min="0" max="23" @focus="hoursFocused" />
+      <input ref="minutesInput" v-model="minutes" type="number" min="0" max="59" @focus="minutesFocused" />
+      <input ref="secondsInput" v-model="seconds" type="number" min="0" max="59" @focus="secondsFocused" />
     </div>
     <div class="grid">
       <button @click="select" class="mb-0">{{ $t('global.form.select') }}</button>
       <button @click="close" class="mb-0 secondary">{{ $t('global.form.cancel') }}</button>
     </div>
+    <TimePickerDial
+        v-if="show"
+        ref="dial"
+        :hours="hours"
+        :minutes="minutes"
+        :seconds="seconds"
+        @setHours="setHours"
+        @setMinutes="setMinutes"
+        @setSeconds="setSeconds"
+        @changeFocus="changeFocus"
+    />
   </Popup>
 </template>

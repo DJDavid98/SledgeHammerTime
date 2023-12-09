@@ -32,7 +32,6 @@ const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
 const sortedLanguages = (Object.entries(LANGUAGES) as [AvailableLanguage, LanguageConfig][]).filter(([key]) => key in languages.value).sort(([a], [b]) => extendedNativeLocaleNames[a].localeCompare(extendedNativeLocaleNames[b]));
 
 const navigateListener = () => {
-  console.debug('navigateListener', window.location.search);
   searchParams.value = new URLSearchParams(window.location.search);
 };
 onMounted(router.on('success', navigateListener));
