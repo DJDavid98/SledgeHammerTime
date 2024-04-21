@@ -53,4 +53,8 @@ class DiscordUser extends Model {
       'discriminator' => $this->discriminator,
     ];
   }
+
+  public function getSettingsCacheKey():string {
+    return "user-settings-{$this->id}";
+  }
 }

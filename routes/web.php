@@ -24,6 +24,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+  Route::put('/settings/{discordUserId}', [BotSettingsController::class, 'set'])->name('settings.set');
   Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
