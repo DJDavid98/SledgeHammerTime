@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
+use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Artisan::command('inspire', function () {
-  $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+Artisan::command('create:bot-token', function () {
+  $consoleUserId = env('APP_CONSOLE_USER_UUID');
+  if (!isset($consoleUserId)){
+    throw new Error('Console user UUID is not specified!');
+  }
+  $consoleUser = User::createOrFirst(['id' => $consoleUserId], ['name' => 'Console']);
+  $token = $consoleUser->createToken('Bot token');
+
+  /** @var $this \Illuminate\Console\Command */
+  $this->info("Your bot token is:");
+  $this->comment($token->plainTextToken);
+})->purpose('Creates a token for the Discord bot that allows interacting with the API');

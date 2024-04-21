@@ -9,10 +9,12 @@ use Illuminate\Support\Facades\Config;
 use Teto\HTTP\AcceptLanguage;
 
 class Language {
+  protected array $ignored_segments = ['discord', 'bot-login'];
+
   public function handle(Request $request, Closure $next) {
     $languages = Config::get('languages');
     $first_route_segment = $request->segment(1);
-    if ($first_route_segment === 'discord'){
+    if (in_array($first_route_segment, $this->ignored_segments, true)){
       return $next($request);
     }
 

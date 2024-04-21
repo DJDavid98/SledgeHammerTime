@@ -23,7 +23,7 @@ class BotSettingsController extends Controller {
     $availableTimezones = DateTimeZone::listIdentifiers();
 
     return Inertia::render('BotSettings', [
-      'userSettings' => $userSettings,
+      'userSettings' => $userSettings ?? [],
       'availableTimezones' => $availableTimezones,
       'formatOptions' => array_map(static fn($x) => $x->value, DiscordTimestampFormat::cases()),
       'columnsOptions' => array_map(static fn($x) => $x->value, TimestampMessageColumns::cases()),

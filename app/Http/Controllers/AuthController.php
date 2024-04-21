@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\SocialProvider;
+use App\Http\Requests\BotLoginRequest;
 use App\Http\Requests\OauthProviderRequest;
 use App\Models\DiscordUser;
 use App\Models\User;
@@ -12,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -90,5 +92,37 @@ class AuthController extends Controller {
     $request->session()->regenerateToken();
 
     return redirect('/');
+  }
+
+  public function botLogin(BotLoginRequest $request) {
+    if (!$request->hasValidSignature()){
+      abort(401);
+    }
+
+    $discordUserId = $request->route('discordUserId');
+    $locale = $request->route('locale');
+    $data = $request->validated();
+
+    $user = null;
+    DB::transaction(function () use ($discordUserId, $data, &$user) {
+      $discordUser = DiscordUser::updateOrCreate(['id' => $discordUserId], $data);
+
+      /** @var User $user */
+      $user = $discordUser->user()->first();
+      if (!$user){
+        $user = $discordUser->user()->create([
+          'name' => $discordUser->public_name,
+        ]);
+        $discordUser->update(['user_id' => $user->id]);
+      }
+    });
+
+    if (!$user){
+      return response(500);
+    }
+
+    Auth::login($user);
+
+    return redirect()->route('settings', ['locale' => $locale]);
   }
 }

@@ -29,24 +29,25 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/discord', [HomeController::class, 'discord'])->name('discord');
+Route::get('/bot-login/{discordUserId}/{locale}', [AuthController::class, 'botLogin'])->name('botLogin');
 Route::get('/{locale?}', [HomeController::class, 'index'])->name('home');
 Route::middleware('guest')->get('/oauth/callback/{provider}', [AuthController::class, 'callback']);
+Route::middleware('guest')->get('/login', [AuthController::class, 'login'])->name('login');
 
 $languages = config('languages');
 $addLocalePrefix = function (string $path, bool $name):string {
   return $name ? "/{locale}$path" : $path;
 };
 $defineRoutes = function (bool $name) use ($addLocalePrefix) {
-  $settingsRoute = Route::get($addLocalePrefix('/settings', $name), [BotSettingsController::class, 'edit']);
-  $profileEditRoute = Route::get($addLocalePrefix('/profile', $name), [ProfileController::class, 'edit']);
-  $loginRoute = Route::middleware('guest')->get($addLocalePrefix('/login', $name), [AuthController::class, 'login']);
+  $settingsRoute = Route::middleware('auth')->get($addLocalePrefix('/settings', $name), [BotSettingsController::class, 'edit']);
+  $profileEditRoute = Route::middleware('auth')->get($addLocalePrefix('/profile', $name), [ProfileController::class, 'edit']);
   Route::middleware('guest')->get($addLocalePrefix('/oauth/callback/{provider}', $name), [AuthController::class, 'callback']);
 
   if ($name){
     Route::middleware('guest')->get($addLocalePrefix('/oauth/redirect/{provider}', true), [AuthController::class, 'redirect']);
+    Route::middleware('guest')->get($addLocalePrefix('/login', $name), [AuthController::class, 'login']);
     $settingsRoute->name('settings');
     $profileEditRoute->name('profile.edit');
-    $loginRoute->name('login');
   }
 };
 foreach ($languages as $language => $_){

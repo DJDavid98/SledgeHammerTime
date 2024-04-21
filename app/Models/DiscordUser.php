@@ -42,7 +42,7 @@ class DiscordUser extends Model {
   }
 
   function getPublicNameAttribute():string {
-    return $this->display_name ?? ($this->discriminator !== '0' ? "{$this->name}#{$this->discriminator}" : $this->name);
+    return $this->display_name ?? (trim($this->discriminator) !== '0' ? "{$this->name}#{$this->discriminator}" : $this->name);
   }
 
   function mapToUiInfo() {

@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\DiscordUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -35,7 +36,7 @@ class ProfileController extends Controller {
 
     $request->user()->save();
 
-    return Redirect::route('profile.edit');
+    return Redirect::route('profile.edit', ['locale' => App::getLocale()]);
   }
 
   /**
