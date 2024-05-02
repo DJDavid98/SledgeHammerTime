@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Button from '@/Components/Button.vue';
 import DiscordUserInfo, { DiscordUserInfoProps } from '@/Components/DiscordUserInfo.vue';
-import InputError from '@/Components/InputError.vue';
-import TextInput from '@/Components/TextInput.vue';
+import FormMessage from '@/Components/FormMessage.vue';
+import TimeZoneInput from '@/Components/TimeZoneInput.vue';
 import Layout from '@/Layouts/Layout.vue';
 import { UserSettings } from '@/model/user-settings';
 import { Head, useForm } from '@inertiajs/vue3';
@@ -11,10 +11,9 @@ const props = defineProps<{
   userSettings: Array<{
     user: DiscordUserInfoProps,
     settings: Partial<UserSettings>
-  }>
-  availableTimezones?: string[],
-  formatOptions?: string[],
-  columnsOptions?: Record<string, string>,
+  }>;
+  formatOptions?: string[];
+  columnsOptions?: Record<string, string>;
 }>();
 
 const forms = props.userSettings.map(userSetting => useForm({
@@ -36,27 +35,15 @@ const forms = props.userSettings.map(userSetting => useForm({
       <p class="mt-1">{{ $t('botSettings.description') }}</p>
     </header>
 
-    <datalist v-if="availableTimezones" id="timezones">
-      <option v-for="zoneIdentifier in availableTimezones" :value="zoneIdentifier" />
-    </datalist>
-
     <article v-for="(entry, i) in userSettings">
       <DiscordUserInfo v-bind="entry.user" />
       <form @submit.prevent="forms[i].put(route('settings.set', { discordUserId: entry.user.id }))">
         <div>
           <label :for="'timezone-'+i">{{ $t('botSettings.fields.timezone.displayName') }}</label>
 
-          <TextInput
-            :id="'timezone-'+i"
-            name="timezone"
-            type="text"
-            class="mt-1"
-            v-model="forms[i].timezone"
-            list="timezones"
-            placeholder="GMT"
-          />
+          <TimeZoneInput :id="'timezone-'+i" name="timezone" className="mt-1" v-model="forms[i].timezone" />
 
-          <InputError class="mt-2" :message="forms[i].errors.timezone" />
+          <FormMessage type="error" class="mt-2" :message="forms[i].errors.timezone" />
 
           <template v-if="formatOptions">
             <label :for="'format'+i">{{ $t('botSettings.fields.format.displayName') }}</label>
@@ -72,7 +59,7 @@ const forms = props.userSettings.map(userSetting => useForm({
               </option>
             </select>
 
-            <InputError class="mt-2" :message="forms[i].errors.format" />
+            <FormMessage type="error" class="mt-2" :message="forms[i].errors.format" />
           </template>
 
           <template v-if="columnsOptions">
@@ -89,20 +76,20 @@ const forms = props.userSettings.map(userSetting => useForm({
               </option>
             </select>
 
-            <InputError class="mt-2" :message="forms[i].errors.columns" />
+            <FormMessage type="error" class="mt-2" :message="forms[i].errors.columns" />
           </template>
 
           <p>
             <input type="checkbox" name="ephemeral" v-model="forms[i].ephemeral" :id="'ephemeral-'+i">
             <label :for="'ephemeral-'+i"> {{ $t('botSettings.fields.ephemeral.displayName') }}</label>
           </p>
-          <InputError class="mt-2" :message="forms[i].errors.ephemeral" />
+          <FormMessage type="error" class="mt-2" :message="forms[i].errors.ephemeral" />
 
           <p>
             <input type="checkbox" name="header" v-model="forms[i].header" :id="'header-'+i">
             <label :for="'header-'+i"> {{ $t('botSettings.fields.header.displayName') }}</label>
           </p>
-          <InputError class="mt-2" :message="forms[i].errors.header" />
+          <FormMessage type="error" class="mt-2" :message="forms[i].errors.header" />
         </div>
 
         <div>
@@ -114,7 +101,7 @@ const forms = props.userSettings.map(userSetting => useForm({
             {{ $t('global.form.save') }}
           </Button>
 
-          <p v-if="forms[i].recentlySuccessful">{{ $t('global.form.saved') }}</p>
+          <FormMessage type="success" :message="forms[i].recentlySuccessful ? $t('global.form.saved') : undefined" />
         </div>
       </form>
       <details class="mb-0">

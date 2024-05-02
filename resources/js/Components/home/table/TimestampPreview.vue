@@ -31,15 +31,17 @@ watch(() => props.fromNow, (fromNow) => {
     updateInterval.value = null;
   }
 }, { immediate: true });
+
+const localTimestamp = computed(() => props.ts?.value.local());
 </script>
 
 <template>
-    <span v-if="ts" :data-tooltip="ts.value.locale($page.props.app.locale).format('LLLL')">
+    <span v-if="localTimestamp" :data-tooltip="localTimestamp.locale($page.props.app.locale).format('LLLL')">
         <template v-if="format">
-            {{ ts.value.locale(locale).format(format) }}
+            {{ localTimestamp.locale(locale).format(format) }}
         </template>
         <template v-if="fromNow">
-            {{ ts.value.locale(locale).fromNow() }}
+            {{ localTimestamp.locale(locale).fromNow() }}
         </template>
     </span>
 </template>

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\DiscordTimestampFormatOption;
+use App\Rules\MomentTimezoneName;
 use App\Rules\TimestampMessageColumnsOption;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,7 @@ class BotSettingsUpdate extends FormRequest {
    */
   public function rules():array {
     return [
-      'timezone' => ['nullable', 'string', 'timezone:all'],
+      'timezone' => ['nullable', 'string', new MomentTimezoneName()],
       'format' => ['nullable', 'string', new DiscordTimestampFormatOption()],
       'ephemeral' => ['nullable', 'boolean'],
       'header' => ['nullable', 'boolean'],

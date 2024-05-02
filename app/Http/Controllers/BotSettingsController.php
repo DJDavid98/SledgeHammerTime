@@ -7,7 +7,6 @@ use App\Enums\TimestampMessageColumns;
 use App\Http\Requests\BotSettingsUpdate;
 use App\Models\DiscordUser;
 use App\Models\Settings;
-use DateTimeZone;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -19,11 +18,8 @@ class BotSettingsController extends Controller {
       'settings' => $du->getSettingsRecord(),
     ]);
 
-    $availableTimezones = DateTimeZone::listIdentifiers();
-
     return Inertia::render('BotSettings', [
       'userSettings' => $userSettings ?? [],
-      'availableTimezones' => $availableTimezones,
       'formatOptions' => array_map(static fn($x) => $x->value, DiscordTimestampFormat::cases()),
       'columnsOptions' => array_map(static fn($x) => $x->value, TimestampMessageColumns::cases()),
     ]);

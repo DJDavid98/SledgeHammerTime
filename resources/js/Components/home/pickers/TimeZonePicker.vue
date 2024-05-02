@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import TimeZoneInput from '@/Components/TimeZoneInput.vue';
 import { timestamp } from '@/injection-keys';
-import { getSortedNormalizedTimezoneNames, getTimezoneValue } from '@/utils/timezone';
-import { inject } from 'vue';
+import { computed, inject } from 'vue';
 
 defineProps<{
   id: string;
@@ -9,20 +9,13 @@ defineProps<{
 
 const ts = inject(timestamp);
 
-const timezones = getSortedNormalizedTimezoneNames().map(getTimezoneValue);
-
-const changeTimezone = (e: Event) => {
-  const { target } = e;
-  if (target instanceof HTMLSelectElement) {
-    ts?.changeTimezone(target.value);
-  }
+const changeTimezone = (value: string) => {
+  ts?.changeTimezone(value);
 };
+
+const currentTimezone = computed(() => ts?.currentTimezone.value);
 </script>
 
 <template>
-  <select :id="id" @change="changeTimezone" class="mb-0">
-    <option v-for="zone in timezones" :value="zone.value" :selected="zone.value === ts?.currentTimezone.value">
-      {{ zone.label }}
-    </option>
-  </select>
+  <TimeZoneInput v-if="ts" :id="id" @change="changeTimezone" v-model="currentTimezone" />
 </template>

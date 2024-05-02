@@ -14,7 +14,7 @@ class TimestampMessageColumnsOption implements ValidationRule {
    */
   public function validate(string $attribute, mixed $value, Closure $fail):void {
     if (TimestampMessageColumns::tryFrom($value) === null){
-      $fail('validation.format')->translate([
+      $fail('validation.columns')->translate([
         'attribute' => $attribute,
       ]);
     }

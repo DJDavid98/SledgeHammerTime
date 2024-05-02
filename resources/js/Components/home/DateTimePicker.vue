@@ -23,12 +23,12 @@ const ts = inject(timestamp);
       <label for="timezonepicker">{{ $t('timestampPicker.picker.label.timezone') }}</label>
       <TimeZonePicker id="timezonepicker" />
     </div>
-    <div>
+    <div v-if="ts">
       <Button
-          @click="ts?.setCurrentTime"
-          :data-tooltip="$t('timestampPicker.picker.tooltip.setToCurrent')"
-          class="mt-4 mb-0 secondary outline"
-          role="button"
+        @click="ts.setCurrentTime"
+        :data-tooltip="$t('timestampPicker.picker.tooltip.setToCurrent')"
+        class="mt-4 mb-0 secondary outline"
+        role="button"
       >
         ⌚
       </Button>

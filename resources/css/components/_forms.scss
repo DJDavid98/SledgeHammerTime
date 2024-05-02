@@ -1,0 +1,11 @@
+.form-message {
+  font-size: 0.9em;
+
+  &.error {
+    color: #faa;
+  }
+
+  &.success {
+    color: #afa;
+  }
+}

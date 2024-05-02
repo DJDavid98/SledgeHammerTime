@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Button from '@/Components/Button.vue';
-import InputError from '@/Components/InputError.vue';
+import FormMessage from '@/Components/FormMessage.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 
@@ -25,16 +25,16 @@ const form = useForm({
       <label for="name">{{ $t('profile.information.displayName') }}</label>
 
       <TextInput
-          id="name"
-          type="text"
-          class="mt-1"
-          v-model="form.name"
-          required
-          autofocus
-          autocomplete="name"
+        id="name"
+        type="text"
+        class="mt-1"
+        v-model="form.name"
+        required
+        autofocus
+        autocomplete="name"
       />
 
-      <InputError class="mt-2" :message="form.errors.name" />
+      <FormMessage type="error" class="mt-2" :message="form.errors.name" />
     </div>
 
     <div>
