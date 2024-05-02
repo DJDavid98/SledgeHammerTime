@@ -13,14 +13,13 @@ class ConsoleUserMiddleware {
    * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
    */
   public function handle(Request $request, Closure $next):Response {
-    $envVarName = 'APP_CONSOLE_USER_UUID';
-    $expectedUserId = env($envVarName);
+    $expectedUserId = config('app.console_user_uuid');
     if (empty($expectedUserId)){
-      return response()->json(['message' => "$envVarName env variable is not set, run `php artisan bot-token:generate`"], 500);
+      return response()->json(['message' => "Console user UUID is missing in .env file, run `php artisan bot-token:generate`"], 500);
     }
 
     $user = $request->user();
-    if (empty($user) || $user->id !== env('APP_CONSOLE_USER_UUID')){
+    if (empty($user) || $user->id !== $expectedUserId){
       return response()->json(['message' => "User ID {$user->id} not authorized (must be $expectedUserId)."], 401);
     }
 

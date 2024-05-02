@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Uid\Uuid;
 
 class BotTokenGenerate extends Command {
@@ -25,19 +26,28 @@ class BotTokenGenerate extends Command {
    * Execute the console command.
    */
   public function handle() {
-    $consoleUserId = env('APP_CONSOLE_USER_UUID');
+    $consoleUserId = config('app.console_user_uuid');
     if (empty($consoleUserId)){
       $this->info('Console user UUID is missing in .env file, it wil be generated');
       $consoleUserId = Uuid::v4();
       if (!$this->writeNewEnvironmentFileWith($consoleUserId)){
         return;
       }
+
+      $this->info('Clearing config cache');
+      $exitCode = Artisan::call('config:clear');
+      if ($exitCode === 0){
+        $this->info("Config cache cleared");
+      }
+      else {
+        $this->info("Config cache clear failed (exit code $exitCode)");
+      }
     }
     $consoleUser = User::firstOrCreate(['id' => $consoleUserId], ['name' => 'Console']);
     $this->info("Generating token for user $consoleUser->name with ID $consoleUser->id");
     $token = $consoleUser->createToken('Bot token');
 
-    $this->info("Your bot token is: <comment>{$token->plainTextToken}</comment>");
+    $this->info("Your API token is: <comment>{$token->plainTextToken}</comment>");
   }
 
   /**

@@ -186,4 +186,15 @@ return [
     // 'Example' => App\Facades\Example::class,
   ])->toArray(),
 
+  /*
+  |--------------------------------------------------------------------------
+  | App-specific settings
+  |--------------------------------------------------------------------------
+  |
+  | Custom settings for the current project
+  |
+  */
+
+  'console_user_uuid' => env('APP_CONSOLE_USER_UUID'),
+
 ];

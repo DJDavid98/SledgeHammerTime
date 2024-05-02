@@ -24,7 +24,7 @@ class BotTokenClear extends Command {
    * Execute the console command.
    */
   public function handle() {
-    $consoleUserId = env('APP_CONSOLE_USER_UUID');
+    $consoleUserId = config('app.console_user_uuid');
     if (!isset($consoleUserId)){
       $this->error('Console user UUID is missing in .env file');
 
