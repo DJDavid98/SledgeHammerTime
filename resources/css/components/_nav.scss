@@ -13,14 +13,20 @@ nav.backdrop {
 }
 
 nav {
+  a, :is(button, input[type="submit"], input[type="button"], [role="button"]).outline, input[type="reset"].outline {
+    @include if.dark {
+      --color: #{$primary-300};
+    }
+  }
+
   .brand {
     font-weight: bold;
     display: flex;
     align-items: center;
-    color: $primary-800;
+    --color: #{$grey-600};
 
     @include if.dark {
-      color: $primary-300;
+      --color: #{$grey-400};
     }
   }
 
