@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { theme } from '@/injection-keys';
 import { DialMode } from '@/utils/dial';
 import { getPositionAngleInElement, integerInRangeByAngle, Point2D } from '@/utils/math';
-import { onMounted, onUnmounted, Ref, ref, watchEffect } from 'vue';
+import { computed, inject, onMounted, onUnmounted, Ref, ref, watchEffect } from 'vue';
 
 const hoursCanvas = ref<HTMLCanvasElement>();
 const minutesCanvas = ref<HTMLCanvasElement>();
@@ -22,6 +23,13 @@ const emit = defineEmits<{
   (e: 'setSeconds', hours: number): void
   (e: 'changeFocus', mode: DialMode): void
 }>();
+
+const themeData = inject(theme);
+
+const colors = computed(() => ({
+  numbers: themeData?.isLightTheme.value ? 'black' : 'white',
+  secondsHand: themeData?.isLightTheme.value ? '#a00' : '#f00',
+}));
 
 interface DialSettings {
   mode: DialMode;
@@ -55,10 +63,10 @@ const drawSingleDial = (settings: DialSettings, debugResolutionMultiplier = 0) =
   ctx.fillStyle = '';
   ctx.strokeStyle = '';
   const canvasRect = new DOMRect(
-      0,
-      0,
-      width,
-      height,
+    0,
+    0,
+    width,
+    height,
   );
   if (debugResolutionMultiplier > 0) {
     const widthIncrements = width / (width / debugResolutionMultiplier);
@@ -83,22 +91,22 @@ const drawSingleDial = (settings: DialSettings, debugResolutionMultiplier = 0) =
     const degreesPerLabel = 360 / labelCount;
     const labelCenterOffset = (height * labelOffsetPercent) / 2;
     const labelPoints = Array.from({ length: labelCount }, (_, i) =>
-        new DOMMatrix()
-            .translate(origin.x, origin.y)
-            .rotate(i * degreesPerLabel)
-            .translate(0, -labelCenterOffset)
-            .transformPoint(transformOrigin),
+      new DOMMatrix()
+        .translate(origin.x, origin.y)
+        .rotate(i * degreesPerLabel)
+        .translate(0, -labelCenterOffset)
+        .transformPoint(transformOrigin),
     );
     labelPoints.forEach((point, i) => {
       const ringProgressPercent = (i / labelCount);
       const value = minValue + ((maxValue - minValue) * ringProgressPercent);
       const text = value.toString();
       ctx.font = `${fontSize}px ${fontFamily}`;
-      ctx.fillStyle = 'white';
+      ctx.fillStyle = colors.value.numbers;
       const textMetrics = ctx.measureText(text);
       const textPosition = new DOMMatrix()
-          .translate(-textMetrics.width * .5, (fontSize / 2) * .8)
-          .transformPoint(point);
+        .translate(-textMetrics.width * .5, (fontSize / 2) * .8)
+        .transformPoint(point);
       ctx.fillText(text, textPosition.x, textPosition.y);
     });
 
@@ -111,9 +119,9 @@ const drawSingleDial = (settings: DialSettings, debugResolutionMultiplier = 0) =
 
       // Draw hand circle
       const handCircleMatrix = new DOMMatrix()
-          .translate(origin.x, origin.y)
-          .rotate(currentValue * degreesPerValue)
-          .translate(0, -labelCenterOffset);
+        .translate(origin.x, origin.y)
+        .rotate(currentValue * degreesPerValue)
+        .translate(0, -labelCenterOffset);
       const handCirclePosition = handCircleMatrix.transformPoint(transformOrigin);
       const handCircleDiameter = handCircleRadius * 2;
       ctx.arc(handCirclePosition.x, handCirclePosition.y, handCircleDiameter, 0, Math.PI * 2, true);
@@ -121,8 +129,8 @@ const drawSingleDial = (settings: DialSettings, debugResolutionMultiplier = 0) =
       // Draw hand
       ctx.moveTo(origin.x, origin.y);
       const handPosition = DOMMatrix.fromMatrix(handCircleMatrix)
-          .translate(0, handCircleDiameter)
-          .transformPoint(transformOrigin);
+        .translate(0, handCircleDiameter)
+        .transformPoint(transformOrigin);
       ctx.lineTo(handPosition.x, handPosition.y);
       ctx.stroke();
       ctx.strokeStyle = '';
@@ -149,7 +157,7 @@ const dialSettings: Record<DialMode, Omit<DialSettings, 'mode'>> = {
       activationDistance: .5,
     }],
     currentValueGetter: () => props.hours,
-    handStrokeStyle: 'white',
+    handStrokeStyle: colors.value.numbers,
     handLineWidth: 5,
   },
   [DialMode.Minutes]: {
@@ -160,7 +168,7 @@ const dialSettings: Record<DialMode, Omit<DialSettings, 'mode'>> = {
       handCircleRadius: 12,
     }],
     currentValueGetter: () => props.minutes,
-    handStrokeStyle: 'white',
+    handStrokeStyle: colors.value.numbers,
     handLineWidth: 3,
   },
   [DialMode.Seconds]: {
@@ -171,7 +179,7 @@ const dialSettings: Record<DialMode, Omit<DialSettings, 'mode'>> = {
       handCircleRadius: 10,
     }],
     currentValueGetter: () => props.seconds,
-    handStrokeStyle: 'red',
+    handStrokeStyle: colors.value.secondsHand,
     handLineWidth: 2,
   },
 };
@@ -329,28 +337,28 @@ onUnmounted(() => {
 <template>
   <div class="time-dial mt-3" :data-mode="mode">
     <canvas
-        ref="hoursCanvas"
-        class="hours-canvas"
-        :width="CANVAS_SIZE"
-        :height="CANVAS_SIZE"
-        @mousedown.passive="startMouseMovementTracking"
-        @touchstart.passive="startTouchMovementTracking"
+      ref="hoursCanvas"
+      class="hours-canvas"
+      :width="CANVAS_SIZE"
+      :height="CANVAS_SIZE"
+      @mousedown.passive="startMouseMovementTracking"
+      @touchstart.passive="startTouchMovementTracking"
     />
     <canvas
-        ref="minutesCanvas"
-        class="minutes-canvas"
-        :width="CANVAS_SIZE"
-        :height="CANVAS_SIZE"
-        @mousedown.passive="startMouseMovementTracking"
-        @touchstart.passive="startTouchMovementTracking"
+      ref="minutesCanvas"
+      class="minutes-canvas"
+      :width="CANVAS_SIZE"
+      :height="CANVAS_SIZE"
+      @mousedown.passive="startMouseMovementTracking"
+      @touchstart.passive="startTouchMovementTracking"
     />
     <canvas
-        ref="secondsCanvas"
-        class="seconds-canvas"
-        :width="CANVAS_SIZE"
-        :height="CANVAS_SIZE"
-        @mousedown.passive="startMouseMovementTracking"
-        @touchstart.passive="startTouchMovementTracking"
+      ref="secondsCanvas"
+      class="seconds-canvas"
+      :width="CANVAS_SIZE"
+      :height="CANVAS_SIZE"
+      @mousedown.passive="startMouseMovementTracking"
+      @touchstart.passive="startTouchMovementTracking"
     />
   </div>
 </template>
