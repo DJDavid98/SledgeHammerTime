@@ -6,15 +6,10 @@ nav.sticky {
 }
 
 nav.backdrop {
-  $bg-opacity: .75;
-  --bg-color: #{rgba($primary-100, $bg-opacity)};
+  --bg-color: var(--background-color);
   background-color: var(--bg-color);
   backdrop-filter: blur(5px);
   box-shadow: 0 0 10px var(--bg-color);
-
-  @include if.dark {
-    --bg-color: #{rgba($black, $bg-opacity)};
-  }
 }
 
 nav {
@@ -40,6 +35,10 @@ nav {
     align-items: center;
     font-size: 1rem;
     direction: revert !important;
+
+    @include if.dark {
+      color: $primary-300;
+    }
 
     &[dir=ltr] .language-name {
       margin-left: 1em;

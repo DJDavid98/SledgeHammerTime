@@ -3,9 +3,9 @@
 @import 'variables';
 @import "~@picocss/pico/scss/pico";
 
-$bg-gradient-start: rgb(242 226 87 / var(--bg-gradient-opacity));
-$bg-gradient-mid: rgb(242 173 88 / var(--bg-gradient-opacity));
-$bg-gradient-end: rgb(242 151 87 / var(--bg-gradient-opacity));
+$bg-gradient-start: rgb(88 94 242 / var(--bg-gradient-opacity));
+$bg-gradient-mid: rgb(88 101 242 / var(--bg-gradient-opacity));
+$bg-gradient-end: rgb(165 94 165 / var(--bg-gradient-opacity));
 $gradient-stops: $bg-gradient-start 0%, $bg-gradient-mid 50%, $bg-gradient-end 100%;
 $bg-gradient-angle: 15deg;
 
@@ -14,14 +14,10 @@ html, body {
 }
 
 html {
-  --bg-gradient-opacity: 1;
+  --bg-gradient-opacity: .5;
   background-image: linear-gradient(#{180deg - $bg-gradient-angle}, #{$gradient-stops});
-  background-color: #000;
+  background-color: var(--background-color);
   background-repeat: no-repeat;
-
-  @include if.dark {
-    --bg-gradient-opacity: .5;
-  }
 }
 
 body {
