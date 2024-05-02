@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\HasUiInfo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Redis;
 
 class DiscordUser extends Model {
-  use HasFactory;
+  use HasFactory, HasUiInfo;
 
   /**
    * The attributes that are mass assignable.
@@ -45,7 +47,7 @@ class DiscordUser extends Model {
     return $this->display_name ?? (trim($this->discriminator) !== '0' ? "{$this->name}#{$this->discriminator}" : $this->name);
   }
 
-  function mapToUiInfo() {
+  function mapToUiInfo():array {
     return [
       'id' => $this->id,
       'name' => $this->public_name,
@@ -56,5 +58,30 @@ class DiscordUser extends Model {
 
   public function getSettingsCacheKey():string {
     return "user-settings-{$this->id}";
+  }
+
+  public function getSettingsCacheDurationSeconds():int {
+    return 5 * 60;
+  }
+
+  public function clearSettingsCache():void {
+    Redis::delete($this->getSettingsCacheKey());
+  }
+
+  public function getSettingsRecord():array {
+    $cacheKey = $this->getSettingsCacheKey();
+
+    $cachedData = Redis::get($cacheKey);
+    if ($cachedData){
+      return json_decode($cachedData, true);
+    }
+
+    $settings = $this->settings()->get(['setting', 'value'])->reduce(fn(array $acc, Settings $s) => [
+      ...$acc,
+      $s->setting => $s->value,
+    ], []);
+    Redis::set($cacheKey, json_encode($settings, JSON_THROW_ON_ERROR), 'EX', $this->getSettingsCacheDurationSeconds());
+
+    return $settings;
   }
 }

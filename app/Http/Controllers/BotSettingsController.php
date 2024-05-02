@@ -10,14 +10,13 @@ use App\Models\Settings;
 use DateTimeZone;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redis;
 use Inertia\Inertia;
 
 class BotSettingsController extends Controller {
   function edit() {
     $userSettings = Auth::user()?->discordUsers()->get()->map(fn(DiscordUser $du) => [
       'user' => $du->mapToUiInfo(),
-      'settings' => $du->settings()->get()->reduce(fn(array $acc, Settings $s) => array_merge($acc, [$s->setting => json_decode($s->value)]), []),
+      'settings' => $du->getSettingsRecord(),
     ]);
 
     $availableTimezones = DateTimeZone::listIdentifiers();
@@ -36,12 +35,13 @@ class BotSettingsController extends Controller {
     $discordUserId = $request->route('discordUserId');
     $discordUser = DiscordUser::findOrFail($discordUserId);
 
+    /** @var Settings[] $currentSettings */
     $currentSettings = $discordUser->settings()->get();
     DB::transaction(function () use ($discordUser, $data, $currentSettings) {
       foreach ($currentSettings as $setting){
         $shouldDelete = !isset($data[$setting->setting]);
-        /** @var $setting Settings */
-        if (!$shouldDelete && Settings::isDefaultValue($setting->setting, $data[$setting->setting])){
+        /** @var Settings $setting */
+        if (!$shouldDelete && Settings::shouldDeleteIfMatchingDefault($setting->setting, $data[$setting->setting])){
           $shouldDelete = true;
           unset($data[$setting->setting]);
         }
@@ -49,7 +49,7 @@ class BotSettingsController extends Controller {
           $setting->delete();
         }
         else {
-          $setting->value = json_encode($data[$setting->setting]);
+          $setting->value = $data[$setting->setting];
           $setting->save();
         }
         unset($data[$setting->setting]);
@@ -57,14 +57,14 @@ class BotSettingsController extends Controller {
 
       $newSettingData = [];
       foreach ($data as $settingName => $value){
-        if (Settings::isDefaultValue($settingName, $value))
+        if (Settings::shouldDeleteIfMatchingDefault($settingName, $value))
           continue;
-        $newSettingData[] = ['setting' => $settingName, 'value' => json_encode($value)];
+        $newSettingData[] = ['setting' => $settingName, 'value' => $value];
       }
       $discordUser->settings()->createMany($newSettingData);
     });
 
-    Redis::delete($discordUser->getSettingsCacheKey());
+    $discordUser->clearSettingsCache();
 
     return response()->noContent(200);
   }

@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function ($route) {
+Route::middleware('auth:sanctum')->group(function () {
   Route::get('/user', [BotApiController::class, 'user']);
-  Route::post('/login-link/{discordUserId}/{locale}', [BotApiController::class, 'loginLink']);
+
+  Route::middleware('console-user')->group(function () {
+    Route::post('/login-link/{discordUserId}/{locale}', [BotApiController::class, 'loginLink']);
+    Route::get('/settings/{discordUserId}', [BotApiController::class, 'settings']);
+  });
 });

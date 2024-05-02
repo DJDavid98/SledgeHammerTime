@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Casts\Json;
 use App\Enums\DiscordTimestampFormat;
+use App\Enums\SettingNames;
 use App\Enums\TimestampMessageColumns;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,22 +18,54 @@ class Settings extends Model {
     'value',
   ];
 
+  /**
+   * The attributes that should be cast.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'value' => Json::class,
+  ];
+
   function discordUser():BelongsTo {
     return $this->belongsTo(DiscordUser::class);
   }
 
-  static function isDefaultValue(string $setting, $value):bool {
+  public function getNameAttribute():SettingNames {
+    return SettingNames::from($this->setting);
+  }
+
+  static function mergeWithDefaults(array $userSettings):array {
+    return array_reduce(SettingNames::cases(), fn(array $acc, SettingNames $case) => [
+      ...$acc,
+      $case->value => $userSettings[$case->value] ?? null,
+    ], []);
+  }
+
+  static function getDefaultValue(string|SettingNames $setting) {
+    $settingName = is_string($setting) ? SettingNames::from($setting) : $setting;
+    switch ($settingName){
+      case SettingNames::FORMAT:
+        return DiscordTimestampFormat::DEFAULT->value;
+      case SettingNames::COLUMNS:
+        return TimestampMessageColumns::DEFAULT->value;
+      case SettingNames::EPHEMERAL:
+      case SettingNames::HEADER:
+        return true;
+      case SettingNames::TIMEZONE:
+        return "GMT";
+      default:
+        throw new \Exception("Invalid setting: $setting");
+    }
+  }
+
+  static function shouldDeleteIfMatchingDefault(string $setting, $value):bool {
     if ($value === null) return true;
     switch ($setting){
-      case "format":
-        return $value === DiscordTimestampFormat::DEFAULT->value;
-      case "columns":
-        return $value === TimestampMessageColumns::DEFAULT->value;
-      case "ephemeral":
-      case "header":
-        return $value === true;
-      case "timezone":
-        return $value === "GMT";
+      case SettingNames::FORMAT->value:
+      case SettingNames::COLUMNS->value:
+      case SettingNames::TIMEZONE->value:
+        return $value === self::getDefaultValue($setting);
       default:
         return false;
     }
