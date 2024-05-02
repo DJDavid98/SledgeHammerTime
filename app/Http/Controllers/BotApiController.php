@@ -35,8 +35,8 @@ class BotApiController extends Controller {
 
   function settings(Request $request) {
     $discordUserId = $request->route('discordUserId');
-    $discordUser = DiscordUser::findOrFail($discordUserId);
-    $settings = $discordUser->getSettingsRecord();
+    $discordUser = DiscordUser::find($discordUserId);
+    $settings = $discordUser?->getSettingsRecord() ?? [];
     $mergedSettings = Settings::mergeWithDefaults($settings);
 
     return response()->json($mergedSettings);
