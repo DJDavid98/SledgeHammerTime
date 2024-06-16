@@ -11,6 +11,21 @@ const emit = defineEmits<{
 }>();
 
 const dialog = ref<HTMLDialogElement>();
+const closeOnMouseup = ref(false);
+
+const isSelf = (target: EventTarget | HTMLElement | null) => target !== null && target === dialog.value;
+const handleMousedown = (e: MouseEvent): void => {
+  // Store whether the target was the popup on mousedown
+  closeOnMouseup.value = isSelf(e.target);
+};
+const handleMouseup = (e: MouseEvent): void => {
+  if (isSelf(e.target) && closeOnMouseup.value) {
+    // Only close the popup if both the down and up targets are the popup
+    // Prevents accidentally closing the popup when dragging something inside
+    close();
+  }
+  closeOnMouseup.value = false;
+};
 
 const close = () => {
   dialog.value?.close();
@@ -40,7 +55,8 @@ defineExpose({
   <dialog
     ref="dialog"
     :class="['popup', {visible: show}]"
-    @click.self="close"
+    @mousedown="handleMousedown"
+    @mouseup="handleMouseup"
   >
     <slot />
   </dialog>
