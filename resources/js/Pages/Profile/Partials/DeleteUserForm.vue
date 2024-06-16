@@ -56,7 +56,10 @@ const closeModal = () => {
     </p>
 
     <template #footer>
-      <Button @click="closeModal">
+      <Button
+        variant="secondary"
+        @click="closeModal"
+      >
         {{ $t('global.form.cancel') }}
       </Button>
 

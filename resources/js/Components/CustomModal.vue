@@ -4,12 +4,13 @@ import { onMounted, onUnmounted, watch } from 'vue';
 const props = withDefaults(
   defineProps<{
     show?: boolean;
-    maxWidth: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | undefined;
+    maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
     closeable?: boolean;
   }>(),
   {
     show: false,
     closeable: true,
+    maxWidth: undefined,
   },
 );
 

@@ -23,7 +23,7 @@ class ProfileController extends Controller {
       $discordUsers = $authUser->discordUsers()->get(['id', 'name', 'display_name', 'discriminator', 'avatar'])->map(fn(DiscordUser $du) => $du->mapToUiInfo());
     }
 
-    return Inertia::render('Profile/Edit', [
+    return Inertia::render('Profile/EditProfile', [
       'discordUsers' => $discordUsers,
     ]);
   }
