@@ -2,7 +2,6 @@
   width: 100%;
   padding-top: 100%;
   position: relative;
-  overflow: hidden;
 
   &[data-mode="hours"] {
     .hours-canvas {
@@ -64,7 +63,7 @@
     pointer-events: none;
     will-change: transform, opacity;
     transition-property: transform, opacity;
-    transition-duration: .3s;
+    transition-duration: .4s;
     transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
     width: 100%;
     height: 100%;

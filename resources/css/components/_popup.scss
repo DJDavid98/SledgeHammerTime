@@ -29,6 +29,7 @@
     min-width: unset !important;
     min-height: unset !important;
     transform: translateY(calc(var(--pico-spacing) * -1));
+    overflow: hidden;
   }
 
   &.visible {
