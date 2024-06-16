@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Button from '@/Components/CustomButton.vue';
-import DatePicker from '@/Components/home/pickers/DatePicker.vue';
-import TimePicker from '@/Components/home/pickers/TimePicker.vue';
-import TimeZonePicker from '@/Components/home/pickers/TimeZonePicker.vue';
+import DatePicker from '@/Components/home/inputs/DateInput.vue';
+import TimePicker from '@/Components/home/inputs/TimeInput.vue';
+import TimeZonePicker from '@/Components/home/inputs/TimeZoneInput.vue';
 import { timestamp } from '@/injection-keys';
 import { inject } from 'vue';
 
