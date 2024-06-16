@@ -19,6 +19,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '~@picocss': resolve(__dirname, 'node_modules/@picocss'),
+      '@': resolve(__dirname, 'resources/js'),
     },
   },
   plugins: [
