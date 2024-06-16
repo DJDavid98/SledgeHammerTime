@@ -41,7 +41,9 @@ const forms = props.userSettings.map(userSetting => useForm({
       v-for="(entry, i) in userSettings"
       :key="entry.user.id"
     >
-      <DiscordUserInfo v-bind="entry.user" />
+      <header>
+        <DiscordUserInfo v-bind="entry.user" />
+      </header>
       <form @submit.prevent="forms[i].put(route('settings.set', { discordUserId: entry.user.id }))">
         <div>
           <label :for="'timezone-'+i">{{ $t('botSettings.fields.timezone.displayName') }}</label>
