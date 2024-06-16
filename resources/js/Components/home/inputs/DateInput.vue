@@ -37,7 +37,8 @@ const changeDate = (value: string) => {
       :value="selectedDate"
       class="mb-0"
       readonly
-      @click="openPopup"
+      @click.prevent="openPopup"
+      @focus="openPopup"
     >
     <DatePickerPopup
       ref="datepicker"

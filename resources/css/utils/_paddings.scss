@@ -1,0 +1,37 @@
+@use '../mixins/if';
+
+@each $key, $size in $spacing {
+  .p-#{$key} {
+    padding: $size;
+  }
+  .pt-#{$key} {
+    padding-top: $size;
+  }
+  .pb-#{$key} {
+    padding-bottom: $size;
+  }
+  .py-#{$key} {
+    padding-top: $size;
+    padding-bottom: $size;
+  }
+  .px-#{$key} {
+    padding-left: $size;
+    padding-right: $size;
+  }
+  .ps-#{$key} {
+    @include if.ltr {
+      padding-left: $size;
+    }
+    @include if.rtl {
+      padding-right: $size;
+    }
+  }
+  .pe-#{$key} {
+    @include if.ltr {
+      padding-right: $size;
+    }
+    @include if.rtl {
+      padding-left: $size;
+    }
+  }
+}

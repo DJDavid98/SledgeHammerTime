@@ -62,7 +62,7 @@ defineExpose<DatePickerPopupApi>({
     :show="show"
     @close="close"
   >
-    <div class="grid-flex">
+    <fieldset role="group">
       <input
         v-model="year"
         type="number"
@@ -82,7 +82,7 @@ defineExpose<DatePickerPopupApi>({
         min="1"
         max="31"
       >
-    </div>
+    </fieldset>
     <div class="grid">
       <button
         class="mb-0"

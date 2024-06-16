@@ -2,18 +2,31 @@
 import Popup from '@/Components/CustomPopup.vue';
 import TimePickerDial, { TimePickerDialAPI } from '@/Components/home/pickers/TimePickerDial.vue';
 import { DialMode } from '@/utils/dial';
+import { AvailableLanguage } from '@/utils/language-settings';
 import { pad } from '@/utils/pad';
+import { toTwelveHours, toTwentyFourHours } from '@/utils/timezone';
+import { usePage } from '@inertiajs/vue3';
+import moment from 'moment';
 import { Moment } from 'moment-timezone';
-import { onUpdated, ref } from 'vue';
+import { computed, onUpdated, ref } from 'vue';
 
 const hours = ref(0);
 const minutes = ref(0);
 const seconds = ref(0);
+const isAm = ref(false);
 const focusFirstInput = ref(false);
 const hoursInput = ref<HTMLInputElement>();
 const minutesInput = ref<HTMLInputElement>();
 const secondsInput = ref<HTMLInputElement>();
 const dial = ref<TimePickerDialAPI>();
+const renderDial = ref(false);
+
+const page = usePage();
+const locale = computed(() => page.props.app.locale as AvailableLanguage);
+const twelveHourMode = computed(() => {
+  const longTimeFormat = moment.localeData(locale.value).longDateFormat('LT');
+  return /A$/i.test(longTimeFormat);
+});
 
 defineProps<{
   show: boolean;
@@ -22,22 +35,30 @@ defineProps<{
 const emit = defineEmits<{
   (e: 'selected', time: string): void
   (e: 'close'): void
+  (e: 'open'): void
 }>();
 
-const close = () => {
+const openPicker = () => {
+  renderDial.value = true;
+  emit('open');
+};
+const closePicker = () => {
+  renderDial.value = false;
   emit('close');
 };
 
 const select = () => {
-  const formattedTime = [hours.value, minutes.value, seconds.value].map(n => pad(n, 2)).join(':');
+  const actualHours = twelveHourMode.value ? toTwentyFourHours(hours.value, isAm.value) : hours.value;
+  const formattedTime = [actualHours, minutes.value, seconds.value].map(n => pad(n, 2)).join(':');
   emit('selected', formattedTime); // Emit the selected date back to the MainDatepicker
-  close();
+  closePicker();
 };
 const open = (initialValue: Moment) => {
-  hours.value = initialValue.hours();
+  const initialHours = initialValue.hours();
+  hours.value = twelveHourMode.value ? toTwelveHours(initialHours) : initialHours;
   minutes.value = initialValue.minutes();
   seconds.value = initialValue.seconds();
-  // TODO 12h clock AM/PM selector
+  isAm.value = initialHours < 12;
   focusFirstInput.value = true;
 };
 
@@ -68,6 +89,31 @@ const changeFocus = (mode: DialMode) => {
   }
 };
 
+const handleHoursBlur = () => {
+  if (!twelveHourMode.value) return;
+
+  if (hours.value > 12) {
+    const newValue = hours.value - 12;
+    hours.value = Math.max(newValue, 1);
+    isAm.value = false;
+  } else if (hours.value < 1) {
+    const newValue = 12;
+    hours.value = 12;
+    isAm.value = true;
+  }
+};
+
+const handleAmPmSelectKeydown = (e: KeyboardEvent) => {
+  switch (e.key.toLowerCase()) {
+    case 'a':
+      isAm.value = true;
+      break;
+    case 'p':
+      isAm.value = false;
+      break;
+  }
+};
+
 export interface TimePickerPopupApi {
   open: typeof open;
 }
@@ -88,9 +134,10 @@ onUpdated(() => {
 <template>
   <Popup
     :show="show"
-    @close="close"
+    @close="closePicker"
+    @open="openPicker"
   >
-    <div class="grid">
+    <fieldset role="group">
       <input
         ref="hoursInput"
         v-model="hours"
@@ -98,6 +145,7 @@ onUpdated(() => {
         min="0"
         max="23"
         @focus="hoursFocused"
+        @blur="handleHoursBlur"
       >
       <input
         ref="minutesInput"
@@ -115,7 +163,19 @@ onUpdated(() => {
         max="59"
         @focus="secondsFocused"
       >
-    </div>
+      <select
+        v-if="twelveHourMode"
+        v-model="isAm"
+        @keydown="handleAmPmSelectKeydown"
+      >
+        <option :value="true">
+          {{ moment.localeData().meridiem(10, minutes, false) }}
+        </option>
+        <option :value="false">
+          {{ moment.localeData().meridiem(22, minutes, false) }}
+        </option>
+      </select>
+    </fieldset>
     <div class="grid">
       <button
         class="mb-0"
@@ -125,17 +185,18 @@ onUpdated(() => {
       </button>
       <button
         class="mb-0 secondary"
-        @click="close"
+        @click="closePicker"
       >
         {{ $t('global.form.cancel') }}
       </button>
     </div>
     <TimePickerDial
-      v-if="show"
+      v-if="renderDial"
       ref="dial"
       :hours="hours"
       :minutes="minutes"
       :seconds="seconds"
+      :twelve-hour-mode="twelveHourMode"
       @set-hours="setHours"
       @set-minutes="setMinutes"
       @set-seconds="setSeconds"

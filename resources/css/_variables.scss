@@ -1,7 +1,8 @@
-$primary-hue: 266;
+$theme-color: 'indigo';
 $semantic-root-element: "#app";
 $font-family-base: 'Montserrat', sans-serif;
 $font-family-mono: 'Source Code Pro', 'Consolas', monospace;
+$enable-transitions: false;
 
 $spacing: (
     (0, 0),

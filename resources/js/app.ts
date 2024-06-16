@@ -10,6 +10,7 @@ import '../css/app.scss';
 import './bootstrap';
 
 const appName = getAppName();
+const getLangJsonPath = (lang: string) => `../../lang/php_${lang.replace(/^php_/, '')}.json`;
 
 createInertiaApp({
   title: (title) => title ? `${title} - ${appName}` : appName,
@@ -20,9 +21,12 @@ createInertiaApp({
         .use(plugin)
         .use(ZiggyVue, Ziggy)
         .use(i18nVue, {
+          fallbackLang: 'en',
+          fallbackMissingTranslations: true,
           resolve: async (lang: string) => {
-            const langs = import.meta.glob('../../lang/*.json');
-            return await langs[`../../lang/php_${lang}.json`]();
+            const langJsons = import.meta.glob('../../lang/*.json');
+            const jsonPathForLocale = getLangJsonPath(lang);
+            return await langJsons[jsonPathForLocale]();
           },
         })
         .mount(el);

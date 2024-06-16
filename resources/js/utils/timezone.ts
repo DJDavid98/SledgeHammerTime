@@ -46,3 +46,23 @@ export const getTimezoneValue = (timezone: string) => ({
 export const momentToTimeInputValue = (time: Moment = moment(), format = `${isoFormattingDateFormat}\\T${isoTimeFormat}`): string =>
   // Force English locale so values are always in the expected format
   time.clone().locale('en').format(format);
+
+const rangeCheck = (value: number, min: number, max: number) => {
+  if (value < min || value > max) {
+    throw new RangeError(`Number between ${min} and ${max} is expected`);
+  }
+};
+
+export const toTwentyFourHours = (twelveHourValue: number, isAm: boolean) => {
+  rangeCheck(twelveHourValue, 1, 12);
+
+  const baseValue = isAm ? 0 : 12;
+  return twelveHourValue === 12 ? baseValue : twelveHourValue + baseValue;
+};
+
+export const toTwelveHours = (twentyFourHourValue: number) => {
+  rangeCheck(twentyFourHourValue, 0, 23);
+
+  const modResult = twentyFourHourValue % 12;
+  return modResult === 0 ? 12 : modResult;
+};

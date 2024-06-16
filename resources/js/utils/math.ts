@@ -136,8 +136,11 @@ export const getPositionAngleInElement = (elementRect: RequiredDomRectInit, orig
   };
 };
 
-export const integerInRangeByAngle = (minValue: number, maxValue: number, angle: number) => {
-  const value = Math.round(minValue + (angle / 360) * (maxValue - minValue));
+export const integerInRangeByAngle = (minValue: number, maxValue: number, angle: number, rotationOffset = 0) => {
+  const angleOffset = (360 / maxValue) * rotationOffset;
+  const angleWithOffsetApplied = angle - angleOffset;
+  const calculationAngle = angleWithOffsetApplied < 0 ? 360 + angleWithOffsetApplied : angleWithOffsetApplied;
+  const value = Math.round(minValue + (calculationAngle / 360) * (maxValue - minValue));
   // If value exceeds maximum, wrap around intentionally
   return value > maxValue - 1 ? minValue : value;
 };

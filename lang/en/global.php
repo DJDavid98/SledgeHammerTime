@@ -1,6 +1,7 @@
 <?php
 
 return [
+  'seoDescription' => 'Generate timestamp indicators for Discord chat messages',
   'nav' => [
     'botSettings' => 'Bot Settings',
     'profile' => 'Profile',

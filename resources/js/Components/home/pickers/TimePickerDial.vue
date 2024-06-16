@@ -4,10 +4,12 @@ import { DialMode } from '@/utils/dial';
 import { getPositionAngleInElement, integerInRangeByAngle, Point2D } from '@/utils/math';
 import { computed, inject, onMounted, onUnmounted, Ref, ref, watchEffect } from 'vue';
 
+const wrapper = ref<HTMLDivElement>();
 const hoursCanvas = ref<HTMLCanvasElement>();
 const minutesCanvas = ref<HTMLCanvasElement>();
 const secondsCanvas = ref<HTMLCanvasElement>();
-const mode = ref<DialMode>();
+const lastCanvasIo = ref<IntersectionObserver | null>(null);
+const mode = ref<DialMode>(DialMode.Hours);
 
 const CANVAS_SIZE = 420;
 
@@ -15,6 +17,7 @@ const props = defineProps<{
   hours: number,
   minutes: number,
   seconds: number,
+  twelveHourMode: boolean,
 }>();
 
 const emit = defineEmits<{
@@ -31,22 +34,28 @@ const colors = computed(() => ({
   secondsHand: themeData?.isLightTheme.value ? '#a00' : '#f00',
 }));
 
+interface DialRingSettings {
+  minValue?: number;
+  maxValue: number;
+  labelCount: number;
+  labelOffsetPercent?: number;
+  fontSize?: number;
+  handCircleRadius: number;
+  handMinValueOffset?: number;
+  /**
+   * Indicates how far away the mouse must be from the origin to activate this ring
+   */
+  activationDistance?: number;
+  /**
+   * Offset the drawn image by this many degrees from the origin
+   */
+  rotationOffset?: number;
+}
+
 interface DialSettings {
   mode: DialMode;
   canvasRef: Ref<HTMLCanvasElement | undefined>,
-  rings: Array<{
-    minValue?: number;
-    maxValue: number;
-    labelCount: number;
-    labelOffsetPercent?: number;
-    fontSize?: number;
-    handCircleRadius: number;
-    handMinValueOffset?: number;
-    /**
-     * Indicates how far away the mouse must be from the origin to activate this ring
-     */
-    activationDistance?: number;
-  }>;
+  rings: DialRingSettings[];
   currentValueGetter: () => number;
   handStrokeStyle: string;
   handLineWidth: number;
@@ -87,19 +96,20 @@ const drawSingleDial = (settings: DialSettings, debugResolutionMultiplier = 0) =
   const isCurrentMode = settings.mode === mode.value;
   const currentValue = settings.currentValueGetter();
   settings.rings.forEach(ring => {
+    const rotationOffset = ring.rotationOffset ?? 0;
     const { labelOffsetPercent = .85, fontSize = 30, minValue = 0, maxValue, labelCount, handCircleRadius } = ring;
     const degreesPerLabel = 360 / labelCount;
     const labelCenterOffset = (height * labelOffsetPercent) / 2;
     const labelPoints = Array.from({ length: labelCount }, (_, i) =>
       new DOMMatrix()
         .translate(origin.x, origin.y)
-        .rotate(i * degreesPerLabel)
+        .rotate((i + rotationOffset) * degreesPerLabel)
         .translate(0, -labelCenterOffset)
         .transformPoint(transformOrigin),
     );
     labelPoints.forEach((point, i) => {
       const ringProgressPercent = (i / labelCount);
-      const value = minValue + ((maxValue - minValue) * ringProgressPercent);
+      const value = Math.round((minValue + ((maxValue - minValue) * ringProgressPercent)) * 100) / 100;
       const text = value.toString();
       ctx.font = `${fontSize}px ${fontFamily}`;
       ctx.fillStyle = colors.value.numbers;
@@ -139,15 +149,17 @@ const drawSingleDial = (settings: DialSettings, debugResolutionMultiplier = 0) =
   });
 };
 
-const dialSettings: Record<DialMode, Omit<DialSettings, 'mode'>> = {
-  [DialMode.Hours]: {
-    canvasRef: hoursCanvas,
-    rings: [{
-      labelCount: 12,
-      fontSize: 25,
-      maxValue: 12,
-      handCircleRadius: 12,
-    }, {
+const dialSetup = computed(() => {
+  const hourRings: DialRingSettings[] = [{
+    labelCount: 12,
+    fontSize: 25,
+    minValue: props.twelveHourMode ? 1 : 0,
+    maxValue: props.twelveHourMode ? 13 : 12,
+    handCircleRadius: 12,
+    rotationOffset: props.twelveHourMode ? 1 : 0,
+  }];
+  if (!props.twelveHourMode) {
+    hourRings.push({
       minValue: 12,
       labelCount: 12,
       labelOffsetPercent: .67,
@@ -155,51 +167,57 @@ const dialSettings: Record<DialMode, Omit<DialSettings, 'mode'>> = {
       maxValue: 24,
       handCircleRadius: 12,
       activationDistance: .5,
-    }],
-    currentValueGetter: () => props.hours,
-    handStrokeStyle: colors.value.numbers,
-    handLineWidth: 5,
-  },
-  [DialMode.Minutes]: {
-    canvasRef: minutesCanvas,
-    rings: [{
-      labelCount: 12,
-      maxValue: 60,
-      handCircleRadius: 12,
-    }],
-    currentValueGetter: () => props.minutes,
-    handStrokeStyle: colors.value.numbers,
-    handLineWidth: 3,
-  },
-  [DialMode.Seconds]: {
-    canvasRef: secondsCanvas,
-    rings: [{
-      labelCount: 12,
-      maxValue: 60,
-      handCircleRadius: 10,
-    }],
-    currentValueGetter: () => props.seconds,
-    handStrokeStyle: colors.value.secondsHand,
-    handLineWidth: 2,
-  },
-};
-const dialSettingKeys = Object.keys(dialSettings) as DialMode[];
-/**
- * Make sure ring array elements are sorted ascending by `activationDistance` otherwise pointer
- * event tracking will not work properly (due to avoiding the manual re-sort of this array
- * for performance reasons)
- */
-dialSettingKeys.forEach(key => {
-  const { rings } = dialSettings[key];
-  if (rings.length > 1) {
-    rings.sort(({ activationDistance: distA = 0 }, { activationDistance: distB = 0 }) => distA - distB);
+    });
   }
+  const settings: Record<DialMode, Omit<DialSettings, 'mode'>> = {
+    [DialMode.Hours]: {
+      canvasRef: hoursCanvas,
+      rings: hourRings,
+      currentValueGetter: () => props.hours,
+      handStrokeStyle: colors.value.numbers,
+      handLineWidth: 5,
+    },
+    [DialMode.Minutes]: {
+      canvasRef: minutesCanvas,
+      rings: [{
+        labelCount: 12,
+        maxValue: 60,
+        handCircleRadius: 12,
+      }],
+      currentValueGetter: () => props.minutes,
+      handStrokeStyle: colors.value.numbers,
+      handLineWidth: 3,
+    },
+    [DialMode.Seconds]: {
+      canvasRef: secondsCanvas,
+      rings: [{
+        labelCount: 12,
+        maxValue: 60,
+        handCircleRadius: 10,
+      }],
+      currentValueGetter: () => props.seconds,
+      handStrokeStyle: colors.value.secondsHand,
+      handLineWidth: 2,
+    },
+  };
+  const keys = Object.keys(settings) as DialMode[];
+  /**
+   * Make sure ring array elements are sorted ascending by `activationDistance` otherwise pointer
+   * event tracking will not work properly (due to avoiding the manual re-sort of this array
+   * for performance reasons)
+   */
+  keys.forEach(key => {
+    const { rings } = settings[key];
+    if (rings.length > 1) {
+      rings.sort(({ activationDistance: distA = 0 }, { activationDistance: distB = 0 }) => distA - distB);
+    }
+  });
+  return { settings, keys };
 });
 
-
 const draw = () => {
-  dialSettingKeys.forEach(key => {
-    drawSingleDial({ mode: key, ...dialSettings[key] });
+  dialSetup.value.keys.forEach(key => {
+    drawSingleDial({ mode: key, ...dialSetup.value.settings[key] });
   });
 };
 
@@ -209,7 +227,7 @@ onMounted(draw);
 const handlePointerPositionChange = (pointerPoint: Point2D) => {
   if (!mode.value) return;
 
-  const { canvasRef, rings } = dialSettings[mode.value];
+  const { canvasRef, rings } = dialSetup.value.settings[mode.value];
   const canvasBounds = canvasRef.value?.getBoundingClientRect();
   if (!canvasBounds) return;
 
@@ -222,8 +240,8 @@ const handlePointerPositionChange = (pointerPoint: Point2D) => {
     }
   }
 
-  const { minValue = 0, maxValue } = activeRing;
-  const value = integerInRangeByAngle(minValue, maxValue, angle);
+  const { minValue = 0, maxValue, rotationOffset = 0 } = activeRing;
+  const value = integerInRangeByAngle(minValue, maxValue, angle, rotationOffset);
 
   switch (mode.value) {
     case DialMode.Hours:
@@ -311,7 +329,7 @@ const stopTouchMovementTracking = () => {
   stopMovementTracking();
 };
 
-const setMode = (newMode?: DialMode) => {
+const setMode = (newMode: DialMode) => {
   mode.value = newMode;
 };
 
@@ -331,11 +349,15 @@ onUnmounted(() => {
   if (touchmoveAnimationFrameRequest) {
     window.cancelAnimationFrame(touchmoveAnimationFrameRequest);
   }
+  if (lastCanvasIo.value) {
+    lastCanvasIo.value.disconnect();
+  }
 });
 </script>
 
 <template>
   <div
+    ref="wrapper"
     class="time-dial mt-3"
     :data-mode="mode"
   >

@@ -1,0 +1,36 @@
+@use 'mixins/if';
+
+html, body {
+  min-height: 100%;
+}
+
+html {
+  --bg-gradient-opacity: .5;
+  background-image: linear-gradient(#{180deg - $bg-gradient-angle}, #{$gradient-stops});
+  background-color: var(--background-color);
+  background-repeat: no-repeat;
+}
+
+body {
+  font-family: $font-family-base;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  @include if.rtl {
+    background-image: linear-gradient(#{180deg + $bg-gradient-angle}, #{$gradient-stops});
+  }
+}
+
+code {
+  font-family: $font-family-mono;
+}
+
+[data-tooltip]::before {
+  font-family: $font-family-base;
+}
+
+.responsive-table {
+  max-width: 100%;
+  overflow-y: auto;
+}

@@ -1,7 +1,7 @@
 .grid-flex {
   display: flex;
   justify-content: space-between;
-  gap: var(--grid-spacing-horizontal);
+  gap: var(--pico-grid-column-gap);
 
   .grid-flex-item {
     flex-grow: 1;

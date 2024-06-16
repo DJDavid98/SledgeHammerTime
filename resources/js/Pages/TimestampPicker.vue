@@ -39,12 +39,8 @@ const setCurrentTime = () => {
   changeDateString(now.format(isoFormattingDateFormat));
   changeTimeString(now.format(isoTimeFormat));
 };
-
-const locale = computed(() => {
-  const pageLocale = usePage().props.app.locale;
-  if (pageLocale === 'en') return undefined;
-  return pageLocale;
-});
+const page = usePage();
+const locale = computed(() => page.props.app.locale);
 
 provide(timestamp, {
   currentTimestamp,

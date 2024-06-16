@@ -6,27 +6,43 @@ nav.sticky {
 }
 
 nav.backdrop {
-  --bg-color: var(--background-color);
   background-color: var(--bg-color);
   backdrop-filter: blur(5px);
   box-shadow: 0 0 10px var(--bg-color);
 }
 
 nav {
-  a, :is(button, input[type="submit"], input[type="button"], [role="button"]).outline, input[type="reset"].outline {
-    @include if.dark {
-      --color: #{$primary-300};
-    }
+  --bg-color: #{$indigo-50};
+  z-index: 5;
+
+  @include if.dark {
+    --bg-color: #{$indigo-950};
   }
 
   .brand {
     font-weight: bold;
     display: flex;
     align-items: center;
-    --color: #{$grey-600};
+  }
 
-    @include if.dark {
-      --color: #{$grey-400};
+  .actions-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: var(--pico-nav-element-spacing-horizontal);
+
+    > li {
+      display: block;
+      height: 2.5em;
+    }
+  }
+
+
+  details.dropdown {
+    margin: 0;
+
+    summary {
+      overflow: hidden;
     }
   }
 
@@ -35,17 +51,40 @@ nav {
     overflow: auto;
   }
 
-  .language-link {
+  .language-button, .language-link {
     display: flex !important;
     flex-flow: row nowrap;
     align-items: center;
-    font-size: 1rem;
-    direction: revert !important;
 
-    @include if.dark {
-      color: $primary-300;
+    .language-flag {
+      display: block;
+      height: 1.2em;
+      margin: -0.75em 0 0;
+    }
+  }
+
+  .language-button .language-flag {
+    transform: translateY(0.1em);
+  }
+
+  @include below('md') {
+    .language-button {
+      .language-flag {
+        transform: translateY(-0.2em);
+      }
+
+      .language-name {
+        display: none;
+      }
     }
 
+    details.dropdown > ul {
+      left: unset !important;
+      right: 0 !important;
+    }
+  }
+
+  .language-button, .language-link {
     &[dir=ltr] .language-name {
       margin-left: 1em;
     }
@@ -53,10 +92,18 @@ nav {
     &[dir=rtl] .language-name {
       margin-right: 1em;
     }
+  }
 
-    &[aria-haspopup="listbox"] > .normal-flag {
-      margin-top: -0.3em;
-      margin-bottom: -0.3em;
+  .user-dropdown {
+    @include below('sm') {
+      .user-name {
+        display: none;
+      }
+    }
+    @include above('sm') {
+      .user-icon {
+        display: none;
+      }
     }
   }
 }

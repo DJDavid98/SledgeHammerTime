@@ -1,25 +1,41 @@
 @use "../mixins/if";
 
+@include below('md') {
+  body:has(.popup) {
+    overflow: hidden;
+  }
+}
+
 .popup {
   position: absolute;
   max-width: 400px;
-  backdrop-filter: blur(3px);
-  border-radius: var(--border-radius);
-  box-shadow: var(--card-box-shadow);
-  padding: var(--block-spacing-horizontal);
+  border-radius: var(--pico-border-radius);
+  box-shadow: var(--pico-card-box-shadow);
+  padding: var(--pico-block-spacing-horizontal);
   background-color: rgba($white, .9);
-  transform: translateY(calc(var(--spacing) * -1));
   z-index: 3;
 
   @include if.dark {
     background-color: rgba($black, .8);
   }
-}
 
-.popup-close-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  @include above('md') {
+    top: unset !important;
+    left: unset !important;
+    right: unset !important;
+    bottom: unset !important;
+    width: unset !important;
+    height: unset !important;
+    min-width: unset !important;
+    min-height: unset !important;
+    transform: translateY(calc(var(--pico-spacing) * -1));
+  }
+
+  &.visible {
+    display: block !important;
+  }
+
+  &::backdrop {
+    backdrop-filter: blur(3px);
+  }
 }

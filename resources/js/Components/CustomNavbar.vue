@@ -18,7 +18,6 @@ const languages = computed(() => page.props.app.languages);
 const languageConfig = computed(() => LANGUAGES[locale.value]);
 const appName = getAppName();
 
-
 const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
   ...nativeLocaleNames,
   'en': 'English, US',
@@ -29,7 +28,11 @@ const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
   'sr': nativeLocaleNames['sr_Latn'],
 };
 
-const sortedLanguages = (Object.entries(LANGUAGES) as [AvailableLanguage, LanguageConfig][]).filter(([key]) => key in languages.value).sort(([a], [b]) => extendedNativeLocaleNames[a].localeCompare(extendedNativeLocaleNames[b]));
+const sortedLanguages = computed(() =>
+  (Object.entries(LANGUAGES) as [AvailableLanguage, LanguageConfig][])
+    .filter(([key]) => key in languages.value)
+    .sort(([a], [b]) => extendedNativeLocaleNames[a].localeCompare(extendedNativeLocaleNames[b])),
+);
 
 const navigateListener = () => {
   searchParams.value = new URLSearchParams(window.location.search);
@@ -50,83 +53,83 @@ onMounted(router.on('success', navigateListener));
         </Link>
       </li>
     </ul>
-    <ul>
-      <li
-        role="list"
-        dir="rtl"
-      >
-        <a
-          href="#"
-          aria-haspopup="listbox"
-          class="language-link"
-          :dir="languageConfig.rtl ? 'rtl' : 'ltr'"
-        >
-          <CountryFlag :country="LANGUAGES[locale]?.countryCode.toLowerCase()" />
-          <span class="language-name">{{ extendedNativeLocaleNames[locale] }}</span>
-        </a>
-        <ul
-          role="listbox"
-          class="language-dropdown"
-          dir="ltr"
-        >
-          <li
-            v-for="[supportedLocale, config] in sortedLanguages"
-            :key="supportedLocale"
+    <ul class="actions-wrapper">
+      <li class="p-0">
+        <details class="dropdown">
+          <summary
+            class="language-button"
+            :dir="languageConfig.rtl ? 'rtl' : 'ltr'"
           >
-            <a
-              :href="route('home', { locale: supportedLocale })+(searchParams.size > 0 ? `?${searchParams}` : '')"
-              class="language-link"
-              :dir="config.rtl ? 'rtl' : 'ltr'"
-            >
-              <CountryFlag :country="config.countryCode.toLowerCase()" />
-              <span class="language-name">{{ extendedNativeLocaleNames[supportedLocale] }}</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <template v-if="$page.props.auth.user">
-        <li
-          role="list"
-          dir="rtl"
-        >
-          <a
-            href="#"
-            aria-haspopup="listbox"
-          >{{ $page.props.auth.user.name }}</a>
-          <ul role="listbox">
-            <li>
-              <Link :href="route('settings', { locale })">
-                {{ $t('global.nav.botSettings') }}
-              </Link>
-            </li>
-            <li>
-              <Link :href="route('profile.edit', { locale })">
-                {{ $t('global.nav.profile') }}
-              </Link>
-            </li>
-            <li>
-              <Link
-                :href="route('logout')"
-                method="post"
-                as="button"
-                role="button"
-                class="outline"
+            <span class="language-flag">
+              <CountryFlag :country="LANGUAGES[locale]?.countryCode.toLowerCase()" />
+            </span>
+            <span class="language-name">{{ extendedNativeLocaleNames[locale] }}</span>
+          </summary>
+          <ul
+            role="listbox"
+            class="language-dropdown"
+            dir="ltr"
+          >
+            <template v-for="[supportedLocale, config] in sortedLanguages">
+              <li
+                v-if="supportedLocale !== locale"
+                :key="supportedLocale"
               >
-                {{ $t('global.nav.logout') }}
-              </Link>
-            </li>
+                <a
+                  :href="route('home', { locale: supportedLocale })+(searchParams.size > 0 ? `?${searchParams}` : '')"
+                  class="language-link"
+                  :dir="config.rtl ? 'rtl' : 'ltr'"
+                >
+                  <span class="language-flag">
+                    <CountryFlag :country="config.countryCode.toLowerCase()" />
+                  </span>
+                  <span class="language-name">{{ extendedNativeLocaleNames[supportedLocale] }}</span>
+                </a>
+              </li>
+            </template>
           </ul>
-        </li>
-      </template>
+        </details>
+      </li>
+      <li class="p-0">
+        <template v-if="$page.props.auth.user">
+          <details class="dropdown user-dropdown">
+            <summary>
+              <span class="user-icon">👤</span>
+              <span class="user-name">{{ $page.props.auth.user.name }}</span>
+            </summary>
+            <ul role="listbox">
+              <li>
+                <Link :href="route('settings', { locale })">
+                  {{ $t('global.nav.botSettings') }}
+                </Link>
+              </li>
+              <li>
+                <Link :href="route('profile.edit', { locale })">
+                  {{ $t('global.nav.profile') }}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  :href="route('logout')"
+                  method="post"
+                  as="button"
+                  role="button"
+                  class="outline"
+                >
+                  {{ $t('global.nav.logout') }}
+                </Link>
+              </li>
+            </ul>
+          </details>
+        </template>
 
-      <template v-else>
-        <li>
+        <template v-else>
           <a
             :href="route('login', { locale })"
             role="button"
           >{{ $t('global.nav.login') }}</a>
-        </li>
-      </template>
+        </template>
+      </li>
     </ul>
   </nav>
 </template>

@@ -10,8 +10,13 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
 </script>
 
 <template>
-  <figure class="mb-0">
+  <div class="responsive-table">
     <table class="mb-0">
+      <colgroup>
+        <col style="width: 25%">
+        <col style="width: 25%">
+        <col style="width: 50%">
+      </colgroup>
       <thead>
         <tr>
           <th colspan="2">
@@ -151,5 +156,5 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
         </tr>
       </tbody>
     </table>
-  </figure>
+  </div>
 </template>

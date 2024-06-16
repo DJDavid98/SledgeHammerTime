@@ -1,6 +1,9 @@
 @use '../mixins/if';
 
 @each $key, $size in $spacing {
+  .m-#{$key} {
+    margin: $size;
+  }
   .mt-#{$key} {
     margin-top: $size;
   }

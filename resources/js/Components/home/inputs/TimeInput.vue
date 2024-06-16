@@ -37,7 +37,8 @@ const changeTime = (value: string) => {
       v-model="selectedDate"
       class="mb-0"
       readonly
-      @click="openPopup"
+      @click.prevent="openPopup"
+      @focus="openPopup"
     >
     <TimePickerPopup
       ref="timepicker"

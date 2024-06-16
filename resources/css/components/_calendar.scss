@@ -6,10 +6,14 @@
   --column-count: 7;
   text-align: center;
   font-size: .9em;
+  --button-size: 1.75em;
+
+  @include below('md') {
+    --button-size: 2.5em;
+  }
 }
 
 .calendar-controls {
-  --button-size: 1.75em;
   display: grid;
   grid-template-columns: repeat(2, var(--button-size)) auto repeat(2, var(--button-size));
   width: 100%;
@@ -19,6 +23,11 @@
   button {
     padding: 0;
     margin: 0;
+    height: var(--button-size);
+  }
+
+  .calendar-context {
+    font-size: calc(var(--button-size) * 0.75);
   }
 }
 
@@ -68,6 +77,7 @@
     box-sizing: border-box;
     margin: 0;
     background-color: transparent;
+    height: var(--button-size);
 
     &.current {
       border-color: currentColor;
@@ -81,7 +91,6 @@
       font-weight: bold;
       background-color: $primary-200;
 
-
       @include if.dark {
         background-color: $primary-800;
       }
@@ -90,7 +99,13 @@
 }
 
 .jump-to-today {
-  font-size: .75em;
-  padding: .1em .2em;
+  padding: .4em;
   margin: .5em 0;
+  display: block;
+  width: 100%;
+
+  @include above('md') {
+    font-size: .75em;
+    padding: .1em .2em;
+  }
 }
