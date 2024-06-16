@@ -4,6 +4,16 @@ import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import i18n from 'laravel-vue-i18n/vite';
 
+const isCI = process.env.CI === 'true';
+
+const conditionalPlugins = [];
+if (!isCI) {
+  conditionalPlugins.push(laravel({
+    input: 'resources/js/app.ts',
+    ssr: 'resources/js/ssr.ts',
+    refresh: true,
+  }));
+}
 
 export default defineConfig({
   resolve: {
@@ -12,11 +22,7 @@ export default defineConfig({
     },
   },
   plugins: [
-    laravel({
-      input: 'resources/js/app.ts',
-      ssr: 'resources/js/ssr.ts',
-      refresh: true,
-    }),
+    ...conditionalPlugins,
     vue({
       template: {
         transformAssetUrls: {
