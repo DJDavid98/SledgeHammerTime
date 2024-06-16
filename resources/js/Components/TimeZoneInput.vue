@@ -25,8 +25,18 @@ const changeTimezone = (e: Event) => {
 </script>
 
 <template>
-  <select :id="id" :name="name" @change="changeTimezone" :class="className ?? 'mb-0'">
-    <option v-for="zone in timezones" :value="zone.value" :selected="zone.value === model">
+  <select
+    :id="id"
+    :name="name"
+    :class="className ?? 'mb-0'"
+    @change="changeTimezone"
+  >
+    <option
+      v-for="zone in timezones"
+      :key="zone.label"
+      :value="zone.value"
+      :selected="zone.value === model"
+    >
       {{ zone.label }}
     </option>
   </select>

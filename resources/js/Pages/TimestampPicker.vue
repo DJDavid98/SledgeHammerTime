@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TimestampDisplay from '@/Components/home/TimestampDisplay.vue';
 import { timestamp } from '@/injection-keys';
-import Layout from '@/Layouts/Layout.vue';
+import Layout from '@/Layouts/DefaultLayout.vue';
 import { isoFormattingDateFormat, isoParsingDateFormat, isoTimeFormat } from '@/utils/timezone';
 import { Head, router, usePage } from '@inertiajs/vue3';
 import moment from 'moment';

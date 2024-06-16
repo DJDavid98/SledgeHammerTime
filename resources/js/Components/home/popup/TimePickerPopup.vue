@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import Popup from '@/Components/CustomPopup.vue';
 import TimePickerDial, { TimePickerDialAPI } from '@/Components/home/popup/TimePickerDial.vue';
-import Popup from '@/Components/Popup.vue';
 import { DialMode } from '@/utils/dial';
 import { pad } from '@/utils/pad';
 import { Moment } from 'moment-timezone';
@@ -86,26 +86,60 @@ onUpdated(() => {
 
 
 <template>
-  <Popup :show="show" @close="close">
+  <Popup
+    :show="show"
+    @close="close"
+  >
     <div class="grid">
-      <input ref="hoursInput" v-model="hours" type="number" min="0" max="23" @focus="hoursFocused" />
-      <input ref="minutesInput" v-model="minutes" type="number" min="0" max="59" @focus="minutesFocused" />
-      <input ref="secondsInput" v-model="seconds" type="number" min="0" max="59" @focus="secondsFocused" />
+      <input
+        ref="hoursInput"
+        v-model="hours"
+        type="number"
+        min="0"
+        max="23"
+        @focus="hoursFocused"
+      >
+      <input
+        ref="minutesInput"
+        v-model="minutes"
+        type="number"
+        min="0"
+        max="59"
+        @focus="minutesFocused"
+      >
+      <input
+        ref="secondsInput"
+        v-model="seconds"
+        type="number"
+        min="0"
+        max="59"
+        @focus="secondsFocused"
+      >
     </div>
     <div class="grid">
-      <button @click="select" class="mb-0">{{ $t('global.form.select') }}</button>
-      <button @click="close" class="mb-0 secondary">{{ $t('global.form.cancel') }}</button>
+      <button
+        class="mb-0"
+        @click="select"
+      >
+        {{ $t('global.form.select') }}
+      </button>
+      <button
+        class="mb-0 secondary"
+        @click="close"
+      >
+        {{ $t('global.form.cancel') }}
+      </button>
     </div>
     <TimePickerDial
-        v-if="show"
-        ref="dial"
-        :hours="hours"
-        :minutes="minutes"
-        :seconds="seconds"
-        @setHours="setHours"
-        @setMinutes="setMinutes"
-        @setSeconds="setSeconds"
-        @changeFocus="changeFocus"
+      v-if="show"
+      ref="dial"
+      :hours="hours"
+      :minutes="minutes"
+      :seconds="seconds"
+      @set-hours="setHours"
+      @set-minutes="setMinutes"
+      @set-seconds="setSeconds"
+      @change-focus="changeFocus"
     />
   </Popup>
 </template>

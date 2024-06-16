@@ -153,7 +153,7 @@ export const generateCalendar = ({
     rows: getCalendarRows(firstDayOfMonthMoment, firstDayOfWeekOffset),
   };
   // Pre-allocate the array, map is used instead of fill to avoid pass-by-reference errors
-  let days = Array.from<CalendarDay[]>({ length: gridSize.rows }).map(() => new Array(gridSize.columns) as CalendarDay[]);
+  const days = Array.from<CalendarDay[]>({ length: gridSize.rows }).map(() => new Array(gridSize.columns) as CalendarDay[]);
   let dayOffset = firstDayOfWeekOffset;
   for (let weekIndex = 0; weekIndex < gridSize.rows; weekIndex++) {
     for (let dayIndex = 0; dayIndex < gridSize.columns; dayIndex++) {

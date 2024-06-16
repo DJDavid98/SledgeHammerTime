@@ -36,12 +36,15 @@ const localTimestamp = computed(() => props.ts?.value.local());
 </script>
 
 <template>
-    <span v-if="localTimestamp" :data-tooltip="localTimestamp.locale($page.props.app.locale).format('LLLL')">
-        <template v-if="format">
-            {{ localTimestamp.locale(locale).format(format) }}
-        </template>
-        <template v-if="fromNow">
-            {{ localTimestamp.locale(locale).fromNow() }}
-        </template>
-    </span>
+  <span
+    v-if="localTimestamp"
+    :data-tooltip="localTimestamp.locale($page.props.app.locale).format('LLLL')"
+  >
+    <template v-if="format">
+      {{ localTimestamp.locale(locale).format(format) }}
+    </template>
+    <template v-if="fromNow">
+      {{ localTimestamp.locale(locale).fromNow() }}
+    </template>
+  </span>
 </template>

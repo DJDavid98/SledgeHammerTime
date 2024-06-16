@@ -2,28 +2,28 @@
 import { onMounted, onUnmounted, watch } from 'vue';
 
 const props = withDefaults(
-    defineProps<{
-      show?: boolean;
-      maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-      closeable?: boolean;
-    }>(),
-    {
-      show: false,
-      closeable: true,
-    },
+  defineProps<{
+    show?: boolean;
+    maxWidth: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | undefined;
+    closeable?: boolean;
+  }>(),
+  {
+    show: false,
+    closeable: true,
+  },
 );
 
 const emit = defineEmits(['close']);
 
 watch(
-    () => props.show,
-    () => {
-      if (props.show) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'visible';
-      }
-    },
+  () => props.show,
+  () => {
+    if (props.show) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'visible';
+    }
+  },
 );
 
 const close = () => {
@@ -53,7 +53,12 @@ onUnmounted(() => {
       <article>
         <header>
           <slot name="header" />
-          <a href="#close" aria-label="Close" class="close" @click="close"></a>
+          <a
+            href="#close"
+            aria-label="Close"
+            class="close"
+            @click="close"
+          />
         </header>
         <slot v-if="show" />
         <footer>

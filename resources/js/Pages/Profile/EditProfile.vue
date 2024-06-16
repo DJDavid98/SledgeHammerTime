@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { DiscordUserInfoProps } from '@/Components/DiscordUserInfo.vue';
-import Layout from '@/Layouts/Layout.vue';
+import Layout from '@/Layouts/DefaultLayout.vue';
 import ConnectedAccounts from '@/Pages/Profile/Partials/ConnectedAccounts.vue';
 import { Head } from '@inertiajs/vue3';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';

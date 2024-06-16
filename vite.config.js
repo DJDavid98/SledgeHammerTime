@@ -27,4 +27,9 @@ export default defineConfig({
     }),
     i18n(),
   ],
+  test: {
+    sequence: {
+      shuffle: true,
+    },
+  },
 });

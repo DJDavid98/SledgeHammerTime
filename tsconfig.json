@@ -15,7 +15,7 @@
       "@/*": ["./resources/js/*"]
     }
   },
-  "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.vue"],
+  "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.vue", "eslint.config.js"],
   "ts-node": {
     "experimentalResolver": true,
     "compilerOptions": {

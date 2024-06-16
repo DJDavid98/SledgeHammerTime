@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Button from '@/Components/Button.vue';
+import Button from '@/Components/CustomButton.vue';
 import DatePicker from '@/Components/home/pickers/DatePicker.vue';
 import TimePicker from '@/Components/home/pickers/TimePicker.vue';
 import TimeZonePicker from '@/Components/home/pickers/TimeZonePicker.vue';
@@ -25,10 +25,10 @@ const ts = inject(timestamp);
     </div>
     <div v-if="ts">
       <Button
-        @click="ts.setCurrentTime"
         :data-tooltip="$t('timestampPicker.picker.tooltip.setToCurrent')"
         class="mt-4 mb-0 secondary outline"
         role="button"
+        @click="ts.setCurrentTime"
       >
         ⌚
       </Button>

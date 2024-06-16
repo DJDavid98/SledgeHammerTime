@@ -17,7 +17,11 @@ const copy = () => {
 
 <template>
   <template v-if="unixTs !== undefined">
-    <code :data-tooltip="$t('timestampPicker.table.clickToCopy')" @click="copy" class="cursor-pointer">
+    <code
+      :data-tooltip="$t('timestampPicker.table.clickToCopy')"
+      class="cursor-pointer"
+      @click="copy"
+    >
       {{ data }}
     </code>
   </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Button from '@/Components/Button.vue';
-import Modal from '@/Components/Modal.vue';
+import Button from '@/Components/CustomButton.vue';
+import Modal from '@/Components/CustomModal.vue';
 import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
 
@@ -35,11 +35,18 @@ const closeModal = () => {
 <template>
   <h2>{{ $t('profile.deletion.heading') }}</h2>
 
-  <p class="mt-1">{{ $t('profile.deletion.description') }}</p>
+  <p class="mt-1">
+    {{ $t('profile.deletion.description') }}
+  </p>
 
-  <Button @click="confirmUserDeletion">{{ $t('profile.deletion.deleteButton') }}</Button>
+  <Button @click="confirmUserDeletion">
+    {{ $t('profile.deletion.deleteButton') }}
+  </Button>
 
-  <Modal :show="confirmingUserDeletion" @close="closeModal">
+  <Modal
+    :show="confirmingUserDeletion"
+    @close="closeModal"
+  >
     <template #header>
       {{ $t('profile.deletion.confirmDialog.header') }}
     </template>
@@ -49,13 +56,16 @@ const closeModal = () => {
     </p>
 
     <template #footer>
-      <Button @click="closeModal">{{ $t('global.form.cancel') }}</Button>
+      <Button @click="closeModal">
+        {{ $t('global.form.cancel') }}
+      </Button>
 
       <Button
-          :disabled="form.processing"
-          :aria-busy="form.processing ? 'true' : undefined"
-          @click="deleteUser"
-      >{{ $t('global.form.confirm') }}
+        :disabled="form.processing"
+        :aria-busy="form.processing ? 'true' : undefined"
+        @click="deleteUser"
+      >
+        {{ $t('global.form.confirm') }}
       </Button>
     </template>
   </Modal>

@@ -32,7 +32,18 @@ const changeDate = (value: string) => {
 
 <template>
   <div>
-    <input :id="id" :value="selectedDate" @click="openPopup" class="mb-0" readonly />
-    <DatePickerPopup :show="showPopup" @close="closePopup" @selected="changeDate" ref="datepicker" />
+    <input
+      :id="id"
+      :value="selectedDate"
+      class="mb-0"
+      readonly
+      @click="openPopup"
+    >
+    <DatePickerPopup
+      ref="datepicker"
+      :show="showPopup"
+      @close="closePopup"
+      @selected="changeDate"
+    />
   </div>
 </template>

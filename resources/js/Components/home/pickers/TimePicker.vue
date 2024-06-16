@@ -32,7 +32,18 @@ const changeTime = (value: string) => {
 
 <template>
   <div>
-    <input :id="id" v-model="selectedDate" @click="openPopup" class="mb-0" readonly />
-    <TimePickerPopup :show="showPopup" @close="closePopup" @selected="changeTime" ref="timepicker" />
+    <input
+      :id="id"
+      v-model="selectedDate"
+      class="mb-0"
+      readonly
+      @click="openPopup"
+    >
+    <TimePickerPopup
+      ref="timepicker"
+      :show="showPopup"
+      @close="closePopup"
+      @selected="changeTime"
+    />
   </div>
 </template>

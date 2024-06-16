@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import Popup from '@/Components/CustomPopup.vue';
 import DatePickerCalendar, { DatePickerCalendarApi } from '@/Components/home/popup/DatePickerCalendar.vue';
-import Popup from '@/Components/Popup.vue';
 import { pad } from '@/utils/pad';
 import { Moment } from 'moment-timezone';
 import { ref, watch } from 'vue';
@@ -58,24 +58,53 @@ defineExpose<DatePickerPopupApi>({
 
 
 <template>
-  <Popup :show="show" @close="close">
+  <Popup
+    :show="show"
+    @close="close"
+  >
     <div class="grid-flex">
-      <input v-model="year" type="number" class="grid-flex-item flex-basis-40" />
-      <input v-model="month" type="number" class="grid-flex-item flex-basis-30" min="1" max="12" />
-      <input v-model="date" type="number" class="grid-flex-item flex-basis-30" min="1" max="31" />
+      <input
+        v-model="year"
+        type="number"
+        class="grid-flex-item flex-basis-40"
+      >
+      <input
+        v-model="month"
+        type="number"
+        class="grid-flex-item flex-basis-30"
+        min="1"
+        max="12"
+      >
+      <input
+        v-model="date"
+        type="number"
+        class="grid-flex-item flex-basis-30"
+        min="1"
+        max="31"
+      >
     </div>
     <div class="grid">
-      <button @click="selectAndClose" class="mb-0">{{ $t('global.form.select') }}</button>
-      <button @click="close" class="mb-0 secondary">{{ $t('global.form.cancel') }}</button>
+      <button
+        class="mb-0"
+        @click="selectAndClose"
+      >
+        {{ $t('global.form.select') }}
+      </button>
+      <button
+        class="mb-0 secondary"
+        @click="close"
+      >
+        {{ $t('global.form.cancel') }}
+      </button>
     </div>
-    <hr />
+    <hr>
     <DatePickerCalendar
-        ref="calendar"
-        v-if="show"
-        :selectedYear="year"
-        :selectedMonth="month"
-        :selectedDate="date"
-        @setDate="setDate"
+      v-if="show"
+      ref="calendar"
+      :selected-year="year"
+      :selected-month="month"
+      :selected-date="date"
+      @set-date="setDate"
     />
   </Popup>
 </template>

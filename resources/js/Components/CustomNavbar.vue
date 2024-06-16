@@ -41,24 +41,42 @@ onMounted(router.on('success', navigateListener));
   <nav class="container-fluid backdrop sticky">
     <ul>
       <li>
-        <Link :href="route('home')" class="brand fs-15">
+        <Link
+          :href="route('home')"
+          class="brand fs-15"
+        >
           <ApplicationLogo />
           <span class="ms-2">{{ appName }}</span>
         </Link>
       </li>
     </ul>
     <ul>
-      <li role="list" dir="rtl">
-        <a href="#" aria-haspopup="listbox" class="language-link" :dir="languageConfig.rtl ? 'rtl' : 'ltr'">
+      <li
+        role="list"
+        dir="rtl"
+      >
+        <a
+          href="#"
+          aria-haspopup="listbox"
+          class="language-link"
+          :dir="languageConfig.rtl ? 'rtl' : 'ltr'"
+        >
           <CountryFlag :country="LANGUAGES[locale]?.countryCode.toLowerCase()" />
           <span class="language-name">{{ extendedNativeLocaleNames[locale] }}</span>
         </a>
-        <ul role="listbox" class="language-dropdown" dir="ltr">
-          <li v-for="[supportedLocale, config] in sortedLanguages">
+        <ul
+          role="listbox"
+          class="language-dropdown"
+          dir="ltr"
+        >
+          <li
+            v-for="[supportedLocale, config] in sortedLanguages"
+            :key="supportedLocale"
+          >
             <a
-                :href="route('home', { locale: supportedLocale })+(searchParams.size > 0 ? `?${searchParams}` : '')"
-                class="language-link"
-                :dir="config.rtl ? 'rtl' : 'ltr'"
+              :href="route('home', { locale: supportedLocale })+(searchParams.size > 0 ? `?${searchParams}` : '')"
+              class="language-link"
+              :dir="config.rtl ? 'rtl' : 'ltr'"
             >
               <CountryFlag :country="config.countryCode.toLowerCase()" />
               <span class="language-name">{{ extendedNativeLocaleNames[supportedLocale] }}</span>
@@ -67,23 +85,34 @@ onMounted(router.on('success', navigateListener));
         </ul>
       </li>
       <template v-if="$page.props.auth.user">
-        <li role="list" dir="rtl">
-          <a href="#" aria-haspopup="listbox">{{ $page.props.auth.user.name }}</a>
+        <li
+          role="list"
+          dir="rtl"
+        >
+          <a
+            href="#"
+            aria-haspopup="listbox"
+          >{{ $page.props.auth.user.name }}</a>
           <ul role="listbox">
             <li>
-              <Link :href="route('settings', { locale })">{{ $t('global.nav.botSettings') }}</Link>
+              <Link :href="route('settings', { locale })">
+                {{ $t('global.nav.botSettings') }}
+              </Link>
             </li>
             <li>
-              <Link :href="route('profile.edit', { locale })">{{ $t('global.nav.profile') }}</Link>
+              <Link :href="route('profile.edit', { locale })">
+                {{ $t('global.nav.profile') }}
+              </Link>
             </li>
             <li>
               <Link
-                  :href="route('logout')"
-                  method="post"
-                  as="button"
-                  role="button"
-                  class="outline"
-              >{{ $t('global.nav.logout') }}
+                :href="route('logout')"
+                method="post"
+                as="button"
+                role="button"
+                class="outline"
+              >
+                {{ $t('global.nav.logout') }}
               </Link>
             </li>
           </ul>
@@ -92,7 +121,10 @@ onMounted(router.on('success', navigateListener));
 
       <template v-else>
         <li>
-          <a :href="route('login', { locale })" role="button">{{ $t('global.nav.login') }}</a>
+          <a
+            :href="route('login', { locale })"
+            role="button"
+          >{{ $t('global.nav.login') }}</a>
         </li>
       </template>
     </ul>

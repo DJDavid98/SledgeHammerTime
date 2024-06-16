@@ -19,5 +19,9 @@ defineProps<{
     </p>
   </header>
 
-  <DiscordUserInfo v-for="info of discordUsers" v-bind="info" />
+  <DiscordUserInfo
+    v-for="info of discordUsers"
+    v-bind="info"
+    :key="info.id"
+  />
 </template>

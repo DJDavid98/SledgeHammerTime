@@ -335,7 +335,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="time-dial mt-3" :data-mode="mode">
+  <div
+    class="time-dial mt-3"
+    :data-mode="mode"
+  >
     <canvas
       ref="hoursCanvas"
       class="hours-canvas"

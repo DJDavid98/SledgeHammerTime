@@ -135,35 +135,60 @@ defineExpose<DatePickerCalendarApi>({
   <div class="calendar-controls">
     <button
       class=""
-      @click="stepDate(-1, 'year')"
       :aria-label="$t('timestampPicker.picker.tooltip.previousYear')"
+      @click="stepDate(-1, 'year')"
     >
       <span aria-hidden="true">⏮</span>
     </button>
-    <button @click="stepDate(-1, 'month')" :aria-label="$t('timestampPicker.picker.tooltip.previousMonth')">
+    <button
+      :aria-label="$t('timestampPicker.picker.tooltip.previousMonth')"
+      @click="stepDate(-1, 'month')"
+    >
       <span aria-hidden="true">◀</span>
     </button>
     <span class="calendar-context">{{ dateMoment.locale(locale).format(contextFormat) }}</span>
-    <button @click="stepDate(1, 'month')" :aria-label="$t('timestampPicker.picker.tooltip.nextMonth')">
+    <button
+      :aria-label="$t('timestampPicker.picker.tooltip.nextMonth')"
+      @click="stepDate(1, 'month')"
+    >
       <span aria-hidden="true">▶</span>
     </button>
-    <button @click="stepDate(1, 'year')" :aria-label="$t('timestampPicker.picker.tooltip.nextYear')">
+    <button
+      :aria-label="$t('timestampPicker.picker.tooltip.nextYear')"
+      @click="stepDate(1, 'year')"
+    >
       <span aria-hidden="true">⏭</span>
     </button>
   </div>
-  <button @click="jumpToToday" class="jump-to-today" :disabled="isShowingCurrentMonth">
+  <button
+    class="jump-to-today"
+    :disabled="isShowingCurrentMonth"
+    @click="jumpToToday"
+  >
     {{ $t('timestampPicker.picker.button.jumpToToday') }}
   </button>
   <div class="calendar">
     <div class="calendar-weekdays">
-      <div v-for="weekdayItem in weekdaysItems" :class="getWeekdayClasses(weekdayItem)">{{ weekdayItem.name }}</div>
+      <div
+        v-for="weekdayItem in weekdaysItems"
+        :key="weekdayItem.index"
+        :class="getWeekdayClasses(weekdayItem)"
+      >
+        {{ weekdayItem.name }}
+      </div>
     </div>
-    <div v-for="calendarWeek in calendar.days" class="calendar-week">
+    <div
+      v-for="(calendarWeek, index) in calendar.days"
+      :key="index"
+      class="calendar-week"
+    >
       <button
         v-for="calendarDay in calendarWeek"
+        :key="`${calendarDay.month}/${calendarDay.date}`"
         :class="getDayClasses(calendarDay)"
         @click="setDate(calendarDay)"
-      >{{ calendarDay.date }}
+      >
+        {{ calendarDay.date }}
       </button>
     </div>
   </div>

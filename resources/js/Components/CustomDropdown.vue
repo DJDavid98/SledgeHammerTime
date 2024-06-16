@@ -1,6 +1,9 @@
 <template>
   <details role="list">
-    <summary aria-haspopup="listbox" role="button">
+    <summary
+      aria-haspopup="listbox"
+      role="button"
+    >
       <slot name="trigger" />
     </summary>
 

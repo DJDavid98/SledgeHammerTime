@@ -4,21 +4,21 @@ import ziggyRoute, { Config as ZiggyConfig } from 'ziggy-js';
 import { PageProps as AppPageProps } from './';
 
 declare global {
-	interface Window {
-		axios: AxiosInstance;
-	}
+  interface Window {
+    axios: AxiosInstance;
+  }
 
-	var route: typeof ziggyRoute;
-	var Ziggy: ZiggyConfig;
+  const route: typeof ziggyRoute;
+  const Ziggy: ZiggyConfig;
 }
 
 declare module 'vue' {
-	interface ComponentCustomProperties {
-		route: typeof ziggyRoute;
-	}
+  interface ComponentCustomProperties {
+    route: typeof ziggyRoute;
+  }
 }
 
 declare module '@inertiajs/core' {
-	interface PageProps extends InertiaPageProps, AppPageProps {
-	}
+  interface PageProps extends InertiaPageProps, AppPageProps {
+  }
 }

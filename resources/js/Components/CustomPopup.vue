@@ -18,10 +18,17 @@ defineExpose({
 
 
 <template>
-  <div class="popup" :hidden="!show">
+  <div
+    class="popup"
+    :hidden="!show"
+  >
     <slot />
   </div>
   <Teleport to="body">
-    <div v-if="show" class="popup-close-backdrop cursor-default" @click="close" />
+    <div
+      v-if="show"
+      class="popup-close-backdrop cursor-default"
+      @click="close"
+    />
   </Teleport>
 </template>

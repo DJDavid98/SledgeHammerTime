@@ -17,5 +17,10 @@ const currentTimezone = computed(() => ts?.currentTimezone.value);
 </script>
 
 <template>
-  <TimeZoneInput v-if="ts" :id="id" @change="changeTimezone" v-model="currentTimezone" />
+  <TimeZoneInput
+    v-if="ts"
+    :id="id"
+    v-model="currentTimezone"
+    @change="changeTimezone"
+  />
 </template>

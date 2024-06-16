@@ -14,11 +14,11 @@ const getAvatarLink = (du: DiscordUserInfoProps) => {
 
   // Default avatar logic
   const defaultAvatarFileName =
-      (du.discriminator === '0'
-          ? // User is migrated to new username system
-          parseInt(du.id, 10) >> 22
-          : // User is on previous username system
-          parseInt(du.discriminator, 10)) % 5;
+    (du.discriminator === '0'
+      ? // User is migrated to new username system
+      parseInt(du.id, 10) >> 22
+      : // User is on previous username system
+      parseInt(du.discriminator, 10)) % 5;
   return `/embed/avatars/${defaultAvatarFileName}.png`;
 };
 
@@ -27,7 +27,11 @@ defineProps<DiscordUserInfoProps>();
 
 <template>
   <figure>
-    <img :alt="`Avatar of ${name}`" v-bind:src="getAvatarLink($props)" class="s-20 me-3 br-50" />
+    <img
+      :alt="`Avatar of ${name}`"
+      :src="getAvatarLink($props)"
+      class="s-20 me-3 br-50"
+    >
     <span class="font-medium text-xl">{{ name }}</span>
   </figure>
 </template>
