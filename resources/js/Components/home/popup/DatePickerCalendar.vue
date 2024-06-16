@@ -134,9 +134,9 @@ defineExpose<DatePickerCalendarApi>({
 <template>
   <div class="calendar-controls">
     <button
-        class=""
-        @click="stepDate(-1, 'year')"
-        :aria-label="$t('timestampPicker.picker.tooltip.previousYear')"
+      class=""
+      @click="stepDate(-1, 'year')"
+      :aria-label="$t('timestampPicker.picker.tooltip.previousYear')"
     >
       <span aria-hidden="true">⏮</span>
     </button>
@@ -160,9 +160,9 @@ defineExpose<DatePickerCalendarApi>({
     </div>
     <div v-for="calendarWeek in calendar.days" class="calendar-week">
       <button
-          v-for="calendarDay in calendarWeek"
-          :class="getDayClasses(calendarDay)"
-          @click="setDate(calendarDay)"
+        v-for="calendarDay in calendarWeek"
+        :class="getDayClasses(calendarDay)"
+        @click="setDate(calendarDay)"
       >{{ calendarDay.date }}
       </button>
     </div>
