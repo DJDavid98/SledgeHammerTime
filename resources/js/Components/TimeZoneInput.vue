@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getSortedNormalizedTimezoneNames, getTimezoneValue } from '@/utils/timezone';
+import { getSortedNormalizedTimezoneNames, getTimezoneValue } from '@/utils/time';
 import { defineModel } from 'vue';
 
 defineProps<{

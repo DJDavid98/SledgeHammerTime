@@ -25,6 +25,7 @@ const emit = defineEmits<{
   (e: 'setMinutes', hours: number): void
   (e: 'setSeconds', hours: number): void
   (e: 'changeFocus', mode: DialMode): void
+  (e: 'select'): void
 }>();
 
 const themeData = inject(theme);
@@ -313,6 +314,9 @@ const stopMovementTracking = () => {
       break;
     case DialMode.Minutes:
       emit('changeFocus', DialMode.Seconds);
+      break;
+    case DialMode.Seconds:
+      emit('select');
       break;
   }
 };

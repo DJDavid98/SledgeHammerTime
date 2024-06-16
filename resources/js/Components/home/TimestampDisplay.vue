@@ -40,7 +40,6 @@ onMounted(() => {
   <CustomAlert
     v-if="showHowTo"
     type="info"
-    icon="ℹ️"
     :title="$t('global.seoDescription')"
     :text="$t('timestampPicker.howTo', { syntaxColName })"
     @close="handleHowToClose"

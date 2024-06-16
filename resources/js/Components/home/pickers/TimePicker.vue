@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import Popup from '@/Components/CustomPopup.vue';
 import TimePickerDial, { TimePickerDialAPI } from '@/Components/home/pickers/TimePickerDial.vue';
+import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
 import { DialMode } from '@/utils/dial';
 import { AvailableLanguage } from '@/utils/language-settings';
 import { pad } from '@/utils/pad';
-import { toTwelveHours, toTwentyFourHours } from '@/utils/timezone';
+import {
+  coerceToTwelveHours,
+  limitHours,
+  limitMinutesSeconds,
+  limitToTwelveHours,
+  toTwelveHours,
+  toTwentyFourHours,
+} from '@/utils/time';
 import { usePage } from '@inertiajs/vue3';
 import moment from 'moment';
 import { Moment } from 'moment-timezone';
@@ -89,19 +97,23 @@ const changeFocus = (mode: DialMode) => {
   }
 };
 
-const handleHoursBlur = () => {
-  if (!twelveHourMode.value) return;
-
-  if (hours.value > 12) {
-    const newValue = hours.value - 12;
-    hours.value = Math.max(newValue, 1);
-    isAm.value = false;
-  } else if (hours.value < 1) {
-    const newValue = 12;
-    hours.value = 12;
-    isAm.value = true;
+/** Not for use in the template */
+const _handleTwentyFourHoursBlur = inputRangeLimitBlurHandlerFactory(hours);
+const handleHoursBlur = (e: FocusEvent) => {
+  if (!twelveHourMode.value) {
+    _handleTwentyFourHoursBlur(e);
+    return;
   }
+
+  const result = coerceToTwelveHours(hours.value);
+  if (!result) return;
+
+  hours.value = result.hours;
+  isAm.value = result.isAm;
 };
+
+const handleMinutesBlur = inputRangeLimitBlurHandlerFactory(minutes);
+const handleSecondsBlur = inputRangeLimitBlurHandlerFactory(seconds);
 
 const handleAmPmSelectKeydown = (e: KeyboardEvent) => {
   switch (e.key.toLowerCase()) {
@@ -154,6 +166,7 @@ onUpdated(() => {
         min="0"
         max="59"
         @focus="minutesFocused"
+        @blur="handleMinutesBlur"
       >
       <input
         ref="secondsInput"
@@ -162,6 +175,7 @@ onUpdated(() => {
         min="0"
         max="59"
         @focus="secondsFocused"
+        @blur="handleSecondsBlur"
       >
       <select
         v-if="twelveHourMode"
@@ -193,14 +207,15 @@ onUpdated(() => {
     <TimePickerDial
       v-if="renderDial"
       ref="dial"
-      :hours="hours"
-      :minutes="minutes"
-      :seconds="seconds"
+      :hours="twelveHourMode ? limitToTwelveHours(hours) : limitHours(hours)"
+      :minutes="limitMinutesSeconds(minutes)"
+      :seconds="limitMinutesSeconds(seconds)"
       :twelve-hour-mode="twelveHourMode"
       @set-hours="setHours"
       @set-minutes="setMinutes"
       @set-seconds="setSeconds"
       @change-focus="changeFocus"
+      @select="select"
     />
   </Popup>
 </template>

@@ -5,7 +5,7 @@ import {
   getMomentForDate,
   Month,
 } from '@/utils/calendar';
-import { isoParsingDateFormat } from '@/utils/timezone';
+import { isoParsingDateFormat } from '@/utils/time';
 import { describe, expect, it } from 'vitest';
 
 describe('Calendar Utils', () => {

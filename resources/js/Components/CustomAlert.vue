@@ -1,13 +1,22 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
-  type: 'info';
+import { computed } from 'vue';
+
+export type AlertType = 'info'
+
+const props = withDefaults(defineProps<{
+  type: AlertType;
   title: string;
   text: string;
-  icon?: string;
   closable?: boolean;
 }>(), {
   closable: true,
 });
+
+const iconsMap: Partial<Record<AlertType, string>> = {
+  info: 'ℹ️',
+};
+
+const icon = computed(() => iconsMap[props.type]);
 
 const emit = defineEmits<{
   (on: 'close'): void;

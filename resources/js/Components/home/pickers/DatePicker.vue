@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import Popup from '@/Components/CustomPopup.vue';
 import DatePickerCalendar, { DatePickerCalendarApi } from '@/Components/home/pickers/DatePickerCalendar.vue';
+import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
 import { pad } from '@/utils/pad';
+import { limitDate, limitMonth } from '@/utils/time';
 import { Moment } from 'moment-timezone';
 import { ref, watch } from 'vue';
 
@@ -43,6 +45,9 @@ const setDate = (newYear: number, newMonth: number, newDate: number) => {
   select();
 };
 
+const handleMonthBlur = inputRangeLimitBlurHandlerFactory(month);
+const handleDateBlur = inputRangeLimitBlurHandlerFactory(date);
+
 watch([year, month, date], () => {
   calendar.value?.setSelection(year.value, month.value, date.value);
 });
@@ -74,6 +79,7 @@ defineExpose<DatePickerPopupApi>({
         class="grid-flex-item flex-basis-30"
         min="1"
         max="12"
+        @blur="handleMonthBlur"
       >
       <input
         v-model="date"
@@ -81,6 +87,7 @@ defineExpose<DatePickerPopupApi>({
         class="grid-flex-item flex-basis-30"
         min="1"
         max="31"
+        @blur="handleDateBlur"
       >
     </fieldset>
     <div class="grid">
@@ -102,8 +109,8 @@ defineExpose<DatePickerPopupApi>({
       v-if="show"
       ref="calendar"
       :selected-year="year"
-      :selected-month="month"
-      :selected-date="date"
+      :selected-month="limitMonth(month)"
+      :selected-date="limitDate(date)"
       @set-date="setDate"
     />
   </Popup>

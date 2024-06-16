@@ -1,5 +1,5 @@
-import { toTwelveHours, toTwentyFourHours } from '@/utils/timezone';
-import { describe, expect, it } from 'vitest';
+import { coerceToTwelveHours, rangeLimit, toTwelveHours, toTwentyFourHours } from '@/utils/time';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 describe('toTwentyFourHours', () => {
   const AM = true;
@@ -59,5 +59,52 @@ describe('toTwelveHours', () => {
     expect(toTwelveHours(21)).to.eql(9);
     expect(toTwelveHours(22)).to.eql(10);
     expect(toTwelveHours(23)).to.eql(11);
+  });
+});
+
+describe('coerceHours', () => {
+  it('should provide the correct output', () => {
+    expect(coerceToTwelveHours(0)).to.eql({ hours: 12, isAm: true });
+    expect(coerceToTwelveHours(1)).to.eql(null);
+    expect(coerceToTwelveHours(2)).to.eql(null);
+    expect(coerceToTwelveHours(3)).to.eql(null);
+    expect(coerceToTwelveHours(4)).to.eql(null);
+    expect(coerceToTwelveHours(5)).to.eql(null);
+    expect(coerceToTwelveHours(6)).to.eql(null);
+    expect(coerceToTwelveHours(7)).to.eql(null);
+    expect(coerceToTwelveHours(8)).to.eql(null);
+    expect(coerceToTwelveHours(9)).to.eql(null);
+    expect(coerceToTwelveHours(10)).to.eql(null);
+    expect(coerceToTwelveHours(11)).to.eql(null);
+    expect(coerceToTwelveHours(12)).to.eql(null);
+    expect(coerceToTwelveHours(13)).to.eql({ hours: 1, isAm: false });
+    expect(coerceToTwelveHours(14)).to.eql({ hours: 2, isAm: false });
+    expect(coerceToTwelveHours(15)).to.eql({ hours: 3, isAm: false });
+    expect(coerceToTwelveHours(16)).to.eql({ hours: 4, isAm: false });
+    expect(coerceToTwelveHours(17)).to.eql({ hours: 5, isAm: false });
+    expect(coerceToTwelveHours(18)).to.eql({ hours: 6, isAm: false });
+    expect(coerceToTwelveHours(19)).to.eql({ hours: 7, isAm: false });
+    expect(coerceToTwelveHours(20)).to.eql({ hours: 8, isAm: false });
+    expect(coerceToTwelveHours(21)).to.eql({ hours: 9, isAm: false });
+    expect(coerceToTwelveHours(22)).to.eql({ hours: 10, isAm: false });
+    expect(coerceToTwelveHours(23)).to.eql({ hours: 11, isAm: false });
+  });
+});
+
+describe('rangeLimit', () => {
+  let consoleWarn: typeof console.warn;
+  beforeAll(() => {
+    consoleWarn = console.warn;
+    console.warn = () => undefined;
+  });
+  afterAll(() => {
+    console.warn = consoleWarn;
+  });
+
+  it('should limit ranges correctly', () => {
+    expect(rangeLimit(0, 1, 2)).to.eql(1);
+    expect(rangeLimit(1, 1, 2)).to.eql(1);
+    expect(rangeLimit(2, 1, 2)).to.eql(2);
+    expect(rangeLimit(3, 1, 2)).to.eql(2);
   });
 });

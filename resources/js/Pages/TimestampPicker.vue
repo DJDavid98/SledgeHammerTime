@@ -2,7 +2,7 @@
 import TimestampDisplay from '@/Components/home/TimestampDisplay.vue';
 import { timestamp } from '@/injection-keys';
 import Layout from '@/Layouts/DefaultLayout.vue';
-import { isoFormattingDateFormat, isoParsingDateFormat, isoTimeFormat } from '@/utils/timezone';
+import { isoFormattingDateFormat, isoParsingDateFormat, isoTimeFormat } from '@/utils/time';
 import { Head, router, usePage } from '@inertiajs/vue3';
 import moment from 'moment';
 import { computed, provide, ref, watch } from 'vue';
