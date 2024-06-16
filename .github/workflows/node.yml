@@ -9,12 +9,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - uses: php-actions/composer@v6
+
+      - name: Cache vendor folder
+        id: cache-vendor
+        uses: actions/cache@v2
+        with:
+          path: ./vendor
+          key: vendor-${{ hashFiles('./composer.lock') }}
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '20'
 
-      - name: Cache node_modules
+      - name: Cache node_modules folder
         id: cache-node-modules
         uses: actions/cache@v2
         with:
