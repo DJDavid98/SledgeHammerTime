@@ -7,6 +7,7 @@
   text-align: center;
   font-size: .9em;
   --button-size: 1.75em;
+  user-select: none;
 
   @include below('md') {
     --button-size: 2.5em;
@@ -27,7 +28,8 @@
   }
 
   .calendar-context {
-    font-size: calc(var(--button-size) * 0.75);
+    font-size: calc(var(--button-size) * 0.65);
+    line-height: var(--button-size);
   }
 }
 
