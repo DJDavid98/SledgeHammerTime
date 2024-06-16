@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { theme } from '@/injection-keys';
-import { DialMode } from '@/utils/dial';
+import {
+  DialColors,
+  DialEnvironment,
+  DialMode,
+  DialRingSettings,
+  DialSettings,
+  drawIndividualDial,
+} from '@/utils/dial';
 import { getPositionAngleInElement, integerInRangeByAngle, Point2D } from '@/utils/math';
-import { computed, inject, onMounted, onUnmounted, Ref, ref, watchEffect } from 'vue';
+import { computed, inject, onMounted, onUnmounted, ref, watchEffect } from 'vue';
 
-const wrapper = ref<HTMLDivElement>();
 const hoursCanvas = ref<HTMLCanvasElement>();
 const minutesCanvas = ref<HTMLCanvasElement>();
 const secondsCanvas = ref<HTMLCanvasElement>();
@@ -17,11 +23,12 @@ const props = defineProps<{
   hours: number,
   minutes: number,
   seconds: number,
+  isAm: boolean,
   twelveHourMode: boolean,
 }>();
 
 const emit = defineEmits<{
-  (e: 'setHours', hours: number): void
+  (e: 'setHours', hours: number, isAm: boolean | undefined): void
   (e: 'setMinutes', hours: number): void
   (e: 'setSeconds', hours: number): void
   (e: 'changeFocus', mode: DialMode): void
@@ -30,146 +37,35 @@ const emit = defineEmits<{
 
 const themeData = inject(theme);
 
-const colors = computed(() => ({
-  numbers: themeData?.isLightTheme.value ? 'black' : 'white',
+const colors = computed((): DialColors => ({
+  numbers: themeData?.isLightTheme.value ? '#333' : '#ccc',
   secondsHand: themeData?.isLightTheme.value ? '#a00' : '#f00',
 }));
 
-interface DialRingSettings {
-  minValue?: number;
-  maxValue: number;
-  labelCount: number;
-  labelOffsetPercent?: number;
-  fontSize?: number;
-  handCircleRadius: number;
-  handMinValueOffset?: number;
-  /**
-   * Indicates how far away the mouse must be from the origin to activate this ring
-   */
-  activationDistance?: number;
-  /**
-   * Offset the drawn image by this many degrees from the origin
-   */
-  rotationOffset?: number;
-}
-
-interface DialSettings {
-  mode: DialMode;
-  canvasRef: Ref<HTMLCanvasElement | undefined>,
-  rings: DialRingSettings[];
-  currentValueGetter: () => number;
-  handStrokeStyle: string;
-  handLineWidth: number;
-}
-
-const drawSingleDial = (settings: DialSettings, debugResolutionMultiplier = 0) => {
-  const ctx = settings.canvasRef.value?.getContext('2d');
-  if (!ctx) return;
-
-  const fontFamily = window.getComputedStyle(document.body).fontFamily;
-
-  const { width, height } = ctx.canvas;
-  ctx.clearRect(0, 0, width, height);
-  ctx.fillStyle = '';
-  ctx.strokeStyle = '';
-  const canvasRect = new DOMRect(
-    0,
-    0,
-    width,
-    height,
-  );
-  if (debugResolutionMultiplier > 0) {
-    const widthIncrements = width / (width / debugResolutionMultiplier);
-    const heightIncrements = height / (height / debugResolutionMultiplier);
-    // Draw debug graphic showing the distance from the origin as opacity and value as color
-    for (let x = 0; x < width; x += widthIncrements) {
-      for (let y = 0; y < height; y += heightIncrements) {
-        const { angle, distancePercent } = getPositionAngleInElement(canvasRect, { x, y });
-        const hue = angle.toFixed(2);
-        ctx.fillStyle = `hsl(${hue}, 50%, 50%, ${(1 - distancePercent).toFixed(2)})`;
-        ctx.fillRect(x, y, debugResolutionMultiplier, debugResolutionMultiplier);
-      }
-    }
-  }
-
-  const origin = new DOMPoint(width / 2, height / 2);
-  const transformOrigin = new DOMPoint(0, 0);
-  const isCurrentMode = settings.mode === mode.value;
-  const currentValue = settings.currentValueGetter();
-  settings.rings.forEach(ring => {
-    const rotationOffset = ring.rotationOffset ?? 0;
-    const { labelOffsetPercent = .85, fontSize = 30, minValue = 0, maxValue, labelCount, handCircleRadius } = ring;
-    const degreesPerLabel = 360 / labelCount;
-    const labelCenterOffset = (height * labelOffsetPercent) / 2;
-    const labelPoints = Array.from({ length: labelCount }, (_, i) =>
-      new DOMMatrix()
-        .translate(origin.x, origin.y)
-        .rotate((i + rotationOffset) * degreesPerLabel)
-        .translate(0, -labelCenterOffset)
-        .transformPoint(transformOrigin),
-    );
-    labelPoints.forEach((point, i) => {
-      const ringProgressPercent = (i / labelCount);
-      const value = Math.round((minValue + ((maxValue - minValue) * ringProgressPercent)) * 100) / 100;
-      const text = value.toString();
-      ctx.font = `${fontSize}px ${fontFamily}`;
-      ctx.fillStyle = colors.value.numbers;
-      const textMetrics = ctx.measureText(text);
-      const textPosition = new DOMMatrix()
-        .translate(-textMetrics.width * .5, (fontSize / 2) * .8)
-        .transformPoint(point);
-      ctx.fillText(text, textPosition.x, textPosition.y);
-    });
-
-    // Draw hand when current mode
-    if (isCurrentMode && currentValue >= minValue && currentValue < maxValue) {
-      const degreesPerValue = 360 / (maxValue - minValue);
-      ctx.beginPath();
-      ctx.strokeStyle = settings.handStrokeStyle;
-      ctx.lineWidth = settings.handLineWidth;
-
-      // Draw hand circle
-      const handCircleMatrix = new DOMMatrix()
-        .translate(origin.x, origin.y)
-        .rotate(currentValue * degreesPerValue)
-        .translate(0, -labelCenterOffset);
-      const handCirclePosition = handCircleMatrix.transformPoint(transformOrigin);
-      const handCircleDiameter = handCircleRadius * 2;
-      ctx.arc(handCirclePosition.x, handCirclePosition.y, handCircleDiameter, 0, Math.PI * 2, true);
-
-      // Draw hand
-      ctx.moveTo(origin.x, origin.y);
-      const handPosition = DOMMatrix.fromMatrix(handCircleMatrix)
-        .translate(0, handCircleDiameter)
-        .transformPoint(transformOrigin);
-      ctx.lineTo(handPosition.x, handPosition.y);
-      ctx.stroke();
-      ctx.strokeStyle = '';
-      ctx.lineWidth = 0;
-    }
-  });
-};
-
 const dialSetup = computed(() => {
+  const hourRingMinValue = props.twelveHourMode ? 1 : 0;
+  const hourRingMaxValue = props.twelveHourMode ? 13 : 12;
+  const hourRingRotationOffset = props.twelveHourMode ? 1 : 0;
+  const hourRingHandCircleRadius = 12;
   const hourRings: DialRingSettings[] = [{
     labelCount: 12,
     fontSize: 25,
-    minValue: props.twelveHourMode ? 1 : 0,
-    maxValue: props.twelveHourMode ? 13 : 12,
-    handCircleRadius: 12,
-    rotationOffset: props.twelveHourMode ? 1 : 0,
+    minValue: hourRingMinValue,
+    maxValue: hourRingMaxValue,
+    handCircleRadius: hourRingHandCircleRadius,
+    rotationOffset: hourRingRotationOffset,
+    isAm: props.twelveHourMode ? true : undefined,
+  }, {
+    labelCount: 12,
+    fontSize: 25,
+    minValue: props.twelveHourMode ? hourRingMinValue : 12,
+    maxValue: props.twelveHourMode ? hourRingMaxValue : 24,
+    handCircleRadius: hourRingHandCircleRadius,
+    rotationOffset: hourRingRotationOffset,
+    isAm: props.twelveHourMode ? false : undefined,
+    labelOffsetPercent: props.twelveHourMode ? .5 : .67,
+    activationDistance: .5,
   }];
-  if (!props.twelveHourMode) {
-    hourRings.push({
-      minValue: 12,
-      labelCount: 12,
-      labelOffsetPercent: .67,
-      fontSize: 25,
-      maxValue: 24,
-      handCircleRadius: 12,
-      activationDistance: .5,
-    });
-  }
   const settings: Record<DialMode, Omit<DialSettings, 'mode'>> = {
     [DialMode.Hours]: {
       canvasRef: hoursCanvas,
@@ -194,7 +90,7 @@ const dialSetup = computed(() => {
       rings: [{
         labelCount: 12,
         maxValue: 60,
-        handCircleRadius: 10,
+        handCircleRadius: 12,
       }],
       currentValueGetter: () => props.seconds,
       handStrokeStyle: colors.value.secondsHand,
@@ -217,8 +113,18 @@ const dialSetup = computed(() => {
 });
 
 const draw = () => {
+  const dialEnv: DialEnvironment = {
+    mode,
+    colors,
+    isAm: props.isAm,
+    twelveHourMode: props.twelveHourMode,
+    minutes: props.minutes,
+  };
   dialSetup.value.keys.forEach(key => {
-    drawSingleDial({ mode: key, ...dialSetup.value.settings[key] });
+    drawIndividualDial(dialEnv, {
+      mode: key,
+      ...dialSetup.value.settings[key],
+    });
   });
 };
 
@@ -241,12 +147,12 @@ const handlePointerPositionChange = (pointerPoint: Point2D) => {
     }
   }
 
-  const { minValue = 0, maxValue, rotationOffset = 0 } = activeRing;
+  const { minValue = 0, maxValue, rotationOffset = 0, isAm } = activeRing;
   const value = integerInRangeByAngle(minValue, maxValue, angle, rotationOffset);
 
   switch (mode.value) {
     case DialMode.Hours:
-      emit('setHours', value);
+      emit('setHours', value, isAm);
       break;
     case DialMode.Minutes:
       emit('setMinutes', value);
@@ -361,7 +267,6 @@ onUnmounted(() => {
 
 <template>
   <div
-    ref="wrapper"
     class="time-dial mt-3"
     :data-mode="mode"
   >

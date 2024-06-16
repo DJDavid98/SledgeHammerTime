@@ -7,6 +7,7 @@ import { AvailableLanguage } from '@/utils/language-settings';
 import { pad } from '@/utils/pad';
 import {
   coerceToTwelveHours,
+  getMeridiemLabel,
   limitHours,
   limitMinutesSeconds,
   limitToTwelveHours,
@@ -74,8 +75,11 @@ const hoursFocused = () => dial.value?.setMode(DialMode.Hours);
 const minutesFocused = () => dial.value?.setMode(DialMode.Minutes);
 const secondsFocused = () => dial.value?.setMode(DialMode.Seconds);
 
-const setHours = (value: number) => {
+const setHours = (value: number, isAmValue?: boolean) => {
   hours.value = value;
+  if (isAmValue !== undefined) {
+    isAm.value = isAmValue;
+  }
 };
 const setMinutes = (value: number) => {
   minutes.value = value;
@@ -183,10 +187,10 @@ onUpdated(() => {
         @keydown="handleAmPmSelectKeydown"
       >
         <option :value="true">
-          {{ moment.localeData().meridiem(10, minutes, false) }}
+          {{ getMeridiemLabel(true, minutes) }}
         </option>
         <option :value="false">
-          {{ moment.localeData().meridiem(22, minutes, false) }}
+          {{ getMeridiemLabel(false, minutes) }}
         </option>
       </select>
     </fieldset>
@@ -210,6 +214,7 @@ onUpdated(() => {
       :hours="twelveHourMode ? limitToTwelveHours(hours) : limitHours(hours)"
       :minutes="limitMinutesSeconds(minutes)"
       :seconds="limitMinutesSeconds(seconds)"
+      :is-am="isAm"
       :twelve-hour-mode="twelveHourMode"
       @set-hours="setHours"
       @set-minutes="setMinutes"

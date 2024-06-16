@@ -140,3 +140,5 @@ export const limitMonth = (value: number): number => {
 export const limitDate = (value: number): number => {
   return rangeLimit(value, 1, 31);
 };
+
+export const getMeridiemLabel = (isAm: boolean, minutes = 0) => moment.localeData().meridiem(isAm ? 10 : 22, minutes, false);
