@@ -63,10 +63,6 @@ nav {
     }
   }
 
-  .language-button .language-flag {
-    transform: translateY(0.1em);
-  }
-
   @include below('md') {
     .language-button {
       .language-flag {
