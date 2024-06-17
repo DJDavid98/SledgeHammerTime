@@ -1,6 +1,10 @@
 <?php
 
+/**
+ * Mapping of language names to app locales
+ */
 return [
+  'en-US' => 'en',
   'en-GB' => 'en-GB',
   'hu' => 'hu',
   'ms' => 'ms',
@@ -34,6 +38,4 @@ return [
   'tr' => 'tr',
   'uk' => 'uk',
   'vi' => 'vi',
-  // Default must be on the bottom
-  'en' => 'en',
 ];

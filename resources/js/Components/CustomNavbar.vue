@@ -20,7 +20,7 @@ const appName = getAppName();
 
 const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
   ...nativeLocaleNames,
-  'en': 'English, US',
+  'en-US': 'English, US',
   'en-GB': 'English, UK',
   'zh': nativeLocaleNames['zh_CN'],
   'zh-TW': nativeLocaleNames['zh_TW'],
