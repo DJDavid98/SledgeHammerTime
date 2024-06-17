@@ -27,16 +27,16 @@ class Language {
       $app_locale_key = $default_lang;
       $accepts_list = AcceptLanguage::get();
       foreach ($accepts_list as $accepts){
-        $languageKey = $accepts['language'].($accepts['region'] ? "-{$accepts['region']}" : '');
-        if (!array_key_exists($languageKey, $languages)){
+        $language_key = $accepts['language'].($accepts['region'] ? "-{$accepts['region']}" : '');
+        if (!array_key_exists($language_key, $languages)){
           continue;
         }
 
-        $app_locale_key = $languageKey;
-        $default_lang = $languages[$languageKey];
+        $app_locale_key = $language_key;
+        $default_lang = $languages[$language_key];
         break;
       }
-      App::setLocale($languages[$default_lang]);
+      App::setLocale($default_lang);
     }
     if ($first_route_segment !== $app_locale_key && $request->method() === 'GET'){
       $query = $request->query->all();
