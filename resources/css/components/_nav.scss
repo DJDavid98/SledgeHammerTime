@@ -79,11 +79,11 @@ nav {
         display: none;
       }
     }
+  }
 
-    details.dropdown > ul {
-      left: unset !important;
-      right: 0 !important;
-    }
+  details.dropdown > ul {
+    left: unset !important;
+    right: 0 !important;
   }
 
   .language-button, .language-link {
