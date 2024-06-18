@@ -1,6 +1,7 @@
 <?php
 
 return [
+  'seoDescription' => 'Generálj időpont jelölőket a Discord üzeneteidhez',
   'nav' => [
     'botSettings' => 'Bot Beállítások',
     'profile' => 'Profil',

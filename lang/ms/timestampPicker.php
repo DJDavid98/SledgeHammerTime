@@ -1,6 +1,7 @@
 <?php
 
 return [
+  'howTo' => 'Pilih tarikh, salin cap masa yang diingini dari lajur :syntaxColName, kemudian tampal di mana-mana sahaja dalam mesej sembang. Hasilnya ialah cap masa dinamik yang dipaparkan secara berlainan untuk semua orang berdasarkan zon waktu masing-masing.',
   'picker' => [
     'label' => [
       'date' => 'Tarikh',

@@ -1,6 +1,7 @@
 <?php
 
 return [
+  'howTo' => 'Izaberite datum, kopirajte željenu vremensku oznaku iz kolone {{syntaxColName}}, a zatim je nalepite bilo gde u poruci. Rezultat će biti dinamička vremenska oznaka koja se prikazuje različito za svakoga na osnovu njihove vremenske zone.',
   'picker' => [
     'label' => [
       'date' => 'Datum',

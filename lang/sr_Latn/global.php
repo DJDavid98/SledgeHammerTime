@@ -1,6 +1,7 @@
 <?php
 
 return [
+  'seoDescription' => 'Generišite vremenske oznake za poruke na Discord aplikaciji',
   'nav' => [
     'botSettings' => 'Bot Settings',
     'profile' => 'Profile',

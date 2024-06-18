@@ -1,6 +1,7 @@
 <?php
 
 return [
+  'seoDescription' => 'Jana penunjuk cap masa untuk mesej sembang Discord',
   'nav' => [
     'botSettings' => 'Bot Settings',
     'profile' => 'Profile',

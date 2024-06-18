@@ -1,6 +1,7 @@
 <?php
 
 return [
+  'howTo' => 'Válassz egy dátumot, másold ki a kívánt jelölőt a :syntaxColName oszlopból, majd másold be bárhova egy üzenetbe. Az eredmény egy dinamikus időbélyeg lesz, ami mindenkinek máshogy fog megjelenni a saját időzónájuktól függően.',
   'picker' => [
     'label' => [
       'date' => 'Dátum',
