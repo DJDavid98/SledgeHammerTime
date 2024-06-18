@@ -10,7 +10,9 @@ import '../css/app.scss';
 import './bootstrap';
 
 const appName = getAppName();
-const getLangJsonPath = (lang: string) => `../../lang/php_${lang.replace(/^php_/, '')}.json`;
+const langJsonImporters = import.meta.glob('../../lang/php_*.json');
+const langJsonPaths = Object.keys(langJsonImporters);
+const findLangJsonPath = (lang: string) => langJsonPaths.find(path => path.endsWith(`lang/php_${lang}.json`));
 
 createInertiaApp({
   title: (title) => title ? `${title} - ${appName}` : appName,
@@ -24,9 +26,11 @@ createInertiaApp({
           fallbackLang: 'en',
           fallbackMissingTranslations: true,
           resolve: async (lang: string) => {
-            const langJsons = import.meta.glob('../../lang/*.json');
-            const jsonPathForLocale = getLangJsonPath(lang);
-            return await langJsons[jsonPathForLocale]();
+            const jsonPathForLocale = findLangJsonPath(lang);
+            if (!jsonPathForLocale) {
+              throw new Error(`Could not find lang json path for lang ${lang}`);
+            }
+            return await langJsonImporters[jsonPathForLocale]();
           },
         })
         .mount(el);
