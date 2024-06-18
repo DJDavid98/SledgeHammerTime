@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import nativeLocaleNames from '@/../../vendor/laravel-lang/native-locale-names/locales/_native/json.json';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import CustomFlag from '@/Components/CustomFlag.vue';
 import { LanguageConfig } from '@/model/language-config';
 import { getAppName } from '@/utils/app';
 import { AvailableLanguage, LANGUAGES } from '@/utils/language-settings';
 import { Link, router, usePage } from '@inertiajs/vue3';
 import { computed, onMounted, ref } from 'vue';
-import CountryFlag from 'vue-country-flag-next';
-
 
 const searchParams = ref<URLSearchParams>(new URLSearchParams(window.location.search));
 
@@ -15,12 +14,13 @@ const page = usePage();
 
 const locale = computed(() => page.props.app.locale as AvailableLanguage);
 const languages = computed(() => page.props.app.languages);
+const supportedLanguages = computed(() => new Set(page.props.app.supportedLanguages));
 const languageConfig = computed(() => LANGUAGES[locale.value]);
 const appName = getAppName();
 
 const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
   ...nativeLocaleNames,
-  'en-US': 'English, US',
+  'en': 'English, US',
   'en-GB': 'English, UK',
   'zh': nativeLocaleNames['zh_CN'],
   'zh-TW': nativeLocaleNames['zh_TW'],
@@ -61,7 +61,10 @@ onMounted(router.on('success', navigateListener));
             :dir="languageConfig.rtl ? 'rtl' : 'ltr'"
           >
             <span class="language-flag">
-              <CountryFlag :country="LANGUAGES[locale]?.countryCode.toLowerCase()" />
+              <CustomFlag
+                :country="LANGUAGES[locale]?.countryCode"
+                :custom-flag="LANGUAGES[locale]?.customFlag"
+              />
             </span>
             <span class="language-name">{{ extendedNativeLocaleNames[locale] }}</span>
           </summary>
@@ -70,20 +73,23 @@ onMounted(router.on('success', navigateListener));
             class="language-dropdown"
             dir="ltr"
           >
-            <template v-for="[supportedLocale, config] in sortedLanguages">
+            <template v-for="[sortedLocale, config] in sortedLanguages">
               <li
-                v-if="supportedLocale !== locale"
-                :key="supportedLocale"
+                v-if="sortedLocale !== locale"
+                :key="sortedLocale"
               >
                 <a
-                  :href="route('home', { locale: supportedLocale })+(searchParams.size > 0 ? `?${searchParams}` : '')"
-                  class="language-link"
+                  :href="route('home', { locale: sortedLocale })+(searchParams.size > 0 ? `?${searchParams}` : '')"
+                  :class="['language-link', { disabled: !supportedLanguages.has(sortedLocale) }]"
                   :dir="config.rtl ? 'rtl' : 'ltr'"
                 >
                   <span class="language-flag">
-                    <CountryFlag :country="config.countryCode.toLowerCase()" />
+                    <CustomFlag
+                      :country="config.countryCode"
+                      :custom-flag="config.customFlag"
+                    />
                   </span>
-                  <span class="language-name">{{ extendedNativeLocaleNames[supportedLocale] }}</span>
+                  <span class="language-name">{{ extendedNativeLocaleNames[sortedLocale] }}</span>
                 </a>
               </li>
             </template>

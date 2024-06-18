@@ -96,6 +96,10 @@ nav {
     }
   }
 
+  .language-link.disabled {
+    opacity: 0.5;
+  }
+
   .user-dropdown {
     @include below('sm') {
       .user-name {

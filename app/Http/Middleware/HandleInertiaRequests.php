@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
@@ -28,14 +29,13 @@ class HandleInertiaRequests extends Middleware {
    * @return array<string, mixed>
    */
   public function share(Request $request):array {
-    $languagesConfig = config('languages');
-
     return [
       ...parent::share($request),
       'app' => [
         'name' => config('app.name'),
-        'locale' => array_flip($languagesConfig)[App::getLocale()],
-        'languages' => $languagesConfig,
+        'locale' => App::getLocale(),
+        'languages' => array_flip(Config::get('languages.ui_locale_map')),
+        'supportedLanguages' => Config::get('languages.supported_locales'),
       ],
       'auth' => [
         'user' => $request->user(),
