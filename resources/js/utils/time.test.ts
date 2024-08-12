@@ -1,5 +1,23 @@
-import { coerceToTwelveHours, rangeLimit, toTwelveHours, toTwentyFourHours } from '@/utils/time';
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import {
+  coerceToTwelveHours,
+  getDefaultInitialDate,
+  getDefaultInitialTimezone,
+  rangeLimit,
+  toTwelveHours,
+  toTwentyFourHours,
+} from '@/utils/time';
+import moment, { MomentZone } from 'moment-timezone';
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  SpyInstance,
+  vi,
+} from 'vitest';
 
 describe('toTwentyFourHours', () => {
   const AM = true;
@@ -106,5 +124,70 @@ describe('rangeLimit', () => {
     expect(rangeLimit(1, 1, 2)).to.eql(1);
     expect(rangeLimit(2, 1, 2)).to.eql(2);
     expect(rangeLimit(3, 1, 2)).to.eql(2);
+  });
+});
+
+describe('getDefaultInitialDate', () => {
+  it('should return a date with the seconds set to 0', () => {
+    const result = getDefaultInitialDate();
+    expect(result).toBeInstanceOf(Date);
+    expect(result.getSeconds()).toBe(0);
+  });
+});
+
+describe('getDefaultInitialTimezone', () => {
+  const mockGuessedTimezone = 'Mock/Guess';
+  let momentTzGuessSpy: SpyInstance;
+  let momentTzZoneSpy: SpyInstance;
+
+  beforeEach(() => {
+    momentTzGuessSpy = vi.spyOn(moment.tz, 'guess').mockReturnValue(mockGuessedTimezone);
+    momentTzZoneSpy = vi.spyOn(moment.tz, 'zone');
+  });
+  afterEach(() => {
+    momentTzGuessSpy.mockRestore();
+    momentTzZoneSpy.mockRestore();
+  });
+
+  it('should return the native timezone when there is a matching moment timezone', () => {
+    const mockTimezone = 'Mock/Constant';
+    const systemApiSpy = vi.spyOn(Intl, 'DateTimeFormat').mockReturnValue({
+      resolvedOptions: () => ({
+        timeZone: mockTimezone,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      }) as any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
+    try {
+      const mockZone = {} as MomentZone;
+      momentTzZoneSpy.mockReturnValue(mockZone);
+      const result = getDefaultInitialTimezone();
+      expect(result).toEqual(mockTimezone);
+    } finally {
+      systemApiSpy.mockRestore();
+    }
+  });
+
+  it('should return the guessed timezone when there is no matching moment timezone', () => {
+    momentTzZoneSpy.mockReturnValue(null);
+    const result = getDefaultInitialTimezone();
+    expect(result).toEqual(mockGuessedTimezone);
+  });
+
+  it('should return the guessed timezone when there is an error', () => {
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockReturnValue(undefined);
+    const mockError = new Error('mock error');
+    const systemApiSpy = vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => {
+      throw mockError;
+    });
+    try {
+      const result = getDefaultInitialTimezone();
+      expect(result).toEqual(mockGuessedTimezone);
+      expect(consoleErrorSpy).toHaveBeenCalledOnce();
+      expect(consoleErrorSpy).toHaveBeenCalledWith(mockError);
+    } finally {
+      consoleErrorSpy.mockRestore();
+      systemApiSpy.mockRestore();
+    }
   });
 });

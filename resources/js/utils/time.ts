@@ -142,3 +142,22 @@ export const limitDate = (value: number): number => {
 };
 
 export const getMeridiemLabel = (isAm: boolean, minutes = 0) => moment.localeData().meridiem(isAm ? 10 : 22, minutes, false);
+
+export const getDefaultInitialDate = (): Date => {
+  const value = new Date();
+  value.setSeconds(0);
+  return value;
+};
+
+export const getDefaultInitialTimezone = (): string => {
+  try {
+    const intlTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // Check if we have the zone data loaded in moment.js
+    if (moment.tz.zone(intlTimezone) !== null) {
+      return intlTimezone;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+  return moment.tz.guess();
+};

@@ -2,7 +2,13 @@
 import TimestampDisplay from '@/Components/home/TimestampDisplay.vue';
 import { timestamp } from '@/injection-keys';
 import Layout from '@/Layouts/DefaultLayout.vue';
-import { isoFormattingDateFormat, isoParsingDateFormat, isoTimeFormat } from '@/utils/time';
+import {
+  getDefaultInitialDate,
+  getDefaultInitialTimezone,
+  isoFormattingDateFormat,
+  isoParsingDateFormat,
+  isoTimeFormat,
+} from '@/utils/time';
 import { Head, router, usePage } from '@inertiajs/vue3';
 import moment from 'moment';
 import { computed, provide, ref, watch } from 'vue';
@@ -11,25 +17,6 @@ const props = defineProps<{
   defaultTs?: number,
   defaultTimezone?: string,
 }>();
-
-const getDefaultInitialDate = () => {
-  const value = new Date();
-  value.setSeconds(0);
-  return value;
-};
-
-const getDefaultInitialTimezone = (): string => {
-  try {
-    const intlTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    // Check if we have the zone data loaded in moment.js
-    if (moment.tz.zone(intlTimezone) !== null) {
-      return intlTimezone;
-    }
-  } catch (e) {
-    console.error(e);
-  }
-  return moment.tz.guess();
-};
 
 const currentTimezone = ref(props.defaultTimezone || getDefaultInitialTimezone());
 const initialDate = moment.tz(props.defaultTs ? new Date(props.defaultTs * 1e3) : getDefaultInitialDate(), currentTimezone.value);
