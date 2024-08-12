@@ -18,7 +18,20 @@ const getDefaultInitialDate = () => {
   return value;
 };
 
-const currentTimezone = ref(props.defaultTimezone || moment.tz.guess());
+const getDefaultInitialTimezone = (): string => {
+  try {
+    const intlTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // Check if we have the zone data loaded in moment.js
+    if (moment.tz.zone(intlTimezone) !== null) {
+      return intlTimezone;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+  return moment.tz.guess();
+};
+
+const currentTimezone = ref(props.defaultTimezone || getDefaultInitialTimezone());
 const initialDate = moment.tz(props.defaultTs ? new Date(props.defaultTs * 1e3) : getDefaultInitialDate(), currentTimezone.value);
 const dateString = ref(initialDate.format(isoFormattingDateFormat));
 const timeString = ref(initialDate.format(isoTimeFormat));
