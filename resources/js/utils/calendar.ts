@@ -1,6 +1,5 @@
 import { WeekendDays } from '@/model/language-config';
-import moment from 'moment';
-import { Moment } from 'moment-timezone';
+import moment, { Moment } from 'moment-timezone';
 
 export interface GenerateCalendarOptions {
   year: number;

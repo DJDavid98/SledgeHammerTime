@@ -57,6 +57,7 @@ defineExpose({
     :class="['popup', {visible: show}]"
     @mousedown="handleMousedown"
     @mouseup="handleMouseup"
+    @close="close"
   >
     <slot />
   </dialog>

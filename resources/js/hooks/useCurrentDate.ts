@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { computed, onUnmounted, ref } from 'vue';
 
 export function useCurrentDate() {

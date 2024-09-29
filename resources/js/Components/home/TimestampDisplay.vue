@@ -6,7 +6,7 @@ import { AvailableLanguage } from '@/utils/language-settings';
 import { usePage } from '@inertiajs/vue3';
 import Cookies from 'js-cookie';
 import { wTrans } from 'laravel-vue-i18n';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { computed, onMounted, ref } from 'vue';
 
 const page = usePage();

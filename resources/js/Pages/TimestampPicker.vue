@@ -10,16 +10,24 @@ import {
   isoTimeFormat,
 } from '@/utils/time';
 import { Head, router, usePage } from '@inertiajs/vue3';
-import moment from 'moment';
-import { computed, provide, ref, watch } from 'vue';
+import moment from 'moment-timezone';
+import { computed, provide, Ref, ref, watch } from 'vue';
 
-const props = defineProps<{
-  defaultTs?: number,
-  defaultTimezone?: string,
-}>();
+const page = usePage();
 
-const currentTimezone = ref(props.defaultTimezone || getDefaultInitialTimezone());
-const initialDate = moment.tz(props.defaultTs ? new Date(props.defaultTs * 1e3) : getDefaultInitialDate(), currentTimezone.value);
+const props = computed(() => {
+  const url = new URL(page.url, window.location.href);
+  const tParam = url.searchParams.get('t');
+  const tParamNumber = typeof tParam === 'string' ? parseInt(tParam, 10) : undefined;
+  const tzParam = url.searchParams.get('tz');
+  return {
+    defaultTs: tParamNumber,
+    defaultTimezone: typeof tzParam === 'string' ? tzParam : undefined,
+  };
+});
+
+const currentTimezone: Ref<string> = ref(props.value.defaultTimezone || getDefaultInitialTimezone());
+const initialDate = getDefaultInitialDate(props.value.defaultTs, currentTimezone.value);
 const dateString = ref(initialDate.format(isoFormattingDateFormat));
 const timeString = ref(initialDate.format(isoTimeFormat));
 
@@ -39,7 +47,6 @@ const setCurrentTime = () => {
   changeDateString(now.format(isoFormattingDateFormat));
   changeTimeString(now.format(isoTimeFormat));
 };
-const page = usePage();
 const locale = computed(() => page.props.app.locale);
 
 provide(timestamp, {

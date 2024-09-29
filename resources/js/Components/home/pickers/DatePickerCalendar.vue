@@ -13,7 +13,7 @@ import {
 import { useMomentLocale } from '@/utils/moment';
 import { usePage } from '@inertiajs/vue3';
 import classNames from 'classnames';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { computed, ref } from 'vue';
 
 const props = defineProps<{

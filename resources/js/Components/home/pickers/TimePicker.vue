@@ -15,15 +15,13 @@ import {
   toTwentyFourHours,
 } from '@/utils/time';
 import { usePage } from '@inertiajs/vue3';
-import moment from 'moment';
-import { Moment } from 'moment-timezone';
-import { computed, onUpdated, ref } from 'vue';
+import moment, { Moment } from 'moment-timezone';
+import { computed, ref } from 'vue';
 
 const hours = ref(0);
 const minutes = ref(0);
 const seconds = ref(0);
 const isAm = ref(false);
-const focusFirstInput = ref(false);
 const hoursInput = ref<HTMLInputElement>();
 const minutesInput = ref<HTMLInputElement>();
 const secondsInput = ref<HTMLInputElement>();
@@ -68,7 +66,6 @@ const open = (initialValue: Moment) => {
   minutes.value = initialValue.minutes();
   seconds.value = initialValue.seconds();
   isAm.value = initialHours < 12;
-  focusFirstInput.value = true;
 };
 
 const hoursFocused = () => dial.value?.setMode(DialMode.Hours);
@@ -87,16 +84,25 @@ const setMinutes = (value: number) => {
 const setSeconds = (value: number) => {
   seconds.value = value;
 };
-const changeFocus = (mode: DialMode) => {
+const changeFocus = (mode: DialMode, setSelection: boolean = false) => {
   switch (mode) {
     case DialMode.Hours:
       hoursInput.value?.focus();
+      if (setSelection) {
+        hoursInput.value?.select();
+      }
       break;
     case DialMode.Minutes:
       minutesInput.value?.focus();
+      if (setSelection) {
+        minutesInput.value?.select();
+      }
       break;
     case DialMode.Seconds:
       secondsInput.value?.focus();
+      if (setSelection) {
+        secondsInput.value?.select();
+      }
       break;
   }
 };
@@ -127,22 +133,29 @@ const handleAmPmSelectKeydown = (e: KeyboardEvent) => {
     case 'p':
       isAm.value = false;
       break;
+    case 'arrowup':
+    case 'arrowdown':
+      isAm.value = !isAm.value;
+      break;
   }
+};
+
+const handleInputKeydown = (e: KeyboardEvent) => {
+  if (e.key !== 'Enter') {
+    return;
+  }
+  e.preventDefault();
+  select();
 };
 
 export interface TimePickerPopupApi {
   open: typeof open;
+  changeFocus: typeof changeFocus,
 }
 
 defineExpose<TimePickerPopupApi>({
   open,
-});
-
-onUpdated(() => {
-  if (focusFirstInput.value) {
-    changeFocus(DialMode.Hours);
-    focusFirstInput.value = false;
-  }
+  changeFocus,
 });
 </script>
 
@@ -160,8 +173,9 @@ onUpdated(() => {
         type="number"
         min="0"
         max="23"
-        @focus="hoursFocused"
-        @blur="handleHoursBlur"
+        @focus.passive="hoursFocused"
+        @blur.passive="handleHoursBlur"
+        @keydown="handleInputKeydown"
       >
       <input
         ref="minutesInput"
@@ -169,8 +183,9 @@ onUpdated(() => {
         type="number"
         min="0"
         max="59"
-        @focus="minutesFocused"
-        @blur="handleMinutesBlur"
+        @focus.passive="minutesFocused"
+        @blur.passive="handleMinutesBlur"
+        @keydown="handleInputKeydown"
       >
       <input
         ref="secondsInput"
@@ -178,8 +193,9 @@ onUpdated(() => {
         type="number"
         min="0"
         max="59"
-        @focus="secondsFocused"
-        @blur="handleSecondsBlur"
+        @focus.passive="secondsFocused"
+        @blur.passive="handleSecondsBlur"
+        @keydown="handleInputKeydown"
       >
       <select
         v-if="twelveHourMode"

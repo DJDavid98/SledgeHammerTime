@@ -1,5 +1,5 @@
 import { momentLocaleMap } from '@/moment';
-import moment from 'moment/moment';
+import moment from 'moment-timezone';
 
 export const useMomentLocale = async (locale: string): Promise<void> => {
   if (locale in momentLocaleMap) {

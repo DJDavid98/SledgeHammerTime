@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import TimePickerPopup, { TimePickerPopupApi } from '@/Components/home/pickers/TimePicker.vue';
 import { timestamp } from '@/injection-keys';
+import { DialMode } from '@/utils/dial';
+import moment from 'moment-timezone';
 import { computed, inject, ref } from 'vue';
 
 defineProps<{
@@ -16,7 +18,13 @@ const timepicker = ref<TimePickerPopupApi | null>(null);
 const openPopup = () => {
   showPopup.value = true;
   if (ts) {
-    timepicker.value?.open(ts.currentTimestamp.value);
+    const currentTsWithTimezone = moment.tz(ts.currentTimestamp.value, ts.currentTimezone.value);
+    // TODO Figure out why `ts.currentTimestamp` does not have a timezone to begin with???
+    console.debug('ts.currentTimestamp.value.tz()', ts.currentTimestamp.value.tz());
+    timepicker.value?.open(currentTsWithTimezone);
+    window.requestAnimationFrame(() => {
+      timepicker.value?.changeFocus(DialMode.Hours, true);
+    });
   }
 };
 

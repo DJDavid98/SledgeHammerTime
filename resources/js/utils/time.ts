@@ -1,5 +1,4 @@
-import { Moment } from 'moment';
-import moment from 'moment-timezone';
+import moment, { Moment } from 'moment-timezone';
 
 export const isoTimeFormat = 'HH:mm:ss';
 export const isoFormattingDateFormat = 'YYYY-MM-DD';
@@ -143,9 +142,14 @@ export const limitDate = (value: number): number => {
 
 export const getMeridiemLabel = (isAm: boolean, minutes = 0) => moment.localeData().meridiem(isAm ? 10 : 22, minutes, false);
 
-export const getDefaultInitialDate = (): Date => {
-  const value = new Date();
-  value.setSeconds(0);
+export const getDefaultInitialDate = (defaultTs: number | undefined, timezone: string): Moment => {
+  const hasDefaultTs = typeof defaultTs === 'number';
+  const value = hasDefaultTs
+    ? moment.tz(new Date(defaultTs * 1e3), 'UTC').tz(timezone)
+    : moment.tz(timezone);
+  if (!hasDefaultTs) {
+    value.seconds(0);
+  }
   return value;
 };
 
