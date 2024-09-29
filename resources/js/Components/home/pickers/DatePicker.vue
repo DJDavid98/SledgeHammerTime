@@ -11,6 +11,9 @@ const year = ref(0);
 const month = ref(0);
 const date = ref(0);
 const calendar = ref<DatePickerCalendarApi>();
+const yearInput = ref<HTMLInputElement>();
+const monthInput = ref<HTMLInputElement>();
+const dateInput = ref<HTMLInputElement>();
 
 defineProps<{
   show: boolean;
@@ -52,12 +55,45 @@ watch([year, month, date], () => {
   calendar.value?.setSelection(year.value, month.value, date.value);
 });
 
+const handleInputKeydown = (e: KeyboardEvent) => {
+  if (e.key !== 'Enter') {
+    return;
+  }
+  e.preventDefault();
+  selectAndClose();
+};
+
+const changeFocus = (input: 'year' | 'month' | 'date', setSelection: boolean = false) => {
+  switch (input) {
+    case 'year':
+      yearInput.value?.focus();
+      if (setSelection) {
+        yearInput.value?.select();
+      }
+      break;
+    case 'month':
+      monthInput.value?.focus();
+      if (setSelection) {
+        monthInput.value?.select();
+      }
+      break;
+    case 'date':
+      dateInput.value?.focus();
+      if (setSelection) {
+        dateInput.value?.select();
+      }
+      break;
+  }
+};
+
 export interface DatePickerPopupApi {
   open: typeof open;
+  changeFocus: typeof changeFocus;
 }
 
 defineExpose<DatePickerPopupApi>({
   open,
+  changeFocus,
 });
 </script>
 
@@ -69,25 +105,31 @@ defineExpose<DatePickerPopupApi>({
   >
     <fieldset role="group">
       <input
+        ref="yearInput"
         v-model="year"
         type="number"
         class="grid-flex-item flex-basis-40"
+        @keydown="handleInputKeydown"
       >
       <input
+        ref="monthInput"
         v-model="month"
         type="number"
         class="grid-flex-item flex-basis-30"
         min="1"
         max="12"
         @blur="handleMonthBlur"
+        @keydown="handleInputKeydown"
       >
       <input
+        ref="dateInput"
         v-model="date"
         type="number"
         class="grid-flex-item flex-basis-30"
         min="1"
         max="31"
         @blur="handleDateBlur"
+        @keydown="handleInputKeydown"
       >
     </fieldset>
     <div class="grid">

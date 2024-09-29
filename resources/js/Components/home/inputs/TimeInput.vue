@@ -13,7 +13,7 @@ const ts = inject(timestamp);
 
 const selectedDate = computed(() => ts?.currentTimestamp.value.format('LTS'));
 const showPopup = ref(false);
-const timepicker = ref<TimePickerPopupApi | null>(null);
+const timepicker = ref<TimePickerPopupApi>();
 
 const openPopup = () => {
   showPopup.value = true;

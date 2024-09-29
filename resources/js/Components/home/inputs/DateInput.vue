@@ -11,12 +11,15 @@ const ts = inject(timestamp);
 
 const selectedDate = computed(() => ts?.currentTimestamp.value.format('LL'));
 const showPopup = ref(false);
-const datepicker = ref<DatePickerPopupApi | null>(null);
+const datepicker = ref<DatePickerPopupApi>();
 
 const openPopup = () => {
   showPopup.value = true;
   if (ts) {
     datepicker.value?.open(ts.currentTimestamp.value);
+    window.requestAnimationFrame(() => {
+      datepicker.value?.changeFocus('year', true);
+    });
   }
 };
 
