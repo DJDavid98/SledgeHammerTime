@@ -5,35 +5,69 @@ $z-index-map: (
 );
 
 $size-map: (
-  header-height: '3.25rem',
-  header-spacing-horizontal: '.625rem',
-  header-spacing-vertical: '.625rem',
-  header-border: '0.0625rem',
-  header-brand-font-size: '1.25rem',
-  default-border-radius: '.5rem',
-  button-skew: '2deg',
+  header-height: 3.25rem,
+  header-spacing-horizontal: .625rem,
+  header-spacing-vertical: .625rem,
+  header-border: 0.0625rem,
+  header-brand-font-size: 1.25rem,
+  content-spacing: 1rem,
+  button-skew: 2deg,
+  button-padding-horizontal: .3rem,
+  button-padding-vertical: .15rem,
+  card-padding: 1rem,
+  card-border-radius: .5rem,
+  alert-spacing: 1rem,
+  alert-border-radius: .5rem,
 );
 
 $color-map: (
   layout-bg: (
-    light: '#fff',
-    dark: '#000'
+    light: #fff,
+    dark: #000
   ),
   layout-color: (
-    light: '#212121',
-    dark: '#C1C2C5',
+    light: #212121,
+    dark: #C1C2C5,
   ),
   header-bg: (
-    light: '#eee',
-    dark: '#1A1B1E'
+    light: #eee,
+    dark: #1A1B1E
   ),
   header-border: (
-    light: '#ddd',
-    dark: '#2C2E33'
+    light: #ddd,
+    dark: #2C2E33
   ),
   header-brand: (
-    light: '#111',
-    dark: '#909296'
+    light: #111,
+    dark: #909296
+  ),
+  card-bg: (
+    light: #eee,
+    dark: #1A1B1E
+  ),
+  card-color: (
+    light: #212121,
+    dark: #C1C2C5,
+  ),
+  alert-bg: (
+    light: rgba(230, 229, 227, .5),
+    dark: rgba(20, 21, 23, 0.2),
+  ),
+  alert-color: (
+    light: rgb(62, 61, 58),
+    dark: rgb(193, 194, 197),
+  ),
+  alert-warning-bg: (
+    // light: #FF00FF,
+    dark: rgba(232, 89, 12, 0.2),
+  ),
+  alert-warning-color: (
+    // light: #FF00FF,
+    dark: rgb(255, 255, 255),
+  ),
+  alert-warning-hl-color: (
+    // light: #FF00FF,
+    dark: #ffd8a8,
   ),
 );
 

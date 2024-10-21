@@ -1,4 +1,9 @@
 .alert {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: app-size('alert-spacing');
+  padding: app-size('alert-spacing');
+  border-radius: app-size('alert-border-radius');
   background-color: app-color('alert-bg');
   color: app-color('alert-color');
 
@@ -7,36 +12,40 @@
     color: app-color('alert-color', true);
   }
 
-  header {
-    background-color: rgba(255, 255, 255, .5);
+  .alert-icon:empty {
+    display: none;
+  }
 
-    @include if-dark {
-      background-color: rgba(0, 0, 0, .5);
-    }
+  .alert-content {
+    flex-grow: 1;
+    flex-basis: 100%;
+    font-size: 0.875rem;
+  }
 
-    .icon {
-      @include if-ltr {
-        margin-right: 1em;
-      }
+  .alert-title {
+    font-weight: bold;
+    margin-bottom: app-size('alert-spacing');
 
-      @include if-rtl {
-        margin-left: 1em;
-      }
-    }
-
-    .close-button {
-      float: right;
-      border: 0;
-      padding: 0;
-      min-width: .8em;
-      min-height: .8em;
-      font-size: 2em;
-      line-height: .5em;
+    &:empty {
+      display: none;
     }
   }
 
-  &.info {
-    background-color: app-color('alert-info-bg');
-    color: app-color('alert-info-color');
+  &.warning {
+    color: app-color('alert-warning-color');
+    background-color: app-color('alert-warning-bg');
+
+    .alert-title, .alert-icon {
+      color: app-color('alert-warning-hl-color');
+    }
+
+    @include if-dark {
+      color: app-color('alert-warning-color', true);
+      background-color: app-color('alert-warning-bg', true);
+
+      .alert-title, .alert-icon {
+        color: app-color('alert-warning-hl-color', true);
+      }
+    }
   }
 }

@@ -1,0 +1,11 @@
+.card {
+  border-radius: app-size('card-border-radius');
+  padding: app-size('card-padding');
+  background-color: app-color('card-bg');
+  color: app-color('card-color');
+
+  @include if-dark {
+    background-color: app-color('card-bg', true);
+    color: app-color('card-color', true);
+  }
+}

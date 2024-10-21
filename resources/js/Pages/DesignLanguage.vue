@@ -1,10 +1,18 @@
 <script setup lang="ts">
+import HtAlert from '@/Reusable/HtAlert.vue';
+import HtCard from '@/Reusable/HtCard.vue';
+import HtContent from '@/Reusable/HtContent.vue';
+import HtHeader from '@/Reusable/HtHeader.vue';
+import { Head } from '@inertiajs/vue3';
+import { loremIpsum } from 'lorem-ipsum';
 
-import XHeader from '@/Reusable/XHeader.vue';
+const placeholderText = loremIpsum();
 </script>
 
 <template>
-  <XHeader>
+  <Head :title="$t('design.title')" />
+
+  <HtHeader>
     <template #left>
       Left
     </template>
@@ -14,7 +22,49 @@ import XHeader from '@/Reusable/XHeader.vue';
     <template #right>
       Right
     </template>
-  </XHeader>
+  </HtHeader>
+
+  <HtContent>
+    <HtAlert type="info">
+      <template #title>
+        Info Alert
+      </template>
+      <template #text>
+        {{ placeholderText }}
+      </template>
+    </HtAlert>
+    <HtAlert type="success">
+      <template #title>
+        Success Alert
+      </template>
+      <template #text>
+        {{ placeholderText }}
+      </template>
+    </HtAlert>
+    <HtAlert type="warning">
+      <template #title>
+        Warning Alert
+      </template>
+      <template #text>
+        {{ placeholderText }}
+      </template>
+    </HtAlert>
+    <HtAlert type="error">
+      <template #title>
+        Error Alert
+      </template>
+      <template #text>
+        {{ placeholderText }}
+      </template>
+    </HtAlert>
+
+    <HtCard>
+      First card content
+    </HtCard>
+    <HtCard>
+      Second card content
+    </HtCard>
+  </HtContent>
 </template>
 
 <style scoped>

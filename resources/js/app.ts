@@ -1,8 +1,5 @@
 import { getAppName } from '@/utils/app';
 import { useMomentLocale } from '@/utils/moment';
-import { library as iconLibrary } from '@fortawesome/fontawesome-svg-core';
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { i18nVue } from 'laravel-vue-i18n';
@@ -17,10 +14,6 @@ const appName = getAppName();
 const langJsonImporters = import.meta.glob('../../lang/php_*.json');
 const langJsonPaths = Object.keys(langJsonImporters);
 const findLangJsonPath = (lang: string) => langJsonPaths.find(path => path.endsWith(`lang/php_${lang}.json`));
-
-iconLibrary.add([
-  faUserSecret,
-]);
 
 createInertiaApp({
   title: (title) => title ? `${title} - ${appName}` : appName,
@@ -41,7 +34,6 @@ createInertiaApp({
             return await langJsonImporters[jsonPathForLocale]();
           },
         })
-        .component('x-fa', FontAwesomeIcon)
         .mount(el);
     });
   },

@@ -10,7 +10,7 @@
 
 @function app-size($key) {
   @if (map-has-key($size-map, $key)) {
-    @return string.unquote(map-get($size-map, $key));
+    @return map-get($size-map, $key);
   }
 
   @return 0;
@@ -23,7 +23,10 @@
     @if ($dark) {
       $color: 'dark';
     }
-    @return string.unquote(map-get(map-get($color-map, $key), $color));
+    $color-data: map-get($color-map, $key);
+    @if (map-has-key($color-data, $color)) {
+      @return map-get($color-data, $color);
+    }
   }
 
   @return #FF00FF;
