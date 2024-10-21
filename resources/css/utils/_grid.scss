@@ -1,12 +1,16 @@
 .grid-flex {
   display: flex;
   justify-content: space-between;
-  gap: var(--pico-grid-column-gap);
+  gap: app-size('grid-column-gap');
 
   .grid-flex-item {
     flex-grow: 1;
     flex-shrink: 1;
   }
+}
+
+.flex-basis-auto {
+  flex-basis: 40% !important;
 }
 
 .flex-basis-40 {

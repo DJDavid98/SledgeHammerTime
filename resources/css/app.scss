@@ -1,30 +1,3 @@
-@import 'variables';
-@import "~@picocss/pico/scss/pico";
-@import "~@picocss/pico/scss/colors";
-
-$primary-300: $indigo-300;
-$primary-200: $indigo-200;
-$primary-800: $indigo-800;
-
-$bg-gradient-start: rgb(88 94 242 / var(--bg-gradient-opacity));
-$bg-gradient-mid: rgb(88 101 242 / var(--bg-gradient-opacity));
-$bg-gradient-end: rgb(165 94 165 / var(--bg-gradient-opacity));
-$gradient-stops: $bg-gradient-start 0%, $bg-gradient-mid 50%, $bg-gradient-end 100%;
-$bg-gradient-angle: 15deg;
-
-
-@import 'mixins/_screen';
-@import 'global';
-@import 'components/alert';
-@import 'components/nav';
-@import 'components/popup';
-@import 'components/calendar';
-@import 'components/time-dial';
-@import 'components/forms';
-@import 'utils/alignment';
-@import 'utils/borders';
-@import 'utils/cursor';
-@import 'utils/grid';
-@import 'utils/margins';
-@import 'utils/paddings';
-@import 'utils/sizing';
+@import 'design/index';
+@import 'utils/index';
+@import 'components/index';

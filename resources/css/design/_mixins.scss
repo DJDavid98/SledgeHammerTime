@@ -1,0 +1,36 @@
+@mixin if-dark {
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) & {
+      @content;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    @content;
+  }
+}
+
+@mixin if-rtl {
+  :root[dir='rtl'] & {
+    @content;
+  }
+}
+
+@mixin if-ltr {
+  :root[dir='ltr'] & {
+    @content;
+  }
+}
+
+@mixin screen-below($breakpoint) {
+  @media (max-width: #{map-get($breakpoints, $breakpoint) - 1px}) {
+    @content;
+  }
+}
+
+@mixin screen-above($breakpoint) {
+  @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+    @content;
+  }
+}
+

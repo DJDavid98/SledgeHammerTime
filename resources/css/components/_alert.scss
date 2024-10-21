@@ -1,22 +1,25 @@
-@use '../mixins/if';
-
 .alert {
-  background-color: var(--pico-primary-background);
-  color: var(--pico-primary-inverse);
+  background-color: app-color('alert-bg');
+  color: app-color('alert-color');
+
+  @include if-dark {
+    background-color: app-color('alert-bg', true);
+    color: app-color('alert-color', true);
+  }
 
   header {
     background-color: rgba(255, 255, 255, .5);
 
-    @include if.dark {
+    @include if-dark {
       background-color: rgba(0, 0, 0, .5);
     }
 
     .icon {
-      @include if.ltr {
+      @include if-ltr {
         margin-right: 1em;
       }
 
-      @include if.rtl {
+      @include if-rtl {
         margin-left: 1em;
       }
     }
@@ -33,11 +36,7 @@
   }
 
   &.info {
-    $info-bg: $blue-500;
-    $info-bg-hover: $blue-450;
-    $info-bg-inverse: $blue-200;
-    --pico-primary-background: #{$info-bg};
-    --pico-primary-inverse: #{$info-bg-inverse};
-    --pico-primary-hover-background: #{$info-bg-hover};
+    background-color: app-color('alert-info-bg');
+    color: app-color('alert-info-color');
   }
 }

@@ -1,0 +1,8 @@
+.button {
+  padding: app-size('button-padding-horizontal') app-size('button-padding-vertical');
+  transform: skewX(app-size('button-skew'));
+
+  .button-content {
+    transform: skewX(-#{app-size('button-skew')});
+  }
+}

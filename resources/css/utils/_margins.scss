@@ -1,5 +1,3 @@
-@use '../mixins/if';
-
 @each $key, $size in $spacing {
   .m-#{$key} {
     margin: $size;
@@ -19,18 +17,18 @@
     margin-right: $size;
   }
   .ms-#{$key} {
-    @include if.ltr {
+    @include if-ltr {
       margin-left: $size;
     }
-    @include if.rtl {
+    @include if-rtl {
       margin-right: $size;
     }
   }
   .me-#{$key} {
-    @include if.ltr {
+    @include if-ltr {
       margin-right: $size;
     }
-    @include if.rtl {
+    @include if-rtl {
       margin-left: $size;
     }
   }

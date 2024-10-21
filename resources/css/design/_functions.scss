@@ -1,0 +1,30 @@
+@use "sass:string";
+
+@function app-z-index($key) {
+  @if (map-has-key($z-index-map, $key)) {
+    @return map-get($z-index-map, $key);
+  }
+
+  @return 0;
+}
+
+@function app-size($key) {
+  @if (map-has-key($size-map, $key)) {
+    @return string.unquote(map-get($size-map, $key));
+  }
+
+  @return 0;
+}
+
+
+@function app-color($key, $dark: false) {
+  @if (map-has-key($color-map, $key)) {
+    $color: 'light';
+    @if ($dark) {
+      $color: 'dark';
+    }
+    @return string.unquote(map-get(map-get($color-map, $key), $color));
+  }
+
+  @return #FF00FF;
+}

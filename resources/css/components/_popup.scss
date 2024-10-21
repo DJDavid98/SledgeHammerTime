@@ -1,6 +1,4 @@
-@use "../mixins/if";
-
-@include below('md') {
+@include screen-below('md') {
   body:has(.popup) {
     overflow: hidden;
   }
@@ -9,17 +7,17 @@
 .popup {
   position: absolute;
   max-width: 400px;
-  border-radius: var(--pico-border-radius);
-  box-shadow: var(--pico-card-box-shadow);
-  padding: var(--pico-block-spacing-horizontal);
-  background-color: rgba($white, .9);
+  border-radius: app-size('border-radius');
+  box-shadow: app-color('card-box-shadow');
+  padding: app-size('block-spacing-horizontal');
+  background-color: app-color('popup-bg');
   z-index: 3;
 
-  @include if.dark {
-    background-color: rgba($black, .8);
+  @include if-dark {
+    background-color: app-color('popup-bg', true);
   }
 
-  @include above('md') {
+  @include screen-above('md') {
     top: unset !important;
     left: unset !important;
     right: unset !important;
@@ -28,7 +26,7 @@
     height: unset !important;
     min-width: unset !important;
     min-height: unset !important;
-    transform: translateY(calc(var(--pico-spacing) * -1));
+    transform: translateY(calc(#{app-size('default-spacing')} * -1));
     overflow: hidden;
   }
 

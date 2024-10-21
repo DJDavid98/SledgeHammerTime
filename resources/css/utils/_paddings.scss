@@ -1,5 +1,3 @@
-@use '../mixins/if';
-
 @each $key, $size in $spacing {
   .p-#{$key} {
     padding: $size;
@@ -19,18 +17,18 @@
     padding-right: $size;
   }
   .ps-#{$key} {
-    @include if.ltr {
+    @include if-ltr {
       padding-left: $size;
     }
-    @include if.rtl {
+    @include if-rtl {
       padding-right: $size;
     }
   }
   .pe-#{$key} {
-    @include if.ltr {
+    @include if-ltr {
       padding-right: $size;
     }
-    @include if.rtl {
+    @include if-rtl {
       padding-left: $size;
     }
   }

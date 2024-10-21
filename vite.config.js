@@ -20,6 +20,7 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '~@picocss': resolve(__dirname, 'node_modules/@picocss'),
+        '~the-new-css-reset': resolve(__dirname, 'node_modules/the-new-css-reset'),
         '@': resolve(__dirname, 'resources/js'),
       },
     },

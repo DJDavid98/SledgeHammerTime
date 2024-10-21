@@ -1,0 +1,40 @@
+:root {
+  --bg-gradient-opacity: .5;
+  --font-family-base: 'Montserrat', sans-serif;
+  --font-family-mono: 'Source Code Pro', 'Consolas', monospace;
+  --bg-gradient-start-color: rgb(88 94 242 / var(--bg-gradient-opacity));
+  --bg-gradient-mid-color: rgb(88 101 242 / var(--bg-gradient-opacity));
+  --bg-gradient-end-color: rgb(165 94 165 / var(--bg-gradient-opacity));
+  --bg-gradient-start-position: 0%;
+  --bg-gradient-mid-position: 50%;
+  --bg-gradient-end-position: 100%;
+  --bg-gradient-angle-default: 15deg;
+}
+
+body {
+  --bg-gradient-angle: var(--bg-gradient-angle-default);
+  min-height: 100vh;
+  font-family: var(--font-family-base);
+  background-image: linear-gradient(calc(180deg - var(--bg-gradient-angle)), var(--bg-gradient-start-color) var(--bg-gradient-start-position), var(--bg-gradient-mid-color) var(--bg-gradient-mid-position), var(--bg-gradient-end-color) var(--bg-gradient-end-position));
+  background-color: app-color('layout-bg');
+  background-repeat: no-repeat;
+  color: app-color('layout-color');
+
+  @include if-dark {
+    background-color: app-color('layout-bg', true);
+    color: app-color('layout-color', true);
+  }
+
+  @include if-rtl {
+    --bg-gradient-angle: calc(-1 * var(--bg-gradient-angle-default));
+  }
+}
+
+code {
+  font-family: var(--font-family-mono);
+}
+
+.responsive-table {
+  max-width: 100%;
+  overflow-y: auto;
+}
