@@ -16,8 +16,10 @@ const emit = defineEmits<{
     class="button"
     @click="emit('click', $event)"
   >
-    <span class="button-text">
-      <slot />
+    <span class="button-content">
+      <span class="button-text">
+        <slot />
+      </span>
     </span>
   </button>
 </template>

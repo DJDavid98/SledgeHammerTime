@@ -1,3 +1,6 @@
+@use "common";
+@use "sass:map";
+
 @mixin if-dark {
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) & {
@@ -22,14 +25,50 @@
   }
 }
 
+@mixin padding-start($size) {
+  @include if-ltr {
+    padding-left: $size;
+  }
+  @include if-rtl {
+    padding-right: $size;
+  }
+}
+
+@mixin padding-end($size) {
+  @include if-ltr {
+    padding-right: $size;
+  }
+  @include if-rtl {
+    padding-left: $size;
+  }
+}
+
+@mixin margin-start($size) {
+  @include if-ltr {
+    margin-left: $size;
+  }
+  @include if-rtl {
+    margin-right: $size;
+  }
+}
+
+@mixin margin-end($size) {
+  @include if-ltr {
+    margin-right: $size;
+  }
+  @include if-rtl {
+    margin-left: $size;
+  }
+}
+
 @mixin screen-below($breakpoint) {
-  @media (max-width: #{map-get($breakpoints, $breakpoint) - 1px}) {
+  @media (max-width: #{map.get(common.$breakpoints, $breakpoint) - 1px}) {
     @content;
   }
 }
 
 @mixin screen-above($breakpoint) {
-  @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+  @media (min-width: #{map.get(common.$breakpoints, $breakpoint)}) {
     @content;
   }
 }

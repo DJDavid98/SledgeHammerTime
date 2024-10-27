@@ -6,7 +6,6 @@ import { i18nVue } from 'laravel-vue-i18n';
 
 import { createApp, DefineComponent, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
-import '../css/design/_index.scss';
 import '../css/app.scss';
 import './bootstrap';
 

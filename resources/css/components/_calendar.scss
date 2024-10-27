@@ -1,3 +1,5 @@
+@use "../design";
+
 .calendar-controls, .calendar {
   --gap: .25em;
   --column-count: 7;
@@ -6,7 +8,7 @@
   --button-size: 1.75em;
   user-select: none;
 
-  @include screen-below('md') {
+  @include design.screen-below('md') {
     --button-size: 2.5em;
   }
 }
@@ -49,7 +51,7 @@
   .red {
     color: #c00;
 
-    @include if-dark {
+    @include design.if-dark {
       color: #faa;
     }
   }
@@ -57,7 +59,7 @@
   .blue {
     color: #0af;
 
-    @include if-dark {
+    @include design.if-dark {
       color: #adf;
     }
   }
@@ -88,10 +90,10 @@
 
     &.selected {
       font-weight: bold;
-      background-color: app-color('calendar-day-selected-bg');
+      background-color: design.app-color('calendar-day-selected-bg');
 
-      @include if-dark {
-        background-color: app-color('calendar-day-selected-bg', true);
+      @include design.if-dark {
+        background-color: design.app-color('calendar-day-selected-bg', true);
       }
     }
   }
@@ -103,7 +105,7 @@
   display: block;
   width: 100%;
 
-  @include screen-above('md') {
+  @include design.screen-above('md') {
     font-size: .75em;
     padding: .1em .2em;
   }

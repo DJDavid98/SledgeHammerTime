@@ -1,8 +1,33 @@
+@use "../design";
+
 .button {
-  padding: app-size('button-padding-horizontal') app-size('button-padding-vertical');
-  transform: skewX(app-size('button-skew'));
+  color: design.app-color-light('button-default-color');
+  background-color: design.app-color-light('button-default-bg');
+  padding: design.app-size('button-padding-vertical') design.app-size('button-padding-horizontal');
+  border-radius: design.app-size('button-border-radius');
+  font-size: design.app-size('button-font-size');
+  box-shadow: 0 design.app-size('button-border-size') 0 design.app-color-light('button-default-border-color');
+  will-change: transform;
+  transition-property: transform, box-shadow;
+  transition-duration: .2s;
+  user-select: none;
+
+  @include design.if-dark {
+    color: design.app-color-dark('button-default-color');
+    background-color: design.app-color-dark('button-default-bg');
+    box-shadow: 0 design.app-size('button-border-size') 0 design.app-color-dark('button-default-border-color');
+  }
+
+  &:active {
+    transform: translateY(design.app-size('button-border-size'));
+    box-shadow: 0 0 0 design.app-color-light('button-default-border-color');
+
+    @include design.if-dark {
+      box-shadow: 0 0 0 design.app-color-dark('button-default-border-color');
+    }
+  }
 
   .button-content {
-    transform: skewX(-#{app-size('button-skew')});
+    display: flex;
   }
 }

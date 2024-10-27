@@ -1,3 +1,2 @@
-@import 'design/index';
-@import 'utils/index';
-@import 'components/index';
+@use 'utils/index' as utils;
+@use 'components/index' as components;

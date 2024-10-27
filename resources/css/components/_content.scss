@@ -1,15 +1,17 @@
+@use "../design";
+
 .content-wrap {
-  margin: app-size('header-height') auto 0;
+  margin: design.app-size('header-height') auto 0;
   width: 100%;
   max-width: 1080px;
-  padding: app-size('content-spacing');
+  padding: design.app-size('content-spacing');
 
   .content {
     display: block;
     width: 100%;
 
     > :not(:last-child) {
-      margin-bottom: app-size('content-spacing');
+      margin-bottom: design.app-size('content-spacing');
     }
   }
 }

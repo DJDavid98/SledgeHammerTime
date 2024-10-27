@@ -1,3 +1,6 @@
+@use "functions";
+@use "mixins";
+
 :root {
   --bg-gradient-opacity: .5;
   --font-family-base: 'Montserrat', sans-serif;
@@ -16,16 +19,16 @@ body {
   min-height: 100vh;
   font-family: var(--font-family-base);
   background-image: linear-gradient(calc(180deg - var(--bg-gradient-angle)), var(--bg-gradient-start-color) var(--bg-gradient-start-position), var(--bg-gradient-mid-color) var(--bg-gradient-mid-position), var(--bg-gradient-end-color) var(--bg-gradient-end-position));
-  background-color: app-color('layout-bg');
+  background-color: functions.app-color('layout-bg');
   background-repeat: no-repeat;
-  color: app-color('layout-color');
+  color: functions.app-color('layout-color');
 
-  @include if-dark {
-    background-color: app-color('layout-bg', true);
-    color: app-color('layout-color', true);
+  @include mixins.if-dark {
+    background-color: functions.app-color('layout-bg', true);
+    color: functions.app-color('layout-color', true);
   }
 
-  @include if-rtl {
+  @include mixins.if-rtl {
     --bg-gradient-angle: calc(-1 * var(--bg-gradient-angle-default));
   }
 }

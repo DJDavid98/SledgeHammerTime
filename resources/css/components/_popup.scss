@@ -1,4 +1,6 @@
-@include screen-below('md') {
+@use "../design";
+
+@include design.screen-below('md') {
   body:has(.popup) {
     overflow: hidden;
   }
@@ -7,17 +9,17 @@
 .popup {
   position: absolute;
   max-width: 400px;
-  border-radius: app-size('border-radius');
-  box-shadow: app-color('card-box-shadow');
-  padding: app-size('block-spacing-horizontal');
-  background-color: app-color('popup-bg');
+  border-radius: design.app-size('border-radius');
+  box-shadow: design.app-color('card-box-shadow');
+  padding: design.app-size('block-spacing-horizontal');
+  background-color: design.app-color('popup-bg');
   z-index: 3;
 
-  @include if-dark {
-    background-color: app-color('popup-bg', true);
+  @include design.if-dark {
+    background-color: design.app-color('popup-bg', true);
   }
 
-  @include screen-above('md') {
+  @include design.screen-above('md') {
     top: unset !important;
     left: unset !important;
     right: unset !important;
@@ -26,7 +28,7 @@
     height: unset !important;
     min-width: unset !important;
     min-height: unset !important;
-    transform: translateY(calc(#{app-size('default-spacing')} * -1));
+    transform: translateY(calc(#{design.app-size('default-spacing')} * -1));
     overflow: hidden;
   }
 

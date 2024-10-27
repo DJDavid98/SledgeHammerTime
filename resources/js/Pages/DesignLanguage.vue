@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import HtAlert from '@/Reusable/HtAlert.vue';
+import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
 import HtContent from '@/Reusable/HtContent.vue';
 import HtHeader from '@/Reusable/HtHeader.vue';
@@ -59,7 +61,15 @@ const placeholderText = loremIpsum();
     </HtAlert>
 
     <HtCard>
-      First card content
+      <p>Logo</p>
+
+      <ApplicationLogo :size="100" />
+
+      <p>Components</p>
+
+      <div>
+        <HtButton>Simple button</HtButton>
+      </div>
     </HtCard>
     <HtCard>
       Second card content

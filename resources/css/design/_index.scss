@@ -1,5 +1,5 @@
-@import '~the-new-css-reset/css/reset.css';
-@import 'functions';
-@import 'common';
-@import 'mixins';
-@import 'layout';
+@use '~the-new-css-reset/css/reset.css';
+@forward 'functions';
+@forward 'common';
+@forward 'mixins';
+@use 'layout';

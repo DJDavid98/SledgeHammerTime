@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $z-index-map: (
   header: 2,
   sidebar: 3,
@@ -11,9 +13,11 @@ $size-map: (
   header-border: 0.0625rem,
   header-brand-font-size: 1.25rem,
   content-spacing: 1rem,
-  button-skew: 2deg,
-  button-padding-horizontal: .3rem,
-  button-padding-vertical: .15rem,
+  button-padding-horizontal: .5rem,
+  button-padding-vertical: .25rem,
+  button-border-size: .125rem,
+  button-border-radius: .25rem,
+  button-font-size: .875rem,
   card-padding: 1rem,
   card-border-radius: .5rem,
   alert-spacing: 1rem,
@@ -69,6 +73,18 @@ $color-map: (
     // light: #FF00FF,
     dark: #ffd8a8,
   ),
+  button-default-color: (
+    // light: #FF00FF,
+    dark: #fff,
+  ),
+  button-default-bg: (
+    // light: #FF00FF,
+    dark: #5865f2,
+  ),
+  button-default-border-color: (
+    // light: #FF00FF,
+    dark: color.adjust(#5865f2, $lightness: -10%, $saturation: -10%),
+  ),
 );
 
 $breakpoints: (
@@ -79,14 +95,14 @@ $breakpoints: (
 );
 
 $spacing: (
-    (0, 0),
-    (1, .25em),
-    (2, .5em),
-    (3, 1em),
-    (4, 1.75em)
+  0: 0,
+  1: .25em,
+  2: .5em,
+  3: 1em,
+  4: 1.75em,
 );
 
-$sizing: 10, 15, 20;
+$sizing: 10, 15, 20, 100;
 
 :root {
   --base-size: 16px;

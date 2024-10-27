@@ -4,6 +4,7 @@
 
 <template>
   <div class="content-wrap">
+    <slot name="sidebar" />
     <main class="content">
       <slot />
     </main>
