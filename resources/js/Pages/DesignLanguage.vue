@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import { useSidebarState } from '@/hooks/useSidebarState';
+import { sidebarState } from '@/injection-keys';
 import HtAlert from '@/Reusable/HtAlert.vue';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
@@ -9,8 +11,13 @@ import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { Head } from '@inertiajs/vue3';
 import { loremIpsum } from 'lorem-ipsum';
+import { provide, readonly } from 'vue';
 
 const placeholderText = loremIpsum();
+
+const sbState = useSidebarState();
+
+provide(sidebarState, readonly(sbState));
 </script>
 
 <template>
@@ -95,6 +102,10 @@ const placeholderText = loremIpsum();
         <HtButton :disabled="true">
           <FontAwesomeIcon :icon="faClipboard" />
         </HtButton>
+        &nbsp;
+        <HtButton :loading="true">
+          <FontAwesomeIcon :icon="faClipboard" />
+        </HtButton>
       </div>
       <div>&nbsp;</div>
       <div>
@@ -126,10 +137,42 @@ const placeholderText = loremIpsum();
         >
           <FontAwesomeIcon :icon="faClipboard" />
         </HtButton>
+        &nbsp;
+        <HtButton
+          color="primary"
+          :loading="true"
+        >
+          <FontAwesomeIcon :icon="faClipboard" />
+        </HtButton>
       </div>
     </HtCard>
     <HtCard>
-      Second card content
+      Sidebar control
+
+      <dl>
+        <dt>isOpen</dt>
+        <dd>{{ sbState.isOpen }}</dd>
+        <dt>isOnLeft</dt>
+        <dd>{{ sbState.isOnLeft }}</dd>
+      </dl>
+
+      <div>
+        <HtButton @click="sbState.setIsOpen(true)">
+          Open
+        </HtButton>
+        &nbsp;
+        <HtButton @click="sbState.setIsOpen(false)">
+          Close
+        </HtButton>
+        &nbsp;
+        <HtButton @click="sbState.setIsOnLeft(true)">
+          Move Left
+        </HtButton>
+        &nbsp;
+        <HtButton @click="sbState.setIsOnLeft(false)">
+          Move Right
+        </HtButton>
+      </div>
     </HtCard>
   </HtContent>
 </template>
