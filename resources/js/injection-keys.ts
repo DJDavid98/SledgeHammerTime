@@ -13,3 +13,9 @@ export const timestamp = Symbol() as InjectionKey<{
 export const theme = Symbol() as InjectionKey<{
   isLightTheme: Ref<boolean>
 }>;
+
+export const sidebarState = Symbol() as InjectionKey<{
+  defaultIsOpen: Ref<boolean>,
+  isOpen: Ref<boolean | null>,
+  isOnLeft: Ref<boolean>,
+}>;

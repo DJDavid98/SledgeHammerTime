@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import HtButton from '@/Reusable/HtButton.vue';
+import { faClipboard } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { computed } from 'vue';
 
 const props = defineProps<{
@@ -17,11 +20,15 @@ const copy = () => {
 
 <template>
   <template v-if="unixTs !== undefined">
-    <code
-      :data-tooltip="$t('timestampPicker.table.clickToCopy')"
+    <HtButton
+      color="primary"
       class="cursor-pointer"
+      :title="$t('timestampPicker.table.clickToCopy')"
       @click="copy"
     >
+      <FontAwesomeIcon :icon="faClipboard" />
+    </HtButton>
+    <code>
       {{ data }}
     </code>
   </template>

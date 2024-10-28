@@ -3,7 +3,7 @@
 .alert {
   display: flex;
   flex-flow: row nowrap;
-  gap: design.app-color('alert-spacing');
+  gap: design.app-size('alert-spacing');
   padding: design.app-size('alert-spacing');
   border-radius: design.app-size('alert-border-radius');
   background-color: design.app-color('alert-bg');

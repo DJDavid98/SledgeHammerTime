@@ -27,6 +27,22 @@
     }
   }
 
+  &.color-primary {
+    @include design.if-dark {
+      color: design.app-color-dark('button-primary-color');
+      background-color: design.app-color-dark('button-primary-bg');
+      box-shadow: 0 design.app-size('button-border-size') 0 design.app-color-dark('button-primary-border-color');
+    }
+
+    &:active {
+      box-shadow: 0 0 0 design.app-color-light('button-primary-border-color');
+
+      @include design.if-dark {
+        box-shadow: 0 0 0 design.app-color-dark('button-primary-border-color');
+      }
+    }
+  }
+
   .button-content {
     display: flex;
   }

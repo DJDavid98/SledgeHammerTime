@@ -1,10 +1,10 @@
 <script setup lang="ts">
-
+import HtSidebar from '@/Reusable/HtSidebar.vue';
 </script>
 
 <template>
-  <div class="content-wrap">
-    <slot name="sidebar" />
+  <HtSidebar />
+  <div class="content-container">
     <main class="content">
       <slot />
     </main>

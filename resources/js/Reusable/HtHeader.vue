@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { getAppName } from '@/utils/app';
 import { Link } from '@inertiajs/vue3';

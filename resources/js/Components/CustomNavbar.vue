@@ -2,11 +2,15 @@
 import nativeLocaleNames from '@/../../vendor/laravel-lang/native-locale-names/locales/_native/json.json';
 import CustomFlag from '@/Components/CustomFlag.vue';
 import UserInfo from '@/Components/UserInfo.vue';
+import { sidebarState } from '@/injection-keys';
 import { LanguageConfig } from '@/model/language-config';
+import HtButton from '@/Reusable/HtButton.vue';
 import HtHeader from '@/Reusable/HtHeader.vue';
 import { AvailableLanguage, LANGUAGES } from '@/utils/language-settings';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { router, usePage } from '@inertiajs/vue3';
-import { computed, onMounted, ref } from 'vue';
+import { computed, inject, onMounted, ref } from 'vue';
 
 const searchParams = ref<URLSearchParams>(new URLSearchParams(window.location.search));
 
@@ -16,6 +20,7 @@ const locale = computed(() => page.props.app.locale as AvailableLanguage);
 const languages = computed(() => page.props.app.languages);
 const supportedLanguages = computed(() => new Set(page.props.app.supportedLanguages));
 const languageConfig = computed(() => LANGUAGES[locale.value]);
+const sbState = inject(sidebarState);
 
 const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
   ...nativeLocaleNames,
@@ -42,6 +47,11 @@ onMounted(router.on('success', navigateListener));
 <template>
   <HtHeader>
     <template #right>
+      <template v-if="sbState?.isOnLeft.value === false">
+        <HtButton @click="sbState.isOnLeft.value = true">
+          <FontAwesomeIcon :icon="faBars" />
+        </HtButton>
+      </template>
       <ul class="actions-wrapper">
         <li class="p-0">
           <details class="dropdown">
@@ -89,6 +99,13 @@ onMounted(router.on('success', navigateListener));
           <UserInfo />
         </li>
       </ul>
+    </template>
+    <template #left>
+      <template v-if="sbState?.isOnLeft.value === true">
+        <HtButton @click="sbState.isOnLeft.value = false">
+          <FontAwesomeIcon :icon="faBars" />
+        </HtButton>
+      </template>
     </template>
   </HtHeader>
 </template>

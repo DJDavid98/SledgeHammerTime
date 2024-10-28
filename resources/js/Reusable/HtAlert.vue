@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import HtButton from '@/Reusable/HtButton.vue';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faInfo, faTimes, faWarning } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -48,16 +49,13 @@ const emit = defineEmits<{
       </div>
     </div>
     <div class="alert-close">
-      <button
+      <HtButton
         v-if="closable"
-        class="close-button ms-1 mb-1"
+        class="close-button"
         @click.prevent="emit('close')"
       >
-        <FontAwesomeIcon
-          :icon="faTimes"
-          :fixed-width="true"
-        />
-      </button>
+        <FontAwesomeIcon :icon="faTimes" />
+      </HtButton>
     </div>
   </article>
 </template>

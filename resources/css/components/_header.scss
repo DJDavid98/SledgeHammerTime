@@ -2,8 +2,8 @@
 @use "sass:map";
 
 .header {
-  position: fixed;
-  z-index: app-z-index('header');
+  position: sticky;
+  z-index: design.app-z-index('header');
   height: design.app-size('header-height');
   top: 0;
   left: 0;

@@ -1,8 +1,8 @@
 @use "sass:color";
 
 $z-index-map: (
-  header: 2,
   sidebar: 3,
+  header: 2,
   default: 1,
 );
 
@@ -22,6 +22,10 @@ $size-map: (
   card-border-radius: .5rem,
   alert-spacing: 1rem,
   alert-border-radius: .5rem,
+  sidebar-spacing: .5rem,
+  sidebar-max-width: 25rem,
+  sidebar-border-size: .0625rem,
+  sidebar-divider-border-size: .0625rem,
 );
 
 $color-map: (
@@ -79,11 +83,35 @@ $color-map: (
   ),
   button-default-bg: (
     // light: #FF00FF,
-    dark: #5865f2,
+    dark: color.adjust(#5865f2, $lightness: -20%, $saturation: -100%),
   ),
   button-default-border-color: (
     // light: #FF00FF,
+    dark: color.adjust(#5865f2, $lightness: -30%, $saturation: -100%),
+  ),
+  button-primary-color: (
+    // light: #FF00FF,
+    dark: #fff,
+  ),
+  button-primary-bg: (
+    // light: #FF00FF,
+    dark: #5865f2,
+  ),
+  button-primary-border-color: (
+    // light: #FF00FF,
     dark: color.adjust(#5865f2, $lightness: -10%, $saturation: -10%),
+  ),
+  sidebar-bg: (
+    // light: #FF00FF,
+    dark: #1a1b1e,
+  ),
+  sidebar-border-color: (
+    // light: #FF00FF,
+    dark: #2c2e33,
+  ),
+  sidebar-divider-color: (
+    // light: #FF00FF,
+    dark: #373a40,
   ),
 );
 
