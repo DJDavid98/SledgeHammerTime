@@ -2,6 +2,7 @@
 import DateTimePicker from '@/Components/home/DateTimePicker.vue';
 import TimestampTable from '@/Components/home/table/TimestampTable.vue';
 import HtAlert from '@/Reusable/HtAlert.vue';
+import HtCard from '@/Reusable/HtCard.vue';
 import { AvailableLanguage } from '@/utils/language-settings';
 import { usePage } from '@inertiajs/vue3';
 import Cookies from 'js-cookie';
@@ -50,9 +51,9 @@ onMounted(() => {
     </template>
   </HtAlert>
 
-  <article class="my-0">
+  <HtCard>
     <DateTimePicker />
 
     <TimestampTable />
-  </article>
+  </HtCard>
 </template>

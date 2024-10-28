@@ -1,4 +1,5 @@
 @use "common";
+@use "functions";
 @use "sass:map";
 
 @mixin if-dark {
@@ -21,6 +22,12 @@
 
 @mixin if-ltr {
   :root[dir='ltr'] & {
+    @content;
+  }
+}
+
+@mixin if-prefers-reduced-motion {
+  @media (prefers-reduced-motion) {
     @content;
   }
 }
@@ -70,6 +77,20 @@
 @mixin screen-above($breakpoint) {
   @media (min-width: #{map.get(common.$breakpoints, $breakpoint)}) {
     @content;
+  }
+}
+
+@mixin button-color-variation($color) {
+  &.color-#{$color} {
+    color: functions.app-color-light('button-' + $color + '-color');
+    background-color: functions.app-color-light('button-' + $color + '-bg');
+    --button-border-color: #{functions.app-color-light('button-' + $color + '-border-color')};
+
+    @include if-dark {
+      color: functions.app-color-dark('button-' + $color + '-color');
+      background-color: functions.app-color-dark('button-' + $color + '-bg');
+      --button-border-color: #{functions.app-color-dark('button-' + $color + '-border-color')};
+    }
   }
 }
 

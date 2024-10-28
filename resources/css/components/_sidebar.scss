@@ -17,7 +17,11 @@
   justify-content: stretch;
   gap: design.app-size('sidebar-spacing');
   will-change: transform;
-  transition: transform .2s ease-out;
+  transition: transform .1s ease-in;
+
+  @include design.if-prefers-reduced-motion {
+    transition: none !important;
+  }
 
   @include design.if-dark {
     background-color: design.app-color-dark('sidebar-bg');

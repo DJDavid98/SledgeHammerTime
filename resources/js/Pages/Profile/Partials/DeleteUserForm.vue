@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Button from '@/Components/CustomButton.vue';
 import Modal from '@/Components/CustomModal.vue';
+import HtButton from '@/Reusable/HtButton.vue';
 import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
 
@@ -56,12 +56,9 @@ const closeModal = () => {
     </p>
 
     <template #footer>
-      <Button
-        variant="secondary"
-        @click="closeModal"
-      >
+      <HtButton @click="closeModal">
         {{ $t('global.form.cancel') }}
-      </Button>
+      </HtButton>
 
       <Button
         :disabled="form.processing"

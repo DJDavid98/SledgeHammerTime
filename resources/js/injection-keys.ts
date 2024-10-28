@@ -15,7 +15,8 @@ export const theme = Symbol() as InjectionKey<{
 }>;
 
 export const sidebarState = Symbol() as InjectionKey<{
-  defaultIsOpen: Ref<boolean>,
-  isOpen: Ref<boolean | null>,
+  isOpen: ComputedRef<boolean | null>,
   isOnLeft: Ref<boolean>,
+  setIsOpen: (value: boolean) => void;
+  setIsOnLeft: (value: boolean) => void;
 }>;

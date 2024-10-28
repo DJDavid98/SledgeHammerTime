@@ -15,7 +15,8 @@ $size-map: (
   content-spacing: 1rem,
   button-padding-horizontal: .5rem,
   button-padding-vertical: .25rem,
-  button-border-size: .125rem,
+  button-border-width: .0625rem,
+  button-shadow-size: .125rem,
   button-border-radius: .25rem,
   button-font-size: .875rem,
   card-padding: 1rem,
@@ -46,7 +47,7 @@ $color-map: (
     dark: #2C2E33
   ),
   header-brand: (
-    light: #111,
+    light: color.adjust(#5865f2, $lightness: -10%, $saturation: -10%),
     dark: #909296
   ),
   card-bg: (
@@ -66,51 +67,55 @@ $color-map: (
     dark: rgb(193, 194, 197),
   ),
   alert-warning-bg: (
-    // light: #FF00FF,
+    light: rgba(246, 178, 143, 0.2),
     dark: rgba(232, 89, 12, 0.2),
   ),
   alert-warning-color: (
-    // light: #FF00FF,
+    light: #000,
     dark: rgb(255, 255, 255),
   ),
   alert-warning-hl-color: (
-    // light: #FF00FF,
+    light: rgb(126, 58, 4),
     dark: #ffd8a8,
   ),
+  button-border-color: (
+    light: rgba(0, 0, 0, .2),
+    dark: rgba(255, 255, 255, .2),
+  ),
   button-default-color: (
-    // light: #FF00FF,
+    light: #000,
     dark: #fff,
   ),
   button-default-bg: (
-    // light: #FF00FF,
+    light: color.adjust(#5865f2, $lightness: 20%, $saturation: -100%),
     dark: color.adjust(#5865f2, $lightness: -20%, $saturation: -100%),
   ),
   button-default-border-color: (
-    // light: #FF00FF,
+    light: color.adjust(#5865f2, $lightness: 10%, $saturation: -100%),
     dark: color.adjust(#5865f2, $lightness: -30%, $saturation: -100%),
   ),
   button-primary-color: (
-    // light: #FF00FF,
+    light: #000,
     dark: #fff,
   ),
   button-primary-bg: (
-    // light: #FF00FF,
+    light: color.adjust(#5865f2, $lightness: 22%),
     dark: #5865f2,
   ),
   button-primary-border-color: (
-    // light: #FF00FF,
+    light: color.adjust(#5865f2, $lightness: 12%, $saturation: -10%),
     dark: color.adjust(#5865f2, $lightness: -10%, $saturation: -10%),
   ),
   sidebar-bg: (
-    // light: #FF00FF,
+    light: #eee,
     dark: #1a1b1e,
   ),
   sidebar-border-color: (
-    // light: #FF00FF,
+    light: #ddd,
     dark: #2c2e33,
   ),
   sidebar-divider-color: (
-    // light: #FF00FF,
+    light: #ccc,
     dark: #373a40,
   ),
 );

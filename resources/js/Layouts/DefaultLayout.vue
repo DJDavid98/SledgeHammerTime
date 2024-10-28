@@ -6,14 +6,14 @@ import { sidebarState, theme } from '@/injection-keys';
 import HtContent from '@/Reusable/HtContent.vue';
 import { useMomentLocale } from '@/utils/moment';
 import { usePage } from '@inertiajs/vue3';
-import { provide } from 'vue';
+import { provide, readonly } from 'vue';
 
 useMomentLocale(usePage().props.app.locale);
 
 const isLightTheme = useIsLightTheme();
-provide(theme, { isLightTheme });
+provide(theme, readonly({ isLightTheme }));
 
-provide(sidebarState, useSidebarState());
+provide(sidebarState, readonly(useSidebarState()));
 </script>
 
 <template>

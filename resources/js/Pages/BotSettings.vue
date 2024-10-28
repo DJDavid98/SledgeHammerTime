@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Button from '@/Components/CustomButton.vue';
 import DiscordUserInfo, { DiscordUserInfoProps } from '@/Components/DiscordUserInfo.vue';
 import FormMessage from '@/Components/FormMessage.vue';
 import TimeZoneInput from '@/Components/TimeZoneInput.vue';
 import Layout from '@/Layouts/DefaultLayout.vue';
 import { UserSettings } from '@/model/user-settings';
+import HtButton from '@/Reusable/HtButton.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps<{
@@ -143,13 +143,12 @@ const forms = props.userSettings.map(userSetting => useForm({
         </div>
 
         <div>
-          <Button
-            :disabled="forms[i].processing"
-            :aria-busy="forms[i].processing ? 'true' : undefined"
+          <HtButton
+            :loading="forms[i].processing"
             type="submit"
           >
             {{ $t('global.form.save') }}
-          </Button>
+          </HtButton>
 
           <FormMessage
             type="success"

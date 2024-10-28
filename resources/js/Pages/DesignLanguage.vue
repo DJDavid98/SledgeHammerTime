@@ -5,6 +5,8 @@ import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
 import HtContent from '@/Reusable/HtContent.vue';
 import HtHeader from '@/Reusable/HtHeader.vue';
+import { faClipboard } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { Head } from '@inertiajs/vue3';
 import { loremIpsum } from 'lorem-ipsum';
 
@@ -69,6 +71,53 @@ const placeholderText = loremIpsum();
 
       <div>
         <HtButton>Simple button</HtButton>
+        &nbsp;
+        <HtButton :disabled="true">
+          Disabled default button
+        </HtButton>
+        &nbsp;
+        <HtButton :loading="true">
+          Loading default button
+        </HtButton>
+        &nbsp;
+        <HtButton>
+          <FontAwesomeIcon :icon="faClipboard" />
+        </HtButton>
+        &nbsp;
+        <HtButton :disabled="true">
+          <FontAwesomeIcon :icon="faClipboard" />
+        </HtButton>
+      </div>
+      <div>&nbsp;</div>
+      <div>
+        <HtButton color="primary">
+          Primary button
+        </HtButton>
+        &nbsp;
+        <HtButton
+          color="primary"
+          :disabled="true"
+        >
+          Disabled primary button
+        </HtButton>
+        &nbsp;
+        <HtButton
+          color="primary"
+          :loading="true"
+        >
+          Loading primary button
+        </HtButton>
+        &nbsp;
+        <HtButton color="primary">
+          <FontAwesomeIcon :icon="faClipboard" />
+        </HtButton>
+        &nbsp;
+        <HtButton
+          color="primary"
+          :disabled="true"
+        >
+          <FontAwesomeIcon :icon="faClipboard" />
+        </HtButton>
       </div>
     </HtCard>
     <HtCard>

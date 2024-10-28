@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Button from '@/Components/CustomButton.vue';
 import FormMessage from '@/Components/FormMessage.vue';
 import TextInput from '@/Components/TextInput.vue';
+import HtButton from '@/Reusable/HtButton.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 
 const user = usePage().props.auth.user;
@@ -42,13 +42,12 @@ const form = useForm({
     </div>
 
     <div>
-      <Button
-        :disabled="form.processing"
-        :aria-busy="form.processing ? 'true' : undefined"
+      <HtButton
+        :loading="form.processing"
         type="submit"
       >
         {{ $t('global.form.save') }}
-      </Button>
+      </HtButton>
 
       <p v-if="form.recentlySuccessful">
         {{ $t('global.form.saved') }}
