@@ -11,12 +11,12 @@ export const timestamp = Symbol() as InjectionKey<{
 }>;
 
 export const theme = Symbol() as InjectionKey<{
-  isLightTheme: Ref<boolean>
+  readonly isLightTheme: boolean
 }>;
 
 export const sidebarState = Symbol() as InjectionKey<{
-  isOpen: ComputedRef<boolean | null>,
-  isOnLeft: Ref<boolean>,
-  setIsOpen: (value: boolean) => void;
-  setIsOnLeft: (value: boolean) => void;
+  readonly isOpen: boolean | null,
+  readonly isOnLeft: boolean,
+  readonly setIsOpen: (value: boolean) => void;
+  readonly setIsOnLeft: (value: boolean) => void;
 }>;

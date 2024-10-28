@@ -15,6 +15,7 @@ const isOpen = computed(() => Boolean(sbState?.isOpen));
   <HtHeader>
     <template #left>
       <HtButton
+        v-if="sbState"
         :class="{ 'visually-hidden': !isOnLeft }"
         :disabled="isOpen"
         @click="sbState.setIsOpen(true)"
@@ -24,6 +25,7 @@ const isOpen = computed(() => Boolean(sbState?.isOpen));
     </template>
     <template #right>
       <HtButton
+        v-if="sbState"
         :class="{ 'visually-hidden': isOnLeft }"
         :disabled="isOpen"
         @click="sbState.setIsOpen(true)"

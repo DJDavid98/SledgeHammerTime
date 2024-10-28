@@ -5,7 +5,7 @@ import HtLoadingIndicator from '@/Reusable/HtLoadingIndicator.vue';
 const props = withDefaults(defineProps<{
   type?: 'button' | 'submit',
   color?: 'primary',
-  'class'?: string,
+  'class'?: string | Record<string, boolean>,
   disabled?: boolean,
   loading?: boolean,
 }>(), {

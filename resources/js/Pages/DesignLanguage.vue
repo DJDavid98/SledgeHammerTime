@@ -37,14 +37,6 @@ const placeholderText = loremIpsum();
         {{ placeholderText }}
       </template>
     </HtAlert>
-    <HtAlert type="success">
-      <template #title>
-        Success Alert
-      </template>
-      <template #text>
-        {{ placeholderText }}
-      </template>
-    </HtAlert>
     <HtAlert type="warning">
       <template #title>
         Warning Alert
@@ -53,12 +45,28 @@ const placeholderText = loremIpsum();
         {{ placeholderText }}
       </template>
     </HtAlert>
-    <HtAlert type="error">
+    <HtAlert type="unknown">
       <template #title>
-        Error Alert
+        Unknown Alert
       </template>
       <template #text>
         {{ placeholderText }}
+      </template>
+    </HtAlert>
+    <HtAlert
+      type="unknown"
+      :closable="false"
+    >
+      <template #title>
+        Un-closable Alert
+      </template>
+    </HtAlert>
+    <HtAlert
+      type="unknown"
+      :closable="false"
+    >
+      <template #text>
+        Text-only
       </template>
     </HtAlert>
 

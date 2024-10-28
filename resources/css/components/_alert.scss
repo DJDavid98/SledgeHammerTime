@@ -26,8 +26,17 @@
 
   .alert-title {
     font-weight: bold;
-    margin-bottom: design.app-size('alert-spacing');
 
+    &:empty {
+      display: none;
+    }
+
+    &:not(:empty) + .alert-text {
+      margin-top: design.app-size('alert-spacing');
+    }
+  }
+
+  .alert-text {
     &:empty {
       display: none;
     }

@@ -5,7 +5,7 @@ import { faInfo, faTimes, faWarning } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { computed, ComputedRef } from 'vue';
 
-export type AlertType = 'info' | 'success' | 'warning' | 'error';
+export type AlertType = 'info' | 'warning' | string;
 
 const props = withDefaults(defineProps<{
   type: AlertType;

@@ -38,8 +38,8 @@ const emit = defineEmits<{
 const themeData = inject(theme);
 
 const colors = computed((): DialColors => ({
-  numbers: themeData?.isLightTheme.value ? '#333' : '#ccc',
-  secondsHand: themeData?.isLightTheme.value ? '#a00' : '#f00',
+  numbers: themeData?.isLightTheme ? '#333' : '#ccc',
+  secondsHand: themeData?.isLightTheme ? '#a00' : '#f00',
 }));
 
 const dialSetup = computed(() => {
