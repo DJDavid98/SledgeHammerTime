@@ -25,8 +25,15 @@ $size-map: (
   alert-border-radius: .5rem,
   sidebar-spacing: .5rem,
   sidebar-max-width: 25rem,
-  sidebar-border-size: .0625rem,
-  sidebar-divider-border-size: .0625rem,
+  sidebar-border: .0625rem,
+  sidebar-divider-border: .0625rem,
+  popup-border: .125rem,
+  popup-box-shadow: 1rem,
+  input-text-padding: .25rem,
+  input-text-border: .0625rem,
+  input-text-border-radius: .25rem,
+  input-text-box-shadow-inset-y: .05rem,
+  input-text-box-shadow: .4rem,
 );
 
 $color-map: (
@@ -106,6 +113,18 @@ $color-map: (
     light: color.adjust(#5865f2, $lightness: 12%, $saturation: -10%),
     dark: color.adjust(#5865f2, $lightness: -10%, $saturation: -10%),
   ),
+  button-success-color: (
+    light: #000,
+    dark: #fff,
+  ),
+  button-success-bg: (
+    light: color.adjust(#559933, $lightness: 22%),
+    dark: #559933,
+  ),
+  button-success-border-color: (
+    light: color.adjust(#559933, $lightness: 12%, $saturation: -10%),
+    dark: color.adjust(#559933, $lightness: -10%, $saturation: -10%),
+  ),
   sidebar-bg: (
     light: #eee,
     dark: #1a1b1e,
@@ -117,6 +136,30 @@ $color-map: (
   sidebar-divider-color: (
     light: #ccc,
     dark: #373a40,
+  ),
+  popup-border-color: (
+    light: #ddd,
+    dark: #2c2e33,
+  ),
+  input-text-color: (
+    light: #212121,
+    dark: #c1c2c5,
+  ),
+  input-text-bg: (
+    light: #eee,
+    dark: #1A1B1E
+  ),
+  input-text-border-color: (
+    light: #eee,
+    dark: #373a40,
+  ),
+  input-text-focus-border-color: (
+    light: color.adjust(#5865f2, $lightness: 20%),
+    dark: #5865f2,
+  ),
+  input-text-box-shadow: (
+    light: rgba(0, 0, 0, .25),
+    dark: rgba(0, 0, 0, .5),
   ),
 );
 

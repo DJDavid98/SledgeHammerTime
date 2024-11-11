@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Popup from '@/Components/CustomPopup.vue';
 import TimePickerDial, { TimePickerDialAPI } from '@/Components/home/pickers/TimePickerDial.vue';
+import HtButton from '@/Reusable/HtButton.vue';
+import HtInput from '@/Reusable/HtInput.vue';
 import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
 import { DialMode } from '@/utils/dial';
 import { AvailableLanguage } from '@/utils/language-settings';
@@ -167,7 +169,7 @@ defineExpose<TimePickerPopupApi>({
     @open="openPicker"
   >
     <fieldset role="group">
-      <input
+      <HtInput
         ref="hoursInput"
         v-model="hours"
         type="number"
@@ -176,8 +178,8 @@ defineExpose<TimePickerPopupApi>({
         @focus.passive="hoursFocused"
         @blur.passive="handleHoursBlur"
         @keydown="handleInputKeydown"
-      >
-      <input
+      />
+      <HtInput
         ref="minutesInput"
         v-model="minutes"
         type="number"
@@ -186,8 +188,8 @@ defineExpose<TimePickerPopupApi>({
         @focus.passive="minutesFocused"
         @blur.passive="handleMinutesBlur"
         @keydown="handleInputKeydown"
-      >
-      <input
+      />
+      <HtInput
         ref="secondsInput"
         v-model="seconds"
         type="number"
@@ -196,7 +198,7 @@ defineExpose<TimePickerPopupApi>({
         @focus.passive="secondsFocused"
         @blur.passive="handleSecondsBlur"
         @keydown="handleInputKeydown"
-      >
+      />
       <select
         v-if="twelveHourMode"
         v-model="isAm"
@@ -211,18 +213,17 @@ defineExpose<TimePickerPopupApi>({
       </select>
     </fieldset>
     <div class="grid">
-      <button
-        class="mb-0"
+      <HtButton
+        color="primary"
         @click="select"
       >
         {{ $t('global.form.select') }}
-      </button>
-      <button
-        class="mb-0 secondary"
+      </HtButton>
+      <HtButton
         @click="closePicker"
       >
         {{ $t('global.form.cancel') }}
-      </button>
+      </HtButton>
     </div>
     <TimePickerDial
       v-if="renderDial"

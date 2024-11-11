@@ -12,9 +12,10 @@
   font-size: design.app-size('button-font-size');
   box-shadow: 0 design.app-size('button-shadow-size') 0 var(--button-border-color);
   will-change: transform;
-  transition-property: transform, box-shadow, opacity;
+  transition-property: transform, box-shadow, opacity, color, background-color, border-color;
   transition-duration: .1s;
   user-select: none;
+  box-sizing: border-box;
 
   @include design.if-dark {
     color: design.app-color-dark('button-default-color');
@@ -35,16 +36,26 @@
     }
   }
 
+  &.icon-only {
+    padding: design.app-size('button-padding-vertical');
+  }
+
   &.visually-hidden {
     opacity: 0 !important;
   }
 
-  &:not(:disabled):active {
+  &.block {
+    display: block;
+    width: 100%;
+  }
+
+  &:not(:disabled):active, &.pressed {
     transform: translateY(design.app-size('button-shadow-size'));
     box-shadow: 0 0 0 var(--button-border-color);
   }
 
   @include design.button-color-variation('primary');
+  @include design.button-color-variation('success');
 
   .loading-icon {
     position: absolute;

@@ -3,11 +3,11 @@
 .card {
   border-radius: design.app-size('card-border-radius');
   padding: design.app-size('card-padding');
-  background-color: design.app-color('card-bg');
-  color: design.app-color('card-color');
+  background-color: design.app-color-light('card-bg');
+  color: design.app-color-light('card-color');
 
   @include design.if-dark {
-    background-color: design.app-color('card-bg', true);
-    color: design.app-color('card-color', true);
+    background-color: design.app-color-dark('card-bg');
+    color: design.app-color-dark('card-color');
   }
 }

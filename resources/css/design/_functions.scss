@@ -19,14 +19,14 @@
 }
 
 @function app-color-light($key) {
-  @return app-color($key, false)
+  @return _app-color($key, false)
 }
 
 @function app-color-dark($key) {
-  @return app-color($key, true)
+  @return _app-color($key, true)
 }
 
-@function app-color($key, $dark: false) {
+@function _app-color($key, $dark: false) {
   @if (map.has-key(common.$color-map, $key)) {
     $color: 'light';
     @if ($dark) {

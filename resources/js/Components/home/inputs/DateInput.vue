@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import DatePickerPopup, { DatePickerPopupApi } from '@/Components/home/pickers/DatePicker.vue';
 import { timestamp } from '@/injection-keys';
+import HtInput from '@/Reusable/HtInput.vue';
 import { computed, inject, ref } from 'vue';
 
 defineProps<{
@@ -35,14 +36,13 @@ const changeDate = (value: string) => {
 
 <template>
   <div>
-    <input
+    <HtInput
       :id="id"
-      :value="selectedDate"
-      class="mb-0"
-      readonly
+      v-model="selectedDate"
+      :readonly="true"
       @click.prevent="openPopup"
       @focus="openPopup"
-    >
+    />
     <DatePickerPopup
       ref="datepicker"
       :show="showPopup"

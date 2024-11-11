@@ -6,12 +6,12 @@
   gap: design.app-size('alert-spacing');
   padding: design.app-size('alert-spacing');
   border-radius: design.app-size('alert-border-radius');
-  background-color: design.app-color('alert-bg');
-  color: design.app-color('alert-color');
+  background-color: design.app-color-light('alert-bg');
+  color: design.app-color-light('alert-color');
 
   @include design.if-dark {
-    background-color: design.app-color('alert-bg', true);
-    color: design.app-color('alert-color', true);
+    background-color: design.app-color-dark('alert-bg');
+    color: design.app-color-dark('alert-color');
   }
 
   .alert-icon:empty {
@@ -43,19 +43,19 @@
   }
 
   &.warning {
-    color: design.app-color('alert-warning-color');
-    background-color: design.app-color('alert-warning-bg');
+    color: design.app-color-light('alert-warning-color');
+    background-color: design.app-color-light('alert-warning-bg');
 
     .alert-title, .alert-icon {
-      color: design.app-color('alert-warning-hl-color');
+      color: design.app-color-light('alert-warning-hl-color');
     }
 
     @include design.if-dark {
-      color: design.app-color('alert-warning-color', true);
-      background-color: design.app-color('alert-warning-bg', true);
+      color: design.app-color-dark('alert-warning-color');
+      background-color: design.app-color-dark('alert-warning-bg');
 
       .alert-title, .alert-icon {
-        color: design.app-color('alert-warning-hl-color', true);
+        color: design.app-color-dark('alert-warning-hl-color');
       }
     }
   }

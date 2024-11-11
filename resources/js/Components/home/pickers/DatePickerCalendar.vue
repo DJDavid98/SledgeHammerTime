@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useCurrentDate } from '@/hooks/useCurrentDate';
+import HtButton from '@/Reusable/HtButton.vue';
 import {
   CalendarDay,
   DayOfWeek,
@@ -11,6 +12,8 @@ import {
   WEEKEND_DAYS,
 } from '@/utils/calendar';
 import { useMomentLocale } from '@/utils/moment';
+import { faBackwardFast, faChevronLeft, faChevronRight, faForwardFast } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { usePage } from '@inertiajs/vue3';
 import classNames from 'classnames';
 import moment from 'moment-timezone';
@@ -133,40 +136,47 @@ defineExpose<DatePickerCalendarApi>({
 
 <template>
   <div class="calendar-controls">
-    <button
-      class=""
+    <HtButton
       :aria-label="$t('timestampPicker.picker.tooltip.previousYear')"
       @click="stepDate(-1, 'year')"
     >
-      <span aria-hidden="true">⏮</span>
-    </button>
-    <button
+      <FontAwesomeIcon
+        :icon="faBackwardFast"
+      />
+    </HtButton>
+    <HtButton
       :aria-label="$t('timestampPicker.picker.tooltip.previousMonth')"
       @click="stepDate(-1, 'month')"
     >
-      <span aria-hidden="true">◀</span>
-    </button>
+      <FontAwesomeIcon
+        :icon="faChevronLeft"
+      />
+    </HtButton>
     <span class="calendar-context">{{ dateMoment.locale(locale).format(contextFormat) }}</span>
-    <button
+    <HtButton
       :aria-label="$t('timestampPicker.picker.tooltip.nextMonth')"
       @click="stepDate(1, 'month')"
     >
-      <span aria-hidden="true">▶</span>
-    </button>
-    <button
+      <FontAwesomeIcon
+        :icon="faChevronRight"
+      />
+    </HtButton>
+    <HtButton
       :aria-label="$t('timestampPicker.picker.tooltip.nextYear')"
       @click="stepDate(1, 'year')"
     >
-      <span aria-hidden="true">⏭</span>
-    </button>
+      <FontAwesomeIcon
+        :icon="faForwardFast"
+      />
+    </HtButton>
   </div>
-  <button
-    class="jump-to-today"
+  <HtButton
     :disabled="isShowingCurrentMonth"
+    :block="true"
     @click="jumpToToday"
   >
     {{ $t('timestampPicker.picker.button.jumpToToday') }}
-  </button>
+  </HtButton>
   <div class="calendar">
     <div class="calendar-weekdays">
       <div

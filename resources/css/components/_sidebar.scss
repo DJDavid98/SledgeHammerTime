@@ -10,7 +10,7 @@
   width: 100%;
   max-width: design.app-size('sidebar-max-width');
   background-color: design.app-color-light('sidebar-bg');
-  border-right: design.app-size('sidebar-border-size') solid design.app-color-light('sidebar-border-color');
+  border-right: design.app-size('sidebar-border') solid design.app-color-light('sidebar-border-color');
   box-sizing: border-box;
   display: flex;
   flex-flow: column nowrap;
@@ -64,7 +64,7 @@
   }
 
   .sidebar-divider {
-    border-top: design.app-size('sidebar-divider-border-size') solid design.app-color-light('sidebar-divider-color');
+    border-top: design.app-size('sidebar-divider-border') solid design.app-color-light('sidebar-divider-color');
 
     @include design.if-dark {
       border-top-color: design.app-color-dark('sidebar-divider-color');

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Popup from '@/Components/CustomPopup.vue';
 import DatePickerCalendar, { DatePickerCalendarApi } from '@/Components/home/pickers/DatePickerCalendar.vue';
+import HtButton from '@/Reusable/HtButton.vue';
+import HtInput from '@/Reusable/HtInput.vue';
 import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
 import { pad } from '@/utils/pad';
 import { limitDate, limitMonth } from '@/utils/time';
@@ -104,14 +106,14 @@ defineExpose<DatePickerPopupApi>({
     @close="close"
   >
     <fieldset role="group">
-      <input
+      <HtInput
         ref="yearInput"
         v-model="year"
         type="number"
         class="grid-flex-item flex-basis-40"
         @keydown="handleInputKeydown"
-      >
-      <input
+      />
+      <HtInput
         ref="monthInput"
         v-model="month"
         type="number"
@@ -120,8 +122,8 @@ defineExpose<DatePickerPopupApi>({
         max="12"
         @blur="handleMonthBlur"
         @keydown="handleInputKeydown"
-      >
-      <input
+      />
+      <HtInput
         ref="dateInput"
         v-model="date"
         type="number"
@@ -130,21 +132,20 @@ defineExpose<DatePickerPopupApi>({
         max="31"
         @blur="handleDateBlur"
         @keydown="handleInputKeydown"
-      >
+      />
     </fieldset>
     <div class="grid">
-      <button
-        class="mb-0"
+      <HtButton
+        color="primary"
         @click="selectAndClose"
       >
         {{ $t('global.form.select') }}
-      </button>
-      <button
-        class="mb-0 secondary"
+      </HtButton>
+      <HtButton
         @click="close"
       >
         {{ $t('global.form.cancel') }}
-      </button>
+      </HtButton>
     </div>
     <hr>
     <DatePickerCalendar

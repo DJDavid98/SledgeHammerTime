@@ -12,11 +12,11 @@ nav.backdrop {
 }
 
 nav {
-  --bg-color: #{design.app-color('nav-bg')};
+  --bg-color: #{design.app-color-light('nav-bg')};
   z-index: 5;
 
   @include design.if-dark {
-    --bg-color: #{design.app-color('nav-bg', true)};
+    --bg-color: #{design.app-color-dark('nav-bg')};
   }
 
   .brand {

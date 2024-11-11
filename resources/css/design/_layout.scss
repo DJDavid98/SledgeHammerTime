@@ -19,13 +19,13 @@ body {
   min-height: 100vh;
   font-family: var(--font-family-base);
   background-image: linear-gradient(calc(180deg - var(--bg-gradient-angle)), var(--bg-gradient-start-color) var(--bg-gradient-start-position), var(--bg-gradient-mid-color) var(--bg-gradient-mid-position), var(--bg-gradient-end-color) var(--bg-gradient-end-position));
-  background-color: functions.app-color('layout-bg');
+  background-color: functions.app-color-light('layout-bg');
   background-repeat: no-repeat;
-  color: functions.app-color('layout-color');
+  color: functions.app-color-light('layout-color');
 
   @include mixins.if-dark {
-    background-color: functions.app-color('layout-bg', true);
-    color: functions.app-color('layout-color', true);
+    background-color: functions.app-color-dark('layout-bg');
+    color: functions.app-color-dark('layout-color');
   }
 
   @include mixins.if-rtl {

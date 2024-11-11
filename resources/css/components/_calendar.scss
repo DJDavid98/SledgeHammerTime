@@ -20,12 +20,6 @@
   margin: .5em 0;
   gap: var(--gap);
 
-  button {
-    padding: 0;
-    margin: 0;
-    height: var(--button-size);
-  }
-
   .calendar-context {
     font-size: calc(var(--button-size) * 0.65);
     line-height: var(--button-size);
@@ -90,23 +84,11 @@
 
     &.selected {
       font-weight: bold;
-      background-color: design.app-color('calendar-day-selected-bg');
+      background-color: design.app-color-light('calendar-day-selected-bg');
 
       @include design.if-dark {
-        background-color: design.app-color('calendar-day-selected-bg', true);
+        background-color: design.app-color-dark('calendar-day-selected-bg');
       }
     }
-  }
-}
-
-.jump-to-today {
-  padding: .4em;
-  margin: .5em 0;
-  display: block;
-  width: 100%;
-
-  @include design.screen-above('md') {
-    font-size: .75em;
-    padding: .1em .2em;
   }
 }

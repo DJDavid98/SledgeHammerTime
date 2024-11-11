@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TimePickerPopup, { TimePickerPopupApi } from '@/Components/home/pickers/TimePicker.vue';
 import { timestamp } from '@/injection-keys';
+import HtInput from '@/Reusable/HtInput.vue';
 import { DialMode } from '@/utils/dial';
 import moment from 'moment-timezone';
 import { computed, inject, ref } from 'vue';
@@ -11,7 +12,7 @@ defineProps<{
 
 const ts = inject(timestamp);
 
-const selectedDate = computed(() => ts?.currentTimestamp.value.format('LTS'));
+const selectedTime = computed(() => ts?.currentTimestamp.value.format('LTS'));
 const showPopup = ref(false);
 const timepicker = ref<TimePickerPopupApi>();
 
@@ -40,14 +41,13 @@ const changeTime = (value: string) => {
 
 <template>
   <div>
-    <input
+    <HtInput
       :id="id"
-      v-model="selectedDate"
-      class="mb-0"
-      readonly
+      v-model="selectedTime"
+      :readonly="true"
       @click.prevent="openPopup"
       @focus="openPopup"
-    >
+    />
     <TimePickerPopup
       ref="timepicker"
       :show="showPopup"
