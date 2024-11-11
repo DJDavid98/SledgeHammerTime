@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { AvailableLanguage } from '@/utils/language-settings';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
@@ -12,7 +14,7 @@ const locale = computed(() => page.props.app.locale as AvailableLanguage);
   <template v-if="$page.props.auth.user">
     <details class="dropdown user-dropdown">
       <summary>
-        <span class="user-icon">👤</span>
+        <span class="user-icon"><FontAwesomeIcon :icon="faUser" /></span>
         <span class="user-name">{{ $page.props.auth.user.name }}</span>
       </summary>
       <ul role="listbox">

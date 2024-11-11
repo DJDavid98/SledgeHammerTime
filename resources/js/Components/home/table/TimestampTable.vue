@@ -2,6 +2,9 @@
 import SyntaxDisplay from '@/Components/home/table/SyntaxDisplay.vue';
 import TimestampPreview from '@/Components/home/table/TimestampPreview.vue';
 import { timestamp } from '@/injection-keys';
+import { faCalendar as faRegularCalendar } from '@fortawesome/free-regular-svg-icons';
+import { faCalendar, faClock, faCode, faUserClock } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { computed, inject } from 'vue';
 
 const ts = inject(timestamp);
@@ -13,9 +16,8 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
   <div class="responsive-table">
     <table class="mb-0">
       <colgroup>
-        <col style="width: 25%">
-        <col style="width: 25%">
-        <col style="width: 50%">
+        <col style="width: 3rem">
+        <col style="width: 16rem">
       </colgroup>
       <thead>
         <tr>
@@ -29,9 +31,12 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
         <tr>
           <td
             rowspan="2"
-            class="fs-20 text-center"
+            class="text-center"
           >
-            📅
+            <FontAwesomeIcon
+              :icon="faCalendar"
+              size="2x"
+            />
           </td>
           <td>
             <SyntaxDisplay
@@ -63,9 +68,12 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
         <tr>
           <td
             rowspan="2"
-            class="fs-20 text-center"
+            class="text-center"
           >
-            🕓
+            <FontAwesomeIcon
+              :icon="faClock"
+              size="2x"
+            />
           </td>
           <td>
             <SyntaxDisplay
@@ -97,9 +105,19 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
         <tr>
           <td
             rowspan="2"
-            class="fs-20 text-center"
+            class="text-center"
           >
-            📅🕓
+            <span class="fa-stack fa-1x">
+              <FontAwesomeIcon
+                :icon="faRegularCalendar"
+                class="fa-stack-2x"
+              />
+              <FontAwesomeIcon
+                :icon="faClock"
+                class="fa-stack-1x"
+                :transform="{ y: 4.5 }"
+              />
+            </span>
           </td>
           <td>
             <SyntaxDisplay
@@ -129,8 +147,11 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
           </td>
         </tr>
         <tr>
-          <td class="fs-20 text-center">
-            👤🕓
+          <td class="text-center">
+            <FontAwesomeIcon
+              :icon="faUserClock"
+              size="2x"
+            />
           </td>
           <td>
             <SyntaxDisplay
@@ -146,8 +167,11 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
           </td>
         </tr>
         <tr>
-          <td class="fs-20 text-center">
-            🏷️
+          <td class="text-center">
+            <FontAwesomeIcon
+              :icon="faCode"
+              size="2x"
+            />
           </td>
           <td>
             <SyntaxDisplay :unix-ts="unixTs" />

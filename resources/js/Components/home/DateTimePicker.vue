@@ -4,6 +4,8 @@ import TimePicker from '@/Components/home/inputs/TimeInput.vue';
 import TimeZonePicker from '@/Components/home/inputs/TimeZoneInput.vue';
 import { timestamp } from '@/injection-keys';
 import HtButton from '@/Reusable/HtButton.vue';
+import { faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { inject } from 'vue';
 
 const ts = inject(timestamp);
@@ -30,7 +32,7 @@ const ts = inject(timestamp);
         role="button"
         @click="ts.setCurrentTime"
       >
-        ⌚
+        <FontAwesomeIcon :icon="faClockRotateLeft" />
       </HtButton>
     </div>
   </div>

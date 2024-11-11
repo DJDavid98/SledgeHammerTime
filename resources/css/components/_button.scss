@@ -5,7 +5,7 @@
   position: relative;
   color: design.app-color-light('button-default-color');
   background-color: design.app-color-light('button-default-bg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .1) 100%);
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .05) 100%);
   padding: design.app-size('button-padding-vertical') design.app-size('button-padding-horizontal');
   border: design.app-size('button-border-width') solid var(--button-border-color);
   border-radius: design.app-size('button-border-radius');
@@ -28,7 +28,7 @@
   }
 
   &:disabled {
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .1) 100%);
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .05) 100%);
     cursor: not-allowed;
 
     .button-content {

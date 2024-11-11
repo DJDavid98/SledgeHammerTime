@@ -33,12 +33,12 @@ $size-map: (
   input-text-border: .0625rem,
   input-text-border-radius: .25rem,
   input-text-box-shadow-inset-y: .05rem,
-  input-text-box-shadow: .4rem,
+  input-text-box-shadow: .15rem,
 );
 
 $color-map: (
   layout-bg: (
-    light: #fff,
+    light: #bbb,
     dark: #000
   ),
   layout-color: (
@@ -46,11 +46,11 @@ $color-map: (
     dark: #C1C2C5,
   ),
   header-bg: (
-    light: #eee,
+    light: color.adjust(#5865f2, $lightness: 27%, $saturation: -10%),
     dark: #1A1B1E
   ),
   header-border: (
-    light: #ddd,
+    light: color.adjust(#5865f2, $lightness: 20%, $saturation: -10%),
     dark: #2C2E33
   ),
   header-brand: (
@@ -58,7 +58,7 @@ $color-map: (
     dark: #909296
   ),
   card-bg: (
-    light: #eee,
+    light: color.adjust(#5865f2, $lightness: 30%, $saturation: -10%),
     dark: #1A1B1E
   ),
   card-color: (
@@ -126,19 +126,19 @@ $color-map: (
     dark: color.adjust(#559933, $lightness: -10%, $saturation: -10%),
   ),
   sidebar-bg: (
-    light: #eee,
+    light: color.adjust(#5865f2, $lightness: 27%, $saturation: -10%),
     dark: #1a1b1e,
   ),
   sidebar-border-color: (
-    light: #ddd,
+    light: color.adjust(#5865f2, $lightness: 20%, $saturation: -10%),
     dark: #2c2e33,
   ),
   sidebar-divider-color: (
-    light: #ccc,
+    light: color.adjust(#5865f2, $lightness: 15%, $saturation: -10%),
     dark: #373a40,
   ),
   popup-border-color: (
-    light: #ddd,
+    light: color.adjust(#5865f2, $lightness: 20%, $saturation: -10%),
     dark: #2c2e33,
   ),
   input-text-color: (
@@ -146,11 +146,11 @@ $color-map: (
     dark: #c1c2c5,
   ),
   input-text-bg: (
-    light: #ddd,
+    light: color.adjust(#5865f2, $lightness: 25%, $saturation: -10%),
     dark: #25262b,
   ),
   input-text-border-color: (
-    light: #eee,
+    light: color.adjust(#5865f2, $lightness: 20%, $saturation: -10%),
     dark: #373a40,
   ),
   input-text-focus-border-color: (
@@ -160,6 +160,10 @@ $color-map: (
   input-text-box-shadow: (
     light: rgba(0, 0, 0, .25),
     dark: rgba(0, 0, 0, .5),
+  ),
+  calendar-day-selected-bg: (
+    light: rgba(#5865f2, .25),
+    dark: rgba(#5865f2, .5),
   ),
 );
 
