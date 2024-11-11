@@ -10,10 +10,10 @@ const emit = defineEmits<{
   (e: 'open'): void
 }>();
 
-const dialog = ref<HTMLDialogElement>();
+const dialogEl = ref<HTMLDialogElement>();
 const closeOnMouseup = ref(false);
 
-const isSelf = (target: EventTarget | HTMLElement | null) => target !== null && target === dialog.value;
+const isSelf = (target: EventTarget | HTMLElement | null) => target !== null && target === dialogEl.value;
 const handleMousedown = (e: MouseEvent): void => {
   // Store whether the target was the popup on mousedown
   closeOnMouseup.value = isSelf(e.target);
@@ -28,11 +28,11 @@ const handleMouseup = (e: MouseEvent): void => {
 };
 
 const close = () => {
-  dialog.value?.close();
+  dialogEl.value?.close();
   emit('close');
 };
 const open = () => {
-  dialog.value?.showModal();
+  dialogEl.value?.showModal();
   emit('open');
 };
 
@@ -53,7 +53,7 @@ defineExpose({
 
 <template>
   <dialog
-    ref="dialog"
+    ref="dialogEl"
     :class="['popup', {visible: show}]"
     @mousedown="handleMousedown"
     @mouseup="handleMouseup"

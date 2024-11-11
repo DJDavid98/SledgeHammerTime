@@ -125,6 +125,18 @@ $color-map: (
     light: color.adjust(#559933, $lightness: 12%, $saturation: -10%),
     dark: color.adjust(#559933, $lightness: -10%, $saturation: -10%),
   ),
+  button-danger-color: (
+    light: #000,
+    dark: #fff,
+  ),
+  button-danger-bg: (
+    light: color.adjust(#993333, $lightness: 30%),
+    dark: #993333,
+  ),
+  button-danger-border-color: (
+    light: color.adjust(#993333, $lightness: 20%, $saturation: -10%),
+    dark: color.adjust(#993333, $lightness: -10%, $saturation: -10%),
+  ),
   sidebar-bg: (
     light: color.adjust(#5865f2, $lightness: 27%, $saturation: -10%),
     dark: #1a1b1e,

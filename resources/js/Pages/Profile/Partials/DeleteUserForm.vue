@@ -39,9 +39,12 @@ const closeModal = () => {
     {{ $t('profile.deletion.description') }}
   </p>
 
-  <Button @click="confirmUserDeletion">
+  <HtButton
+    color="danger"
+    @click="confirmUserDeletion"
+  >
     {{ $t('profile.deletion.deleteButton') }}
-  </Button>
+  </HtButton>
 
   <Modal
     :show="confirmingUserDeletion"
@@ -60,13 +63,14 @@ const closeModal = () => {
         {{ $t('global.form.cancel') }}
       </HtButton>
 
-      <Button
+      <HtButton
+        color="danger"
         :disabled="form.processing"
         :aria-busy="form.processing ? 'true' : undefined"
         @click="deleteUser"
       >
         {{ $t('global.form.confirm') }}
-      </Button>
+      </HtButton>
     </template>
   </Modal>
 </template>

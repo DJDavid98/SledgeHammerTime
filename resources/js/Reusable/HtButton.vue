@@ -7,7 +7,7 @@ const props = withDefaults(defineProps<{
   /**
    * Defaults to gray when not provided
    */
-  color?: 'primary' | 'success',
+  color?: 'primary' | 'success' | 'danger',
   'class'?: string | Record<string, boolean>,
   disabled?: boolean,
   loading?: boolean,

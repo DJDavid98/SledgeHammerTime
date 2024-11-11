@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import FormMessage from '@/Components/FormMessage.vue';
-import TextInput from '@/Components/TextInput.vue';
 import HtButton from '@/Reusable/HtButton.vue';
+import HtInput from '@/Reusable/HtInput.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 
 const user = usePage().props.auth.user;
@@ -24,7 +24,7 @@ const form = useForm({
     <div>
       <label for="name">{{ $t('profile.information.displayName') }}</label>
 
-      <TextInput
+      <HtInput
         id="name"
         v-model="form.name"
         type="text"

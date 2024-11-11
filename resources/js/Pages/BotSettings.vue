@@ -5,6 +5,7 @@ import TimeZoneInput from '@/Components/TimeZoneInput.vue';
 import Layout from '@/Layouts/DefaultLayout.vue';
 import { UserSettings } from '@/model/user-settings';
 import HtButton from '@/Reusable/HtButton.vue';
+import HtCard from '@/Reusable/HtCard.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps<{
@@ -29,15 +30,15 @@ const forms = props.userSettings.map(userSetting => useForm({
   <Head :title="$t('botSettings.title')" />
 
   <Layout>
-    <header>
+    <HtCard>
       <h2>{{ $t('botSettings.title') }}</h2>
 
       <p class="mt-1">
         {{ $t('botSettings.description') }}
       </p>
-    </header>
+    </HtCard>
 
-    <article
+    <HtCard
       v-for="(entry, i) in userSettings"
       :key="entry.user.id"
     >
@@ -160,6 +161,6 @@ const forms = props.userSettings.map(userSetting => useForm({
         <summary>{{ $t('botSettings.fields.rawData.displayName') }}</summary>
         <pre><code>{{ JSON.stringify(entry.settings, null, 4) }}</code></pre>
       </details>
-    </article>
+    </HtCard>
   </Layout>
 </template>
