@@ -44,6 +44,14 @@
 
   &.is-open {
     transform: translateX(0);
+
+    &.position-left + .sidebar-spacing-wrapper {
+      padding-left: design.app-size('sidebar-max-width');
+    }
+
+    &.position-right + .sidebar-spacing-wrapper {
+      padding-right: design.app-size('sidebar-max-width');
+    }
   }
 
   > * {
@@ -73,5 +81,13 @@
 
   .sidebar-bottom {
     flex: 0 0 auto;
+  }
+}
+
+.sidebar-spacing-wrapper {
+  transition: padding .1s ease-in-out;
+
+  @media (max-width: design.app-size('sidebar-default-open-min-width')) {
+    padding: 0 !important;
   }
 }

@@ -1,0 +1,20 @@
+@use "../design";
+
+.discord-user-info {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: design.app-size('discord-user-info-spacing');
+  margin-bottom: design.app-size('content-spacing');
+
+  .user-image {
+    width: design.app-size('discord-user-info-image-size');
+    height: design.app-size('discord-user-info-image-size');
+    border-radius: design.app-size('discord-user-info-image-border-radius');
+  }
+
+  .user-name {
+    font-size: design.app-size('discord-user-info-name-font-size');
+  }
+}

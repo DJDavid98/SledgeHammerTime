@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import HtFormSelect from '@/Reusable/HtFormSelect.vue';
 import { getSortedNormalizedTimezoneNames, getTimezoneValue } from '@/utils/time';
 import { defineModel } from 'vue';
 
-defineProps<{
-  id: string;
-  className?: string;
+const props = defineProps<{
+  'class'?: string;
   name?: string;
 }>();
 
@@ -25,19 +25,18 @@ const changeTimezone = (e: Event) => {
 </script>
 
 <template>
-  <select
-    :id="id"
+  <HtFormSelect
+    v-model="model"
     :name="name"
-    :class="className ?? 'mb-0'"
+    :class="props.class ?? 'mb-0'"
     @change="changeTimezone"
   >
     <option
       v-for="zone in timezones"
       :key="zone.label"
       :value="zone.value"
-      :selected="zone.value === model"
     >
       {{ zone.label }}
     </option>
-  </select>
+  </HtFormSelect>
 </template>

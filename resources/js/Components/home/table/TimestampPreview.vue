@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMomentLocale } from '@/utils/moment';
+import { loadMomentLocale } from '@/utils/moment';
 import { usePage } from '@inertiajs/vue3';
 import { Moment } from 'moment-timezone';
 import { computed, getCurrentInstance, Ref, ref, watch } from 'vue';
@@ -14,7 +14,7 @@ const updateInterval = ref<ReturnType<typeof setInterval> | null>(null);
 const instance = getCurrentInstance();
 
 const locale = computed(() => usePage().props.app.locale);
-useMomentLocale(locale.value).then(() => {
+loadMomentLocale(locale.value).then(() => {
   instance?.proxy?.$forceUpdate();
 });
 

@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import DatePickerPopup, { DatePickerPopupApi } from '@/Components/home/pickers/DatePicker.vue';
-import { timestamp } from '@/injection-keys';
+import { formControlId, timestamp } from '@/injection-keys';
 import HtInput from '@/Reusable/HtInput.vue';
 import { computed, inject, ref } from 'vue';
 
-defineProps<{
-  id: string;
-}>();
-
 const ts = inject(timestamp);
+const id = inject(formControlId);
 
 const selectedDate = computed(() => ts?.currentTimestamp.value.format('LL'));
 const showPopup = ref(false);
@@ -40,6 +37,7 @@ const changeDate = (value: string) => {
       :id="id"
       v-model="selectedDate"
       :readonly="true"
+      :hide-selection="true"
       @click.prevent="openPopup"
       @focus="openPopup"
     />

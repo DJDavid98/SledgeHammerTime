@@ -6,6 +6,11 @@ import Layout from '@/Layouts/DefaultLayout.vue';
 import { UserSettings } from '@/model/user-settings';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
+import HtFormCheckbox from '@/Reusable/HtFormCheckbox.vue';
+import HtFormControl from '@/Reusable/HtFormControl.vue';
+import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
+import HtFormSelect from '@/Reusable/HtFormSelect.vue';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps<{
@@ -46,27 +51,31 @@ const forms = props.userSettings.map(userSetting => useForm({
         <DiscordUserInfo v-bind="entry.user" />
       </header>
       <form @submit.prevent="forms[i].put(route('settings.set', { discordUserId: entry.user.id }))">
-        <div>
-          <label :for="'timezone-'+i">{{ $t('botSettings.fields.timezone.displayName') }}</label>
-
-          <TimeZoneInput
+        <HtFormControlGroup :vertical="true">
+          <HtFormControl
             :id="'timezone-'+i"
-            v-model="forms[i].timezone"
-            name="timezone"
-            class-name="mt-1"
-          />
+            :label="$t('botSettings.fields.timezone.displayName')"
+          >
+            <TimeZoneInput
+              v-model="forms[i].timezone"
+              name="timezone"
+              class-name="mt-1"
+            />
+            <template #message>
+              <FormMessage
+                type="error"
+                class="mt-2"
+                :message="forms[i].errors.timezone"
+              />
+            </template>
+          </HtFormControl>
 
-          <FormMessage
-            type="error"
-            class="mt-2"
-            :message="forms[i].errors.timezone"
-          />
-
-          <template v-if="formatOptions">
-            <label :for="'format'+i">{{ $t('botSettings.fields.format.displayName') }}</label>
-
-            <select
-              :id="'format-'+i"
+          <HtFormControl
+            v-if="formatOptions"
+            :id="'format'+i"
+            :label="$t('botSettings.fields.format.displayName')"
+          >
+            <HtFormSelect
               v-model="forms[i].format"
               name="format"
               class="mt-1"
@@ -78,20 +87,22 @@ const forms = props.userSettings.map(userSetting => useForm({
               >
                 {{ $t(`botSettings.fields.format.option.${formatLetter}`) }}
               </option>
-            </select>
+            </HtFormSelect>
+            <template #message>
+              <FormMessage
+                type="error"
+                class="mt-2"
+                :message="forms[i].errors.format"
+              />
+            </template>
+          </HtFormControl>
 
-            <FormMessage
-              type="error"
-              class="mt-2"
-              :message="forms[i].errors.format"
-            />
-          </template>
-
-          <template v-if="columnsOptions">
-            <label :for="'columns'+i">{{ $t('botSettings.fields.columns.displayName') }}</label>
-
-            <select
-              :id="'columns-'+i"
+          <HtFormControl
+            v-if="columnsOptions"
+            :id="'columns'+i"
+            :label="$t('botSettings.fields.columns.displayName')"
+          >
+            <HtFormSelect
               v-model="forms[i].columns"
               name="columns"
               class="mt-1"
@@ -103,50 +114,53 @@ const forms = props.userSettings.map(userSetting => useForm({
               >
                 {{ $t(`botSettings.fields.columns.option.${columnsOption}`) }}
               </option>
-            </select>
+            </HtFormSelect>
+            <template #message>
+              <FormMessage
+                type="error"
+                class="mt-2"
+                :message="forms[i].errors.columns"
+              />
+            </template>
+          </HtFormControl>
 
-            <FormMessage
-              type="error"
-              class="mt-2"
-              :message="forms[i].errors.columns"
-            />
-          </template>
+          <HtFormCheckbox
+            :id="'ephemeral-'+i"
+            v-model="forms[i].ephemeral"
+            name="ephemeral"
+            :label="$t('botSettings.fields.ephemeral.displayName')"
+          >
+            <template #message>
+              <FormMessage
+                type="error"
+                class="mt-2"
+                :message="forms[i].errors.ephemeral"
+              />
+            </template>
+          </HtFormCheckbox>
 
-          <p>
-            <input
-              :id="'ephemeral-'+i"
-              v-model="forms[i].ephemeral"
-              type="checkbox"
-              name="ephemeral"
-            >
-            <label :for="'ephemeral-'+i"> {{ $t('botSettings.fields.ephemeral.displayName') }}</label>
-          </p>
-          <FormMessage
-            type="error"
-            class="mt-2"
-            :message="forms[i].errors.ephemeral"
-          />
-
-          <p>
-            <input
-              :id="'header-'+i"
-              v-model="forms[i].header"
-              type="checkbox"
-              name="header"
-            >
-            <label :for="'header-'+i"> {{ $t('botSettings.fields.header.displayName') }}</label>
-          </p>
-          <FormMessage
-            type="error"
-            class="mt-2"
-            :message="forms[i].errors.header"
-          />
-        </div>
+          <HtFormCheckbox
+            :id="'header-'+i"
+            v-model="forms[i].header"
+            name="header"
+            :label="$t('botSettings.fields.header.displayName')"
+          >
+            <template #message>
+              <FormMessage
+                type="error"
+                class="mt-2"
+                :message="forms[i].errors.header"
+              />
+            </template>
+          </HtFormCheckbox>
+        </HtFormControlGroup>
 
         <div>
           <HtButton
+            color="primary"
             :loading="forms[i].processing"
             type="submit"
+            :icon-start="faSave"
           >
             {{ $t('global.form.save') }}
           </HtButton>
@@ -157,10 +171,6 @@ const forms = props.userSettings.map(userSetting => useForm({
           />
         </div>
       </form>
-      <details class="mb-0">
-        <summary>{{ $t('botSettings.fields.rawData.displayName') }}</summary>
-        <pre><code>{{ JSON.stringify(entry.settings, null, 4) }}</code></pre>
-      </details>
     </HtCard>
   </Layout>
 </template>

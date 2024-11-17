@@ -2,6 +2,9 @@
 import Popup from '@/Components/CustomPopup.vue';
 import TimePickerDial, { TimePickerDialAPI } from '@/Components/home/pickers/TimePickerDial.vue';
 import HtButton from '@/Reusable/HtButton.vue';
+import HtButtonGroup from '@/Reusable/HtButtonGroup.vue';
+import HtFormInputGroup from '@/Reusable/HtFormInputGroup.vue';
+import HtFormSelect from '@/Reusable/HtFormSelect.vue';
 import HtInput from '@/Reusable/HtInput.vue';
 import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
 import { DialMode } from '@/utils/dial';
@@ -168,7 +171,7 @@ defineExpose<TimePickerPopupApi>({
     @close="closePicker"
     @open="openPicker"
   >
-    <fieldset role="group">
+    <HtFormInputGroup>
       <HtInput
         ref="hoursInput"
         v-model="hours"
@@ -199,7 +202,7 @@ defineExpose<TimePickerPopupApi>({
         @blur.passive="handleSecondsBlur"
         @keydown="handleInputKeydown"
       />
-      <select
+      <HtFormSelect
         v-if="twelveHourMode"
         v-model="isAm"
         @keydown="handleAmPmSelectKeydown"
@@ -210,21 +213,23 @@ defineExpose<TimePickerPopupApi>({
         <option :value="false">
           {{ getMeridiemLabel(false, minutes) }}
         </option>
-      </select>
-    </fieldset>
-    <div class="grid">
+      </HtFormSelect>
+    </HtFormInputGroup>
+    <HtButtonGroup>
       <HtButton
         color="primary"
+        :justify-center="true"
         @click="select"
       >
         {{ $t('global.form.select') }}
       </HtButton>
       <HtButton
+        :justify-center="true"
         @click="closePicker"
       >
         {{ $t('global.form.cancel') }}
       </HtButton>
-    </div>
+    </HtButtonGroup>
     <TimePickerDial
       v-if="renderDial"
       ref="dial"

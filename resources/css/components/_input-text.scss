@@ -24,4 +24,12 @@
     }
   }
 
+  &.hide-selection {
+    caret-color: transparent;
+
+    &::selection {
+      background-color: transparent;
+    }
+  }
+
 }

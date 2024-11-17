@@ -1,9 +1,13 @@
 <script setup lang="ts">
-
 import CustomFlag from '@/Components/CustomFlag.vue';
+import { CROWDIN_URL } from '@/config';
 import { LanguageConfig } from '@/model/language-config';
+import HtButton from '@/Reusable/HtButton.vue';
+import HtCollapsible from '@/Reusable/HtCollapsible.vue';
+import HtLinkButton from '@/Reusable/HtLinkButton.vue';
 import { AvailableLanguage, LANGUAGES } from '@/utils/language-settings';
-import { router, usePage } from '@inertiajs/vue3';
+import { faCaretDown, faCaretUp, faGlobe, faLifeRing } from '@fortawesome/free-solid-svg-icons';
+import { Link, router, usePage } from '@inertiajs/vue3';
 import { computed, onMounted, ref } from 'vue';
 import nativeLocaleNames from '../../../vendor/laravel-lang/native-locale-names/locales/_native/json.json';
 
@@ -32,6 +36,13 @@ const sortedLanguages = computed(() =>
     .sort(([a], [b]) => extendedNativeLocaleNames[a].localeCompare(extendedNativeLocaleNames[b])),
 );
 
+const searchParamsString = computed(() => {
+  return searchParams.value.size > 0 ? `?${searchParams.value}` : '';
+});
+
+const noTranslationsNeededLocales = new Set(['en', 'en-GB', 'hu']);
+const languagesDropdownVisible = ref(false);
+
 const navigateListener = () => {
   searchParams.value = new URLSearchParams(window.location.search);
 };
@@ -39,44 +50,74 @@ onMounted(router.on('success', navigateListener));
 </script>
 
 <template>
-  <details class="dropdown">
-    <summary
-      class="language-button"
+  <div class="language-selector">
+    <div
+      class="language-info"
       :dir="languageConfig.rtl ? 'rtl' : 'ltr'"
     >
-      <span class="language-flag">
+      <div class="language-flag">
         <CustomFlag
-          :country="LANGUAGES[locale]?.countryCode"
-          :custom-flag="LANGUAGES[locale]?.customFlag"
+          :country="languageConfig.countryCode"
+          :custom-flag="languageConfig.customFlag"
         />
-      </span>
-      <span class="language-name">{{ extendedNativeLocaleNames[locale] }}</span>
-    </summary>
-    <ul
-      role="listbox"
-      class="language-dropdown"
-      dir="ltr"
+      </div>
+      <div class="language-name">
+        {{ extendedNativeLocaleNames[locale] }}
+      </div>
+    </div>
+    <div class="translation-progress" />
+    <HtCollapsible
+      :visible="languagesDropdownVisible"
+      class="language-list"
+      :max-height="200"
     >
-      <template v-for="[sortedLocale, config] in sortedLanguages">
-        <li
-          v-if="sortedLocale !== locale"
-          :key="sortedLocale"
-        >
-          <a
-            :href="route('home', { locale: sortedLocale })+(searchParams.size > 0 ? `?${searchParams}` : '')"
-            :class="['language-link', { disabled: !supportedLanguages.has(sortedLocale) }]"
-            :dir="config.rtl ? 'rtl' : 'ltr'"
+      <div
+        dir="ltr"
+      >
+        <template v-for="[sortedLocale, config] in sortedLanguages">
+          <li
+            v-if="sortedLocale !== locale"
+            :key="sortedLocale"
           >
-            <span class="language-flag">
-              <CustomFlag
-                :country="config.countryCode"
-                :custom-flag="config.customFlag"
-              />
-            </span>
-            <span class="language-name">{{ extendedNativeLocaleNames[sortedLocale] }}</span>
-          </a>
-        </li>
-      </template>
-    </ul>
-  </details>
+            <Link
+              :href="route('home', { locale: sortedLocale })+searchParamsString"
+              :class="['language-link', { disabled: !supportedLanguages.has(sortedLocale) }]"
+              :dir="config.rtl ? 'rtl' : 'ltr'"
+            >
+              <span class="language-flag">
+                <CustomFlag
+                  :country="config.countryCode"
+                  :custom-flag="config.customFlag"
+                />
+              </span>
+              <span class="language-name">{{ extendedNativeLocaleNames[sortedLocale] }}</span>
+            </Link>
+          </li>
+        </template>
+      </div>
+    </HtCollapsible>
+    <div class="language-controls">
+      <HtButton
+        :block="true"
+        class="change-language-button"
+        :icon-start="faGlobe"
+        :icon-end="languagesDropdownVisible ? faCaretDown : faCaretUp"
+        :justify-center="true"
+        :pressed="languagesDropdownVisible"
+        @click.prevent="languagesDropdownVisible = !languagesDropdownVisible"
+      >
+        <span>{{ $t('global.changeLanguage') }}</span>
+      </HtButton>
+      <HtLinkButton
+        v-if="!noTranslationsNeededLocales.has(locale)"
+        color="success"
+        class="contribute-button"
+        :icon-only="true"
+        :icon-start="faLifeRing"
+        :href="`${CROWDIN_URL}/${languageConfig?.crowdinLocale || locale}`"
+        :external="true"
+        :target-blank="true"
+      />
+    </div>
+  </div>
 </template>

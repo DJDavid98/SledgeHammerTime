@@ -15,7 +15,7 @@
 
 .calendar-controls {
   display: grid;
-  grid-template-columns: repeat(2, var(--button-size)) auto repeat(2, var(--button-size));
+  grid-template-columns: calc(var(--button-size) * 2.5) auto calc(var(--button-size) * 2.5);
   width: 100%;
   margin: .5em 0;
   gap: var(--gap);

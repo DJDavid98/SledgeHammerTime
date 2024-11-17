@@ -1,20 +1,21 @@
 <script setup lang="ts">
 
-import HtLoadingIndicator from '@/Reusable/HtLoadingIndicator.vue';
+import HtButtonContent, { HtButtonContentProps } from '@/Reusable/HtButtonContent.vue';
+import { ButtonColors, getButtonClasses } from '@/utils/buttons';
+import { computed } from 'vue';
 
 const props = withDefaults(defineProps<{
   type?: 'button' | 'submit',
   /**
    * Defaults to gray when not provided
    */
-  color?: 'primary' | 'success' | 'danger',
+  color?: ButtonColors,
   'class'?: string | Record<string, boolean>,
   disabled?: boolean,
-  loading?: boolean,
   block?: boolean,
   pressed?: boolean,
-  iconOnly?: boolean,
-}>(), {
+  justifyCenter?: boolean,
+} & Partial<HtButtonContentProps>>(), {
   type: 'button',
   color: undefined,
   'class': undefined,
@@ -23,7 +24,12 @@ const props = withDefaults(defineProps<{
   block: false,
   pressed: false,
   iconOnly: false,
+  iconStart: undefined,
+  iconEnd: undefined,
+  justifyCenter: false,
 });
+
+const buttonClasses = computed(() => getButtonClasses(props));
 
 const emit = defineEmits<{
   (e: 'click', event: MouseEvent): void;
@@ -33,20 +39,17 @@ const emit = defineEmits<{
 <template>
   <button
     :type="type"
-    :class="['button', props.class, { [`color-${props.color}`]: props.color, block: props.block, pressed: props.pressed,'icon-only': props.iconOnly }]"
+    :class="buttonClasses"
     :disabled="props.disabled || props.loading"
     @click="emit('click', $event)"
   >
-    <span
-      v-if="loading"
-      class="loading-icon"
+    <HtButtonContent
+      :loading="loading"
+      :icon-only="iconOnly"
+      :icon-start="iconStart"
+      :icon-end="iconEnd"
     >
-      <HtLoadingIndicator size="1em" />
-    </span>
-    <span class="button-content">
-      <span class="button-text">
-        <slot />
-      </span>
-    </span>
+      <slot />
+    </HtButtonContent>
   </button>
 </template>

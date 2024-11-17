@@ -1,52 +1,80 @@
 <script setup lang="ts">
+import HtButton from '@/Reusable/HtButton.vue';
+import HtCollapsible from '@/Reusable/HtCollapsible.vue';
+import HtLinkButton from '@/Reusable/HtLinkButton.vue';
 import { AvailableLanguage } from '@/utils/language-settings';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faCaretDown, faCaretUp, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const page = usePage();
 
 const locale = computed(() => page.props.app.locale as AvailableLanguage);
+const userInfo = computed(() => page.props.auth?.user);
+
+const userDropdownVisible = ref(false);
+
+const toggleUserDropdown = (e: MouseEvent) => {
+  e.preventDefault();
+
+  if (!userInfo.value) return;
+
+  userDropdownVisible.value = !userDropdownVisible.value;
+};
 </script>
 
 <template>
-  <template v-if="$page.props.auth.user">
-    <details class="dropdown user-dropdown">
-      <summary>
-        <span class="user-icon"><FontAwesomeIcon :icon="faUser" /></span>
-        <span class="user-name">{{ $page.props.auth.user.name }}</span>
-      </summary>
-      <ul role="listbox">
-        <li>
-          <Link :href="route('settings', { locale })">
-            {{ $t('global.nav.botSettings') }}
-          </Link>
-        </li>
-        <li>
-          <Link :href="route('profile.edit', { locale })">
-            {{ $t('global.nav.profile') }}
-          </Link>
-        </li>
-        <li>
-          <Link
-            :href="route('logout')"
-            method="post"
-            as="button"
-            role="button"
-            class="outline"
-          >
-            {{ $t('global.nav.logout') }}
-          </Link>
-        </li>
-      </ul>
-    </details>
-  </template>
+  <HtCollapsible :visible="userDropdownVisible">
+    <ul
+      v-if="userInfo"
+      :class="['user-dropdown', { visible: userDropdownVisible }]"
+    >
+      <li>
+        <Link
+          :href="route('settings', { locale })"
+        >
+          {{ $t('global.nav.botSettings') }}
+        </Link>
+      </li>
+      <li>
+        <Link
+          :href="route('profile.edit', { locale })"
+        >
+          {{ $t('global.nav.profile') }}
+        </Link>
+      </li>
+      <li>
+        <Link
+          :href="route('logout')"
+          method="post"
+          as="button"
+          class="cursor-pointer"
+        >
+          {{ $t('global.nav.logout') }}
+        </Link>
+      </li>
+    </ul>
+  </HtCollapsible>
+  <div class="user-info">
+    <HtButton
+      v-if="userInfo"
+      color="primary"
+      :icon-start="faUser"
+      :icon-end="userDropdownVisible ? faCaretDown : faCaretUp"
+      :pressed="userDropdownVisible"
+      @click="toggleUserDropdown"
+    >
+      {{ userInfo?.name ?? $t('global.guest') }}
+    </HtButton>
 
-  <template v-else>
-    <a
+    <HtLinkButton
+      v-else
+      color="primary"
       :href="route('login', { locale })"
-      role="button"
-    >{{ $t('global.nav.login') }}</a>
-  </template>
+      :external="true"
+      :target-blank="false"
+    >
+      {{ $t('global.nav.login') }}
+    </HtLinkButton>
+  </div>
 </template>

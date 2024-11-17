@@ -4,6 +4,8 @@ import TimePicker from '@/Components/home/inputs/TimeInput.vue';
 import TimeZonePicker from '@/Components/home/inputs/TimeZoneInput.vue';
 import { timestamp } from '@/injection-keys';
 import HtButton from '@/Reusable/HtButton.vue';
+import HtFormControl from '@/Reusable/HtFormControl.vue';
+import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
 import { faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { inject } from 'vue';
@@ -12,20 +14,29 @@ const ts = inject(timestamp);
 </script>
 
 <template>
-  <div class="grid">
-    <div>
-      <label for="datepicker">{{ $t('timestampPicker.picker.label.date') }}</label>
-      <DatePicker id="datepicker" />
-    </div>
-    <div>
-      <label for="timepicker">{{ $t('timestampPicker.picker.label.time') }}</label>
-      <TimePicker id="timepicker" />
-    </div>
-    <div>
-      <label for="timezonepicker">{{ $t('timestampPicker.picker.label.timezone') }}</label>
-      <TimeZonePicker id="timezonepicker" />
-    </div>
-    <div v-if="ts">
+  <HtFormControlGroup>
+    <HtFormControl
+      id="datepicker"
+      :label="$t('timestampPicker.picker.label.date')"
+    >
+      <DatePicker />
+    </HtFormControl>
+    <HtFormControl
+      id="timepicker"
+      :label="$t('timestampPicker.picker.label.time')"
+    >
+      <TimePicker />
+    </HtFormControl>
+    <HtFormControl
+      id="timezonepicker"
+      :label="$t('timestampPicker.picker.label.timezone')"
+    >
+      <TimeZonePicker />
+    </HtFormControl>
+    <div
+      v-if="ts"
+      class="form-control"
+    >
       <HtButton
         :data-tooltip="$t('timestampPicker.picker.tooltip.setToCurrent')"
         class="mt-4 mb-0 secondary outline"
@@ -35,5 +46,5 @@ const ts = inject(timestamp);
         <FontAwesomeIcon :icon="faClockRotateLeft" />
       </HtButton>
     </div>
-  </div>
+  </HtFormControlGroup>
 </template>

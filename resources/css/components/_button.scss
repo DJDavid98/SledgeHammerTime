@@ -16,6 +16,7 @@
   transition-duration: .1s;
   user-select: none;
   box-sizing: border-box;
+  display: inline-block;
 
   @include design.if-dark {
     color: design.app-color-dark('button-default-color');
@@ -42,6 +43,10 @@
 
   &.visually-hidden {
     opacity: 0 !important;
+  }
+
+  &.justify-center .button-content {
+    justify-content: center;
   }
 
   &.block {
@@ -76,5 +81,19 @@
 
   .button-content {
     display: flex;
+    justify-content: space-between;
+    gap: design.app-size('button-content-gap');
+  }
+}
+
+.button-group {
+  display: flex;
+  flex-flow: row nowrap;
+
+  > .button {
+    min-width: 0;
+    flex-grow: 1;
+
+    @include design.combined-border-radius;
   }
 }

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import { useSidebarState } from '@/hooks/useSidebarState';
-import { sidebarState } from '@/injection-keys';
+import { useLocalSettings } from '@/composables/useLocalSettings';
+import { useSidebarState } from '@/composables/useSidebarState';
+import { localSettings, sidebarState } from '@/injection-keys';
 import HtAlert from '@/Reusable/HtAlert.vue';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
@@ -15,9 +16,11 @@ import { provide, readonly } from 'vue';
 
 const placeholderText = loremIpsum();
 
-const sbState = useSidebarState();
+const localSettingsValue = readonly(useLocalSettings());
+const sidebarStateValue = readonly(useSidebarState(localSettingsValue));
 
-provide(sidebarState, readonly(sbState));
+provide(sidebarState, sidebarStateValue);
+provide(localSettings, localSettingsValue);
 </script>
 
 <template>
@@ -151,26 +154,22 @@ provide(sidebarState, readonly(sbState));
 
       <dl>
         <dt>isOpen</dt>
-        <dd>{{ sbState.isOpen }}</dd>
-        <dt>isOnLeft</dt>
-        <dd>{{ sbState.isOnLeft }}</dd>
+        <dd>{{ sidebarStateValue.isOpen }}</dd>
+        <dt>isOnRight</dt>
+        <dd>{{ localSettingsValue.sidebarOnRight }}</dd>
       </dl>
 
       <div>
-        <HtButton @click="sbState.setIsOpen(true)">
+        <HtButton @click="sidebarStateValue.setIsOpen(true)">
           Open
         </HtButton>
         &nbsp;
-        <HtButton @click="sbState.setIsOpen(false)">
+        <HtButton @click="sidebarStateValue.setIsOpen(false)">
           Close
         </HtButton>
         &nbsp;
-        <HtButton @click="sbState.setIsOnLeft(true)">
-          Move Left
-        </HtButton>
-        &nbsp;
-        <HtButton @click="sbState.setIsOnLeft(false)">
-          Move Right
+        <HtButton @click="localSettingsValue.toggleSidebarOnRight()">
+          Toggle Left/Right
         </HtButton>
       </div>
     </HtCard>

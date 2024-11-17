@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import LanguageSelector from '@/Components/LanguageSelector.vue';
 import UserInfo from '@/Components/UserInfo.vue';
-import { sidebarState } from '@/injection-keys';
+import { localSettings, sidebarState } from '@/injection-keys';
 import HtButton from '@/Reusable/HtButton.vue';
 import { faAlignLeft, faAlignRight, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { computed, inject } from 'vue';
 
 const state = inject(sidebarState);
-const isOnLeft = computed(() => Boolean(state?.isOnLeft));
+const localSettingsValue = inject(localSettings);
+const isOnRight = computed(() => Boolean(localSettingsValue?.sidebarOnRight));
 const isOpen = computed(() => Boolean(state?.isOpen));
 </script>
 
 
 <template>
-  <aside :class="['sidebar', `position-${isOnLeft ? 'left' : 'right'}`, { 'is-open': isOpen }]">
+  <aside :class="['sidebar', `position-${isOnRight ? 'right' : 'left'}`, { 'is-open': isOpen }]">
     <div
       v-if="state"
       class="sidebar-top"
@@ -22,8 +23,8 @@ const isOpen = computed(() => Boolean(state?.isOpen));
       <HtButton @click="state.setIsOpen(false)">
         <FontAwesomeIcon :icon="faTimes" />
       </HtButton>
-      <HtButton @click="state.setIsOnLeft(!isOnLeft)">
-        <FontAwesomeIcon :icon="isOnLeft ? faAlignRight : faAlignLeft" />
+      <HtButton @click="localSettingsValue?.toggleSidebarOnRight()">
+        <FontAwesomeIcon :icon="isOnRight ? faAlignLeft : faAlignRight" />
       </HtButton>
     </div>
     <hr class="sidebar-divider">
@@ -40,4 +41,7 @@ const isOpen = computed(() => Boolean(state?.isOpen));
       </ul>
     </div>
   </aside>
+  <div class="sidebar-spacing-wrapper">
+    <slot />
+  </div>
 </template>

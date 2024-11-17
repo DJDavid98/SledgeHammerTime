@@ -1,0 +1,26 @@
+@use "../design";
+
+.user-info {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: design.app-size('user-info-spacing');
+}
+
+.user-dropdown {
+  list-style: disc;
+  list-style-position: outside;
+  margin: design.app-size('user-info-spacing') 0;
+
+  @include design.if-ltr {
+    padding-left: design.app-size('content-spacing');
+  }
+  @include design.if-rtl {
+    padding-right: design.app-size('content-spacing');
+  }
+
+  a, button {
+    text-decoration: underline;
+  }
+}

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import FormMessage from '@/Components/FormMessage.vue';
 import HtButton from '@/Reusable/HtButton.vue';
+import HtFormControl from '@/Reusable/HtFormControl.vue';
+import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
 import HtInput from '@/Reusable/HtInput.vue';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { useForm, usePage } from '@inertiajs/vue3';
 
 const user = usePage().props.auth.user;
@@ -21,30 +24,35 @@ const form = useForm({
   </header>
 
   <form @submit.prevent="form.patch(route('profile.update'))">
-    <div>
-      <label for="name">{{ $t('profile.information.displayName') }}</label>
-
-      <HtInput
+    <HtFormControlGroup :vertical="true">
+      <HtFormControl
         id="name"
-        v-model="form.name"
-        type="text"
-        class="mt-1"
-        required
-        autofocus
-        autocomplete="name"
-      />
-
-      <FormMessage
-        type="error"
-        class="mt-2"
-        :message="form.errors.name"
-      />
-    </div>
+        :label="$t('profile.information.displayName')"
+      >
+        <HtInput
+          v-model="form.name"
+          type="text"
+          class="mt-1"
+          required
+          autofocus
+          autocomplete="name"
+        />
+        <template #message>
+          <FormMessage
+            type="error"
+            class="mt-2"
+            :message="form.errors.name"
+          />
+        </template>
+      </HtFormControl>
+    </HtFormControlGroup>
 
     <div>
       <HtButton
+        color="primary"
         :loading="form.processing"
         type="submit"
+        :icon-start="faSave"
       >
         {{ $t('global.form.save') }}
       </HtButton>

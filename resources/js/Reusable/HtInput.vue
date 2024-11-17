@@ -12,6 +12,7 @@ const emit = defineEmits<{
 const props = defineProps<{
   id?: string;
   readonly?: boolean;
+  hideSelection?: boolean;
   type?: 'text' | 'number';
   min?: string | number;
   max?: string | number;
@@ -34,7 +35,7 @@ defineExpose({
     ref="input-el"
     :type="type"
     :value="model"
-    :class="['input-text', props.class]"
+    :class="['input-text', props.class, { 'hide-selection': hideSelection }]"
     :readonly="readonly"
     :min="min"
     :max="max"

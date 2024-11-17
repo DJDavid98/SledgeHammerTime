@@ -19,6 +19,7 @@ $size-map: (
   button-shadow-size: .125rem,
   button-border-radius: .25rem,
   button-font-size: .875rem,
+  button-content-gap: .3rem,
   card-padding: 1rem,
   card-border-radius: .5rem,
   alert-spacing: 1rem,
@@ -27,6 +28,7 @@ $size-map: (
   sidebar-max-width: 25rem,
   sidebar-border: .0625rem,
   sidebar-divider-border: .0625rem,
+  sidebar-default-open-min-width: 1024px,
   popup-border: .125rem,
   popup-box-shadow: 1rem,
   input-text-padding: .25rem,
@@ -34,6 +36,28 @@ $size-map: (
   input-text-border-radius: .25rem,
   input-text-box-shadow-inset-y: .05rem,
   input-text-box-shadow: .15rem,
+  form-control-spacing: .5rem,
+  language-selector-spacing: .5em,
+  user-info-spacing: .5em,
+  collapsible-padding: .35em,
+  collapsible-border-radius: .5em,
+  form-checkbox-width: 1em,
+  form-checkbox-height: 1em,
+  form-checkbox-border: .0625em,
+  form-checkbox-border-radius: .25em,
+  form-select-icon-size: 1em,
+  form-select-icon-padding: .25em,
+  discord-user-info-spacing: .5em,
+  discord-user-info-image-border-radius: 50%,
+  discord-user-info-image-size: 2rem,
+  discord-user-info-name-font-size: 1.25rem,
+  table-cell-spacing: .5em,
+  table-border-size: .0625em,
+  syntax-display-spacing: .5em,
+  syntax-display-padding-vertical: .15em,
+  syntax-display-padding-horizontal: .5em,
+  syntax-display-border-radius: .3em,
+  syntax-display-line-height: 1.5em,
 );
 
 $color-map: (
@@ -176,6 +200,22 @@ $color-map: (
   calendar-day-selected-bg: (
     light: rgba(#5865f2, .25),
     dark: rgba(#5865f2, .5),
+  ),
+  collapsible-bg: (
+    light: rgba(#000, .25),
+    dark: rgba(#000, .5),
+  ),
+  table-border: (
+    light: #6d6e70,
+    dark: #373a40,
+  ),
+  syntax-display-code-color: (
+    light: #232323,
+    dark: #dcdcdc,
+  ),
+  syntax-display-code-bg: (
+    light: #ccc,
+    dark: #444,
   ),
 );
 
