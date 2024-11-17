@@ -1,3 +1,150 @@
+@use "../design";
+
+.form-control-group {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  gap: design.app-size('form-control-spacing');
+  margin-bottom: design.app-size('form-control-spacing');
+
+  &.vertical {
+    flex-flow: column nowrap;
+  }
+}
+
+.form-control-wrap {
+  display: block;
+  flex: 1 1 auto;
+}
+
+.form-control {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  gap: design.app-size('form-control-spacing');
+}
+
+.form-control-checkbox {
+  display: block;
+
+  .form-checkbox-input-wrap {
+    position: relative;
+    display: inline-block;
+    width: design.app-size('form-checkbox-width');
+    height: design.app-size('form-checkbox-height');
+    border: design.app-size('form-checkbox-border') solid design.app-color-light('input-text-border-color');
+    background-color: design.app-color-light('input-text-bg');
+    border-radius: design.app-size('form-checkbox-border-radius');
+    vertical-align: text-top;
+
+    &:focus {
+      border-color: design.app-color-light('input-text-focus-border-color');
+    }
+
+    @include design.if-dark {
+      border-color: design.app-color-dark('input-text-border-color');
+      background-color: design.app-color-dark('input-text-bg');
+
+      &:focus {
+        border-color: design.app-color-dark('input-text-focus-border-color');
+      }
+    }
+
+    @include design.if-ltr {
+      margin-right: design.app-size('form-control-spacing');
+    }
+    @include design.if-rtl {
+      margin-left: design.app-size('form-control-spacing');
+    }
+
+
+    .form-checkbox-check-icon,
+    .form-checkbox-input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    .form-checkbox-input {
+      border: 0;
+      background: transparent;
+      box-sizing: border-box;
+    }
+
+    .form-checkbox-check-icon {
+      text-align: center;
+      transform: translate(-0.1em, 0.05em);
+      opacity: 0;
+      color: design.app-color-light('input-text-color');
+      transition: opacity .1s linear;
+      font-size: .8em;
+
+      @include design.if-dark {
+        color: design.app-color-dark('input-text-color');
+      }
+    }
+
+    .form-checkbox-input:checked + .form-checkbox-check-icon {
+      opacity: 1;
+    }
+  }
+
+  .form-checkbox-label {
+    cursor: default;
+  }
+}
+
+.form-control-select {
+  display: inline-block;
+  position: relative;
+
+  > select {
+    $padding-value: calc(#{design.app-size('input-text-padding') * 2} + #{design.app-size('form-select-icon-padding') * 2} + #{design.app-size('form-select-icon-size')});
+    @include design.if-ltr {
+      padding-right: $padding-value;
+    }
+    @include design.if-rtl {
+      padding-left: $padding-value;
+    }
+  }
+
+  .form-select-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0 design.app-size('form-select-icon-padding');
+    pointer-events: none;
+    font-size: design.app-size('form-select-icon-size');
+
+    @include design.if-ltr {
+      right: 0;
+    }
+
+    @include design.if-rtl {
+      left: 0;
+    }
+  }
+}
+
+.form-input-group {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: design.app-size('form-control-spacing');
+
+  > .input-text {
+    min-width: 0;
+    flex-grow: 1;
+
+    @include design.combined-border-radius;
+  }
+}
+
 .form-message {
   font-size: 0.9em;
 

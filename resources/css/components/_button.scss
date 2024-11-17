@@ -1,0 +1,99 @@
+@use "../design";
+
+.button {
+  --button-border-color: #{design.app-color-light('button-default-border-color')};
+  position: relative;
+  color: design.app-color-light('button-default-color');
+  background-color: design.app-color-light('button-default-bg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .05) 100%);
+  padding: design.app-size('button-padding-vertical') design.app-size('button-padding-horizontal');
+  border: design.app-size('button-border-width') solid var(--button-border-color);
+  border-radius: design.app-size('button-border-radius');
+  font-size: design.app-size('button-font-size');
+  box-shadow: 0 design.app-size('button-shadow-size') 0 var(--button-border-color);
+  will-change: transform;
+  transition-property: transform, box-shadow, opacity, color, background-color, border-color;
+  transition-duration: .1s;
+  user-select: none;
+  box-sizing: border-box;
+  display: inline-block;
+
+  @include design.if-dark {
+    color: design.app-color-dark('button-default-color');
+    background-color: design.app-color-dark('button-default-bg');
+    --button-border-color: #{design.app-color-dark('button-default-border-color')};
+  }
+
+  @include design.if-prefers-reduced-motion {
+    transition: none !important;
+  }
+
+  &:disabled {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .05) 100%);
+    cursor: not-allowed;
+
+    .button-content {
+      opacity: .5;
+    }
+  }
+
+  &.icon-only {
+    padding: design.app-size('button-padding-vertical');
+  }
+
+  &.visually-hidden {
+    opacity: 0 !important;
+  }
+
+  &.justify-center .button-content {
+    justify-content: center;
+  }
+
+  &.block {
+    display: block;
+    width: 100%;
+  }
+
+  &:not(:disabled):active, &.pressed {
+    transform: translateY(design.app-size('button-shadow-size'));
+    box-shadow: 0 0 0 var(--button-border-color);
+  }
+
+  @include design.button-color-variation('primary');
+  @include design.button-color-variation('success');
+  @include design.button-color-variation('danger');
+
+  .loading-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to right, transparent, var(--button-border-color), transparent);
+
+    + .button-content {
+      opacity: .2;
+    }
+  }
+
+  .button-content {
+    display: flex;
+    justify-content: space-between;
+    gap: design.app-size('button-content-gap');
+  }
+}
+
+.button-group {
+  display: flex;
+  flex-flow: row nowrap;
+
+  > .button {
+    min-width: 0;
+    flex-grow: 1;
+
+    @include design.combined-border-radius;
+  }
+}

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import CustomAlert from '@/Components/CustomAlert.vue';
 import DateTimePicker from '@/Components/home/DateTimePicker.vue';
 import TimestampTable from '@/Components/home/table/TimestampTable.vue';
+import HtAlert from '@/Reusable/HtAlert.vue';
+import HtCard from '@/Reusable/HtCard.vue';
 import { AvailableLanguage } from '@/utils/language-settings';
 import { usePage } from '@inertiajs/vue3';
 import Cookies from 'js-cookie';
@@ -37,17 +38,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <CustomAlert
+  <HtAlert
     v-if="showHowTo"
     type="info"
-    :title="$t('global.seoDescription')"
-    :text="$t('timestampPicker.howTo', { syntaxColName })"
     @close="handleHowToClose"
-  />
+  >
+    <template #title>
+      {{ $t('global.seoDescription') }}
+    </template>
+    <template #text>
+      {{ $t('timestampPicker.howTo', { syntaxColName }) }}
+    </template>
+  </HtAlert>
 
-  <article class="my-0">
+  <HtCard>
     <DateTimePicker />
 
     <TimestampTable />
-  </article>
+  </HtCard>
 </template>

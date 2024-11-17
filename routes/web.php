@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BotSettingsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StaticController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,8 @@ $addLocalePrefix = function (string $path, bool $name):string {
 $defineRoutes = function (bool $name) use ($addLocalePrefix) {
   $settingsRoute = Route::middleware('auth')->get($addLocalePrefix('/settings', $name), [BotSettingsController::class, 'edit']);
   $profileEditRoute = Route::middleware('auth')->get($addLocalePrefix('/profile', $name), [ProfileController::class, 'edit']);
+  $designRoute = Route::get($addLocalePrefix('/design', $name), [StaticController::class, 'design']);
+
   Route::middleware('guest')->get($addLocalePrefix('/oauth/callback/{provider}', $name), [AuthController::class, 'callback']);
 
   if ($name){
@@ -48,6 +51,7 @@ $defineRoutes = function (bool $name) use ($addLocalePrefix) {
     Route::middleware('guest')->get($addLocalePrefix('/login', $name), [AuthController::class, 'login']);
     $settingsRoute->name('settings');
     $profileEditRoute->name('profile.edit');
+    $designRoute->name('design');
   }
 };
 foreach ($languages as $language => $_){

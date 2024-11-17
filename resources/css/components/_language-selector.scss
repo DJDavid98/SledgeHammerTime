@@ -1,0 +1,61 @@
+@use "../design";
+
+.language-selector {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-bottom: design.app-size('content-spacing');
+}
+
+.language-info {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: design.app-size('language-selector-spacing');
+  margin-bottom: design.app-size('language-selector-spacing');
+
+  .language-flag {
+    font-size: 1rem;
+    width: 2.5em;
+    height: 2em;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: .5em;
+
+    .flag {
+      display: block;
+    }
+  }
+
+  .language-name {
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+
+}
+
+.language-controls {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: design.app-size('language-selector-spacing');
+
+  .change-language-button {
+    flex: 1 1 100%;
+  }
+
+  .contribute-button {
+    flex: 0 0 auto;
+  }
+}
+
+.language-list {
+  .language-link {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: design.app-size('language-selector-spacing');
+  }
+}

@@ -1,43 +1,62 @@
-@use '../mixins/if';
+@use "../design";
 
 .alert {
-  background-color: var(--pico-primary-background);
-  color: var(--pico-primary-inverse);
+  display: flex;
+  flex-flow: row nowrap;
+  gap: design.app-size('alert-spacing');
+  padding: design.app-size('alert-spacing');
+  border-radius: design.app-size('alert-border-radius');
+  background-color: design.app-color-light('alert-bg');
+  color: design.app-color-light('alert-color');
 
-  header {
-    background-color: rgba(255, 255, 255, .5);
+  @include design.if-dark {
+    background-color: design.app-color-dark('alert-bg');
+    color: design.app-color-dark('alert-color');
+  }
 
-    @include if.dark {
-      background-color: rgba(0, 0, 0, .5);
+  .alert-icon:empty {
+    display: none;
+  }
+
+  .alert-content {
+    flex-grow: 1;
+    flex-basis: 100%;
+    font-size: 0.875rem;
+  }
+
+  .alert-title {
+    font-weight: bold;
+
+    &:empty {
+      display: none;
     }
 
-    .icon {
-      @include if.ltr {
-        margin-right: 1em;
-      }
-
-      @include if.rtl {
-        margin-left: 1em;
-      }
-    }
-
-    .close-button {
-      float: right;
-      border: 0;
-      padding: 0;
-      min-width: .8em;
-      min-height: .8em;
-      font-size: 2em;
-      line-height: .5em;
+    &:not(:empty) + .alert-text {
+      margin-top: design.app-size('alert-spacing');
     }
   }
 
-  &.info {
-    $info-bg: $blue-500;
-    $info-bg-hover: $blue-450;
-    $info-bg-inverse: $blue-200;
-    --pico-primary-background: #{$info-bg};
-    --pico-primary-inverse: #{$info-bg-inverse};
-    --pico-primary-hover-background: #{$info-bg-hover};
+  .alert-text {
+    &:empty {
+      display: none;
+    }
+  }
+
+  &.warning {
+    color: design.app-color-light('alert-warning-color');
+    background-color: design.app-color-light('alert-warning-bg');
+
+    .alert-title, .alert-icon {
+      color: design.app-color-light('alert-warning-hl-color');
+    }
+
+    @include design.if-dark {
+      color: design.app-color-dark('alert-warning-color');
+      background-color: design.app-color-dark('alert-warning-bg');
+
+      .alert-title, .alert-icon {
+        color: design.app-color-dark('alert-warning-hl-color');
+      }
+    }
   }
 }

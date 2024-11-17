@@ -1,0 +1,246 @@
+@use "sass:color";
+
+$z-index-map: (
+  sidebar: 3,
+  header: 2,
+  default: 1,
+);
+
+$size-map: (
+  header-height: 3.25rem,
+  header-spacing-horizontal: .625rem,
+  header-spacing-vertical: .625rem,
+  header-border: 0.0625rem,
+  header-brand-font-size: 1.25rem,
+  content-spacing: 1rem,
+  button-padding-horizontal: .5rem,
+  button-padding-vertical: .25rem,
+  button-border-width: .0625rem,
+  button-shadow-size: .125rem,
+  button-border-radius: .25rem,
+  button-font-size: .875rem,
+  button-content-gap: .3rem,
+  card-padding: 1rem,
+  card-border-radius: .5rem,
+  alert-spacing: 1rem,
+  alert-border-radius: .5rem,
+  sidebar-spacing: .5rem,
+  sidebar-max-width: 25rem,
+  sidebar-border: .0625rem,
+  sidebar-divider-border: .0625rem,
+  sidebar-default-open-min-width: 1024px,
+  popup-border: .125rem,
+  popup-box-shadow: 1rem,
+  input-text-padding: .25rem,
+  input-text-border: .0625rem,
+  input-text-border-radius: .25rem,
+  input-text-box-shadow-inset-y: .05rem,
+  input-text-box-shadow: .15rem,
+  form-control-spacing: .5rem,
+  language-selector-spacing: .5em,
+  user-info-spacing: .5em,
+  collapsible-padding: .35em,
+  collapsible-border-radius: .5em,
+  form-checkbox-width: 1em,
+  form-checkbox-height: 1em,
+  form-checkbox-border: .0625em,
+  form-checkbox-border-radius: .25em,
+  form-select-icon-size: 1em,
+  form-select-icon-padding: .25em,
+  discord-user-info-spacing: .5em,
+  discord-user-info-image-border-radius: 50%,
+  discord-user-info-image-size: 2rem,
+  discord-user-info-name-font-size: 1.25rem,
+  table-cell-spacing: .5em,
+  table-border-size: .0625em,
+  syntax-display-spacing: .5em,
+  syntax-display-padding-vertical: .15em,
+  syntax-display-padding-horizontal: .5em,
+  syntax-display-border-radius: .3em,
+  syntax-display-line-height: 1.5em,
+);
+
+$color-map: (
+  layout-bg: (
+    light: #bbb,
+    dark: #000
+  ),
+  layout-color: (
+    light: #212121,
+    dark: #C1C2C5,
+  ),
+  header-bg: (
+    light: color.adjust(#5865f2, $lightness: 27%, $saturation: -10%),
+    dark: #1A1B1E
+  ),
+  header-border: (
+    light: color.adjust(#5865f2, $lightness: 20%, $saturation: -10%),
+    dark: #2C2E33
+  ),
+  header-brand: (
+    light: color.adjust(#5865f2, $lightness: -10%, $saturation: -10%),
+    dark: #909296
+  ),
+  card-bg: (
+    light: color.adjust(#5865f2, $lightness: 30%, $saturation: -10%),
+    dark: #1A1B1E
+  ),
+  card-color: (
+    light: #212121,
+    dark: #C1C2C5,
+  ),
+  alert-bg: (
+    light: rgba(230, 229, 227, .5),
+    dark: rgba(20, 21, 23, 0.2),
+  ),
+  alert-color: (
+    light: rgb(62, 61, 58),
+    dark: rgb(193, 194, 197),
+  ),
+  alert-warning-bg: (
+    light: rgba(246, 178, 143, 0.2),
+    dark: rgba(232, 89, 12, 0.2),
+  ),
+  alert-warning-color: (
+    light: #000,
+    dark: rgb(255, 255, 255),
+  ),
+  alert-warning-hl-color: (
+    light: rgb(126, 58, 4),
+    dark: #ffd8a8,
+  ),
+  button-border-color: (
+    light: rgba(0, 0, 0, .2),
+    dark: rgba(255, 255, 255, .2),
+  ),
+  button-default-color: (
+    light: #000,
+    dark: #fff,
+  ),
+  button-default-bg: (
+    light: color.adjust(#5865f2, $lightness: 20%, $saturation: -100%),
+    dark: color.adjust(#5865f2, $lightness: -20%, $saturation: -100%),
+  ),
+  button-default-border-color: (
+    light: color.adjust(#5865f2, $lightness: 10%, $saturation: -100%),
+    dark: color.adjust(#5865f2, $lightness: -30%, $saturation: -100%),
+  ),
+  button-primary-color: (
+    light: #000,
+    dark: #fff,
+  ),
+  button-primary-bg: (
+    light: color.adjust(#5865f2, $lightness: 22%),
+    dark: #5865f2,
+  ),
+  button-primary-border-color: (
+    light: color.adjust(#5865f2, $lightness: 12%, $saturation: -10%),
+    dark: color.adjust(#5865f2, $lightness: -10%, $saturation: -10%),
+  ),
+  button-success-color: (
+    light: #000,
+    dark: #fff,
+  ),
+  button-success-bg: (
+    light: color.adjust(#559933, $lightness: 22%),
+    dark: #559933,
+  ),
+  button-success-border-color: (
+    light: color.adjust(#559933, $lightness: 12%, $saturation: -10%),
+    dark: color.adjust(#559933, $lightness: -10%, $saturation: -10%),
+  ),
+  button-danger-color: (
+    light: #000,
+    dark: #fff,
+  ),
+  button-danger-bg: (
+    light: color.adjust(#993333, $lightness: 30%),
+    dark: #993333,
+  ),
+  button-danger-border-color: (
+    light: color.adjust(#993333, $lightness: 20%, $saturation: -10%),
+    dark: color.adjust(#993333, $lightness: -10%, $saturation: -10%),
+  ),
+  sidebar-bg: (
+    light: color.adjust(#5865f2, $lightness: 27%, $saturation: -10%),
+    dark: #1a1b1e,
+  ),
+  sidebar-border-color: (
+    light: color.adjust(#5865f2, $lightness: 20%, $saturation: -10%),
+    dark: #2c2e33,
+  ),
+  sidebar-divider-color: (
+    light: color.adjust(#5865f2, $lightness: 15%, $saturation: -10%),
+    dark: #373a40,
+  ),
+  popup-border-color: (
+    light: color.adjust(#5865f2, $lightness: 20%, $saturation: -10%),
+    dark: #2c2e33,
+  ),
+  input-text-color: (
+    light: #212121,
+    dark: #c1c2c5,
+  ),
+  input-text-bg: (
+    light: color.adjust(#5865f2, $lightness: 25%, $saturation: -10%),
+    dark: #25262b,
+  ),
+  input-text-border-color: (
+    light: color.adjust(#5865f2, $lightness: 20%, $saturation: -10%),
+    dark: #373a40,
+  ),
+  input-text-focus-border-color: (
+    light: color.adjust(#5865f2, $lightness: 20%),
+    dark: #5865f2,
+  ),
+  input-text-box-shadow: (
+    light: rgba(0, 0, 0, .25),
+    dark: rgba(0, 0, 0, .5),
+  ),
+  calendar-day-selected-bg: (
+    light: rgba(#5865f2, .25),
+    dark: rgba(#5865f2, .5),
+  ),
+  collapsible-bg: (
+    light: rgba(#000, .25),
+    dark: rgba(#000, .5),
+  ),
+  table-border: (
+    light: #6d6e70,
+    dark: #373a40,
+  ),
+  syntax-display-code-color: (
+    light: #232323,
+    dark: #dcdcdc,
+  ),
+  syntax-display-code-bg: (
+    light: #ccc,
+    dark: #444,
+  ),
+);
+
+$breakpoints: (
+  sm: '400px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1200px',
+);
+
+$spacing: (
+  0: 0,
+  1: .25em,
+  2: .5em,
+  3: 1em,
+  4: 1.75em,
+);
+
+$sizing: 10, 15, 20, 100;
+
+:root {
+  --base-size: 16px;
+}
+
+html {
+  font-size: var(--base-size);
+  font-family: var(--font-family-base);
+}

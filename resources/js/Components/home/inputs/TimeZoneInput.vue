@@ -3,10 +3,6 @@ import TimeZoneInput from '@/Components/TimeZoneInput.vue';
 import { timestamp } from '@/injection-keys';
 import { computed, inject } from 'vue';
 
-defineProps<{
-  id: string;
-}>();
-
 const ts = inject(timestamp);
 
 const changeTimezone = (value: string) => {
@@ -19,7 +15,6 @@ const currentTimezone = computed(() => ts?.currentTimezone.value);
 <template>
   <TimeZoneInput
     v-if="ts"
-    :id="id"
     v-model="currentTimezone"
     @change="changeTimezone"
   />

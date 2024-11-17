@@ -1,0 +1,111 @@
+@use "common";
+@use "functions";
+@use "sass:map";
+
+@mixin if-dark {
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) & {
+      @content;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    @content;
+  }
+}
+
+@mixin if-rtl {
+  :root[dir='rtl'] & {
+    @content;
+  }
+}
+
+@mixin if-ltr {
+  :root[dir='ltr'] & {
+    @content;
+  }
+}
+
+@mixin if-prefers-reduced-motion {
+  @media (prefers-reduced-motion) {
+    @content;
+  }
+}
+
+@mixin padding-start($size) {
+  @include if-ltr {
+    padding-left: $size;
+  }
+  @include if-rtl {
+    padding-right: $size;
+  }
+}
+
+@mixin padding-end($size) {
+  @include if-ltr {
+    padding-right: $size;
+  }
+  @include if-rtl {
+    padding-left: $size;
+  }
+}
+
+@mixin margin-start($size) {
+  @include if-ltr {
+    margin-left: $size;
+  }
+  @include if-rtl {
+    margin-right: $size;
+  }
+}
+
+@mixin margin-end($size) {
+  @include if-ltr {
+    margin-right: $size;
+  }
+  @include if-rtl {
+    margin-left: $size;
+  }
+}
+
+@mixin screen-below($breakpoint) {
+  @media (max-width: #{map.get(common.$breakpoints, $breakpoint) - 1px}) {
+    @content;
+  }
+}
+
+@mixin screen-above($breakpoint) {
+  @media (min-width: #{map.get(common.$breakpoints, $breakpoint)}) {
+    @content;
+  }
+}
+
+@mixin button-color-variation($color) {
+  &.color-#{$color} {
+    color: functions.app-color-light('button-' + $color + '-color');
+    background-color: functions.app-color-light('button-' + $color + '-bg');
+    --button-border-color: #{functions.app-color-light('button-' + $color + '-border-color')};
+
+    @include if-dark {
+      color: functions.app-color-dark('button-' + $color + '-color');
+      background-color: functions.app-color-dark('button-' + $color + '-bg');
+      --button-border-color: #{functions.app-color-dark('button-' + $color + '-border-color')};
+    }
+  }
+}
+
+@mixin combined-border-radius {
+  &:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+}

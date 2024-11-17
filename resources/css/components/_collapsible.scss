@@ -1,0 +1,36 @@
+@use "../design";
+
+.collapsible {
+  display: flex;
+  flex-flow: column;
+  overflow: hidden;
+  transition: height, margin;
+  transition-duration: .2s;
+  transition-timing-function: linear;
+  border-radius: design.app-size('collapsible-border-radius');
+  background-color: design.app-color-light('collapsible-bg');
+  box-sizing: border-box;
+  margin: 0;
+
+  @include design.if-dark {
+    background-color: design.app-color-dark('collapsible-bg');
+  }
+
+  &:not(.visible) {
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  &.visible {
+    margin: design.app-size('collapsible-padding') 0;
+
+    &.limited-height {
+      overflow: auto !important;
+    }
+  }
+
+
+  > * {
+    margin: design.app-size('collapsible-padding');
+  }
+}

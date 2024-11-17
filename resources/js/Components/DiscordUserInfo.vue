@@ -26,12 +26,12 @@ defineProps<DiscordUserInfoProps>();
 </script>
 
 <template>
-  <figure>
+  <figure class="discord-user-info">
     <img
       :alt="`Avatar of ${name}`"
       :src="getAvatarLink($props)"
-      class="s-20 me-3 br-50"
+      class="user-image"
     >
-    <span class="font-medium text-xl">{{ name }}</span>
+    <span class="user-name">{{ name }}</span>
   </figure>
 </template>

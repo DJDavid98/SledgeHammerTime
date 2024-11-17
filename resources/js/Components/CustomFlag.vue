@@ -1,14 +1,20 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import CountryFlag from 'vue-country-flag-next';
 
-withDefaults(defineProps<{
+
+const props = withDefaults(defineProps<{
   country: string;
+  size?: number;
   customFlag?: boolean;
   altText?: string;
 }>(), {
   customFlag: false,
   altText: undefined,
+  size: 16,
 });
+
+const fontSize = computed(() => props.size / 16);
 </script>
 
 <template>
@@ -17,12 +23,14 @@ withDefaults(defineProps<{
       class="flag custom-flag"
       :src="`/flags/${country}.svg`"
       :alt="altText"
+      :style="`font-size: ${fontSize}rem`"
     >
   </template>
   <CountryFlag
     v-else
     :country="country.toLowerCase()"
     :alt="altText"
+    :style="`font-size: ${fontSize}rem`"
   />
 </template>
 

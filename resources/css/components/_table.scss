@@ -1,0 +1,31 @@
+@use "../design";
+
+.table-wrap {
+  width: 100%;
+
+  &.responsive {
+    max-width: 100%;
+    overflow-y: auto;
+  }
+}
+
+.table {
+  width: 100%;
+
+  th {
+    font-weight: bold;
+  }
+
+  th, td {
+    padding: design.app-size('table-cell-spacing');
+    vertical-align: middle;
+  }
+
+  tbody tr {
+    border-top: design.app-size('table-border-size') solid design.app-color-light('table-border');
+
+    @include design.if-dark {
+      border-top-color: design.app-color-dark('table-border');
+    }
+  }
+}

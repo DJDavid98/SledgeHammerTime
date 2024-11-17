@@ -1,0 +1,17 @@
+@use "../design";
+
+.content-container {
+  margin: design.app-size('header-height') auto 0;
+  width: 100%;
+  max-width: 1080px;
+  padding: design.app-size('content-spacing');
+
+  .content {
+    display: block;
+    width: 100%;
+
+    > :not(:last-child) {
+      margin-bottom: design.app-size('content-spacing');
+    }
+  }
+}

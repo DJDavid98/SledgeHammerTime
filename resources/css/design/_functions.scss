@@ -1,0 +1,42 @@
+@use "sass:string";
+@use "sass:map";
+@use "common";
+
+@function app-z-index($key) {
+  @if (map.has-key(common.$z-index-map, $key)) {
+    @return map.get(common.$z-index-map, $key);
+  }
+
+  @return 0;
+}
+
+@function app-size($key) {
+  @if (map.has-key(common.$size-map, $key)) {
+    @return map.get(common.$size-map, $key);
+  }
+
+  @return 0;
+}
+
+@function app-color-light($key) {
+  @return _app-color($key, false)
+}
+
+@function app-color-dark($key) {
+  @return _app-color($key, true)
+}
+
+@function _app-color($key, $dark: false) {
+  @if (map.has-key(common.$color-map, $key)) {
+    $color: 'light';
+    @if ($dark) {
+      $color: 'dark';
+    }
+    $color-data: map.get(common.$color-map, $key);
+    @if (map.has-key($color-data, $color)) {
+      @return map.get($color-data, $color);
+    }
+  }
+
+  @return #FF00FF;
+}

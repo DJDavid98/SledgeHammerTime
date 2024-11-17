@@ -1,6 +1,6 @@
-@use "../mixins/if";
+@use "../design";
 
-@include below('md') {
+@include design.screen-below('md') {
   body:has(.popup) {
     overflow: hidden;
   }
@@ -9,17 +9,22 @@
 .popup {
   position: absolute;
   max-width: 400px;
-  border-radius: var(--pico-border-radius);
-  box-shadow: var(--pico-card-box-shadow);
-  padding: var(--pico-block-spacing-horizontal);
-  background-color: rgba($white, .9);
+  background-color: design.app-color-light('card-bg');
+  color: design.app-color-light('card-color');
+  border: design.app-size('popup-border') solid design.app-color-light('popup-border-color');
+  border-radius: design.app-size('card-border-radius');
+  box-shadow: 0 0 design.app-size('popup-box-shadow') design.app-color-light('popup-border-color');
+  padding: design.app-size('content-spacing');
   z-index: 3;
 
-  @include if.dark {
-    background-color: rgba($black, .8);
+  @include design.if-dark {
+    background-color: design.app-color-dark('card-bg');
+    color: design.app-color-dark('card-color');
+    border-color: design.app-color-dark('popup-border-color');
+    box-shadow: 0 0 design.app-size('popup-box-shadow') design.app-color-dark('popup-border-color');
   }
 
-  @include above('md') {
+  @include design.screen-above('md') {
     top: unset !important;
     left: unset !important;
     right: unset !important;
@@ -28,7 +33,7 @@
     height: unset !important;
     min-width: unset !important;
     min-height: unset !important;
-    transform: translateY(calc(var(--pico-spacing) * -1));
+    transform: translateY(calc(#{design.app-size('content-spacing')} * -1));
     overflow: hidden;
   }
 

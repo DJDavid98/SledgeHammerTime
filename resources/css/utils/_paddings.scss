@@ -1,6 +1,9 @@
-@use '../mixins/if';
+@use "../design";
+@use "sass:map";
 
-@each $key, $size in $spacing {
+$spacing-keys: map.keys(design.$spacing);
+@each $key in $spacing-keys {
+  $size: map.get(design.$spacing, $key);
   .p-#{$key} {
     padding: $size;
   }
@@ -19,19 +22,9 @@
     padding-right: $size;
   }
   .ps-#{$key} {
-    @include if.ltr {
-      padding-left: $size;
-    }
-    @include if.rtl {
-      padding-right: $size;
-    }
+    @include design.padding-start($size);
   }
   .pe-#{$key} {
-    @include if.ltr {
-      padding-right: $size;
-    }
-    @include if.rtl {
-      padding-left: $size;
-    }
+    @include design.padding-end($size);
   }
 }

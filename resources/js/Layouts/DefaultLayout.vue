@@ -1,21 +1,40 @@
 <script setup lang="ts">
 import Navbar from '@/Components/CustomNavbar.vue';
-import { useIsLightTheme } from '@/hooks/useIsLightTheme';
-import { theme } from '@/injection-keys';
-import { useMomentLocale } from '@/utils/moment';
-import { usePage } from '@inertiajs/vue3';
-import { provide } from 'vue';
+import { useCurrentLanguage } from '@/composables/useCurrentLanguage';
+import { useIsLightTheme } from '@/composables/useIsLightTheme';
+import { useLocalSettings } from '@/composables/useLocalSettings';
+import { useSidebarState } from '@/composables/useSidebarState';
+import { localSettings, sidebarState, theme } from '@/injection-keys';
+import HtContent from '@/Reusable/HtContent.vue';
+import { loadMomentLocale } from '@/utils/moment';
+import { provide, readonly, watch } from 'vue';
 
-useMomentLocale(usePage().props.app.locale);
+const { locale, languageConfig } = useCurrentLanguage();
+watch(locale, (newLocale) => {
+  loadMomentLocale(newLocale);
+}, {
+  immediate: true,
+});
+watch(languageConfig, (currentLanguageConfig) => {
+  if (!document.documentElement) return;
+
+  document.documentElement.dir = currentLanguageConfig?.rtl ? 'rtl' : 'ltr';
+}, {
+  immediate: true,
+});
 
 const isLightTheme = useIsLightTheme();
-provide(theme, { isLightTheme });
+provide(theme, readonly({ isLightTheme }));
+
+const localSettingsValue = readonly(useLocalSettings());
+provide(sidebarState, readonly(useSidebarState(localSettingsValue)));
+provide(localSettings, localSettingsValue);
 </script>
 
 <template>
   <Navbar />
 
-  <main class="container">
+  <HtContent>
     <slot />
-  </main>
+  </HtContent>
 </template>

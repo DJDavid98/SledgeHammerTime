@@ -1,5 +1,4 @@
-@use '../mixins/if';
-@use '../variables';
+@use "../design";
 
 .calendar-controls, .calendar {
   --gap: .25em;
@@ -9,23 +8,17 @@
   --button-size: 1.75em;
   user-select: none;
 
-  @include below('md') {
+  @include design.screen-below('md') {
     --button-size: 2.5em;
   }
 }
 
 .calendar-controls {
   display: grid;
-  grid-template-columns: repeat(2, var(--button-size)) auto repeat(2, var(--button-size));
+  grid-template-columns: calc(var(--button-size) * 2.5) auto calc(var(--button-size) * 2.5);
   width: 100%;
   margin: .5em 0;
   gap: var(--gap);
-
-  button {
-    padding: 0;
-    margin: 0;
-    height: var(--button-size);
-  }
 
   .calendar-context {
     font-size: calc(var(--button-size) * 0.65);
@@ -52,7 +45,7 @@
   .red {
     color: #c00;
 
-    @include if.dark {
+    @include design.if-dark {
       color: #faa;
     }
   }
@@ -60,7 +53,7 @@
   .blue {
     color: #0af;
 
-    @include if.dark {
+    @include design.if-dark {
       color: #adf;
     }
   }
@@ -91,23 +84,11 @@
 
     &.selected {
       font-weight: bold;
-      background-color: $primary-200;
+      background-color: design.app-color-light('calendar-day-selected-bg');
 
-      @include if.dark {
-        background-color: $primary-800;
+      @include design.if-dark {
+        background-color: design.app-color-dark('calendar-day-selected-bg');
       }
     }
-  }
-}
-
-.jump-to-today {
-  padding: .4em;
-  margin: .5em 0;
-  display: block;
-  width: 100%;
-
-  @include above('md') {
-    font-size: .75em;
-    padding: .1em .2em;
   }
 }

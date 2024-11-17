@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { useCurrentDate } from '@/hooks/useCurrentDate';
+import { useCurrentDate } from '@/composables/useCurrentDate';
+import HtButton from '@/Reusable/HtButton.vue';
+import HtButtonGroup from '@/Reusable/HtButtonGroup.vue';
 import {
   CalendarDay,
   DayOfWeek,
@@ -10,7 +12,9 @@ import {
   WeekdayItem,
   WEEKEND_DAYS,
 } from '@/utils/calendar';
-import { useMomentLocale } from '@/utils/moment';
+import { loadMomentLocale } from '@/utils/moment';
+import { faBackwardFast, faChevronLeft, faChevronRight, faForwardFast } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { usePage } from '@inertiajs/vue3';
 import classNames from 'classnames';
 import moment from 'moment-timezone';
@@ -33,7 +37,7 @@ const momentLocaleData = ref<moment.Locale | null>(null);
 
 const locale = computed(() => usePage().props.app.locale);
 
-useMomentLocale(locale.value).then(() => {
+loadMomentLocale(locale.value).then(() => {
   momentLocaleData.value = moment.localeData(locale.value);
 });
 
@@ -133,40 +137,51 @@ defineExpose<DatePickerCalendarApi>({
 
 <template>
   <div class="calendar-controls">
-    <button
-      class=""
-      :aria-label="$t('timestampPicker.picker.tooltip.previousYear')"
-      @click="stepDate(-1, 'year')"
-    >
-      <span aria-hidden="true">⏮</span>
-    </button>
-    <button
-      :aria-label="$t('timestampPicker.picker.tooltip.previousMonth')"
-      @click="stepDate(-1, 'month')"
-    >
-      <span aria-hidden="true">◀</span>
-    </button>
+    <HtButtonGroup>
+      <HtButton
+        :aria-label="$t('timestampPicker.picker.tooltip.previousYear')"
+        @click="stepDate(-1, 'year')"
+      >
+        <FontAwesomeIcon
+          :icon="faBackwardFast"
+        />
+      </HtButton>
+      <HtButton
+        :aria-label="$t('timestampPicker.picker.tooltip.previousMonth')"
+        @click="stepDate(-1, 'month')"
+      >
+        <FontAwesomeIcon
+          :icon="faChevronLeft"
+        />
+      </HtButton>
+    </HtButtonGroup>
     <span class="calendar-context">{{ dateMoment.locale(locale).format(contextFormat) }}</span>
-    <button
-      :aria-label="$t('timestampPicker.picker.tooltip.nextMonth')"
-      @click="stepDate(1, 'month')"
-    >
-      <span aria-hidden="true">▶</span>
-    </button>
-    <button
-      :aria-label="$t('timestampPicker.picker.tooltip.nextYear')"
-      @click="stepDate(1, 'year')"
-    >
-      <span aria-hidden="true">⏭</span>
-    </button>
+    <HtButtonGroup>
+      <HtButton
+        :aria-label="$t('timestampPicker.picker.tooltip.nextMonth')"
+        @click="stepDate(1, 'month')"
+      >
+        <FontAwesomeIcon
+          :icon="faChevronRight"
+        />
+      </HtButton>
+      <HtButton
+        :aria-label="$t('timestampPicker.picker.tooltip.nextYear')"
+        @click="stepDate(1, 'year')"
+      >
+        <FontAwesomeIcon
+          :icon="faForwardFast"
+        />
+      </HtButton>
+    </HtButtonGroup>
   </div>
-  <button
-    class="jump-to-today"
+  <HtButton
     :disabled="isShowingCurrentMonth"
+    :block="true"
     @click="jumpToToday"
   >
     {{ $t('timestampPicker.picker.button.jumpToToday') }}
-  </button>
+  </HtButton>
   <div class="calendar">
     <div class="calendar-weekdays">
       <div
