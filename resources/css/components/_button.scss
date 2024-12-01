@@ -17,6 +17,7 @@
   user-select: none;
   box-sizing: border-box;
   display: inline-block;
+  cursor: pointer;
 
   @include design.if-dark {
     color: design.app-color-dark('button-default-color');
@@ -57,6 +58,10 @@
   &:not(:disabled):active, &.pressed {
     transform: translateY(design.app-size('button-shadow-size'));
     box-shadow: 0 0 0 var(--button-border-color);
+  }
+
+  &.loading {
+    cursor: wait;
   }
 
   @include design.button-color-variation('primary');
