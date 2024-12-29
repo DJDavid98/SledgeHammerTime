@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../design";
 
 .form-control-group {
@@ -55,7 +56,7 @@
       }
 
       &:focus-visible {
-        outline: design.app-size('focus-outline') solid design.app-color-dark('input-text-focus-border-color');
+        outline-color: design.app-color-dark('input-text-focus-border-color');
       }
     }
 
@@ -65,7 +66,6 @@
     @include design.if-rtl {
       margin-left: design.app-size('form-control-spacing');
     }
-
 
     .form-checkbox-check-icon,
     .form-checkbox-input {
@@ -101,6 +101,99 @@
   }
 
   .form-checkbox-label {
+    cursor: default;
+  }
+}
+
+.form-control-radio {
+  display: block;
+
+  .form-radio-input-wrap {
+    position: relative;
+    display: inline-block;
+    width: design.app-size('form-checkbox-width');
+    height: design.app-size('form-checkbox-height');
+    vertical-align: text-top;
+
+    &:focus {
+      z-index: design.app-z-index('focus');
+      border-color: design.app-color-light('input-text-focus-border-color');
+    }
+
+    &:focus-visible {
+      outline: design.app-size('focus-outline') solid design.app-color-light('input-text-focus-border-color');
+    }
+
+    @include design.if-ltr {
+      margin-right: design.app-size('form-control-spacing');
+    }
+    @include design.if-rtl {
+      margin-left: design.app-size('form-control-spacing');
+    }
+
+    .form-radio-input,
+    .form-radio-select-icon {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+
+    .form-radio-select-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .form-radio-input {
+      border: 0;
+      border: design.app-size('form-checkbox-border') solid design.app-color-light('input-text-border-color');
+      background-color: design.app-color-light('input-text-bg');
+      border-radius: 50%;
+
+      &:focus {
+        border-color: design.app-color-light('input-text-focus-border-color');
+      }
+
+      &:focus-visible {
+        outline: design.app-size('focus-outline') solid design.app-color-light('input-text-focus-border-color');
+      }
+
+      @include design.if-dark {
+        background-color: design.app-color-dark('input-text-bg');
+        border-color: design.app-color-dark('input-text-border-color');
+
+        &:focus {
+          border-color: design.app-color-dark('input-text-focus-border-color');
+        }
+
+        &:focus-visible {
+          outline-color: design.app-color-dark('input-text-focus-border-color');
+        }
+      }
+    }
+
+    .form-radio-select-icon {
+      opacity: 0;
+      background-color: design.app-color-light('input-text-color');
+      transition: opacity .1s linear;
+      display: block;
+      width: design.app-size('form-radio-select-icon');
+      height: design.app-size('form-radio-select-icon');
+      margin: (100% - design.app-size('form-radio-select-icon')) * 0.5;
+      pointer-events: none;
+
+      @include design.if-dark {
+        background-color: design.app-color-dark('input-text-color');
+      }
+    }
+
+    .form-radio-input:checked + .form-radio-select-icon {
+      opacity: 1;
+    }
+  }
+
+  .form-radio-label {
     cursor: default;
   }
 }

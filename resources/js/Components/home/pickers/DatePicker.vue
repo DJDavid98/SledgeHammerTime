@@ -11,9 +11,9 @@ import { limitDate, limitMonth } from '@/utils/time';
 import { Moment } from 'moment-timezone';
 import { ref, useTemplateRef, watch } from 'vue';
 
-const year = ref(0);
-const month = ref(0);
-const date = ref(0);
+const year = ref(new Date(0).getUTCFullYear());
+const month = ref(1);
+const date = ref(1);
 const calendar = ref<DatePickerCalendarApi>();
 const yearInput = ref<HTMLInputElement>();
 const monthInput = ref<HTMLInputElement>();
@@ -24,12 +24,17 @@ const emit = defineEmits<{
 }>();
 
 const popupRef = useTemplateRef<CustomPopupApi>('popup-el');
+const formRef = useTemplateRef<HTMLFormElement>('form-el');
 
 const select = () => {
   const formattedDate = [year.value, month.value, date.value].map(n => pad(n, 2)).join('-');
   emit('selected', formattedDate); // Emit the selected date back to the MainDatepicker
 };
 const selectAndClose = () => {
+  const focusedEl = formRef.value?.querySelector<HTMLElement>(':focus');
+  if (focusedEl) {
+    focusedEl.blur();
+  }
   select();
   close();
 };
@@ -56,14 +61,6 @@ const handleDateBlur = inputRangeLimitBlurHandlerFactory(date);
 watch([year, month, date], () => {
   calendar.value?.setSelection(year.value, month.value, date.value);
 });
-
-const handleInputKeydown = (e: KeyboardEvent) => {
-  if (e.key !== 'Enter') {
-    return;
-  }
-  e.preventDefault();
-  selectAndClose();
-};
 
 const changeFocus = (input: 'year' | 'month' | 'date', setSelection: boolean = false) => {
   switch (input) {
@@ -101,51 +98,53 @@ defineExpose<DatePickerApi>({
 
 <template>
   <Popup ref="popup-el">
-    <HtFormInputGroup>
-      <HtInput
-        ref="yearInput"
-        v-model="year"
-        type="number"
-        class="grid-flex-item flex-basis-40"
-        @blur="handleYearBlur"
-        @keydown="handleInputKeydown"
-      />
-      <HtInput
-        ref="monthInput"
-        v-model="month"
-        type="number"
-        class="grid-flex-item flex-basis-30"
-        min="1"
-        max="12"
-        @blur="handleMonthBlur"
-        @keydown="handleInputKeydown"
-      />
-      <HtInput
-        ref="dateInput"
-        v-model="date"
-        type="number"
-        class="grid-flex-item flex-basis-30"
-        min="1"
-        max="31"
-        @blur="handleDateBlur"
-        @keydown="handleInputKeydown"
-      />
-    </HtFormInputGroup>
-    <HtButtonGroup>
-      <HtButton
-        color="primary"
-        :justify-center="true"
-        @click="selectAndClose"
-      >
-        {{ $t('global.form.select') }}
-      </HtButton>
-      <HtButton
-        :justify-center="true"
-        @click="close"
-      >
-        {{ $t('global.form.cancel') }}
-      </HtButton>
-    </HtButtonGroup>
+    <form
+      ref="form-el"
+      @submit.prevent="selectAndClose"
+    >
+      <HtFormInputGroup>
+        <HtInput
+          ref="yearInput"
+          v-model="year"
+          type="number"
+          class="grid-flex-item flex-basis-40"
+          @blur="handleYearBlur"
+        />
+        <HtInput
+          ref="monthInput"
+          v-model="month"
+          type="number"
+          class="grid-flex-item flex-basis-30"
+          min="1"
+          max="12"
+          @blur="handleMonthBlur"
+        />
+        <HtInput
+          ref="dateInput"
+          v-model="date"
+          type="number"
+          class="grid-flex-item flex-basis-30"
+          min="1"
+          max="31"
+          @blur="handleDateBlur"
+        />
+      </HtFormInputGroup>
+      <HtButtonGroup>
+        <HtButton
+          color="primary"
+          :justify-center="true"
+          type="submit"
+        >
+          {{ $t('global.form.select') }}
+        </HtButton>
+        <HtButton
+          :justify-center="true"
+          @click="close"
+        >
+          {{ $t('global.form.cancel') }}
+        </HtButton>
+      </HtButtonGroup>
+    </form>
     <hr>
     <DatePickerCalendar
       ref="calendar"

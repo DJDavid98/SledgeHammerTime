@@ -7,6 +7,8 @@ return [
       'date' => 'Date',
       'time' => 'Time',
       'timezone' => 'Timezone',
+      'modeOffset' => 'Absolute Offset',
+      'modeZoneName' => 'Zone Name',
     ],
     'button' => [
       'jumpToToday' => 'Jump to current month',

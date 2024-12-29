@@ -1,3 +1,9 @@
+import {
+  TimezoneSelection,
+  TimezoneSelectionByOffset,
+  TimeZoneSelectionType,
+} from '@/model/timezone-selection';
+import { pad } from '@/utils/pad';
 import moment, { Moment } from 'moment-timezone';
 
 export const isoTimeFormat = 'HH:mm:ss';
@@ -5,6 +11,7 @@ export const isoFormattingDateFormat = 'YYYY-MM-DD';
 export const isoParsingDateFormat = 'Y-MM-DD';
 
 export const gmtZoneRegex = /^Etc\/(GMT([+-]\d+)?)$/;
+export const offsetZoneRegex = /^(?:Etc\/)?(?:GMT|UTC)\+?(-?\d{1,2})(?::?(\d{2}))?$/i;
 
 const formatGmtZoneLabel = (offset = '') => `GMT${offset} (UTC${offset})`;
 
@@ -17,29 +24,15 @@ export const transformGmtZoneName = (value: string): string =>
     }),
   );
 
-const compareGmtStrings = (a: string, b: string) =>
-  parseInt(a.replace(gmtZoneRegex, '$2'), 10) - parseInt(b.replace(gmtZoneRegex, '$2'), 10);
-
 export const getSortedNormalizedTimezoneNames = (): string[] =>
   moment.tz
     .names()
-    .filter((name) => !/^(?:Etc\/)?GMT[+-]?0$/.test(name) && name !== 'GMT')
-    .sort((a, b) => {
-      const isAGmt = gmtZoneRegex.test(a);
-      const isBGmt = gmtZoneRegex.test(b);
-      if (isAGmt) return isBGmt ? compareGmtStrings(a, b) : -1;
-      if (isBGmt) return isAGmt ? compareGmtStrings(a, b) : 1;
-      return a.localeCompare(b);
-    });
-
-export const getTimezoneLabel = (timezone: string): string => {
-  if (!gmtZoneRegex.test(timezone)) return timezone;
-  return transformGmtZoneName(timezone);
-};
+    .filter((name) => !name.startsWith('Etc/GMT'))
+    .sort((a, b) => a.localeCompare(b));
 
 export const getTimezoneValue = (timezone: string) => ({
   value: timezone,
-  label: getTimezoneLabel(timezone),
+  label: timezone,
 });
 
 export const momentToTimeInputValue = (time: Moment = moment(), format = `${isoFormattingDateFormat}\\T${isoTimeFormat}`): string =>
@@ -59,7 +52,7 @@ export const rangeLimit = (value: number, min: number, max: number): number => {
   }
 
   if (log) {
-    console.warn(`Number between ${min} and ${max} is expected, got ${value}`);
+    console.warn(new RangeError(`Number between ${min} and ${max} is expected, got ${value}`));
   }
   return result;
 };
@@ -142,18 +135,40 @@ export const limitDate = (value: number): number => {
 
 export const getMeridiemLabel = (isAm: boolean, minutes = 0) => moment.localeData().meridiem(isAm ? 10 : 22, minutes, false);
 
-export const getDefaultInitialDate = (defaultTs: number | undefined, timezone: string): Moment => {
+export const getInitialMoment = (timezone: TimezoneSelection, defaultTs?: number): Moment => {
   const hasDefaultTs = typeof defaultTs === 'number';
   const value = hasDefaultTs
-    ? moment.tz(new Date(defaultTs * 1e3), 'UTC').tz(timezone)
-    : moment.tz(timezone);
+    ? moment.tz(new Date(defaultTs * 1e3), 'UTC')
+    : moment();
+  switch (timezone.type) {
+    case TimeZoneSelectionType.OFFSET:
+      value.utcOffset(getUtcOffsetString(timezone));
+      break;
+    case TimeZoneSelectionType.ZONE_NAME:
+      value.tz(timezone.name);
+      break;
+  }
+  return value;
+};
+export const getCurrentTimestampMoment = (inputString: string, formatString: string, timezone: TimezoneSelection): Moment => {
+  switch (timezone.type) {
+    case TimeZoneSelectionType.OFFSET:
+      return moment.tz(inputString, formatString, 'UTC').utcOffset(convertTimeZoneSelectionToString(timezone));
+    case TimeZoneSelectionType.ZONE_NAME:
+      return moment.tz(inputString, formatString, timezone.name);
+  }
+};
+
+export const getDefaultInitialMoment = (defaultTs: number | undefined, timezone: TimezoneSelection): Moment => {
+  const hasDefaultTs = typeof defaultTs === 'number';
+  const value = getInitialMoment(timezone, defaultTs);
   if (!hasDefaultTs) {
     value.seconds(0);
   }
   return value;
 };
 
-export const getDefaultInitialTimezone = (): string => {
+export const guessInitialTimezoneName = (): string => {
   try {
     const intlTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     // Check if we have the zone data loaded in moment.js
@@ -164,4 +179,52 @@ export const getDefaultInitialTimezone = (): string => {
     console.error(e);
   }
   return moment.tz.guess();
+};
+
+export const getDefaultInitialTimezone = (defaultTimezoneProp?: string): TimezoneSelection => {
+  if (defaultTimezoneProp) {
+    const offsetZoneMatch = defaultTimezoneProp.match(offsetZoneRegex);
+    if (offsetZoneMatch !== null) {
+      const hours = rangeLimit(parseInt(offsetZoneMatch[1], 10), -14, 14);
+      const minutes = rangeLimit(parseInt(offsetZoneMatch[2], 10), 0, 59);
+      if (!isNaN(hours)) {
+        return {
+          type: TimeZoneSelectionType.OFFSET,
+          // Handle negative zero case consistently
+          hours: hours === 0 ? 0 : hours,
+          minutes: isNaN(minutes) ? 0 : minutes,
+        };
+      }
+    } else {
+      return { type: TimeZoneSelectionType.ZONE_NAME, name: defaultTimezoneProp };
+    }
+  }
+  return { type: TimeZoneSelectionType.ZONE_NAME, name: guessInitialTimezoneName() };
+};
+
+export const getUtcOffsetString = (zoneSelectionByOffset: TimezoneSelectionByOffset) => {
+  return (zoneSelectionByOffset.hours < 0 ? '-' : '+')
+    + pad(Math.abs(zoneSelectionByOffset.hours), 2)
+    + ':'
+    + pad(zoneSelectionByOffset.minutes, 2);
+};
+
+export const createCurrentTsWithTimezone = (currentTimestamp: Moment, currentTimezone: TimezoneSelection) => {
+  switch (currentTimezone.type) {
+    case TimeZoneSelectionType.OFFSET:
+      return moment(currentTimestamp).utcOffset(getUtcOffsetString(currentTimezone));
+    case TimeZoneSelectionType.ZONE_NAME:
+      // TODO Figure out why `ts.currentTimestamp` does not have a timezone to begin with???
+      console.debug('currentTimestamp.value.tz()', currentTimestamp.tz());
+      return moment.tz(currentTimestamp, currentTimezone.name);
+  }
+};
+
+export const convertTimeZoneSelectionToString = (currentTimezone: TimezoneSelection) => {
+  switch (currentTimezone.type) {
+    case TimeZoneSelectionType.OFFSET:
+      return `GMT${getUtcOffsetString(currentTimezone)}`;
+    case TimeZoneSelectionType.ZONE_NAME:
+      return currentTimezone.name;
+  }
 };

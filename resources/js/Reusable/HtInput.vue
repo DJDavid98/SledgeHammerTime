@@ -12,11 +12,13 @@ const emit = defineEmits<{
 const props = defineProps<{
   id?: string;
   readonly?: boolean;
+  disabled?: boolean;
   hideSelection?: boolean;
   positionAnchorName?: string;
   type?: 'text' | 'number';
   min?: string | number;
   max?: string | number;
+  tabindex?: string | number;
   'class'?: string;
 }>();
 
@@ -45,8 +47,10 @@ defineExpose({
     :value="model"
     :class="['input-text', props.class, { 'hide-selection': hideSelection }]"
     :readonly="readonly"
+    :disabled="disabled"
     :min="min"
     :max="max"
+    :tabindex="tabindex"
     :style="positionAnchorName ? `anchor-name: ${positionAnchorName}` : undefined"
     @click="emit('click', $event)"
     @focus="emit('focus', $event)"

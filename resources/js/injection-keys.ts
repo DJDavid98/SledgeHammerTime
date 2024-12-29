@@ -1,12 +1,13 @@
+import { TimezoneSelection } from '@/model/timezone-selection';
 import { Moment } from 'moment-timezone';
 import { ComputedRef, InjectionKey, Ref } from 'vue';
 
 export const timestamp = Symbol() as InjectionKey<{
   currentTimestamp: ComputedRef<Moment>,
-  currentTimezone: Ref<string>,
+  currentTimezone: Ref<TimezoneSelection>,
   changeDateString: (value: string) => void,
   changeTimeString: (value: string) => void,
-  changeTimezone: (value: string) => void,
+  changeTimezone: (value: TimezoneSelection) => void,
   setCurrentTime: () => void,
 }>;
 

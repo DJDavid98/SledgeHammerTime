@@ -1,7 +1,15 @@
 import {
+  TimezoneSelection,
+  TimezoneSelectionByName,
+  TimezoneSelectionByOffset,
+  TimeZoneSelectionType,
+} from '@/model/timezone-selection';
+import {
   coerceToTwelveHours,
-  getDefaultInitialDate,
+  createCurrentTsWithTimezone,
+  getDefaultInitialMoment,
   getDefaultInitialTimezone,
+  getUtcOffsetString,
   rangeLimit,
   toTwelveHours,
   toTwentyFourHours,
@@ -127,20 +135,30 @@ describe('rangeLimit', () => {
   });
 });
 
-describe('getDefaultInitialDate', () => {
+describe('getDefaultInitialMoment', () => {
   it('should return a date with the seconds set to 0', () => {
-    const result = getDefaultInitialDate(undefined, 'UTC');
+    const result = getDefaultInitialMoment(undefined, {
+      type: TimeZoneSelectionType.ZONE_NAME,
+      name: 'UTC',
+    });
     expect(moment.isMoment(result)).toBe(true);
     expect(result.seconds()).toBe(0);
   });
   it('should return the same timestamp when passed an initial value', () => {
-    const result = getDefaultInitialDate(55, 'UTC');
+    const result = getDefaultInitialMoment(55, {
+      type: TimeZoneSelectionType.ZONE_NAME,
+      name: 'UTC',
+    });
     expect(result.unix()).toBe(55);
   });
 });
 
 describe('getDefaultInitialTimezone', () => {
   const mockGuessedTimezone = 'Mock/Guess';
+  const mockGuessedTimezoneReturnValue: ReturnType<typeof getDefaultInitialTimezone> = {
+    type: TimeZoneSelectionType.ZONE_NAME,
+    name: mockGuessedTimezone,
+  };
   let momentTzGuessSpy: SpyInstance;
   let momentTzZoneSpy: SpyInstance;
 
@@ -166,7 +184,7 @@ describe('getDefaultInitialTimezone', () => {
       const mockZone = {} as MomentZone;
       momentTzZoneSpy.mockReturnValue(mockZone);
       const result = getDefaultInitialTimezone();
-      expect(result).toEqual(mockTimezone);
+      expect(result).toEqual({ ...mockGuessedTimezoneReturnValue, name: mockTimezone });
     } finally {
       systemApiSpy.mockRestore();
     }
@@ -175,7 +193,11 @@ describe('getDefaultInitialTimezone', () => {
   it('should return the guessed timezone when there is no matching moment timezone', () => {
     momentTzZoneSpy.mockReturnValue(null);
     const result = getDefaultInitialTimezone();
-    expect(result).toEqual(mockGuessedTimezone);
+    const expected: ReturnType<typeof getDefaultInitialTimezone> = {
+      type: TimeZoneSelectionType.ZONE_NAME,
+      name: mockGuessedTimezone,
+    };
+    expect(result).toEqual(expected);
   });
 
   it('should return the guessed timezone when there is an error', () => {
@@ -186,12 +208,82 @@ describe('getDefaultInitialTimezone', () => {
     });
     try {
       const result = getDefaultInitialTimezone();
-      expect(result).toEqual(mockGuessedTimezone);
+      expect(result).toEqual(mockGuessedTimezoneReturnValue);
       expect(consoleErrorSpy).toHaveBeenCalledOnce();
       expect(consoleErrorSpy).toHaveBeenCalledWith(mockError);
     } finally {
       consoleErrorSpy.mockRestore();
       systemApiSpy.mockRestore();
     }
+  });
+
+  it.each([
+    { input: 'GMT+0', expectedHours: 0, expectedMinutes: 0 },
+    { input: 'GMT+1', expectedHours: 1, expectedMinutes: 0 },
+    { input: 'GMT+10', expectedHours: 10, expectedMinutes: 0 },
+    { input: 'GMT+1030', expectedHours: 10, expectedMinutes: 30 },
+    { input: 'GMT+10:30', expectedHours: 10, expectedMinutes: 30 },
+    { input: 'GMT-0', expectedHours: 0, expectedMinutes: 0 },
+    { input: 'GMT-1', expectedHours: -1, expectedMinutes: 0 },
+    { input: 'GMT-10', expectedHours: -10, expectedMinutes: 0 },
+    { input: 'GMT-1030', expectedHours: -10, expectedMinutes: 30 },
+    { input: 'GMT-10:30', expectedHours: -10, expectedMinutes: 30 },
+    { input: 'Etc/GMT-0', expectedHours: 0, expectedMinutes: 0 },
+    { input: 'Etc/GMT-1', expectedHours: -1, expectedMinutes: 0 },
+    { input: 'Etc/GMT-10', expectedHours: -10, expectedMinutes: 0 },
+    { input: 'Etc/GMT-1030', expectedHours: -10, expectedMinutes: 30 },
+    { input: 'Etc/GMT-10:30', expectedHours: -10, expectedMinutes: 30 },
+  ])('should return the parsed GMT offset when default timezone prop is $input', ({
+    input,
+    expectedHours,
+    expectedMinutes,
+  }) => {
+    const expected: TimezoneSelection = {
+      type: TimeZoneSelectionType.OFFSET,
+      hours: expectedHours,
+      minutes: expectedMinutes,
+    };
+    expect(getDefaultInitialTimezone(input)).toEqual(expected);
+  });
+});
+
+describe('getUtcOffsetString', () => {
+  it('should return the correct offset string', () => {
+    const defaultObject: TimezoneSelectionByOffset = {
+      type: TimeZoneSelectionType.OFFSET,
+      hours: 0,
+      minutes: 0,
+    };
+    expect(getUtcOffsetString(defaultObject)).toEqual('+00:00');
+    expect(getUtcOffsetString({ ...defaultObject, hours: 1, minutes: 1 })).toEqual('+01:01');
+    expect(getUtcOffsetString({ ...defaultObject, hours: -14, minutes: 30 })).toEqual('-14:30');
+  });
+});
+
+describe('createCurrentTsWithTimezone', () => {
+  it('should return a moment timestamp with the correct utc offset', () => {
+    const now = moment.utc(0);
+    const defaultObject: TimezoneSelectionByOffset = {
+      type: TimeZoneSelectionType.OFFSET,
+      hours: 0,
+      minutes: 0,
+    };
+    expect(createCurrentTsWithTimezone(now, defaultObject).utcOffset()).toEqual(0);
+    expect(createCurrentTsWithTimezone(
+      now,
+      { ...defaultObject, hours: 1, minutes: 1 },
+    ).utcOffset()).toEqual(61);
+    expect(createCurrentTsWithTimezone(
+      now,
+      { ...defaultObject, hours: -14, minutes: 30 },
+    ).utcOffset()).toEqual(-870);
+  });
+  it('should return a moment timestamp with the correct zone name', () => {
+    const now = moment.utc(0);
+    const defaultObject: TimezoneSelectionByName = {
+      type: TimeZoneSelectionType.ZONE_NAME,
+      name: 'Europe/Budapest',
+    };
+    expect(createCurrentTsWithTimezone(now, defaultObject).utcOffset()).toEqual(60);
   });
 });

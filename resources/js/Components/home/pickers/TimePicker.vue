@@ -45,6 +45,7 @@ const emit = defineEmits<{
 }>();
 
 const popupRef = useTemplateRef<CustomPopupApi>('popup-el');
+const formRef = useTemplateRef<HTMLFormElement>('form-el');
 
 const openPicker = () => {
   renderDial.value = true;
@@ -53,11 +54,15 @@ const closePicker = () => {
   renderDial.value = false;
 };
 
-const select = () => {
+const selectAndClose = () => {
+  const focusedEl = formRef.value?.querySelector<HTMLElement>(':focus');
+  if (focusedEl) {
+    focusedEl.blur();
+  }
   const actualHours = twelveHourMode.value ? toTwentyFourHours(hours.value, isAm.value) : hours.value;
   const formattedTime = [actualHours, minutes.value, seconds.value].map(n => pad(n, 2)).join(':');
   emit('selected', formattedTime); // Emit the selected date back to the MainDatepicker
-  closePicker();
+  close();
 };
 const open = (initialValue: Moment, focusOnClose?: Focusable | null) => {
   const initialHours = initialValue.hours();
@@ -66,6 +71,9 @@ const open = (initialValue: Moment, focusOnClose?: Focusable | null) => {
   seconds.value = initialValue.seconds();
   isAm.value = initialHours < 12;
   popupRef.value?.open(focusOnClose);
+};
+const close = () => {
+  popupRef.value?.close();
 };
 
 const hoursFocused = () => dial.value?.setMode(DialMode.Hours);
@@ -140,14 +148,6 @@ const handleAmPmSelectKeydown = (e: KeyboardEvent) => {
   }
 };
 
-const handleInputKeydown = (e: KeyboardEvent) => {
-  if (e.key !== 'Enter') {
-    return;
-  }
-  e.preventDefault();
-  select();
-};
-
 export interface TimePickerPopupApi {
   open: typeof open;
   changeFocus: typeof changeFocus,
@@ -166,65 +166,67 @@ defineExpose<TimePickerPopupApi>({
     @close="closePicker"
     @open="openPicker"
   >
-    <HtFormInputGroup>
-      <HtInput
-        ref="hoursInput"
-        v-model="hours"
-        type="number"
-        min="0"
-        max="23"
-        @focus.passive="hoursFocused"
-        @blur.passive="handleHoursBlur"
-        @keydown="handleInputKeydown"
-      />
-      <HtInput
-        ref="minutesInput"
-        v-model="minutes"
-        type="number"
-        min="0"
-        max="59"
-        @focus.passive="minutesFocused"
-        @blur.passive="handleMinutesBlur"
-        @keydown="handleInputKeydown"
-      />
-      <HtInput
-        ref="secondsInput"
-        v-model="seconds"
-        type="number"
-        min="0"
-        max="59"
-        @focus.passive="secondsFocused"
-        @blur.passive="handleSecondsBlur"
-        @keydown="handleInputKeydown"
-      />
-      <HtFormSelect
-        v-if="twelveHourMode"
-        v-model="isAm"
-        @keydown="handleAmPmSelectKeydown"
-      >
-        <option :value="true">
-          {{ getMeridiemLabel(true, minutes) }}
-        </option>
-        <option :value="false">
-          {{ getMeridiemLabel(false, minutes) }}
-        </option>
-      </HtFormSelect>
-    </HtFormInputGroup>
-    <HtButtonGroup>
-      <HtButton
-        color="primary"
-        :justify-center="true"
-        @click="select"
-      >
-        {{ $t('global.form.select') }}
-      </HtButton>
-      <HtButton
-        :justify-center="true"
-        @click="closePicker"
-      >
-        {{ $t('global.form.cancel') }}
-      </HtButton>
-    </HtButtonGroup>
+    <form
+      ref="form-el"
+      @submit.prevent="selectAndClose"
+    >
+      <HtFormInputGroup>
+        <HtInput
+          ref="hoursInput"
+          v-model="hours"
+          type="number"
+          min="0"
+          max="23"
+          @focus.passive="hoursFocused"
+          @blur.passive="handleHoursBlur"
+        />
+        <HtInput
+          ref="minutesInput"
+          v-model="minutes"
+          type="number"
+          min="0"
+          max="59"
+          @focus.passive="minutesFocused"
+          @blur.passive="handleMinutesBlur"
+        />
+        <HtInput
+          ref="secondsInput"
+          v-model="seconds"
+          type="number"
+          min="0"
+          max="59"
+          @focus.passive="secondsFocused"
+          @blur.passive="handleSecondsBlur"
+        />
+        <HtFormSelect
+          v-if="twelveHourMode"
+          v-model="isAm"
+          @keydown="handleAmPmSelectKeydown"
+        >
+          <option :value="true">
+            {{ getMeridiemLabel(true, minutes) }}
+          </option>
+          <option :value="false">
+            {{ getMeridiemLabel(false, minutes) }}
+          </option>
+        </HtFormSelect>
+      </HtFormInputGroup>
+      <HtButtonGroup>
+        <HtButton
+          color="primary"
+          :justify-center="true"
+          type="submit"
+        >
+          {{ $t('global.form.select') }}
+        </HtButton>
+        <HtButton
+          :justify-center="true"
+          @click="close"
+        >
+          {{ $t('global.form.cancel') }}
+        </HtButton>
+      </HtButtonGroup>
+    </form>
     <TimePickerDial
       v-if="renderDial"
       ref="dial"
@@ -237,7 +239,7 @@ defineExpose<TimePickerPopupApi>({
       @set-minutes="setMinutes"
       @set-seconds="setSeconds"
       @change-focus="changeFocus"
-      @select="select"
+      @select="selectAndClose"
     />
   </Popup>
 </template>

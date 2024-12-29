@@ -2,23 +2,27 @@
 import DatePicker, { DatePickerApi } from '@/Components/home/pickers/DatePicker.vue';
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
-import { computed, inject, provide, ref, useTemplateRef } from 'vue';
+import { computed, inject, provide, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
 
 const selectedDate = computed(() => ts?.currentTimestamp.value.format('LL'));
-const datepicker = ref<DatePickerApi>();
+const datepicker = useTemplateRef<DatePickerApi>('date-picker');
 const inputEl = useTemplateRef<InputApi>('input-el');
 
 const openPopup = (e: KeyboardEvent | MouseEvent) => {
-  if ('key' in e && (e.key === 'Tab' || e.key === 'Shift')) {
-    return;
+  let viaKeyboard = false;
+  if ('key' in e) {
+    if (e.key === 'Tab' || e.key === 'Shift') {
+      return;
+    }
+    viaKeyboard = true;
   }
 
   e.preventDefault();
   if (ts) {
-    datepicker.value?.open(ts.currentTimestamp.value, inputEl.value?.inputEl);
+    datepicker.value?.open(ts.currentTimestamp.value, viaKeyboard ? inputEl.value?.inputEl : null);
     window.requestAnimationFrame(() => {
       datepicker.value?.changeFocus('year', true);
     });
@@ -46,7 +50,7 @@ provide(positionAnchor, positionAnchorName);
       @keydown="openPopup"
     />
     <DatePicker
-      ref="datepicker"
+      ref="date-picker"
       @selected="changeDate"
     />
   </div>

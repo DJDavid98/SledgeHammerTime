@@ -78,7 +78,7 @@ defineExpose<CustomPopupApi>({
     :style="positionAnchorName ? `position-anchor: ${positionAnchorName}` : undefined"
     @mousedown="handleMousedown"
     @mouseup="handleMouseup"
-    @close.passive="handleDialogClose"
+    @close="handleDialogClose"
   >
     <slot />
   </dialog>

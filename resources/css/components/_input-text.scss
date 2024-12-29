@@ -27,9 +27,10 @@
     &:focus {
       border-color: design.app-color-dark('input-text-focus-border-color');
 
-      &:focus-visible {
-        outline: design.app-size('focus-outline') solid design.app-color-dark('input-text-focus-border-color');
-      }
+    }
+
+    &:focus-visible {
+      outline-color: design.app-color-dark('input-text-focus-border-color');
     }
   }
 

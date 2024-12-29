@@ -12,7 +12,11 @@
 }
 
 .flex-basis-auto {
-  flex-basis: 40% !important;
+  flex-basis: auto !important;
+}
+
+.flex-basis-20 {
+  flex-basis: 20% !important;
 }
 
 .flex-basis-40 {

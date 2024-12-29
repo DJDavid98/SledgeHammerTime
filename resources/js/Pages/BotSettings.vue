@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import DiscordUserInfo, { DiscordUserInfoProps } from '@/Components/DiscordUserInfo.vue';
 import FormMessage from '@/Components/FormMessage.vue';
-import TimeZoneInput from '@/Components/TimeZoneInput.vue';
+import TimeZoneInput from '@/Components/TimeZoneSelect.vue';
 import Layout from '@/Layouts/DefaultLayout.vue';
 import { UserSettings } from '@/model/user-settings';
 import HtButton from '@/Reusable/HtButton.vue';

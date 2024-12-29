@@ -12,6 +12,7 @@ const props = withDefaults(defineProps<{
   color?: ButtonColors,
   'class'?: string | Record<string, boolean>,
   disabled?: boolean,
+  tabindex?: string | number,
   block?: boolean,
   pressed?: boolean,
   justifyCenter?: boolean,
@@ -22,6 +23,7 @@ const props = withDefaults(defineProps<{
   disabled: false,
   loading: false,
   block: false,
+  tabindex: undefined,
   pressed: false,
   iconOnly: false,
   iconStart: undefined,
@@ -41,6 +43,7 @@ const emit = defineEmits<{
     :type="type"
     :class="buttonClasses"
     :disabled="props.disabled || props.loading"
+    :tabindex="tabindex"
     @click="emit('click', $event)"
   >
     <HtButtonContent
