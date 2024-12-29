@@ -109,14 +109,7 @@ defineExpose<TimeZonePickerApi>({
         />
       </HtFormControlGroup>
       <HtFormInputGroup>
-        <HtInput
-          type="text"
-          class="grid-flex-item flex-basis-40"
-          inert
-          readonly
-          model-value="GMT (UTC)"
-          tabindex="-1"
-        />
+        <span class="input-text hide-selection grid-flex-item flex-basis-auto">GMT (UTC)</span>
         <HtInput
           ref="offset-hours"
           v-model="offsetHours"
