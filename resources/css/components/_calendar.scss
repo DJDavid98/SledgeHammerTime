@@ -73,6 +73,15 @@
     margin: 0;
     background-color: transparent;
     height: var(--button-size);
+    position: relative;
+
+    &:focus {
+      z-index: design.app-z-index('focus');
+    }
+
+    &:focus-visible {
+      outline: design.app-size('focus-outline') solid;
+    }
 
     &.current {
       border-color: currentColor;

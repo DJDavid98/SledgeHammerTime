@@ -25,16 +25,25 @@
   }
 
   @include design.screen-above('md') {
-    top: unset !important;
-    left: unset !important;
-    right: unset !important;
-    bottom: unset !important;
-    width: unset !important;
-    height: unset !important;
-    min-width: unset !important;
-    min-height: unset !important;
-    transform: translateY(calc(#{design.app-size('content-spacing')} * -1));
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    width: auto;
+    height: auto;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
     overflow: hidden;
+
+    @supports (position-anchor: --test) {
+      transform: none;
+
+      &.has-anchor {
+        top: anchor(bottom) !important;
+        left: anchor(left) !important;
+      }
+    }
   }
 
   &.visible {

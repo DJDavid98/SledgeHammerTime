@@ -52,6 +52,7 @@ const setDate = (newYear: number, newMonth: number, newDate: number) => {
   select();
 };
 
+const handleYearBlur = inputRangeLimitBlurHandlerFactory(year);
 const handleMonthBlur = inputRangeLimitBlurHandlerFactory(month);
 const handleDateBlur = inputRangeLimitBlurHandlerFactory(date);
 
@@ -113,6 +114,7 @@ defineExpose<DatePickerPopupApi>({
         v-model="year"
         type="number"
         class="grid-flex-item flex-basis-40"
+        @blur="handleYearBlur"
         @keydown="handleInputKeydown"
       />
       <HtInput

@@ -38,3 +38,5 @@ export interface LocalSettingsValue {
 export const localSettings = Symbol() as InjectionKey<LocalSettingsValue>;
 
 export const formControlId = Symbol() as InjectionKey<string>;
+
+export const positionAnchor = Symbol() as InjectionKey<`--${string}`>;

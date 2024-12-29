@@ -1,8 +1,9 @@
 @use "sass:color";
 
 $z-index-map: (
-  sidebar: 3,
-  header: 2,
+  sidebar: 4,
+  header: 3,
+  focus: 2,
   default: 1,
 );
 
@@ -37,6 +38,7 @@ $size-map: (
   input-text-box-shadow-inset-y: .05rem,
   input-text-box-shadow: .15rem,
   form-control-spacing: .5rem,
+  focus-outline: .2em,
   language-selector-spacing: .5em,
   user-info-spacing: .5em,
   collapsible-padding: .35em,

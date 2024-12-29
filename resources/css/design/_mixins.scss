@@ -108,4 +108,12 @@
   &:not(:first-child):not(:last-child) {
     border-radius: 0;
   }
+
+  &:not(:first-child) {
+    border-left: 0 !important;
+  }
+
+  &:not(:last-child) {
+    border-right: 0 !important;
+  }
 }

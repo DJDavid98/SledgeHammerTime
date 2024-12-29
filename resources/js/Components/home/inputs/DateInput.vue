@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import DatePickerPopup, { DatePickerPopupApi } from '@/Components/home/pickers/DatePicker.vue';
-import { formControlId, timestamp } from '@/injection-keys';
+import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput from '@/Reusable/HtInput.vue';
-import { computed, inject, ref } from 'vue';
+import { computed, inject, provide, ref } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
@@ -28,8 +28,10 @@ const closePopup = () => {
 const changeDate = (value: string) => {
   ts?.changeDateString(value);
 };
-</script>
 
+const positionAnchorName = '--date-input';
+provide(positionAnchor, positionAnchorName);
+</script>
 
 <template>
   <div>
@@ -38,6 +40,7 @@ const changeDate = (value: string) => {
       v-model="selectedDate"
       :readonly="true"
       :hide-selection="true"
+      :position-anchor-name="positionAnchorName"
       @click.prevent="openPopup"
       @focus="openPopup"
     />

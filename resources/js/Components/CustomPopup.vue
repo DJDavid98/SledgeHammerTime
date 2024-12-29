@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { positionAnchor } from '@/injection-keys';
+import { inject, ref, watch } from 'vue';
 
 const props = defineProps<{
   show: boolean;
@@ -12,6 +13,7 @@ const emit = defineEmits<{
 
 const dialogEl = ref<HTMLDialogElement>();
 const closeOnMouseup = ref(false);
+const positionAnchorName = inject(positionAnchor);
 
 const isSelf = (target: EventTarget | HTMLElement | null) => target !== null && target === dialogEl.value;
 const handleMousedown = (e: MouseEvent): void => {
@@ -54,7 +56,8 @@ defineExpose({
 <template>
   <dialog
     ref="dialogEl"
-    :class="['popup', {visible: show}]"
+    :class="['popup', {visible: show, 'has-anchor': Boolean(positionAnchorName)}]"
+    :style="positionAnchorName ? `position-anchor: ${positionAnchorName}` : undefined"
     @mousedown="handleMousedown"
     @mouseup="handleMouseup"
     @close="close"

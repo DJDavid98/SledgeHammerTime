@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import TimePickerPopup, { TimePickerPopupApi } from '@/Components/home/pickers/TimePicker.vue';
-import { formControlId, timestamp } from '@/injection-keys';
+import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput from '@/Reusable/HtInput.vue';
 import { DialMode } from '@/utils/dial';
 import moment from 'moment-timezone';
-import { computed, inject, ref } from 'vue';
+import { computed, inject, provide, ref } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
@@ -33,6 +33,9 @@ const closePopup = () => {
 const changeTime = (value: string) => {
   ts?.changeTimeString(value);
 };
+
+const positionAnchorName = '--time-input';
+provide(positionAnchor, positionAnchorName);
 </script>
 
 
@@ -43,6 +46,7 @@ const changeTime = (value: string) => {
       v-model="selectedTime"
       :readonly="true"
       :hide-selection="true"
+      :position-anchor-name="positionAnchorName"
       @click.prevent="openPopup"
       @focus="openPopup"
     />

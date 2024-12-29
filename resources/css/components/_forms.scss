@@ -38,7 +38,12 @@
     vertical-align: text-top;
 
     &:focus {
+      z-index: design.app-z-index('focus');
       border-color: design.app-color-light('input-text-focus-border-color');
+    }
+
+    &:focus-visible {
+      outline: design.app-size('focus-outline') solid design.app-color-light('input-text-focus-border-color');
     }
 
     @include design.if-dark {
@@ -47,6 +52,10 @@
 
       &:focus {
         border-color: design.app-color-dark('input-text-focus-border-color');
+      }
+
+      &:focus-visible {
+        outline: design.app-size('focus-outline') solid design.app-color-dark('input-text-focus-border-color');
       }
     }
 

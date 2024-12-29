@@ -36,3 +36,7 @@ body {
 code {
   font-family: var(--font-family-mono);
 }
+
+* {
+  z-index: functions.app-z-index('default');
+}

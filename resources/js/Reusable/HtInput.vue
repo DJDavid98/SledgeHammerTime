@@ -13,6 +13,7 @@ const props = defineProps<{
   id?: string;
   readonly?: boolean;
   hideSelection?: boolean;
+  positionAnchorName?: string;
   type?: 'text' | 'number';
   min?: string | number;
   max?: string | number;
@@ -39,6 +40,7 @@ defineExpose({
     :readonly="readonly"
     :min="min"
     :max="max"
+    :style="positionAnchorName ? `anchor-name: ${positionAnchorName}` : undefined"
     @click="emit('click', $event)"
     @focus="emit('focus', $event)"
     @blur="emit('blur', $event)"

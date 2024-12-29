@@ -29,6 +29,14 @@
     transition: none !important;
   }
 
+  &:focus {
+    z-index: design.app-z-index('focus');
+  }
+
+  &:focus-visible {
+    outline: design.app-size('focus-outline') solid var(--button-border-color);
+  }
+
   &:disabled {
     background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .05) 100%);
     cursor: not-allowed;
@@ -88,6 +96,7 @@
     display: flex;
     justify-content: space-between;
     gap: design.app-size('button-content-gap');
+    pointer-events: none;
   }
 }
 
