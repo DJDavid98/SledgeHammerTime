@@ -23,7 +23,7 @@ import {
   describe,
   expect,
   it,
-  SpyInstance,
+  MockInstance,
   vi,
 } from 'vitest';
 
@@ -159,8 +159,8 @@ describe('getDefaultInitialTimezone', () => {
     type: TimeZoneSelectionType.ZONE_NAME,
     name: mockGuessedTimezone,
   };
-  let momentTzGuessSpy: SpyInstance;
-  let momentTzZoneSpy: SpyInstance;
+  let momentTzGuessSpy: MockInstance;
+  let momentTzZoneSpy: MockInstance;
 
   beforeEach(() => {
     momentTzGuessSpy = vi.spyOn(moment.tz, 'guess').mockReturnValue(mockGuessedTimezone);

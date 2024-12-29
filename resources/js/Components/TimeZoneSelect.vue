@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HtFormSelect, { FormSelectApi } from '@/Reusable/HtFormSelect.vue';
 import { getSortedNormalizedTimezoneNames, getTimezoneValue } from '@/utils/time';
-import { defineModel, useTemplateRef } from 'vue';
+import { useTemplateRef } from 'vue';
 
 const props = defineProps<{
   'class'?: string;

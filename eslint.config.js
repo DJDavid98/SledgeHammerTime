@@ -2,7 +2,6 @@
 
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
-// @ts-expect-error (Missing types)
 import pluginVue from 'eslint-plugin-vue';
 
 export default tseslint.config(

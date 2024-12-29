@@ -10,7 +10,7 @@ import HtFormRadio from '@/Reusable/HtFormRadio.vue';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
 import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
 import { guessInitialTimezoneName } from '@/utils/time';
-import { computed, ref, useTemplateRef } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
 const defaultZoneName = guessInitialTimezoneName();
 const offsetHours = ref(0);
@@ -26,25 +26,6 @@ const popupRef = useTemplateRef<CustomPopupApi>('popup-el');
 const offsetHoursRef = useTemplateRef<InputApi>('offset-hours');
 const timezoneSelectRef = useTemplateRef<InputApi>('timezone-select');
 const formRef = useTemplateRef<HTMLFormElement>('form-el');
-
-const modeOffsetSelected = computed<boolean>({
-  get: () => mode.value === TimeZoneSelectionType.OFFSET,
-  set: (newValue) => {
-    console.debug('modeOffsetSelected set newValue', newValue);
-    if (newValue) {
-      mode.value = TimeZoneSelectionType.OFFSET;
-    }
-  },
-});
-const modeZoneNameSelected = computed<boolean>({
-  get: () => mode.value === TimeZoneSelectionType.ZONE_NAME,
-  set: (newValue) => {
-    console.debug('modeZoneNameSelected set newValue', newValue);
-    if (newValue) {
-      mode.value = TimeZoneSelectionType.ZONE_NAME;
-    }
-  },
-});
 
 const select = () => {
   console.log('mode.value', mode.value);

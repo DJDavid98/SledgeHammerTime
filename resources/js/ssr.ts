@@ -25,6 +25,7 @@ createServer((page) =>
           // @ts-expect-error (Types do not like this)
           location: new URL(page.props.ziggy.location),
         }).use(i18nVue, {
+          // eslint-disable-next-line @typescript-eslint/no-require-imports
           resolve: (lang: string) => require(`../../lang/${lang}.json`),
         });
     },

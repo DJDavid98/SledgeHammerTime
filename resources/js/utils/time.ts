@@ -17,7 +17,6 @@ const formatGmtZoneLabel = (offset = '') => `GMT${offset} (UTC${offset})`;
 
 export const transformGmtZoneName = (value: string): string =>
   value.replace(gmtZoneRegex, (_, extractedIdentifier: string) =>
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     extractedIdentifier.replace(/^GMT(?:([+-])(\d+))?$/, (__, sign: string, offset: string) => {
       const newSign = sign ? (sign === '+' ? '-' : '+') : '';
       return formatGmtZoneLabel(`${newSign}${offset ?? ''}`);

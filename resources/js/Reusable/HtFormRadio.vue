@@ -32,7 +32,7 @@ const emit = defineEmits<{
           :checked="checked"
           :tabindex="tabindex"
           class="form-radio-input"
-          @change.passive="emit('change', $event)"
+          @change.passive="emit('change', $event as InputEvent)"
         >
         <span class="form-radio-select-icon" />
       </span>
