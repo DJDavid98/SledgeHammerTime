@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Popup from '@/Components/CustomPopup.vue';
+import Popup, { CustomPopupApi, Focusable } from '@/Components/CustomPopup.vue';
 import DatePickerCalendar, { DatePickerCalendarApi } from '@/Components/home/pickers/DatePickerCalendar.vue';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtButtonGroup from '@/Reusable/HtButtonGroup.vue';
@@ -9,7 +9,7 @@ import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
 import { pad } from '@/utils/pad';
 import { limitDate, limitMonth } from '@/utils/time';
 import { Moment } from 'moment-timezone';
-import { ref, watch } from 'vue';
+import { ref, useTemplateRef, watch } from 'vue';
 
 const year = ref(0);
 const month = ref(0);
@@ -19,18 +19,11 @@ const yearInput = ref<HTMLInputElement>();
 const monthInput = ref<HTMLInputElement>();
 const dateInput = ref<HTMLInputElement>();
 
-defineProps<{
-  show: boolean;
-}>();
-
 const emit = defineEmits<{
-  (e: 'selected', date: string): void
-  (e: 'close'): void
+  (e: 'selected', date: string): void;
 }>();
 
-const close = () => {
-  emit('close');
-};
+const popupRef = useTemplateRef<CustomPopupApi>('popup-el');
 
 const select = () => {
   const formattedDate = [year.value, month.value, date.value].map(n => pad(n, 2)).join('-');
@@ -40,16 +33,20 @@ const selectAndClose = () => {
   select();
   close();
 };
-const open = (initialValue: Moment) => {
+const open = (initialValue: Moment, focusOnClose?: Focusable | null) => {
   year.value = initialValue.year();
   month.value = initialValue.month() + 1;
   date.value = initialValue.date();
+  popupRef.value?.open(focusOnClose);
 };
 const setDate = (newYear: number, newMonth: number, newDate: number) => {
   year.value = newYear;
   month.value = newMonth;
   date.value = newDate;
   select();
+};
+const close = () => {
+  popupRef.value?.close();
 };
 
 const handleYearBlur = inputRangeLimitBlurHandlerFactory(year);
@@ -91,23 +88,19 @@ const changeFocus = (input: 'year' | 'month' | 'date', setSelection: boolean = f
   }
 };
 
-export interface DatePickerPopupApi {
+export interface DatePickerApi {
   open: typeof open;
   changeFocus: typeof changeFocus;
 }
 
-defineExpose<DatePickerPopupApi>({
+defineExpose<DatePickerApi>({
   open,
   changeFocus,
 });
 </script>
 
-
 <template>
-  <Popup
-    :show="show"
-    @close="close"
-  >
+  <Popup ref="popup-el">
     <HtFormInputGroup>
       <HtInput
         ref="yearInput"
@@ -155,7 +148,6 @@ defineExpose<DatePickerPopupApi>({
     </HtButtonGroup>
     <hr>
     <DatePickerCalendar
-      v-if="show"
       ref="calendar"
       :selected-year="year"
       :selected-month="limitMonth(month)"

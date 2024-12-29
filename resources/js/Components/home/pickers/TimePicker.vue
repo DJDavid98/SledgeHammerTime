@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Popup from '@/Components/CustomPopup.vue';
+import Popup, { CustomPopupApi, Focusable } from '@/Components/CustomPopup.vue';
 import TimePickerDial, { TimePickerDialAPI } from '@/Components/home/pickers/TimePickerDial.vue';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtButtonGroup from '@/Reusable/HtButtonGroup.vue';
@@ -21,7 +21,7 @@ import {
 } from '@/utils/time';
 import { usePage } from '@inertiajs/vue3';
 import moment, { Moment } from 'moment-timezone';
-import { computed, ref } from 'vue';
+import { computed, ref, useTemplateRef } from 'vue';
 
 const hours = ref(0);
 const minutes = ref(0);
@@ -40,23 +40,17 @@ const twelveHourMode = computed(() => {
   return /A$/i.test(longTimeFormat);
 });
 
-defineProps<{
-  show: boolean;
-}>();
-
 const emit = defineEmits<{
   (e: 'selected', time: string): void
-  (e: 'close'): void
-  (e: 'open'): void
 }>();
+
+const popupRef = useTemplateRef<CustomPopupApi>('popup-el');
 
 const openPicker = () => {
   renderDial.value = true;
-  emit('open');
 };
 const closePicker = () => {
   renderDial.value = false;
-  emit('close');
 };
 
 const select = () => {
@@ -65,12 +59,13 @@ const select = () => {
   emit('selected', formattedTime); // Emit the selected date back to the MainDatepicker
   closePicker();
 };
-const open = (initialValue: Moment) => {
+const open = (initialValue: Moment, focusOnClose?: Focusable | null) => {
   const initialHours = initialValue.hours();
   hours.value = twelveHourMode.value ? toTwelveHours(initialHours) : initialHours;
   minutes.value = initialValue.minutes();
   seconds.value = initialValue.seconds();
   isAm.value = initialHours < 12;
+  popupRef.value?.open(focusOnClose);
 };
 
 const hoursFocused = () => dial.value?.setMode(DialMode.Hours);
@@ -167,7 +162,7 @@ defineExpose<TimePickerPopupApi>({
 
 <template>
   <Popup
-    :show="show"
+    ref="popup-el"
     @close="closePicker"
     @open="openPicker"
   >

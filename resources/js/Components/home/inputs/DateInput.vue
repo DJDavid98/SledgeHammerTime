@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import DatePickerPopup, { DatePickerPopupApi } from '@/Components/home/pickers/DatePicker.vue';
+import DatePicker, { DatePickerApi } from '@/Components/home/pickers/DatePicker.vue';
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
-import HtInput from '@/Reusable/HtInput.vue';
-import { computed, inject, provide, ref } from 'vue';
+import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
+import { computed, inject, provide, ref, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
 
 const selectedDate = computed(() => ts?.currentTimestamp.value.format('LL'));
-const showPopup = ref(false);
-const datepicker = ref<DatePickerPopupApi>();
+const datepicker = ref<DatePickerApi>();
+const inputEl = useTemplateRef<InputApi>('input-el');
 
-const openPopup = () => {
-  showPopup.value = true;
+const openPopup = (e: KeyboardEvent | MouseEvent) => {
+  if ('key' in e && (e.key === 'Tab' || e.key === 'Shift')) {
+    return;
+  }
+
+  e.preventDefault();
   if (ts) {
-    datepicker.value?.open(ts.currentTimestamp.value);
+    datepicker.value?.open(ts.currentTimestamp.value, inputEl.value?.inputEl);
     window.requestAnimationFrame(() => {
       datepicker.value?.changeFocus('year', true);
     });
   }
-};
-
-const closePopup = () => {
-  showPopup.value = false;
 };
 
 const changeDate = (value: string) => {
@@ -37,17 +37,16 @@ provide(positionAnchor, positionAnchorName);
   <div>
     <HtInput
       :id="id"
+      ref="input-el"
       v-model="selectedDate"
       :readonly="true"
       :hide-selection="true"
       :position-anchor-name="positionAnchorName"
       @click.prevent="openPopup"
-      @focus="openPopup"
+      @keydown="openPopup"
     />
-    <DatePickerPopup
+    <DatePicker
       ref="datepicker"
-      :show="showPopup"
-      @close="closePopup"
       @selected="changeDate"
     />
   </div>

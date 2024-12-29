@@ -24,9 +24,16 @@ const model = defineModel<string | number>();
 
 const inputRef = useTemplateRef<HTMLInputElement>('input-el');
 
+export interface InputApi {
+  focus: () => void;
+  select: () => void;
+  inputEl: HTMLInputElement | null;
+}
+
 defineExpose({
   focus: () => inputRef?.value?.focus(),
   select: () => inputRef?.value?.select(),
+  inputEl: inputRef,
 });
 </script>
 

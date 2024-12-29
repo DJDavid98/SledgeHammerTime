@@ -1,33 +1,33 @@
 <script setup lang="ts">
 import TimePickerPopup, { TimePickerPopupApi } from '@/Components/home/pickers/TimePicker.vue';
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
-import HtInput from '@/Reusable/HtInput.vue';
+import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
 import { DialMode } from '@/utils/dial';
 import moment from 'moment-timezone';
-import { computed, inject, provide, ref } from 'vue';
+import { computed, inject, provide, ref, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
 
 const selectedTime = computed(() => ts?.currentTimestamp.value.format('LTS'));
-const showPopup = ref(false);
 const timepicker = ref<TimePickerPopupApi>();
+const inputEl = useTemplateRef<InputApi>('input-el');
 
-const openPopup = () => {
-  showPopup.value = true;
+const openPopup = (e: KeyboardEvent | MouseEvent) => {
+  if ('key' in e && (e.key === 'Tab' || e.key === 'Shift')) {
+    return;
+  }
+
+  e.preventDefault();
   if (ts) {
     const currentTsWithTimezone = moment.tz(ts.currentTimestamp.value, ts.currentTimezone.value);
     // TODO Figure out why `ts.currentTimestamp` does not have a timezone to begin with???
     console.debug('ts.currentTimestamp.value.tz()', ts.currentTimestamp.value.tz());
-    timepicker.value?.open(currentTsWithTimezone);
+    timepicker.value?.open(currentTsWithTimezone, inputEl.value?.inputEl);
     window.requestAnimationFrame(() => {
       timepicker.value?.changeFocus(DialMode.Hours, true);
     });
   }
-};
-
-const closePopup = () => {
-  showPopup.value = false;
 };
 
 const changeTime = (value: string) => {
@@ -43,17 +43,16 @@ provide(positionAnchor, positionAnchorName);
   <div>
     <HtInput
       :id="id"
+      ref="input-el"
       v-model="selectedTime"
       :readonly="true"
       :hide-selection="true"
       :position-anchor-name="positionAnchorName"
       @click.prevent="openPopup"
-      @focus="openPopup"
+      @keydown="openPopup"
     />
     <TimePickerPopup
       ref="timepicker"
-      :show="showPopup"
-      @close="closePopup"
       @selected="changeTime"
     />
   </div>

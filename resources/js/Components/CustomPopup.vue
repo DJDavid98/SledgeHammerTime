@@ -2,8 +2,12 @@
 import { positionAnchor } from '@/injection-keys';
 import { inject, ref, watch } from 'vue';
 
+export interface Focusable {
+  focus: () => void;
+}
+
 const props = defineProps<{
-  show: boolean;
+  show?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -13,6 +17,7 @@ const emit = defineEmits<{
 
 const dialogEl = ref<HTMLDialogElement>();
 const closeOnMouseup = ref(false);
+const focusElementOnClose = ref<Focusable | null>(null);
 const positionAnchorName = inject(positionAnchor);
 
 const isSelf = (target: EventTarget | HTMLElement | null) => target !== null && target === dialogEl.value;
@@ -31,22 +36,35 @@ const handleMouseup = (e: MouseEvent): void => {
 
 const close = () => {
   dialogEl.value?.close();
+};
+const handleDialogClose = () => {
+  focusElementOnClose.value?.focus();
+  focusElementOnClose.value = null;
   emit('close');
 };
-const open = () => {
+const open = (focusOnClose?: Focusable | null) => {
+  focusElementOnClose.value = focusOnClose || null;
   dialogEl.value?.showModal();
   emit('open');
 };
 
 watch(() => props.show, (value) => {
-  if (value) {
-    open();
-  } else {
-    close();
+  switch (value) {
+    case true:
+      open();
+      break;
+    case false:
+      close();
+      break;
   }
 });
 
-defineExpose({
+export interface CustomPopupApi {
+  close: typeof close;
+  open: typeof open;
+}
+
+defineExpose<CustomPopupApi>({
   close,
   open,
 });
@@ -60,7 +78,7 @@ defineExpose({
     :style="positionAnchorName ? `position-anchor: ${positionAnchorName}` : undefined"
     @mousedown="handleMousedown"
     @mouseup="handleMouseup"
-    @close="close"
+    @close.passive="handleDialogClose"
   >
     <slot />
   </dialog>

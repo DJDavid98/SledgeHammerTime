@@ -61,6 +61,7 @@ onUnmounted(() => {
     ref="collapsibleRef"
     :class="['collapsible', { visible, 'limited-height': !!maxHeight }, props.class]"
     :style="`height: ${height}px`"
+    :inert="!visible"
   >
     <slot />
   </div>
