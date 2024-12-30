@@ -39,4 +39,5 @@ return [
       'displayName' => 'Header',
     ],
   ],
+  'saveSuccess' => 'Your settings have been saves successfully.',
 ];
