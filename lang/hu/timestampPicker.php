@@ -7,6 +7,8 @@ return [
       'date' => 'Dátum',
       'time' => 'Idő',
       'timezone' => 'Időzóna',
+      'modeOffset' => 'Abszolút Eltolás',
+      'modeZoneName' => 'Zóna Név',
     ],
     'button' => [
       'jumpToToday' => 'Ugrás az aktuális hónapra',

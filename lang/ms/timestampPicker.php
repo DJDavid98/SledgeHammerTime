@@ -7,18 +7,18 @@ return [
       'date' => 'Tarikh',
       'time' => 'Masa',
       'timezone' => 'Zon waktu',
+      'modeOffset' => 'Absolute Offset',
+      'modeZoneName' => 'Zone Name',
     ],
     'button' => [
       'jumpToToday' => 'Jump to current month',
     ],
     'tooltip' => [
       'setToCurrent' => 'Tetapkan ke masa semasa',
-      'calendar' => [
-        'previousYear' => 'tahun lepas',
-        'previousMonth' => 'bulan lepas',
-        'nextMonth' => 'bulan hadapan',
-        'nextYear' => 'tahun hadapan',
-      ],
+      'previousYear' => 'Previous year',
+      'previousMonth' => 'Previous month',
+      'nextMonth' => 'Next month',
+      'nextYear' => 'Next year',
     ],
   ],
   'table' => [
