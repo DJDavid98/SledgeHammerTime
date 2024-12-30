@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return [
-    'failed'   => 'Rossz email-jelszó páros.',
-    'password' => 'A(z) :attribute jelszónak kell, hogy legyen!',
-    'throttle' => 'Túl sok próbálkozás. Kérjük próbálja újra :seconds másodperc múlva.',
+    'failed'   => 'These credentials do not match our records.',
+    'password' => 'The password is incorrect.',
+    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 ];
