@@ -6,6 +6,7 @@ return [
     'heading' => 'Profile Information',
     'description' => "Update your account's profile information.",
     'displayName' => 'Display Name',
+    'saveSuccess' => 'Your settings have been saves successfully.',
   ],
   'accounts' => [
     'heading' => 'Connected Accounts',
