@@ -1,7 +1,7 @@
 <?php
 
 return [
-  'seoDescription' => 'Jana penunjuk cap masa untuk mesej sembang Discord',
+  'seoDescription' => 'Generate timestamp indicators for Discord chat messages',
   'changeLanguage' => 'Change language',
   'guest' => 'Guest',
   'nav' => [
