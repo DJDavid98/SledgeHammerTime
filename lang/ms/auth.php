@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return [
-    'failed'   => 'These credentials do not match our records.',
-    'password' => 'The password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed'   => 'Butiran ini tidak sepadan dengan rekod kami.',
+    'password' => 'Kata laluan tidak sah.',
+    'throttle' => 'Terlalu banyak percubaan log masuk. Sila cuba lagi dalam :seconds saat.',
 ];
