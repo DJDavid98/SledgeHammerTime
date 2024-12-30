@@ -50,7 +50,7 @@ const toggleUserDropdown = (e: MouseEvent) => {
           as="button"
           class="cursor-pointer"
         >
-          {{ $t('global.nav.logout') }}
+          {{ $t('actions.log_out') }}
         </Link>
       </li>
     </ul>
@@ -74,7 +74,7 @@ const toggleUserDropdown = (e: MouseEvent) => {
       :external="true"
       :target-blank="false"
     >
-      {{ $t('global.nav.login') }}
+      {{ $t('actions.log_in') }}
     </HtLinkButton>
   </div>
 </template>

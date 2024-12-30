@@ -162,12 +162,12 @@ const forms = props.userSettings.map(userSetting => useForm({
             type="submit"
             :icon-start="faSave"
           >
-            {{ $t('global.form.save') }}
+            {{ $t('actions.save') }}
           </HtButton>
 
           <FormMessage
             type="success"
-            :message="forms[i].recentlySuccessful ? $t('global.form.saved') : undefined"
+            :message="forms[i].recentlySuccessful ? $t('botSettings.saveSuccess') : undefined"
           />
         </div>
       </form>

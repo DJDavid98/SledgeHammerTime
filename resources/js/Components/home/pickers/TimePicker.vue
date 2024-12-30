@@ -217,13 +217,13 @@ defineExpose<TimePickerPopupApi>({
           :justify-center="true"
           type="submit"
         >
-          {{ $t('global.form.select') }}
+          {{ $t('actions.select') }}
         </HtButton>
         <HtButton
           :justify-center="true"
           @click="close"
         >
-          {{ $t('global.form.cancel') }}
+          {{ $t('actions.cancel') }}
         </HtButton>
       </HtButtonGroup>
     </form>

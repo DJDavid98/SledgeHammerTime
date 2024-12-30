@@ -54,11 +54,11 @@ const form = useForm({
         type="submit"
         :icon-start="faSave"
       >
-        {{ $t('global.form.save') }}
+        {{ $t('actions.save') }}
       </HtButton>
 
       <p v-if="form.recentlySuccessful">
-        {{ $t('global.form.saved') }}
+        {{ $t('profile.information.saveSuccess') }}
       </p>
     </div>
   </form>

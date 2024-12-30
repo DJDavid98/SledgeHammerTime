@@ -60,7 +60,7 @@ const closeModal = () => {
 
     <template #footer>
       <HtButton @click="closeModal">
-        {{ $t('global.form.cancel') }}
+        {{ $t('actions.cancel') }}
       </HtButton>
 
       <HtButton
@@ -69,7 +69,7 @@ const closeModal = () => {
         :aria-busy="form.processing ? 'true' : undefined"
         @click="deleteUser"
       >
-        {{ $t('global.form.confirm') }}
+        {{ $t('actions.confirm') }}
       </HtButton>
     </template>
   </Modal>
