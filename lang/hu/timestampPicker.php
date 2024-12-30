@@ -1,29 +1,29 @@
 <?php
 
 return [
-  'howTo' => 'Pick a date, copy the desired timestamp from the :syntaxColName column, then paste it anywhere in a chat message. The result will be a dynamic timestamp that displays differently for everyone based on their own timezone.',
+  'howTo' => 'Válassz egy dátumot, másold ki a kívánt jelölőt a :syntaxColName oszlopból, majd másold be bárhova egy üzenetbe. Az eredmény egy dinamikus időbélyeg lesz, ami mindenkinek máshogy fog megjelenni a saját időzónájuktól függően.',
   'picker' => [
     'label' => [
-      'date' => 'Date',
-      'time' => 'Time',
-      'timezone' => 'Timezone',
-      'modeOffset' => 'Absolute Offset',
-      'modeZoneName' => 'Zone Name',
+      'date' => 'Dátum',
+      'time' => 'Idő',
+      'timezone' => 'Időzóna',
+      'modeOffset' => 'Abszolút Eltolás',
+      'modeZoneName' => 'Zóna Név',
     ],
     'button' => [
-      'jumpToToday' => 'Jump to current month',
+      'jumpToToday' => 'Ugrás az aktuális hónapra',
     ],
     'tooltip' => [
-      'setToCurrent' => 'Set to current time',
-      'previousYear' => 'Previous year',
-      'previousMonth' => 'Previous month',
-      'nextMonth' => 'Next month',
-      'nextYear' => 'Next year',
+      'setToCurrent' => 'Aktuális idő beállítása',
+      'previousYear' => 'Előző év',
+      'previousMonth' => 'Előző hónap',
+      'nextMonth' => 'Következő hónap',
+      'nextYear' => 'Következő év',
     ],
   ],
   'table' => [
-    'syntaxColumn' => 'Chat syntax',
-    'resultColumn' => 'Example result',
-    'clickToCopy' => 'Copy to clipboard',
+    'syntaxColumn' => 'Üzenet formája',
+    'resultColumn' => 'Példa megjelenés',
+    'clickToCopy' => 'Vágólapra másolás',
   ],
 ];
