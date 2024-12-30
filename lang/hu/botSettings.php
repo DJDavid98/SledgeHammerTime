@@ -1,42 +1,43 @@
 <?php
 
 return [
-  'title' => 'Bot Settings',
-  'description' => 'Below you can see your current settings in the HammerTime Bot for each connected account.',
+  'title' => 'Bot Beállítások',
+  'description' => 'Alább láthatod a jelenlegi beállításaidat a HammerTime Bot-ban, minden összekapcsolt fiókodhoz.',
   'fields' => [
     'rawData' => [
-      'displayName' => 'Raw data (for debugging purposes)',
+      'displayName' => 'Nyers adatok (hibakeresés céljából)',
     ],
     'timezone' => [
-      'displayName' => 'Timezone',
+      'displayName' => 'Időzóna',
     ],
     'format' => [
-      'displayName' => 'Format',
+      'displayName' => 'Formátum',
       'option' => [
-        'd' => 'Short date',
-        'f' => 'Date and time',
-        't' => 'Short time',
-        'D' => 'Long date',
-        'F' => 'Weekday, date and time',
-        'R' => 'Relative',
-        'T' => 'Long time',
-        'default' => 'Default',
+        'd' => 'Rövid dátum',
+        'f' => 'Dátum és idő',
+        't' => 'Rövid idő',
+        'D' => 'Hosszú dátum',
+        'F' => 'Hét napja, dátum és idő',
+        'R' => 'Viszonylagos',
+        'T' => 'Hosszú idő',
+        'default' => 'Alapértelmezett',
       ],
     ],
     'columns' => [
-      'displayName' => 'Columns',
+      'displayName' => 'Oszlopok',
       'option' => [
-        'syntax' => 'Syntax only',
-        'preview' => 'Preview only',
-        'both' => 'Both syntax and preview',
-        'default' => 'Default',
+        'syntax' => 'Csak a kód',
+        'preview' => 'Csak az előnézet',
+        'both' => 'A kód és Az előnézet is',
+        'default' => 'Alapértelmezett',
       ],
     ],
     'ephemeral' => [
-      'displayName' => 'Ephemeral',
+      'displayName' => 'Ideiglenes',
     ],
     'header' => [
-      'displayName' => 'Header',
+      'displayName' => 'Fejléc',
     ],
   ],
+  'saveSuccess' => 'Your settings have been saves successfully.',
 ];
