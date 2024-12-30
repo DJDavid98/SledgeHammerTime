@@ -19,6 +19,9 @@ yarn-error.log
 /.idea
 !/.idea/runConfigurations
 /.vscode
+
+# generated files
 .phpstorm.meta.php
 _ide_helper*.php
 lang/php_*.json
+crowdin_report.json5

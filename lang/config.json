@@ -2,121 +2,140 @@
   "languages": {
     "ar": {
       "name": "Arabic",
+      "nativeName": "اللغة العربية",
       "countryCode": "AE",
       "emoji": "\uD83C\uDDF8\uD83C\uDDE6",
       "rtl": true,
       "calendarWeekdayFormat": "dddd",
       "credits": [
         {
-          "crowdin": "raphael.santiago.53",
-          "displayName": "Raphael Santiago"
+          "crowdinId": 13734875
         }
       ]
     },
     "bg": {
       "name": "Bulgarian",
+      "nativeName": "Български",
       "countryCode": "BG",
       "emoji": "\uD83C\uDDE7\uD83C\uDDEC",
       "credits": [
         {
-          "crowdin": "Rxshi"
+          "crowdinId": 15078949
+        },
+        {
+          "crowdinId": 16601907
         }
       ]
     },
     "ca": {
       "name": "Catalan",
+      "nativeName": "Català",
       "countryCode": "ES-CA",
       "credits": [
         {
-          "crowdin": "sware"
+          "crowdinId": 13533384
+        },
+        {
+          "crowdinId": 16655625
         }
       ]
     },
     "zh": {
       "name": "Chinese Simplified",
+      "nativeName": "中文",
       "countryCode": "CN",
       "emoji": "\uD83C\uDDE8\uD83C\uDDF3",
       "crowdinLocale": "zh-CN",
       "momentLocale": "zh-cn",
+      "dayjsLocale": "zh-cn",
+      "laravelLocale": "zh_CN",
       "calendarLabelFormat": "YYYY年MMM",
       "calendarYearLabelFormat": "YYYY年",
       "credits": [
         {
-          "crowdin": "CPYW_7226"
+          "crowdinId": 15176660
         },
         {
-          "crowdin": "User670"
+          "crowdinId": 12485887
         },
         {
-          "crowdin": "febilly",
-          "displayName": "姓甚名谁"
+          "crowdinId": 15776699
+        },
+        {
+          "crowdinId": 16611181
         }
       ]
     },
     "zh-TW": {
       "name": "Chinese Traditional",
+      "nativeName": "繁體中文",
       "countryCode": "TW",
       "emoji": "\uD83C\uDDF9\uD83C\uDDFC",
       "momentLocale": "zh-tw",
+      "dayjsLocale": "zh-tw",
+      "laravelLocale": "zh_TW",
       "calendarLabelFormat": "YYYY年MMM",
       "calendarYearLabelFormat": "YYYY年",
       "credits": [
         {
-          "crowdin": "CPYW_7226"
+          "crowdinId": 15176660
         },
         {
-          "crowdin": "notlin4"
+          "crowdinId": 15434450
         },
         {
-          "crowdin": "ms.investigator",
-          "displayName": "investigator VT"
+          "crowdinId": 15980591
         }
       ]
     },
     "hr": {
       "name": "Croatian",
+      "nativeName": "Hrvatski",
       "countryCode": "HR",
       "emoji": "\uD83C\uDDED\uD83C\uDDF7",
-      "weekendDays": {
-        "0": "red"
-      },
+      "weekendDays": [
+        0
+      ],
       "credits": [
         {
-          "crowdin": "stjepanmih13x",
+          "crowdinId": 15734961,
           "displayName": "Volvone",
           "url": "https://github.com/volvone"
         }
-      ],
-      "percent": 98
+      ]
     },
     "cs": {
       "name": "Czech",
+      "nativeName": "Čeština",
       "countryCode": "CZ",
       "emoji": "\uD83C\uDDE8\uD83C\uDDFF",
       "credits": [
         {
-          "crowdin": "klauny"
+          "crowdinId": 15709863
         },
         {
-          "crowdin": "Ethxrnity",
-          "displayName": "イーテルニティ ☄️"
+          "crowdinId": 14311950
         },
         {
-          "crowdin": "Blurplix"
+          "crowdinId": 15193976
+        },
+        {
+          "crowdinId": 15044779
         }
       ]
     },
     "nl": {
       "name": "Dutch",
+      "nativeName": "Nederlands",
       "countryCode": "NL",
       "emoji": "\uD83C\uDDF3\uD83C\uDDF1",
-      "weekendDays": {
-        "6": "red",
-        "0": "red"
-      },
+      "weekendDays": [
+        6,
+        0
+      ],
       "credits": [
         {
-          "crowdin": "Jessuh",
+          "crowdinId": 14730100,
           "displayName": "Jesse",
           "url": "https://github.com/Jessuhh"
         }
@@ -124,336 +143,410 @@
     },
     "en-GB": {
       "name": "English, United Kingdom",
+      "nativeName": "English, UK",
       "countryCode": "GB",
       "emoji": "\uD83C\uDDEC\uD83C\uDDE7",
-      "momentLocale": "en-gb"
+      "momentLocale": "en-gb",
+      "dayjsLocale": "en-gb",
+      "laravelLocale": "en_GB"
     },
     "en": {
       "name": "English, United States",
+      "nativeName": "English, US",
       "countryCode": "US",
       "emoji": "\uD83C\uDDFA\uD83C\uDDF8"
     },
     "fr": {
       "name": "French",
+      "nativeName": "Français",
       "countryCode": "FR",
       "emoji": "\uD83C\uDDEB\uD83C\uDDF7",
       "credits": [
         {
-          "crowdin": "Cookikui",
-          "displayName": "Cookie Kiro"
+          "crowdinId": 14840926
         },
         {
-          "crowdin": "Ouiouibaguette"
+          "crowdinId": 15263324
         },
         {
-          "crowdin": "sivelswhy"
+          "crowdinId": 15066243
         },
         {
-          "crowdin": "ValouFCH"
+          "crowdinId": 15205466
         },
         {
-          "crowdin": "graffiti34",
-          "displayName": "James Roger"
+          "crowdinId": 15845459
         },
         {
-          "crowdin": "M4gicalCat"
+          "crowdinId": 13466537
         },
         {
-          "crowdin": "humain",
-          "displayName": "HumainAbsurde"
+          "crowdinId": 16601907
+        },
+        {
+          "crowdinId": 16611155
+        },
+        {
+          "crowdinId": 16629243
+        },
+        {
+          "crowdinId": 13898663
+        },
+        {
+          "crowdinId": 16723857
         }
       ]
     },
     "de": {
       "name": "German",
+      "nativeName": "Deutsch",
       "countryCode": "DE",
       "emoji": "\uD83C\uDDE9\uD83C\uDDEA",
       "credits": [
         {
-          "crowdin": "carlos.diener",
-          "displayName": "Carlos Diener"
+          "crowdinId": 15199922
         },
         {
-          "crowdin": "Fabian9799"
+          "crowdinId": 13020288
         },
         {
-          "crowdin": "julix00"
+          "crowdinId": 15169912
         }
       ]
     },
     "el": {
       "name": "Greek",
+      "nativeName": "Ελληνικά",
       "countryCode": "GR",
       "emoji": "\uD83C\uDDEC\uD83C\uDDF7",
       "credits": [
         {
-          "crowdin": "BelleBernice"
+          "crowdinId": 14459560
         }
       ]
     },
     "hi": {
       "name": "Hindi",
+      "nativeName": "हिंदी",
       "countryCode": "IN",
       "emoji": "\uD83C\uDDEE\uD83C\uDDF3",
       "credits": [
         {
-          "crowdin": "Balajiasli"
+          "crowdinId": 15923883
+        },
+        {
+          "crowdinId": 16677355
         }
       ]
     },
     "he": {
       "name": "Hebrew",
+      "nativeName": "עִברִית",
       "countryCode": "IL",
       "emoji": "\uD83C\uDDEE\uD83C\uDDF1",
       "rtl": true,
-      "weekendDays": {"5": "red", "6": "red"},
+      "weekendDays": [
+        5,
+        6
+      ],
       "credits": [
         {
-          "crowdin": "ZeRealOne",
-          "displayName": "Amit Cohen"
+          "crowdinId": 15269410
         }
-      ],
-      "percent": 75
+      ]
     },
     "hu": {
       "name": "Hungarian",
+      "nativeName": "Magyar",
       "countryCode": "HU",
       "emoji": "\uD83C\uDDED\uD83C\uDDFA",
-      "weekendDays": {"6": "red", "0": "red"}
+      "weekendDays": [
+        6,
+        0
+      ]
     },
     "id": {
       "name": "Indonesian",
+      "nativeName": "Bahasa Indonesia",
       "countryCode": "ID",
       "emoji": "\uD83C\uDDEE\uD83C\uDDE9",
       "credits": [
         {
-          "crowdin": "jckcr",
-          "displayName": "Jackie",
+          "crowdinId": 15258052,
           "url": "https://github.com/Jckcr"
         }
       ]
     },
     "it": {
       "name": "Italian",
+      "nativeName": "Italiano",
       "countryCode": "IT",
       "emoji": "\uD83C\uDDEE\uD83C\uDDF9",
-      "weekendDays": {"6": "red", "0": "red"},
+      "weekendDays": [
+        6,
+        0
+      ],
       "credits": [
         {
-          "crowdin": "pellilory126",
-          "displayName": "RVG|\uD835\uDCF5\uD835\uDCF8\uD835\uDCFB\uD835\uDD02",
-          "url": "https://top.gg/bot/1076200668810985634"
+          "crowdinId": 15096881,
+          "url": "https://github.com/lorypelli"
         }
       ]
     },
     "ja": {
       "name": "Japanese",
+      "nativeName": "日本語",
       "countryCode": "JP",
       "emoji": "\uD83C\uDDEF\uD83C\uDDF5",
       "calendarLabelFormat": "YYYY年MMMM",
       "calendarYearLabelFormat": "YYYY年",
       "credits": [
         {
-          "crowdin": "TheOnlyRAK"
+          "crowdinId": 15218810
         },
         {
-          "crowdin": "sjkim04",
+          "crowdinId": 14469636,
           "displayName": "のむチュウ (sjk)",
           "url": "https://github.com/sjkim04"
         },
         {
-          "crowdin": "eai04191"
+          "crowdinId": 13047240
+        },
+        {
+          "crowdinId": 16187048
+        },
+        {
+          "crowdinId": 15980591
         }
-      ],
-      "percent": 78
+      ]
     },
     "ko": {
       "name": "Korean",
+      "nativeName": "한국어",
       "countryCode": "KR",
       "emoji": "\uD83C\uDDF0\uD83C\uDDF7",
       "calendarLabelFormat": "YYYY년 MMMM",
       "calendarYearLabelFormat": "YYYY년",
       "credits": [
         {
-          "crowdin": "cheesepickle12345678",
-          "displayName": "Bin"
+          "crowdinId": 15404404
         },
         {
-          "crowdin": "sjkim04",
+          "crowdinId": 14469636,
           "displayName": "김카츄 (sjk)",
           "url": "https://github.com/sjkim04"
+        },
+        {
+          "crowdinId": 14531480
+        },
+        {
+          "crowdinId": 14153733
         }
       ]
     },
     "lv": {
       "name": "Latvian",
+      "nativeName": "Latviski",
       "countryCode": "LV",
       "emoji": "\uD83C\uDDF1\uD83C\uDDFB",
       "credits": [
         {
-          "crowdin": "JajarGG",
-          "displayName": "Casper"
+          "crowdinId": 15659129
         }
       ]
     },
     "lt": {
       "name": "Lithuanian",
+      "nativeName": "Lietuviškai",
       "countryCode": "LT",
       "emoji": "\uD83C\uDDF1\uD83C\uDDF9",
       "credits": [
         {
-          "crowdin": "tayloryte"
+          "crowdinId": 15270240
         },
         {
-          "crowdin": "Seenoc"
+          "crowdinId": 14785728
+        },
+        {
+          "crowdinId": 16654645
         }
       ]
     },
     "ms": {
       "name": "Malay",
+      "nativeName": "Bahasa Melayu",
       "countryCode": "MY",
       "emoji": "\uD83C\uDDF2\uD83C\uDDFE",
       "firstDayOfWeek": 0,
-      "weekendDays": {
-        "0": "red",
-        "6": "blue"
-      },
+      "weekendDays": [
+        0
+      ],
+      "blueDay": 6,
       "credits": [
         {
-          "crowdin": "mnh48",
-          "displayName": "Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48.moe)"
+          "crowdinId": 12680006
+        }
+      ]
+    },
+    "mn": {
+      "name": "Mongolian",
+      "nativeName": "Монгол",
+      "countryCode": "MN",
+      "credits": [
+        {
+          "crowdinId": 16733607
         }
       ]
     },
     "fa": {
       "name": "Persian",
+      "nativeName": "فارسی",
       "countryCode": "IR",
       "emoji": "\uD83C\uDDEE\uD83C\uDDF7",
       "rtl": true,
       "credits": [
         {
-          "crowdin": "DeadMarco",
-          "displayName": "Mohammad Safa Gray"
+          "crowdinId": 15419858
+        },
+        {
+          "crowdinId": 16684353
         }
-      ],
-      "percent": 78
+      ]
     },
     "pl": {
       "name": "Polish",
+      "nativeName": "Polski",
       "countryCode": "PL",
       "emoji": "\uD83C\uDDF5\uD83C\uDDF1",
-      "weekendDays": {
-        "0": "red"
-      },
+      "weekendDays": [
+        0
+      ],
       "credits": [
         {
-          "crowdin": "MinerPL",
+          "crowdinId": 14844020,
+          "displayName": "MinerPL",
           "url": "https://github.com/minerpl"
         },
         {
-          "crowdin": "sthakrk",
-          "displayName": "stha"
+          "crowdinId": 14031231
+        },
+        {
+          "crowdinId": 16172948
+        },
+        {
+          "crowdinId": 14673608
         }
       ]
     },
     "pt": {
       "name": "Portuguese",
+      "nativeName": "Português",
       "countryCode": "PT",
+      "crowdinLocale": "pt-PT",
       "emoji": "\uD83C\uDDF5\uD83C\uDDF9",
       "calendarWeekdayFormat": "ddd",
       "credits": [
         {
-          "crowdin": "JajarGG",
-          "displayName": "Casper"
+          "crowdinId": 15659129
         },
         {
-          "crowdin": "DemiCool",
-          "displayName": "Tiago"
+          "crowdinId": 15682999
         },
         {
-          "crowdin": "buckshot-"
+          "crowdinId": 15281318
+        },
+        {
+          "crowdinId": 16669695
         }
       ]
     },
     "pt-BR": {
       "name": "Portuguese, Brazilian",
+      "nativeName": "Português do Brasil",
       "countryCode": "BR",
       "emoji": "\uD83C\uDDE7\uD83C\uDDF7",
       "momentLocale": "pt-br",
+      "dayjsLocale": "pt-br",
+      "laravelLocale": "pt_BR",
       "calendarWeekdayFormat": "ddd",
       "credits": [
         {
-          "crowdin": "leo0six"
+          "crowdinId": 14830652
         },
         {
-          "crowdin": "ShadowG"
+          "crowdinId": 13110344
         },
         {
-          "crowdin": "Chrisdbhr",
-          "displayName": "Chris"
+          "crowdinId": 13379819
+        },
+        {
+          "crowdinId": 12931321
         }
       ]
     },
     "ro": {
       "name": "Romanian",
+      "nativeName": "Română",
       "countryCode": "RO",
       "emoji": "\uD83C\uDDF7\uD83C\uDDF4",
       "credits": [
         {
-          "crowdin": "mihaiofficialRO",
-          "displayName": "mihai"
+          "crowdinId": 14999657
         }
       ]
     },
     "ru": {
       "name": "Russian",
+      "nativeName": "Русский",
       "countryCode": "RU",
       "emoji": "\uD83C\uDDF7\uD83C\uDDFA",
       "credits": [
         {
-          "crowdin": "GameHacker"
+          "crowdinId": 15276044
         },
         {
-          "crowdin": "JudeDM"
+          "crowdinId": 15196324
         },
         {
-          "crowdin": "NightyCloud",
-          "displayName": "Luna"
+          "crowdinId": 14880978
         },
         {
-          "crowdin": "Aligatoor",
-          "displayName": "Nikita Sharikov"
+          "crowdinId": 15276232
         },
         {
-          "crowdin": "arturfomenko8",
-          "displayName": "Крутой Бо"
+          "crowdinId": 14491318
         },
         {
-          "crowdin": "helppriklreyta",
-          "displayName": "Рейт"
+          "crowdinId": 14318252
         },
         {
-          "crowdin": "JudDayLum",
-          "displayName": "JudDayLum Official"
+          "crowdinId": 15761951
         },
         {
-          "crowdin": "bill876",
-          "displayName": "Vladimir"
+          "crowdinId": 12500432
+        },
+        {
+          "crowdinId": 16601907
+        },
+        {
+          "crowdinId": 16655307
         }
       ]
     },
     "sr": {
       "name": "Serbian (Latin)",
+      "nativeName": "Srpski",
       "countryCode": "RS",
       "emoji": "\uD83C\uDDF7\uD83C\uDDF8",
       "crowdinLocale": "sr-CS",
-      "weekendDays": {
-        "6": "red",
-        "0": "red"
-      },
+      "weekendDays": [
+        6,
+        0
+      ],
+      "laravelLocale": "sr_Latin",
       "credits": [
         {
-          "crowdin": "net-tech-",
+          "crowdinId": 14936099,
           "displayName": "net-tech-#7475",
           "url": "https://nettech.dev/"
         }
@@ -461,117 +554,155 @@
     },
     "es": {
       "name": "Spanish",
+      "nativeName": "Español",
       "countryCode": "ES",
       "emoji": "\uD83C\uDDEA\uD83C\uDDF8",
       "crowdinLocale": "es-ES",
       "credits": [
         {
-          "crowdin": "shaulyareaj",
+          "crowdinId": 14524626,
           "displayName": "Yareaj",
           "url": "https://github.com/Yareaj/"
         },
         {
-          "crowdin": "DrakeZero"
+          "crowdinId": 14699026
+        },
+        {
+          "crowdinId": 16655625
         }
       ]
     },
     "sv": {
       "name": "Swedish",
+      "nativeName": "Svenska",
       "countryCode": "SE",
       "emoji": "\uD83C\uDDF8\uD83C\uDDEA",
       "crowdinLocale": "sv-SE",
-      "weekendDays": {"0": "red"},
+      "weekendDays": [
+        0
+      ],
       "credits": [
         {
-          "crowdin": "joll05"
+          "crowdinId": 15692641
         },
         {
-          "crowdin": "Liggliluff",
+          "crowdinId": 25282,
+          "displayName": "Liggliluff",
           "url": "https://github.com/Liggliluff"
         },
         {
-          "crowdin": "tunket"
+          "crowdinId": 15276254
         },
         {
-          "crowdin": "patricktobias",
-          "displayName": "Patrick Tobias"
+          "crowdinId": 15221880
+        },
+        {
+          "crowdinId": 16622315
         }
       ]
     },
     "th": {
       "name": "Thai",
+      "nativeName": "ไทย",
       "countryCode": "TH",
       "emoji": "\uD83C\uDDF9\uD83C\uDDED",
       "credits": [
         {
-          "crowdin": "unpredictable",
-          "displayName": "Rukchad Wongprayoon"
+          "crowdinId": 15514192,
+          "displayName": "timelessnesses",
+          "url": "https://github.com/timelessnesses"
         }
       ]
     },
     "tr": {
       "name": "Turkish",
+      "nativeName": "Türkçe",
       "countryCode": "TR",
       "emoji": "\uD83C\uDDF9\uD83C\uDDF7",
       "credits": [
         {
-          "crowdin": "tututuana",
+          "crowdinId": 14391214,
           "url": "https://github.com/tututuana"
+        },
+        {
+          "crowdinId": 16669493
         }
       ]
     },
     "uk": {
       "name": "Ukrainian",
+      "nativeName": "Українська",
       "countryCode": "UA",
       "emoji": "\uD83C\uDDFA\uD83C\uDDE6",
       "credits": [
         {
-          "crowdin": "GameHacker"
+          "crowdinId": 15276044
         },
         {
-          "crowdin": "enky"
+          "crowdinId": 14495070
         },
         {
-          "crowdin": "WhiteBear60",
-          "displayName": "Myhailo Yaremenko"
+          "crowdinId": 14236042
+        },
+        {
+          "crowdinId": 16601907
         }
-      ],
-      "percent": 78
+      ]
     },
     "ur": {
       "name": "Urdu (Pakistan)",
+      "nativeName": "اردو",
       "countryCode": "PK",
       "emoji": "\uD83C\uDDF5\uD83C\uDDF0",
       "rtl": true,
       "credits": [
         {
-          "crowdin": "muharslan"
+          "crowdinId": 15767931
         },
         {
-          "crowdin": "Developer_X",
-          "displayName": "Muhammad Dawood"
+          "crowdinId": 15745113
         }
-      ],
-      "percent": 98
+      ]
     },
     "vi": {
       "name": "Vietnamese",
+      "nativeName": "Tiếng Việt",
       "countryCode": "VN",
       "emoji": "\uD83C\uDDFB\uD83C\uDDF3",
       "credits": [
         {
-          "crowdin": "quanonthecob",
-          "displayName": "Quan"
+          "crowdinId": 16061216
         }
       ]
     },
     "da": {
       "name": "Danish",
+      "nativeName": "Dansk",
       "countryCode": "DK",
       "emoji": "\uD83C\uDDE9\uD83C\uDDF0",
       "credits": [
         {
-          "crowdin": "jovictasor"
+          "crowdinId": 16066210
+        },
+        {
+          "crowdinId": 12852355
+        },
+        {
+          "crowdinId": 12426169
+        }
+      ]
+    },
+    "nb": {
+      "name": "Norwegian",
+      "nativeName": "Norsk",
+      "countryCode": "NO",
+      "emoji": "\uD83C\uDDF3\uD83C\uDDF4",
+      "credits": [
+        {
+          "crowdinId": 16466619
+        },
+        {
+          "crowdinId": 16406120
         }
       ]
     }

@@ -1,4 +1,3 @@
-import { WeekendDays } from '@/model/language-config';
 import moment, { Moment } from 'moment-timezone';
 
 export interface GenerateCalendarOptions {
@@ -46,6 +45,8 @@ export interface Calendar {
   days: CalendarDay[][];
   firstDayOfWeek: DayOfWeek | number;
 }
+
+type WeekendDays = Partial<Record<DayOfWeek, string>>;
 
 const redSundayWeekendDays: WeekendDays = {
   [DayOfWeek.Sunday]: 'red',

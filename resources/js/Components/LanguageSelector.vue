@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CustomFlag from '@/Components/CustomFlag.vue';
+import { useCurrentLanguage } from '@/composables/useCurrentLanguage';
 import { CROWDIN_URL } from '@/config';
 import { LanguageConfig } from '@/model/language-config';
 import HtButton from '@/Reusable/HtButton.vue';
@@ -7,18 +8,13 @@ import HtCollapsible from '@/Reusable/HtCollapsible.vue';
 import HtLinkButton from '@/Reusable/HtLinkButton.vue';
 import { AvailableLanguage, LANGUAGES } from '@/utils/language-settings';
 import { faCaretDown, faCaretUp, faGlobe, faLifeRing } from '@fortawesome/free-solid-svg-icons';
-import { Link, router, usePage } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 import { computed, onMounted, ref } from 'vue';
 import nativeLocaleNames from '../../../vendor/laravel-lang/native-locale-names/data/_native.json';
 
 const searchParams = ref<URLSearchParams>(new URLSearchParams(window.location.search));
 
-const page = usePage();
-
-const locale = computed(() => page.props.app.locale as AvailableLanguage);
-const languages = computed(() => page.props.app.languages);
-const supportedLanguages = computed(() => new Set(page.props.app.supportedLanguages));
-const languageConfig = computed(() => LANGUAGES[locale.value]);
+const { locale, languages, supportedLanguages, languageConfig } = useCurrentLanguage();
 
 const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
   ...nativeLocaleNames,
@@ -32,7 +28,12 @@ const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
 
 const sortedLanguages = computed(() =>
   (Object.entries(LANGUAGES) as [AvailableLanguage, LanguageConfig][])
-    .filter(([key]) => key in languages.value)
+    .filter(([key, config]) => {
+      if (config.laravelLocale) {
+        return config.laravelLocale in languages.value;
+      }
+      return key in languages.value;
+    })
     .sort(([a], [b]) => extendedNativeLocaleNames[a].localeCompare(extendedNativeLocaleNames[b])),
 );
 
