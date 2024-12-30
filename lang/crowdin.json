@@ -1,5 +1,5 @@
 {
-  "meta": "Generated at 2024-12-30T03:00:05.779Z",
+  "meta": "Generated at 2024-12-30T03:24:01.674Z",
   "users": {
     "25282": {
       "username": "Liggli",
@@ -950,156 +950,156 @@
       "translation": 100
     },
     "ar": {
-      "approval": 100,
-      "translation": 100
+      "approval": 0,
+      "translation": 3
     },
     "bg": {
-      "approval": 96,
-      "translation": 96
+      "approval": 0,
+      "translation": 0
     },
     "ca": {
-      "approval": 100,
-      "translation": 100
+      "approval": 0,
+      "translation": 0
     },
     "cs": {
-      "approval": 100,
-      "translation": 100
+      "approval": 0,
+      "translation": 0
     },
     "da": {
-      "approval": 100,
-      "translation": 100
+      "approval": 0,
+      "translation": 0
     },
     "de": {
-      "approval": 100,
-      "translation": 100
+      "approval": 0,
+      "translation": 0
     },
     "el": {
-      "approval": 100,
-      "translation": 100
+      "approval": 0,
+      "translation": 0
     },
     "en-GB": {
-      "approval": 100,
-      "translation": 100
-    },
-    "es": {
-      "approval": 100,
-      "translation": 100
-    },
-    "fa": {
-      "approval": 77,
-      "translation": 77
-    },
-    "fr": {
-      "approval": 100,
-      "translation": 100
-    },
-    "he": {
-      "approval": 74,
-      "translation": 74
-    },
-    "hi": {
-      "approval": 97,
-      "translation": 97
-    },
-    "hr": {
-      "approval": 94,
-      "translation": 94
-    },
-    "hu": {
-      "approval": 100,
-      "translation": 100
-    },
-    "id": {
-      "approval": 100,
-      "translation": 100
-    },
-    "it": {
-      "approval": 100,
-      "translation": 100
-    },
-    "ja": {
-      "approval": 100,
-      "translation": 100
-    },
-    "ko": {
-      "approval": 100,
-      "translation": 100
-    },
-    "lt": {
-      "approval": 96,
-      "translation": 96
-    },
-    "lv": {
-      "approval": 88,
-      "translation": 88
-    },
-    "mn": {
-      "approval": 100,
-      "translation": 100
-    },
-    "ms": {
-      "approval": 100,
-      "translation": 100
-    },
-    "nb": {
-      "approval": 96,
-      "translation": 99
-    },
-    "nl": {
-      "approval": 100,
-      "translation": 100
-    },
-    "pl": {
-      "approval": 100,
-      "translation": 100
-    },
-    "pt-BR": {
-      "approval": 100,
-      "translation": 100
-    },
-    "pt": {
-      "approval": 100,
-      "translation": 100
-    },
-    "ro": {
-      "approval": 100,
-      "translation": 100
-    },
-    "ru": {
-      "approval": 100,
-      "translation": 100
-    },
-    "sr": {
-      "approval": 90,
-      "translation": 90
-    },
-    "sv": {
-      "approval": 99,
-      "translation": 99
-    },
-    "th": {
-      "approval": 100,
-      "translation": 100
-    },
-    "tr": {
-      "approval": 100,
-      "translation": 100
-    },
-    "uk": {
-      "approval": 96,
-      "translation": 96
-    },
-    "ur": {
-      "approval": 88,
-      "translation": 88
-    },
-    "vi": {
-      "approval": 100,
-      "translation": 100
-    },
-    "zh": {
       "approval": 95,
       "translation": 95
+    },
+    "es": {
+      "approval": 0,
+      "translation": 0
+    },
+    "fa": {
+      "approval": 0,
+      "translation": 0
+    },
+    "fr": {
+      "approval": 0,
+      "translation": 0
+    },
+    "he": {
+      "approval": 0,
+      "translation": 0
+    },
+    "hi": {
+      "approval": 0,
+      "translation": 0
+    },
+    "hr": {
+      "approval": 0,
+      "translation": 0
+    },
+    "hu": {
+      "approval": 95,
+      "translation": 95
+    },
+    "id": {
+      "approval": 0,
+      "translation": 0
+    },
+    "it": {
+      "approval": 0,
+      "translation": 0
+    },
+    "ja": {
+      "approval": 0,
+      "translation": 0
+    },
+    "ko": {
+      "approval": 0,
+      "translation": 0
+    },
+    "lt": {
+      "approval": 0,
+      "translation": 0
+    },
+    "lv": {
+      "approval": 0,
+      "translation": 0
+    },
+    "mn": {
+      "approval": 0,
+      "translation": 0
+    },
+    "ms": {
+      "approval": 75,
+      "translation": 75
+    },
+    "nb": {
+      "approval": 0,
+      "translation": 0
+    },
+    "nl": {
+      "approval": 0,
+      "translation": 0
+    },
+    "pl": {
+      "approval": 0,
+      "translation": 0
+    },
+    "pt-BR": {
+      "approval": 0,
+      "translation": 0
+    },
+    "pt": {
+      "approval": 0,
+      "translation": 0
+    },
+    "ro": {
+      "approval": 0,
+      "translation": 0
+    },
+    "ru": {
+      "approval": 0,
+      "translation": 0
+    },
+    "sr": {
+      "approval": 0,
+      "translation": 0
+    },
+    "sv": {
+      "approval": 0,
+      "translation": 0
+    },
+    "th": {
+      "approval": 0,
+      "translation": 0
+    },
+    "tr": {
+      "approval": 0,
+      "translation": 0
+    },
+    "uk": {
+      "approval": 0,
+      "translation": 0
+    },
+    "ur": {
+      "approval": 0,
+      "translation": 0
+    },
+    "vi": {
+      "approval": 0,
+      "translation": 0
+    },
+    "zh": {
+      "approval": 0,
+      "translation": 0
     }
   }
 }

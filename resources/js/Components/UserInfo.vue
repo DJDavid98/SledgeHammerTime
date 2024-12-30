@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import { useCurrentLanguage } from '@/composables/useCurrentLanguage';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCollapsible from '@/Reusable/HtCollapsible.vue';
 import HtLinkButton from '@/Reusable/HtLinkButton.vue';
-import { AvailableLanguage } from '@/utils/language-settings';
 import { faCaretDown, faCaretUp, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
 const page = usePage();
 
-const locale = computed(() => page.props.app.locale as AvailableLanguage);
+const { locale } = useCurrentLanguage();
 const userInfo = computed(() => page.props.auth?.user);
 
 const userDropdownVisible = ref(false);

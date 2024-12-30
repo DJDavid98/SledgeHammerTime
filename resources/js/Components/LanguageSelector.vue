@@ -8,6 +8,7 @@ import HtLinkButton from '@/Reusable/HtLinkButton.vue';
 import { AvailableLanguage, LANGUAGES } from '@/utils/language-settings';
 import { faCaretDown, faCaretUp, faGlobe, faLifeRing } from '@fortawesome/free-solid-svg-icons';
 import { Link, router } from '@inertiajs/vue3';
+import { loadLanguageAsync } from 'laravel-vue-i18n';
 import { computed, onMounted, ref } from 'vue';
 import nativeLocaleNames from '../../../vendor/laravel-lang/native-locale-names/data/_native.json';
 
@@ -42,6 +43,11 @@ const searchParamsString = computed(() => {
 
 const noTranslationsNeededLocales = new Set(['en', 'en-GB', 'hu']);
 const languagesDropdownVisible = ref(false);
+
+const loadClickedLanguage = (language: AvailableLanguage, config: LanguageConfig) => {
+  const laravelLocale = config.laravelLocale ?? language;
+  loadLanguageAsync(laravelLocale);
+};
 
 const navigateListener = () => {
   searchParams.value = new URLSearchParams(window.location.search);
@@ -83,6 +89,7 @@ onMounted(router.on('success', navigateListener));
               :href="route('home', { locale: sortedLocale })+searchParamsString"
               :class="['language-link', { disabled: !supportedLanguages.has(sortedLocale) }]"
               :dir="config.rtl ? 'rtl' : 'ltr'"
+              @click.passive="loadClickedLanguage(sortedLocale, config)"
             >
               <span class="language-flag">
                 <CustomFlag

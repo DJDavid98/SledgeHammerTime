@@ -30,7 +30,11 @@ createInertiaApp({
             if (!jsonPathForLocale) {
               throw new Error(`Could not find lang json path for lang ${lang}`);
             }
-            return await langJsonImporters[jsonPathForLocale]();
+            const result = await langJsonImporters[jsonPathForLocale]();
+            if (typeof result !== 'object' || result === null || !('default' in result)) {
+              throw new Error(`Missing default export in json for lang ${lang}`);
+            }
+            return result;
           },
         })
         .mount(el);
