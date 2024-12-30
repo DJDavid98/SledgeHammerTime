@@ -36,6 +36,7 @@ class HandleInertiaRequests extends Middleware {
         'locale' => App::getLocale(),
         'languages' => array_flip(Config::get('languages.ui_locale_map')),
         'supportedLanguages' => Config::get('languages.supported_locales'),
+        'crowdinProjectId' => Config::get('crowdin.project_id'),
       ],
       'auth' => [
         'user' => $request->user(),

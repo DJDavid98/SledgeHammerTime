@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import CustomFlag from '@/Components/CustomFlag.vue';
 import { useCurrentLanguage } from '@/composables/useCurrentLanguage';
-import { CROWDIN_URL } from '@/config';
 import { LanguageConfig } from '@/model/language-config';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCollapsible from '@/Reusable/HtCollapsible.vue';
@@ -14,7 +13,7 @@ import nativeLocaleNames from '../../../vendor/laravel-lang/native-locale-names/
 
 const searchParams = ref<URLSearchParams>(new URLSearchParams(window.location.search));
 
-const { locale, languages, supportedLanguages, languageConfig } = useCurrentLanguage();
+const { locale, languages, supportedLanguages, languageConfig, crowdinProjectId } = useCurrentLanguage();
 
 const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
   ...nativeLocaleNames,
@@ -115,7 +114,7 @@ onMounted(router.on('success', navigateListener));
         class="contribute-button"
         :icon-only="true"
         :icon-start="faLifeRing"
-        :href="`${CROWDIN_URL}/${languageConfig?.crowdinLocale || locale}`"
+        :href="`https://crowdin.com/project/${crowdinProjectId}/${languageConfig?.crowdinLocale || locale}`"
         :external="true"
         :target-blank="true"
       />

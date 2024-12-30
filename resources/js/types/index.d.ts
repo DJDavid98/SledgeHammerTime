@@ -15,6 +15,7 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     languages: Record<AvailableLanguage, string>;
     /** List of all supported Laravel app locales **/
     supportedLanguages: AvailableLanguage[];
+    crowdinProjectId: string;
   }
   auth: {
     user: User;

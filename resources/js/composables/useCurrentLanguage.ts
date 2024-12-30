@@ -8,11 +8,13 @@ export const useCurrentLanguage = () => {
   const locale = computed(() => languages.value[page.props.app.locale]);
   const languageConfig = computed(() => LANGUAGES[locale.value]);
   const supportedLanguages = computed(() => new Set(page.props.app.supportedLanguages));
+  const crowdinProjectId = computed(() => page.props.app.crowdinProjectId);
 
   return {
     locale,
     languages,
     languageConfig,
     supportedLanguages,
+    crowdinProjectId,
   };
 };
