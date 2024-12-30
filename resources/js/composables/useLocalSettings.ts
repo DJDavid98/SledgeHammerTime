@@ -1,4 +1,4 @@
-import { useCurrentLanguage } from '@/composables/useCurrentLanguage';
+import { CurrentLanguageData } from '@/injection-keys';
 import { computed, onMounted, ref, watch } from 'vue';
 
 const splitPrefKey = 'split-input';
@@ -6,15 +6,14 @@ const customPrefKey = 'custom-input';
 const sidebarPrefKey = 'sidebar-right';
 const sidebarOffDesktopPrefKey = 'sidebar-off-desktop';
 
-export const useLocalSettings = () => {
+export const useLocalSettings = (currentLanguage: Ref<CurrentLanguageData>) => {
   const customInputEnabled = ref<boolean | null>(null);
   const combinedInputsEnabled = ref<boolean | null>(null);
   const sidebarOnRight = ref<boolean | null>(null);
   const sidebarOffDesktop = ref<boolean | null>(null);
-  const { languageConfig } = useCurrentLanguage();
 
   const effectiveSidebarOnRight = computed(() => (
-    languageConfig.value?.rtl ? !sidebarOnRight.value : sidebarOnRight.value
+    currentLanguage.value.languageConfig?.rtl ? !sidebarOnRight.value : sidebarOnRight.value
   ));
 
   watch(customInputEnabled, (newValue) => {

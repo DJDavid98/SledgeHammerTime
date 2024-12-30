@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { loadMomentLocale } from '@/utils/moment';
-import { usePage } from '@inertiajs/vue3';
+import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
 import { Moment } from 'moment-timezone';
 import { computed, getCurrentInstance, Ref, ref, watch } from 'vue';
 
@@ -13,10 +12,7 @@ const props = defineProps<{
 const updateInterval = ref<ReturnType<typeof setInterval> | null>(null);
 const instance = getCurrentInstance();
 
-const locale = computed(() => usePage().props.app.locale);
-loadMomentLocale(locale.value).then(() => {
-  instance?.proxy?.$forceUpdate();
-});
+const momentLocale = useMomentLocaleForceUpdate(instance);
 
 watch(() => props.fromNow, (fromNow) => {
   if (updateInterval.value !== null) {
@@ -41,10 +37,10 @@ const localTimestamp = computed(() => props.ts?.value.local());
     :data-tooltip="localTimestamp.locale($page.props.app.locale).format('LLLL')"
   >
     <template v-if="format">
-      {{ localTimestamp.locale(locale).format(format) }}
+      {{ localTimestamp.locale(momentLocale).format(format) }}
     </template>
     <template v-if="fromNow">
-      {{ localTimestamp.locale(locale).fromNow() }}
+      {{ localTimestamp.locale(momentLocale).fromNow() }}
     </template>
   </span>
 </template>

@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import TimePicker, { TimePickerPopupApi } from '@/Components/home/pickers/TimePicker.vue';
+import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
 import { DialMode } from '@/utils/dial';
 import { createCurrentTsWithTimezone } from '@/utils/time';
-import { computed, inject, provide, useTemplateRef } from 'vue';
+import { computed, getCurrentInstance, inject, provide, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
 
-const selectedTime = computed(() => ts?.currentTimestamp.value.format('LTS'));
+const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
+const selectedTime = computed(() => ts?.currentTimestamp.value.locale(momentLocale.value).format('LTS'));
 const timepicker = useTemplateRef<TimePickerPopupApi>('time-picker');
 const inputEl = useTemplateRef<InputApi>('input-el');
 
@@ -46,7 +48,7 @@ provide(positionAnchor, positionAnchorName);
     <HtInput
       :id="id"
       ref="input-el"
-      v-model="selectedTime"
+      :model-value="selectedTime"
       :readonly="true"
       :hide-selection="true"
       :position-anchor-name="positionAnchorName"

@@ -2,7 +2,7 @@
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { useLocalSettings } from '@/composables/useLocalSettings';
 import { useSidebarState } from '@/composables/useSidebarState';
-import { localSettings, sidebarState } from '@/injection-keys';
+import { currentLanguageInject, localSettings, sidebarState } from '@/injection-keys';
 import HtAlert from '@/Reusable/HtAlert.vue';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
@@ -12,11 +12,12 @@ import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { Head } from '@inertiajs/vue3';
 import { loremIpsum } from 'lorem-ipsum';
-import { provide, readonly } from 'vue';
+import { inject, provide, readonly } from 'vue';
 
 const placeholderText = loremIpsum();
 
-const localSettingsValue = readonly(useLocalSettings());
+const { languageConfig } = inject(currentLanguageInject);
+const localSettingsValue = readonly(useLocalSettings(languageConfig));
 const sidebarStateValue = readonly(useSidebarState(localSettingsValue));
 
 provide(sidebarState, sidebarStateValue);

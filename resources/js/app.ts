@@ -1,4 +1,5 @@
 import { getAppName } from '@/utils/app';
+import { LANGUAGES } from '@/utils/language-settings';
 import { loadMomentLocale } from '@/utils/moment';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -18,7 +19,10 @@ createInertiaApp({
   title: (title) => title ? `${title} - ${appName}` : appName,
   resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue')),
   setup({ el, App, props, plugin }) {
-    loadMomentLocale(props.initialPage.props.app.locale).then(() => {
+    const locale = props.initialPage.props.app.languages[props.initialPage.props.app.locale];
+    const languageConfig = LANGUAGES[locale];
+    const initialMomentLocale = languageConfig?.momentLocale ?? locale;
+    loadMomentLocale(initialMomentLocale).then(() => {
       createApp({ render: () => h(App, props) })
         .use(plugin)
         .use(ZiggyVue, Ziggy)

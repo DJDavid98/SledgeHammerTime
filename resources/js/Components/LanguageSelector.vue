@@ -1,20 +1,19 @@
 <script setup lang="ts">
 import CustomFlag from '@/Components/CustomFlag.vue';
-import { useCurrentLanguage } from '@/composables/useCurrentLanguage';
+import { currentLanguageInject } from '@/injection-keys';
 import { LanguageConfig } from '@/model/language-config';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCollapsible from '@/Reusable/HtCollapsible.vue';
 import HtLinkButton from '@/Reusable/HtLinkButton.vue';
 import { AvailableLanguage, LANGUAGES } from '@/utils/language-settings';
 import { faCaretDown, faCaretUp, faGlobe, faLifeRing } from '@fortawesome/free-solid-svg-icons';
-import { Link, router } from '@inertiajs/vue3';
-import { loadLanguageAsync } from 'laravel-vue-i18n';
-import { computed, onMounted, ref } from 'vue';
+import { router } from '@inertiajs/vue3';
+import { computed, inject, onMounted, ref } from 'vue';
 import nativeLocaleNames from '../../../vendor/laravel-lang/native-locale-names/data/_native.json';
 
 const searchParams = ref<URLSearchParams>(new URLSearchParams(window.location.search));
 
-const { locale, languages, supportedLanguages, languageConfig, crowdinProjectId } = useCurrentLanguage();
+const currentLanguage = inject(currentLanguageInject);
 
 const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
   ...nativeLocaleNames,
@@ -29,10 +28,11 @@ const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
 const sortedLanguages = computed(() =>
   (Object.entries(LANGUAGES) as [AvailableLanguage, LanguageConfig][])
     .filter(([key, config]) => {
+      if (!currentLanguage?.languages) return true;
       if (config.laravelLocale) {
-        return config.laravelLocale in languages.value;
+        return config.laravelLocale in currentLanguage.languages;
       }
-      return key in languages.value;
+      return key in currentLanguage.languages;
     })
     .sort(([a], [b]) => extendedNativeLocaleNames[a].localeCompare(extendedNativeLocaleNames[b])),
 );
@@ -44,11 +44,6 @@ const searchParamsString = computed(() => {
 const noTranslationsNeededLocales = new Set(['en', 'en-GB', 'hu']);
 const languagesDropdownVisible = ref(false);
 
-const loadClickedLanguage = (language: AvailableLanguage, config: LanguageConfig) => {
-  const laravelLocale = config.laravelLocale ?? language;
-  loadLanguageAsync(laravelLocale);
-};
-
 const navigateListener = () => {
   searchParams.value = new URLSearchParams(window.location.search);
 };
@@ -58,17 +53,18 @@ onMounted(router.on('success', navigateListener));
 <template>
   <div class="language-selector">
     <div
+      v-if="currentLanguage"
       class="language-info"
-      :dir="languageConfig.rtl ? 'rtl' : 'ltr'"
+      :dir="currentLanguage.languageConfig.rtl ? 'rtl' : 'ltr'"
     >
       <div class="language-flag">
         <CustomFlag
-          :country="languageConfig.countryCode"
-          :custom-flag="languageConfig.customFlag"
+          :country="currentLanguage.languageConfig.countryCode"
+          :custom-flag="currentLanguage.languageConfig.customFlag"
         />
       </div>
       <div class="language-name">
-        {{ extendedNativeLocaleNames[locale] }}
+        {{ extendedNativeLocaleNames[currentLanguage.locale] }}
       </div>
     </div>
     <div class="translation-progress" />
@@ -82,14 +78,13 @@ onMounted(router.on('success', navigateListener));
       >
         <template v-for="[sortedLocale, config] in sortedLanguages">
           <li
-            v-if="sortedLocale !== locale"
+            v-if="sortedLocale !== currentLanguage.locale"
             :key="sortedLocale"
           >
-            <Link
+            <a
               :href="route('home', { locale: sortedLocale })+searchParamsString"
-              :class="['language-link', { disabled: !supportedLanguages.has(sortedLocale) }]"
+              :class="['language-link', { disabled: !currentLanguage?.supportedLanguages?.has(sortedLocale) }]"
               :dir="config.rtl ? 'rtl' : 'ltr'"
-              @click.passive="loadClickedLanguage(sortedLocale, config)"
             >
               <span class="language-flag">
                 <CustomFlag
@@ -98,7 +93,7 @@ onMounted(router.on('success', navigateListener));
                 />
               </span>
               <span class="language-name">{{ extendedNativeLocaleNames[sortedLocale] }}</span>
-            </Link>
+            </a>
           </li>
         </template>
       </div>
@@ -116,12 +111,12 @@ onMounted(router.on('success', navigateListener));
         <span>{{ $t('global.changeLanguage') }}</span>
       </HtButton>
       <HtLinkButton
-        v-if="!noTranslationsNeededLocales.has(locale)"
+        v-if="!noTranslationsNeededLocales.has(currentLanguage?.locale)"
         color="success"
         class="contribute-button"
         :icon-only="true"
         :icon-start="faLifeRing"
-        :href="`https://crowdin.com/project/${crowdinProjectId}/${languageConfig?.crowdinLocale || locale}`"
+        :href="`https://crowdin.com/project/${currentLanguage?.crowdinProjectId}/${currentLanguage?.languageConfig?.crowdinLocale || currentLanguage?.locale}`"
         :external="true"
         :target-blank="true"
       />

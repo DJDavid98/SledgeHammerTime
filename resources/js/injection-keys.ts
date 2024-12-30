@@ -1,4 +1,7 @@
+import { LanguageConfig } from '@/model/language-config';
 import { TimezoneSelection } from '@/model/timezone-selection';
+import { PageProps } from '@/types';
+import { AvailableLanguage } from '@/utils/language-settings';
 import { Moment } from 'moment-timezone';
 import { ComputedRef, InjectionKey, Ref } from 'vue';
 
@@ -41,3 +44,15 @@ export const localSettings = Symbol() as InjectionKey<LocalSettingsValue>;
 export const formControlId = Symbol() as InjectionKey<string>;
 
 export const positionAnchor = Symbol() as InjectionKey<`--${string}`>;
+
+export const pagePropsInject = Symbol() as InjectionKey<Ref<PageProps>>;
+
+export interface CurrentLanguageData {
+  locale: AvailableLanguage;
+  languages: Record<string, AvailableLanguage>;
+  languageConfig: LanguageConfig | undefined;
+  supportedLanguages: Set<string>;
+  crowdinProjectId: string;
+}
+
+export const currentLanguageInject = Symbol() as InjectionKey<Ref<CurrentLanguageData>>;

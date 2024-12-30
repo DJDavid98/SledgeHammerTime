@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import DatePicker, { DatePickerApi } from '@/Components/home/pickers/DatePicker.vue';
+import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
-import { computed, inject, provide, useTemplateRef } from 'vue';
+import { computed, getCurrentInstance, inject, provide, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
 
-const selectedDate = computed(() => ts?.currentTimestamp.value.format('LL'));
+const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
+const selectedDate = computed(() => ts?.currentTimestamp.value.locale(momentLocale.value).format('LL'));
 const datepicker = useTemplateRef<DatePickerApi>('date-picker');
 const inputEl = useTemplateRef<InputApi>('input-el');
 
@@ -42,7 +44,7 @@ provide(positionAnchor, positionAnchorName);
     <HtInput
       :id="id"
       ref="input-el"
-      v-model="selectedDate"
+      :model-value="selectedDate"
       :readonly="true"
       :hide-selection="true"
       :position-anchor-name="positionAnchorName"
