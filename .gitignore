@@ -24,4 +24,4 @@ yarn-error.log
 .phpstorm.meta.php
 _ide_helper*.php
 lang/php_*.json
-crowdin_report.json5
+crowdin_report*.json5

@@ -1,3 +1,4 @@
+import { deepmergeCustom } from 'deepmerge-ts';
 import { config as dotenvConfig } from 'dotenv';
 import { promises as fs } from 'fs';
 import path from 'path';
@@ -127,7 +128,7 @@ void (async () => {
   }
   const readmeTextBeforeMarker = readmeText.substring(0, markerIndex);
 
-  const rawReportDataCachePath = path.join(readmeFolder, 'crowdin_report.json5');
+  const rawReportDataCachePath = path.join(readmeFolder, `crowdin_report_${crowdinProjectIdentifier}.json5`);
   const useCache = process.env.CROWDIN_REPORT_CACHE === 'true';
   const cacheDurationHours = 1;
 
@@ -374,9 +375,18 @@ void (async () => {
 
     indexedReportData.users[id] = reportUserData;
   });
+  const legacyReportDataPath = path.join(readmeFolder, 'lang', 'crowdin_hammertime.json');
+  console.info(`Reading legacy report data from ${legacyReportDataPath}…`);
+  let legacyReportDataString = await fs.readFile(legacyReportDataPath).then((r) => r.toString());
+  const legacyReportData = JSON.parse(legacyReportDataString.replace(/^\/\/.*$/gm, '')) as typeof indexedReportData;
+  console.info(`Assembling report data…`);
+  const customizedDeepmerge = deepmergeCustom({
+    mergeArrays: values => Array.from(new Set(...values)),
+  });
+  const assembledReportData = customizedDeepmerge(legacyReportData, indexedReportData);
   const assembledReportDataOutputPath = path.join(readmeFolder, 'lang', 'crowdin.json');
   console.info(`Writing assembled report data to ${assembledReportDataOutputPath}…`);
-  const assembledReportDataString = JSON.stringify(indexedReportData, null, 2);
+  const assembledReportDataString = JSON.stringify(assembledReportData, null, 2);
   await fs.writeFile(assembledReportDataOutputPath, assembledReportDataString);
 
   console.info('Generating credits text…');
@@ -391,13 +401,13 @@ void (async () => {
           // No credits, omit language from README (primarily for included languages)
           break;
         case 1:
-          creditsText.push(`${languageString}: ${mapCreditToString(normalizeCredit(config.credits[0], indexedReportData))}`);
+          creditsText.push(`${languageString}: ${mapCreditToString(normalizeCredit(config.credits[0], assembledReportData))}`);
           break;
         default: {
           creditsText.push(languageString);
 
           const sortedCredits = config.credits
-            .map((c) => normalizeCredit(c, indexedReportData))
+            .map((c) => normalizeCredit(c, assembledReportData))
             .sort((cr1, cr2) => cr1.displayName.localeCompare(cr2.displayName));
 
           sortedCredits.forEach((credit) => {
