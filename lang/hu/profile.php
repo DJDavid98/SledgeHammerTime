@@ -6,7 +6,7 @@ return [
     'heading' => 'Profilinformációk',
     'description' => "Frissítsd a fiókod profilinformációit.",
     'displayName' => 'Megjelenített Név',
-    'saveSuccess' => 'Your profile has been updated successfully.',
+    'saveSuccess' => 'A profilod sikeresen frissítésre került.',
   ],
   'accounts' => [
     'heading' => 'Connected Accounts',
