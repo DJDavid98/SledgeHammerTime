@@ -9,7 +9,7 @@ import { AvailableLanguage, LANGUAGES } from '@/utils/language-settings';
 import { faCaretDown, faCaretUp, faGlobe, faLifeRing } from '@fortawesome/free-solid-svg-icons';
 import { Link, router, usePage } from '@inertiajs/vue3';
 import { computed, onMounted, ref } from 'vue';
-import nativeLocaleNames from '../../../vendor/laravel-lang/native-locale-names/locales/_native/json.json';
+import nativeLocaleNames from '../../../vendor/laravel-lang/native-locale-names/data/_native.json';
 
 const searchParams = ref<URLSearchParams>(new URLSearchParams(window.location.search));
 
