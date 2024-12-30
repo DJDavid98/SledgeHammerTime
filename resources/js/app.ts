@@ -1,5 +1,5 @@
 import { getAppName } from '@/utils/app';
-import { LANGUAGES } from '@/utils/language-settings';
+import { AvailableLanguage, LANGUAGES } from '@/utils/language-settings';
 import { loadMomentLocale } from '@/utils/moment';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -20,7 +20,7 @@ createInertiaApp({
   resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue')),
   setup({ el, App, props, plugin }) {
     const locale = props.initialPage.props.app.languages[props.initialPage.props.app.locale];
-    const languageConfig = LANGUAGES[locale];
+    const languageConfig = LANGUAGES[locale as AvailableLanguage];
     const initialMomentLocale = languageConfig?.momentLocale ?? locale;
     loadMomentLocale(initialMomentLocale).then(() => {
       createApp({ render: () => h(App, props) })

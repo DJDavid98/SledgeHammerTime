@@ -9,7 +9,7 @@ const ts = inject(timestamp);
 const id = inject(formControlId);
 
 const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
-const selectedDate = computed(() => ts?.currentTimestamp.value.locale(momentLocale.value).format('LL'));
+const selectedDate = computed(() => momentLocale.value ? ts?.currentTimestamp.value.locale(momentLocale.value).format('LL') : '');
 const datepicker = useTemplateRef<DatePickerApi>('date-picker');
 const inputEl = useTemplateRef<InputApi>('input-el');
 

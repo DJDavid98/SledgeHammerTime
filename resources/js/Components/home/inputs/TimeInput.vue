@@ -11,7 +11,7 @@ const ts = inject(timestamp);
 const id = inject(formControlId);
 
 const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
-const selectedTime = computed(() => ts?.currentTimestamp.value.locale(momentLocale.value).format('LTS'));
+const selectedTime = computed(() => momentLocale.value ? ts?.currentTimestamp.value.locale(momentLocale.value).format('LTS') : '');
 const timepicker = useTemplateRef<TimePickerPopupApi>('time-picker');
 const inputEl = useTemplateRef<InputApi>('input-el');
 

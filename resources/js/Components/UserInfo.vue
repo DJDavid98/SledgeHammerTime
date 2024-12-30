@@ -8,8 +8,8 @@ import { Link } from '@inertiajs/vue3';
 import { computed, inject, ref } from 'vue';
 
 const page = inject(pagePropsInject);
-const { locale } = inject(currentLanguageInject);
-const userInfo = computed(() => page.value.props?.auth?.user);
+const currentLanguage = inject(currentLanguageInject);
+const userInfo = computed(() => page?.value?.auth?.user);
 
 const userDropdownVisible = ref(false);
 
@@ -30,14 +30,14 @@ const toggleUserDropdown = (e: MouseEvent) => {
     >
       <li>
         <Link
-          :href="route('settings', { locale })"
+          :href="route('settings', { locale: currentLanguage?.locale })"
         >
           {{ $t('global.nav.botSettings') }}
         </Link>
       </li>
       <li>
         <Link
-          :href="route('profile.edit', { locale })"
+          :href="route('profile.edit', { locale: currentLanguage?.locale })"
         >
           {{ $t('global.nav.profile') }}
         </Link>
@@ -69,7 +69,7 @@ const toggleUserDropdown = (e: MouseEvent) => {
     <HtLinkButton
       v-else
       color="primary"
-      :href="route('login', { locale })"
+      :href="route('login', { locale: currentLanguage?.locale })"
       :external="true"
       :target-blank="false"
     >

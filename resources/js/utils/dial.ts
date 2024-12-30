@@ -1,6 +1,6 @@
 import { getPositionAngleInElement, Point2D } from '@/utils/math';
 import { getMeridiemLabel } from '@/utils/time';
-import moment from 'moment-timezone';
+import moment, { Moment } from 'moment-timezone';
 import { Ref } from 'vue';
 
 export enum DialMode {

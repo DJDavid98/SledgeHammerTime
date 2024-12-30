@@ -12,7 +12,7 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     name: string;
     locale: string;
     /** Mapping Laravel app locales to UI locales **/
-    languages: Record<AvailableLanguage, string>;
+    languages: Record<string, AvailableLanguage>;
     /** List of all supported Laravel app locales **/
     supportedLanguages: AvailableLanguage[];
     crowdinProjectId: string;

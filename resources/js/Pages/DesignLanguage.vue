@@ -16,8 +16,8 @@ import { inject, provide, readonly } from 'vue';
 
 const placeholderText = loremIpsum();
 
-const { languageConfig } = inject(currentLanguageInject);
-const localSettingsValue = readonly(useLocalSettings(languageConfig));
+const currentLanguage = inject(currentLanguageInject);
+const localSettingsValue = readonly(useLocalSettings(currentLanguage));
 const sidebarStateValue = readonly(useSidebarState(localSettingsValue));
 
 provide(sidebarState, sidebarStateValue);

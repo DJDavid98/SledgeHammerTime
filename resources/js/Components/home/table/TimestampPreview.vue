@@ -33,7 +33,7 @@ const localTimestamp = computed(() => props.ts?.value.local());
 
 <template>
   <span
-    v-if="localTimestamp"
+    v-if="localTimestamp && momentLocale"
     :data-tooltip="localTimestamp.locale($page.props.app.locale).format('LLLL')"
   >
     <template v-if="format">

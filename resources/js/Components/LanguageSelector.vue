@@ -28,11 +28,11 @@ const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
 const sortedLanguages = computed(() =>
   (Object.entries(LANGUAGES) as [AvailableLanguage, LanguageConfig][])
     .filter(([key, config]) => {
-      if (!currentLanguage?.languages) return true;
+      if (!currentLanguage?.value.languages) return true;
       if (config.laravelLocale) {
-        return config.laravelLocale in currentLanguage.languages;
+        return config.laravelLocale in currentLanguage.value.languages;
       }
-      return key in currentLanguage.languages;
+      return key in currentLanguage.value.languages;
     })
     .sort(([a], [b]) => extendedNativeLocaleNames[a].localeCompare(extendedNativeLocaleNames[b])),
 );
@@ -53,7 +53,7 @@ onMounted(router.on('success', navigateListener));
 <template>
   <div class="language-selector">
     <div
-      v-if="currentLanguage"
+      v-if="currentLanguage?.languageConfig"
       class="language-info"
       :dir="currentLanguage.languageConfig.rtl ? 'rtl' : 'ltr'"
     >
@@ -78,7 +78,7 @@ onMounted(router.on('success', navigateListener));
       >
         <template v-for="[sortedLocale, config] in sortedLanguages">
           <li
-            v-if="sortedLocale !== currentLanguage.locale"
+            v-if="sortedLocale !== currentLanguage?.locale"
             :key="sortedLocale"
           >
             <a
@@ -111,7 +111,7 @@ onMounted(router.on('success', navigateListener));
         <span>{{ $t('global.changeLanguage') }}</span>
       </HtButton>
       <HtLinkButton
-        v-if="!noTranslationsNeededLocales.has(currentLanguage?.locale)"
+        v-if="currentLanguage?.locale && !noTranslationsNeededLocales.has(currentLanguage.locale)"
         color="success"
         class="contribute-button"
         :icon-only="true"
