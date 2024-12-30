@@ -102,7 +102,7 @@ defineExpose<DatePickerApi>({
       ref="form-el"
       @submit.prevent="selectAndClose"
     >
-      <HtFormInputGroup>
+      <HtFormInputGroup dir="ltr">
         <HtInput
           ref="yearInput"
           v-model="year"

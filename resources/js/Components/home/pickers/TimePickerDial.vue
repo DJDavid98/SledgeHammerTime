@@ -55,6 +55,7 @@ const dialSetup = computed(() => {
     handCircleRadius: hourRingHandCircleRadius,
     rotationOffset: hourRingRotationOffset,
     isAm: props.twelveHourMode ? true : undefined,
+    textGetter: (moment, value) => moment.hours(value).format('H'),
   }, {
     labelCount: 12,
     fontSize: 25,
@@ -65,6 +66,7 @@ const dialSetup = computed(() => {
     isAm: props.twelveHourMode ? false : undefined,
     labelOffsetPercent: props.twelveHourMode ? .5 : .67,
     activationDistance: .5,
+    textGetter: (moment, value) => moment.hours(value).format('H'),
   }];
   const settings: Record<DialMode, Omit<DialSettings, 'mode'>> = {
     [DialMode.Hours]: {
@@ -80,6 +82,7 @@ const dialSetup = computed(() => {
         labelCount: 12,
         maxValue: 60,
         handCircleRadius: 12,
+        textGetter: (moment, value) => moment.minutes(value).format('m'),
       }],
       currentValueGetter: () => props.minutes,
       handStrokeStyle: colors.value.numbers,
@@ -91,6 +94,7 @@ const dialSetup = computed(() => {
         labelCount: 12,
         maxValue: 60,
         handCircleRadius: 12,
+        textGetter: (moment, value) => moment.seconds(value).format('s'),
       }],
       currentValueGetter: () => props.seconds,
       handStrokeStyle: colors.value.secondsHand,
@@ -269,6 +273,7 @@ onUnmounted(() => {
   <div
     class="time-dial mt-3"
     :data-mode="mode"
+    dir="ltr"
   >
     <canvas
       ref="hoursCanvas"

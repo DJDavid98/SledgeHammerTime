@@ -2,6 +2,7 @@
 import { useCurrentDate } from '@/composables/useCurrentDate';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtButtonGroup from '@/Reusable/HtButtonGroup.vue';
+import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
 import {
   CalendarDay,
   DayOfWeek,
@@ -144,6 +145,11 @@ defineExpose<DatePickerCalendarApi>({
       >
         <FontAwesomeIcon
           :icon="faBackwardFast"
+          class="icon-ltr"
+        />
+        <FontAwesomeIcon
+          :icon="faForwardFast"
+          class="icon-rtl"
         />
       </HtButton>
       <HtButton
@@ -152,6 +158,11 @@ defineExpose<DatePickerCalendarApi>({
       >
         <FontAwesomeIcon
           :icon="faChevronLeft"
+          class="icon-ltr"
+        />
+        <FontAwesomeIcon
+          :icon="faChevronRight"
+          class="icon-rtl"
         />
       </HtButton>
     </HtButtonGroup>
@@ -163,6 +174,11 @@ defineExpose<DatePickerCalendarApi>({
       >
         <FontAwesomeIcon
           :icon="faChevronRight"
+          class="icon-ltr"
+        />
+        <FontAwesomeIcon
+          :icon="faChevronLeft"
+          class="icon-rtl"
         />
       </HtButton>
       <HtButton
@@ -171,17 +187,24 @@ defineExpose<DatePickerCalendarApi>({
       >
         <FontAwesomeIcon
           :icon="faForwardFast"
+          class="icon-ltr"
+        />
+        <FontAwesomeIcon
+          :icon="faBackwardFast"
+          class="icon-rtl"
         />
       </HtButton>
     </HtButtonGroup>
   </div>
-  <HtButton
-    :disabled="isShowingCurrentMonth"
-    :block="true"
-    @click="jumpToToday"
-  >
-    {{ $t('timestampPicker.picker.button.jumpToToday') }}
-  </HtButton>
+  <HtFormControlGroup :vertical="true">
+    <HtButton
+      :disabled="isShowingCurrentMonth"
+      :block="true"
+      @click="jumpToToday"
+    >
+      {{ $t('timestampPicker.picker.button.jumpToToday') }}
+    </HtButton>
+  </HtFormControlGroup>
   <div class="calendar">
     <div class="calendar-weekdays">
       <div
@@ -203,7 +226,7 @@ defineExpose<DatePickerCalendarApi>({
         :class="getDayClasses(calendarDay)"
         @click="setDate(calendarDay)"
       >
-        {{ calendarDay.date }}
+        {{ calendarDay.display }}
       </button>
     </div>
   </div>

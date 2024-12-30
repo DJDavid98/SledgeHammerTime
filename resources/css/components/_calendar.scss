@@ -24,6 +24,18 @@
     font-size: calc(var(--button-size) * 0.65);
     line-height: var(--button-size);
   }
+
+  @include design.if-ltr {
+    .icon-rtl {
+      display: none;
+    }
+  }
+
+  @include design.if-rtl {
+    .icon-ltr {
+      display: none;
+    }
+  }
 }
 
 .calendar {

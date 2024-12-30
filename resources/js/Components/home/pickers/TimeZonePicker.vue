@@ -108,7 +108,7 @@ defineExpose<TimeZonePickerApi>({
           @change="handleModeRadioChange($event, TimeZoneSelectionType.OFFSET)"
         />
       </HtFormControlGroup>
-      <HtFormInputGroup>
+      <HtFormInputGroup dir="ltr">
         <span class="input-text hide-selection grid-flex-item flex-basis-auto">GMT (UTC)</span>
         <HtInput
           ref="offset-hours"

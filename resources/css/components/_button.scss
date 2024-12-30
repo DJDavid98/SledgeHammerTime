@@ -108,6 +108,12 @@
     min-width: 0;
     flex-grow: 1;
 
-    @include design.combined-border-radius;
+    @include design.if-ltr {
+      @include design.combined-border-radius;
+    }
+
+    @include design.if-rtl {
+      @include design.combined-border-radius-inverted;
+    }
   }
 }

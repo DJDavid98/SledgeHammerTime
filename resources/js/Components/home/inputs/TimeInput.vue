@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TimePickerPopup, { TimePickerPopupApi } from '@/Components/home/pickers/TimePicker.vue';
+import TimePicker, { TimePickerPopupApi } from '@/Components/home/pickers/TimePicker.vue';
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
 import { DialMode } from '@/utils/dial';
@@ -53,7 +53,7 @@ provide(positionAnchor, positionAnchorName);
       @click.prevent="openPopup"
       @keydown="openPopup"
     />
-    <TimePickerPopup
+    <TimePicker
       ref="time-picker"
       @selected="changeTime"
     />

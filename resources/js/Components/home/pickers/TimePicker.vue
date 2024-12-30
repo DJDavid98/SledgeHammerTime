@@ -170,7 +170,7 @@ defineExpose<TimePickerPopupApi>({
       ref="form-el"
       @submit.prevent="selectAndClose"
     >
-      <HtFormInputGroup>
+      <HtFormInputGroup dir="ltr">
         <HtInput
           ref="hoursInput"
           v-model="hours"

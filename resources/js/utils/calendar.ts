@@ -34,6 +34,7 @@ export enum Month {
 export interface CalendarDay {
   date: number;
   month: number;
+  display: string;
   /**
    * Optional metadata used for display purposes only
    */
@@ -162,6 +163,7 @@ export const generateCalendar = ({
         date: weekDayMoment.date(),
         weekday: weekDayMoment.day(),
         month: weekDayMoment.month(),
+        display: weekDayMoment.format('D'),
       };
       dayOffset++;
     }

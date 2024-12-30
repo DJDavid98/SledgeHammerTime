@@ -242,8 +242,14 @@
   > .input-text {
     min-width: 0;
     flex-grow: 1;
+  }
 
+  &:not([dir="rtl"]) > .input-text {
     @include design.combined-border-radius;
+  }
+
+  &[dir="rtl"] > .input-text {
+    @include design.combined-border-radius-inverted;
   }
 }
 
