@@ -1,12 +1,12 @@
 <?php
 
 return [
-  'howTo' => 'Pick a date, copy the desired timestamp from the :syntaxColName column, then paste it anywhere in a chat message. The result will be a dynamic timestamp that displays differently for everyone based on their own timezone.',
+  'howTo' => 'Pilih tarikh, salin cap masa yang diingini dari lajur :syntaxColName, kemudian tampal di mana-mana sahaja dalam mesej sembang. Hasilnya ialah cap masa dinamik yang dipaparkan secara berlainan untuk semua orang berdasarkan zon waktu masing-masing.',
   'picker' => [
     'label' => [
-      'date' => 'Date',
-      'time' => 'Time',
-      'timezone' => 'Timezone',
+      'date' => 'Tarikh',
+      'time' => 'Masa',
+      'timezone' => 'Zon waktu',
       'modeOffset' => 'Absolute Offset',
       'modeZoneName' => 'Zone Name',
     ],
@@ -14,7 +14,7 @@ return [
       'jumpToToday' => 'Jump to current month',
     ],
     'tooltip' => [
-      'setToCurrent' => 'Set to current time',
+      'setToCurrent' => 'Tetapkan ke masa semasa',
       'previousYear' => 'Previous year',
       'previousMonth' => 'Previous month',
       'nextMonth' => 'Next month',
@@ -22,8 +22,8 @@ return [
     ],
   ],
   'table' => [
-    'syntaxColumn' => 'Chat syntax',
-    'resultColumn' => 'Example result',
-    'clickToCopy' => 'Copy to clipboard',
+    'syntaxColumn' => 'Sintaks sembang',
+    'resultColumn' => 'Contoh hasilnya',
+    'clickToCopy' => 'Salin ke papan keratan',
   ],
 ];
