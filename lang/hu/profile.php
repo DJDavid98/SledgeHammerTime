@@ -1,11 +1,11 @@
 <?php
 
 return [
-  'title' => 'Profil',
+  'title' => 'Profile',
   'information' => [
-    'heading' => 'Profilinformációk',
-    'description' => "Frissítsd a fiókod profilinformációit.",
-    'displayName' => 'Megjelenített Név',
+    'heading' => 'Profile Information',
+    'description' => "Update your account's profile information.",
+    'displayName' => 'Display Name',
   ],
   'accounts' => [
     'heading' => 'Connected Accounts',
