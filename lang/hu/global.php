@@ -1,18 +1,20 @@
 <?php
 
 return [
-  'seoDescription' => 'Generálj időpont jelölőket a Discord üzeneteidhez',
+  'seoDescription' => 'Generate timestamp indicators for Discord chat messages',
+  'changeLanguage' => 'Change language',
+  'guest' => 'Guest',
   'nav' => [
-    'botSettings' => 'Bot Beállítások',
-    'profile' => 'Profil',
-    'login' => 'Bejelentkezés',
-    'logout' => 'Kijelentkezés',
+    'botSettings' => 'Bot Settings',
+    'profile' => 'Profile',
+    'login' => 'Log in',
+    'logout' => 'Log out',
   ],
   'form' => [
-    'save' => 'Mentés',
-    'saved' => 'Mentve.',
-    'cancel' => 'Mégse',
-    'select' => 'Kiválaszt',
-    'confirm' => 'Megrősítés',
+    'save' => 'Save',
+    'saved' => 'Saved.',
+    'cancel' => 'Cancel',
+    'select' => 'Select',
+    'confirm' => 'Confirm',
   ],
 ];
