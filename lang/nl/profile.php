@@ -1,15 +1,15 @@
 <?php
 
 return [
-  'title' => 'Profile',
+  'title' => 'Profiel',
   'information' => [
-    'heading' => 'Profile Information',
+    'heading' => 'Profiel Informatie',
     'description' => "Update your account's profile information.",
     'displayName' => 'Display Name',
     'saveSuccess' => 'Your profile has been updated successfully.',
   ],
   'accounts' => [
-    'heading' => 'Connected Accounts',
+    'heading' => 'Gekoppelde accounts',
     'description' => [
       'A HammerTime account is going to let you link multiple Discord accounts to be able to manage their resources in one place in the future.',
       'Below you can find a list of all Discord accounts associated with this HammerTime account.',
