@@ -5,7 +5,7 @@ return [
   'changeLanguage' => 'Wijzig taal',
   'guest' => 'Gast',
   'nav' => [
-    'botSettings' => 'Botinstellingen',
-    'profile' => 'Profile',
+    'botSettings' => 'Bot-instellingen',
+    'profile' => 'Profiel',
   ],
 ];
