@@ -1,43 +1,43 @@
 <?php
 
 return [
-  'title' => 'Bot Settings',
-  'description' => 'Below you can see your current settings in the HammerTime Bot for each connected account.',
+  'title' => 'Bot-instellingen',
+  'description' => 'Hieronder ziet u uw huidige instellingen in de HammerTime Bot voor elke verbonden account.',
   'fields' => [
     'rawData' => [
-      'displayName' => 'Raw data (for debugging purposes)',
+      'displayName' => 'Ruwe gegevens (voor debugging-doeleinden)',
     ],
     'timezone' => [
-      'displayName' => 'Timezone',
+      'displayName' => 'Tijdzone',
     ],
     'format' => [
       'displayName' => 'Format',
       'option' => [
-        'd' => 'Short date',
-        'f' => 'Date and time',
-        't' => 'Short time',
-        'D' => 'Long date',
-        'F' => 'Weekday, date and time',
-        'R' => 'Relative',
-        'T' => 'Long time',
-        'default' => 'Default',
+        'd' => 'Korte datum',
+        'f' => 'Datum en tijd',
+        't' => 'Korte tijd',
+        'D' => 'Lange datum',
+        'F' => 'Weekdag, datum en tijd',
+        'R' => 'Relatief',
+        'T' => 'Lange tijd',
+        'default' => 'Standaard',
       ],
     ],
     'columns' => [
-      'displayName' => 'Columns',
+      'displayName' => 'Kolommen',
       'option' => [
         'syntax' => 'Syntax only',
         'preview' => 'Preview only',
         'both' => 'Both syntax and preview',
-        'default' => 'Default',
+        'default' => 'Standaard',
       ],
     ],
     'ephemeral' => [
       'displayName' => 'Ephemeral',
     ],
     'header' => [
-      'displayName' => 'Header',
+      'displayName' => 'Koptekst',
     ],
   ],
-  'saveSuccess' => 'Your settings have been saved successfully.',
+  'saveSuccess' => 'Uw instellingen zijn succesvol opgeslagen.',
 ];
