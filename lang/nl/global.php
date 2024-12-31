@@ -2,10 +2,10 @@
 
 return [
   'seoDescription' => 'Generate timestamp indicators for Discord chat messages',
-  'changeLanguage' => 'Change language',
-  'guest' => 'Guest',
+  'changeLanguage' => 'Wijzig taal',
+  'guest' => 'Gast',
   'nav' => [
-    'botSettings' => 'Bot Settings',
+    'botSettings' => 'Botinstellingen',
     'profile' => 'Profile',
   ],
 ];
