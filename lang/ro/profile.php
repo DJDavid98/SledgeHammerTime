@@ -1,26 +1,26 @@
 <?php
 
 return [
-  'title' => 'Profile',
+  'title' => 'Profil',
   'information' => [
-    'heading' => 'Profile Information',
-    'description' => "Update your account's profile information.",
-    'displayName' => 'Display Name',
-    'saveSuccess' => 'Your profile has been updated successfully.',
+    'heading' => 'Informații profil',
+    'description' => "Actualizați informațiile de profil ale contului dvs.",
+    'displayName' => 'Nume afișat',
+    'saveSuccess' => 'Profilul dvs. a fost actualizat cu succes.',
   ],
   'accounts' => [
-    'heading' => 'Connected Accounts',
+    'heading' => 'Conturi conectate',
     'description' => [
-      'A HammerTime account is going to let you link multiple Discord accounts to be able to manage their resources in one place in the future.',
-      'Below you can find a list of all Discord accounts associated with this HammerTime account.',
+      'Un cont HammerTime vă va permite să legați mai multe conturi Discord pentru a putea gestiona resursele într-un singur loc în viitor.',
+      'Mai jos puteți găsi o listă a tuturor conturilor Discord asociate cu acest cont HammerTime.',
     ],
   ],
   'deletion' => [
-    'heading' => 'Account Deletion',
-    'description' => 'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.',
-    'deleteButton' => 'Delete Account',
+    'heading' => 'Ștergerea contului',
+    'description' => 'Odată ce contul dvs. este șters, toate resursele și datele acestuia vor fi șterse definitiv. Înainte de a vă șterge contul, vă rugăm să descărcați orice date sau informații pe care doriți să le păstrați.',
+    'deleteButton' => 'Ștergeți contul',
     'confirmDialog' => [
-      'header' => 'Are you sure you want to delete your account?',
+      'header' => 'Sunteți sigur că doriți să vă ștergeți contul?',
       'body' => 'Once your account is deleted, all of its resources and data will be permanently deleted.',
     ],
   ],
