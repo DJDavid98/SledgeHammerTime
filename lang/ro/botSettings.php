@@ -1,43 +1,43 @@
 <?php
 
 return [
-  'title' => 'Bot Settings',
-  'description' => 'Below you can see your current settings in the HammerTime Bot for each connected account.',
+  'title' => 'Setări Bot',
+  'description' => 'Mai jos puteți vedea setările curente din HammerTime Bot pentru fiecare cont conectat.',
   'fields' => [
     'rawData' => [
-      'displayName' => 'Raw data (for debugging purposes)',
+      'displayName' => 'Date brute (în scopuri de depanare)',
     ],
     'timezone' => [
-      'displayName' => 'Timezone',
+      'displayName' => 'Fus orar',
     ],
     'format' => [
-      'displayName' => 'Format',
+      'displayName' => 'Formatul',
       'option' => [
-        'd' => 'Short date',
-        'f' => 'Date and time',
-        't' => 'Short time',
-        'D' => 'Long date',
-        'F' => 'Weekday, date and time',
-        'R' => 'Relative',
-        'T' => 'Long time',
-        'default' => 'Default',
+        'd' => 'Data scurtă',
+        'f' => 'Data și timpu',
+        't' => 'Timp scurt',
+        'D' => 'Data lungă',
+        'F' => 'Ziua săptămânii, data și ora',
+        'R' => 'Relativ',
+        'T' => 'Timp lung',
+        'default' => 'Implicit',
       ],
     ],
     'columns' => [
-      'displayName' => 'Columns',
+      'displayName' => 'Coloane',
       'option' => [
-        'syntax' => 'Syntax only',
-        'preview' => 'Preview only',
-        'both' => 'Both syntax and preview',
-        'default' => 'Default',
+        'syntax' => 'Numai sintaxa',
+        'preview' => 'Doar previzualizare',
+        'both' => 'Atât sintaxa, cât și previzualizarea',
+        'default' => 'Implicit',
       ],
     ],
     'ephemeral' => [
-      'displayName' => 'Ephemeral',
+      'displayName' => 'Efemer',
     ],
     'header' => [
-      'displayName' => 'Header',
+      'displayName' => 'Antet',
     ],
   ],
-  'saveSuccess' => 'Your settings have been saved successfully.',
+  'saveSuccess' => 'Setările dvs. au fost salvate cu succes.',
 ];
