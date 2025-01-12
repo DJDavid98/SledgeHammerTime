@@ -1,29 +1,29 @@
 <?php
 
 return [
-  'howTo' => 'Pick a date, copy the desired timestamp from the :syntaxColName column, then paste it anywhere in a chat message. The result will be a dynamic timestamp that displays differently for everyone based on their own timezone.',
+  'howTo' => 'Alegeți o dată, copiați timestamp-ul dorit din coloana :syntaxColName, apoi adăugați-l oriunde într-un mesaj de chat. Rezultatul va fi o marcă de timp dinamică care se afișează diferit pentru fiecare în funcție de propriul fus orar.',
   'picker' => [
     'label' => [
-      'date' => 'Date',
-      'time' => 'Time',
-      'timezone' => 'Timezone',
-      'modeOffset' => 'Absolute Offset',
-      'modeZoneName' => 'Zone Name',
+      'date' => 'Data',
+      'time' => 'Timpu',
+      'timezone' => 'Fus orar',
+      'modeOffset' => 'Offset absolut',
+      'modeZoneName' => 'Numele zonei',
     ],
     'button' => [
-      'jumpToToday' => 'Jump to current month',
+      'jumpToToday' => 'Salt la luna curentă',
     ],
     'tooltip' => [
-      'setToCurrent' => 'Set to current time',
-      'previousYear' => 'Previous year',
-      'previousMonth' => 'Previous month',
-      'nextMonth' => 'Next month',
-      'nextYear' => 'Next year',
+      'setToCurrent' => 'Setat la ora curentă',
+      'previousYear' => 'Anul precedent',
+      'previousMonth' => 'Luna precedentă',
+      'nextMonth' => 'Luna viitoare',
+      'nextYear' => 'Anul următor',
     ],
   ],
   'table' => [
-    'syntaxColumn' => 'Chat syntax',
-    'resultColumn' => 'Example result',
-    'clickToCopy' => 'Copy to clipboard',
+    'syntaxColumn' => 'Sintaxa chat-ului',
+    'resultColumn' => 'Exemplu de rezultat',
+    'clickToCopy' => 'Copiați în clipboard',
   ],
 ];
