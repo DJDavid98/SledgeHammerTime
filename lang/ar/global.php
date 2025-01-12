@@ -1,11 +1,11 @@
 <?php
 
 return [
-  'seoDescription' => 'Generate timestamp indicators for Discord chat messages',
-  'changeLanguage' => 'Change language',
-  'guest' => 'Guest',
+  'seoDescription' => 'إنشاء مؤشرات الطابع الزمني لرسائل دردشة ديسكورد',
+  'changeLanguage' => 'تغيير اللغة',
+  'guest' => 'ضيف',
   'nav' => [
-    'botSettings' => 'Bot Settings',
-    'profile' => 'Profile',
+    'botSettings' => 'إعدادات البوت',
+    'profile' => 'الملف الشخصي',
   ],
 ];
