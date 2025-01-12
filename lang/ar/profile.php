@@ -1,27 +1,27 @@
 <?php
 
 return [
-  'title' => 'Profile',
+  'title' => 'الملف الشخصي',
   'information' => [
-    'heading' => 'Profile Information',
-    'description' => "Update your account's profile information.",
-    'displayName' => 'Display Name',
-    'saveSuccess' => 'Your profile has been updated successfully.',
+    'heading' => 'معلومات الملف الشخصي',
+    'description' => "تحديث معلومات الملف الشخصي لحسابك.",
+    'displayName' => 'اسم العرض',
+    'saveSuccess' => 'تم تحديث ملفك الشخصي بنجاح.',
   ],
   'accounts' => [
-    'heading' => 'Connected Accounts',
+    'heading' => 'الحسابات المتصلة',
     'description' => [
-      'A HammerTime account is going to let you link multiple Discord accounts to be able to manage their resources in one place in the future.',
-      'Below you can find a list of all Discord accounts associated with this HammerTime account.',
+      'سيسمح لك حساب HammerTime بربط حسابات ديسكورد متعددة لتتمكن من إدارة مواردها في مكان واحد في المستقبل.',
+      'يمكنك العثور أدناه على قائمة بجميع حسابات ديسكورد المرتبطة بحساب HammerTime هذا.',
     ],
   ],
   'deletion' => [
-    'heading' => 'Account Deletion',
-    'description' => 'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.',
-    'deleteButton' => 'Delete Account',
+    'heading' => 'حذف الحساب',
+    'description' => 'بمجرد حذف حسابك، سيتم حذف جميع موارده وبياناته بشكل دائم. قبل حذف حسابك، يرجى تنزيل أي بيانات أو معلومات ترغب في الاحتفاظ بها.',
+    'deleteButton' => 'حذف الحساب',
     'confirmDialog' => [
-      'header' => 'Are you sure you want to delete your account?',
-      'body' => 'Once your account is deleted, all of its resources and data will be permanently deleted.',
+      'header' => 'هل أنت متأكد أنك تريد حذف حسابك؟',
+      'body' => 'بمجرد حذف حسابك، سيتم حذف جميع موارده وبياناته نهائيا.',
     ],
   ],
 ];
