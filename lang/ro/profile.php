@@ -21,7 +21,7 @@ return [
     'deleteButton' => 'Ștergeți contul',
     'confirmDialog' => [
       'header' => 'Sunteți sigur că doriți să vă ștergeți contul?',
-      'body' => 'Once your account is deleted, all of its resources and data will be permanently deleted.',
+      'body' => 'Odată ce contul dvs. este șters, toate resursele și datele acestuia vor fi șterse definitiv.',
     ],
   ],
 ];
