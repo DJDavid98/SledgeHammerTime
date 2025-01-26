@@ -1,43 +1,43 @@
 <?php
 
 return [
-  'title' => 'Bot Settings',
-  'description' => 'Below you can see your current settings in the HammerTime Bot for each connected account.',
+  'title' => 'Ρυθμίσεις Bot',
+  'description' => 'Παρακάτω μπορείτε να δείτε τις τρέχουσες ρυθμίσεις σας στο HammerTime Bot για κάθε συνδεδεμένο λογαριασμό.',
   'fields' => [
     'rawData' => [
-      'displayName' => 'Raw data (for debugging purposes)',
+      'displayName' => 'Ανεπεξέργαστα δεδομένα (για σκοπούς εντοπισμού σφαλμάτων)',
     ],
     'timezone' => [
-      'displayName' => 'Timezone',
+      'displayName' => 'Ζώνη ώρας',
     ],
     'format' => [
-      'displayName' => 'Format',
+      'displayName' => 'Μορφοποίηση',
       'option' => [
-        'd' => 'Short date',
-        'f' => 'Date and time',
-        't' => 'Short time',
-        'D' => 'Long date',
-        'F' => 'Weekday, date and time',
-        'R' => 'Relative',
-        'T' => 'Long time',
-        'default' => 'Default',
+        'd' => 'Σύντομη ημερομηνία',
+        'f' => 'Ημερομηνία και ώρα',
+        't' => 'Σύντομη ώρα',
+        'D' => 'Πλήρης ημερομηνία',
+        'F' => 'Ημέρα, ημερομηνία και ώρα',
+        'R' => 'Σχετική',
+        'T' => 'Πλήρης ώρα',
+        'default' => 'Προεπιλογή',
       ],
     ],
     'columns' => [
-      'displayName' => 'Columns',
+      'displayName' => 'Στήλες',
       'option' => [
-        'syntax' => 'Syntax only',
-        'preview' => 'Preview only',
-        'both' => 'Both syntax and preview',
-        'default' => 'Default',
+        'syntax' => 'Σύνταξη',
+        'preview' => 'Προεπισκόπηση',
+        'both' => 'Σύνταξη και προεπισκόπηση',
+        'default' => 'Προεπιλογή',
       ],
     ],
     'ephemeral' => [
       'displayName' => 'Ephemeral',
     ],
     'header' => [
-      'displayName' => 'Header',
+      'displayName' => 'Επικεφαλίδα',
     ],
   ],
-  'saveSuccess' => 'Your settings have been saved successfully.',
+  'saveSuccess' => 'Οι ρυθμίσεις σας αποθηκεύτηκαν με επιτυχία.',
 ];
