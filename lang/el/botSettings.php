@@ -33,7 +33,7 @@ return [
       ],
     ],
     'ephemeral' => [
-      'displayName' => 'Ephemeral',
+      'displayName' => 'Ορατότητα',
     ],
     'header' => [
       'displayName' => 'Επικεφαλίδα',
