@@ -23,7 +23,7 @@ return [
   ],
   'table' => [
     'syntaxColumn' => 'Σύνταξη συνομιλίας',
-    'resultColumn' => 'Example result',
-    'clickToCopy' => 'Copy to clipboard',
+    'resultColumn' => 'Παράδειγμα αποτελέσματος',
+    'clickToCopy' => 'Αντιγραφή στο πρόχειρο',
   ],
 ];
