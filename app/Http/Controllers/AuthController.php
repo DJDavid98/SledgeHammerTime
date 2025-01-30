@@ -123,6 +123,11 @@ class AuthController extends Controller {
 
     Auth::login($user);
 
+    $locale_route_alias = config('languages.locale_route_alias');
+    if (array_key_exists($locale, $locale_route_alias)){
+      $locale = $locale_route_alias[$locale];
+    }
+
     return redirect()->route('settings', ['locale' => $locale]);
   }
 }

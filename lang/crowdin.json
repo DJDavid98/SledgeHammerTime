@@ -1,5 +1,5 @@
 {
-  "meta": "Generated at 2024-12-30T05:15:13.027Z",
+  "meta": "Generated at 2025-01-30T18:32:17.682Z",
   "users": {
     "25282": {
       "username": "Liggli",
@@ -140,7 +140,7 @@
     },
     "13617551": {
       "username": "DJDavid98",
-      "avatarUrl": "https://crowdin-static.downloads.crowdin.com/avatar/13617551/medium/c029a87fe6b3d7a92587750621476764.png",
+      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/13617551/medium/c029a87fe6b3d7a92587750621476764.png",
       "languages": [
         "ar",
         "bg",
@@ -257,7 +257,7 @@
     },
     "14459560": {
       "username": "BelleBernice",
-      "avatarUrl": "https://crowdin-static.downloads.crowdin.com/avatar/14459560/medium/e95c5c8972902e5bc2541fd8c91b847a.jpg",
+      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/14459560/medium/e95c5c8972902e5bc2541fd8c91b847a.jpg",
       "fullName": "Belle Bernice",
       "languages": [
         "el"
@@ -379,6 +379,14 @@
         "fr"
       ]
     },
+    "14914643": {
+      "username": "younessmouhid",
+      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/14914643/medium/49fd62344c8aaf711202fc5617a117fa.png",
+      "fullName": "yngams",
+      "languages": [
+        "ar"
+      ]
+    },
     "14936099": {
       "username": "net-tech-",
       "avatarUrl": "https://crowdin-static.downloads.crowdin.com/avatar/14936099/medium/577bbd43898509185ee3aa910be8d7a0.png",
@@ -389,7 +397,7 @@
     },
     "14999657": {
       "username": "mihaiofficialRO",
-      "avatarUrl": "https://crowdin-static.downloads.crowdin.com/avatar/14999657/medium/64e7f99cd656e04aad4d9394e86bae71_default.png",
+      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/14999657/medium/64e7f99cd656e04aad4d9394e86bae71_default.png",
       "fullName": "mihai",
       "languages": [
         "ro"
@@ -721,6 +729,14 @@
         "da"
       ]
     },
+    "16122526": {
+      "username": "Poseidon281",
+      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/16122526/medium/836bb4682752a0d724255f7147fc0b5d.png",
+      "fullName": "Senna",
+      "languages": [
+        "nl"
+      ]
+    },
     "16172948": {
       "username": "meeekos",
       "avatarUrl": "https://crowdin-static.downloads.crowdin.com/avatar/16172948/medium/62c44a407cbd24307b8d9b4e28665240.jpeg",
@@ -950,7 +966,7 @@
     },
     "ar": {
       "approval": 0,
-      "translation": 0
+      "translation": 85
     },
     "bg": {
       "approval": 0,
@@ -974,7 +990,7 @@
     },
     "el": {
       "approval": 0,
-      "translation": 0
+      "translation": 100
     },
     "en-GB": {
       "approval": 100,
@@ -1046,7 +1062,7 @@
     },
     "nl": {
       "approval": 0,
-      "translation": 0
+      "translation": 23
     },
     "pl": {
       "approval": 0,
@@ -1062,7 +1078,7 @@
     },
     "ro": {
       "approval": 0,
-      "translation": 0
+      "translation": 100
     },
     "ru": {
       "approval": 0,
