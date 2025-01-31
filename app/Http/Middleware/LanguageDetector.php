@@ -18,7 +18,7 @@ class LanguageDetector {
     'oauth',
   ];
 
-  protected const LOCALIZED_PATH_REGEX = '/^[a-z]{2}(?:[_-][a-zA-Z\d]{2,})?($|\/)/';
+  protected const LOCALIZED_PATH_REGEX = '/^[a-z]{2}(?:[_-][a-zA-Z\d]{2,})?(?:$|\/)/';
 
   public function handle(Request $request, Closure $next) {
     $request_path = $request->path();
@@ -26,7 +26,7 @@ class LanguageDetector {
     $is_localized_path = preg_match(self::LOCALIZED_PATH_REGEX, $request_path);
     if ($is_localized_path){
       // Perform language validation
-      $request_path = preg_replace(self::LOCALIZED_PATH_REGEX, '$1', $request_path);
+      $request_path = preg_replace(self::LOCALIZED_PATH_REGEX, '', $request_path);
       $route_locale = $this->validateLocale($first_route_segment);
     }
     else {
