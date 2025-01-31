@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import { currentLanguageInject } from '@/injection-keys';
 import { getAppName } from '@/utils/app';
+import { FALLBACK_LANGUAGE } from '@/utils/language-settings';
 import { Link } from '@inertiajs/vue3';
+import { inject } from 'vue';
 
 const appName = getAppName();
+const currentLanguage = inject(currentLanguageInject);
 </script>
 
 <template>
@@ -12,7 +16,7 @@ const appName = getAppName();
       <slot name="left" />
     </div>
     <Link
-      :href="route('home')"
+      :href="route('home', { locale: currentLanguage?.locale ?? FALLBACK_LANGUAGE })"
       class="header-brand"
     >
       <ApplicationLogo :size="10" />

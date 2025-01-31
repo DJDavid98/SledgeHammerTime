@@ -52,7 +52,6 @@ return [
   'locale_route_alias' => [
     'en-US' => 'en',
     'en_US' => 'en',
-    'en_GB' => 'en-GB',
     'es-ES' => 'es',
     'sv-SV' => 'sv',
     'pt_BR' => 'pt-BR',

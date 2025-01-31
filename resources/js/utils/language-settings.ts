@@ -9,3 +9,5 @@ export const LANGUAGES = localeConfig.languages as LanguagesConfig;
 
 export const isAvailableLanguage = (language: string): language is AvailableLanguage => language in LANGUAGES;
 
+export const FALLBACK_LANGUAGE: AvailableLanguage = 'en';
+

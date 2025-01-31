@@ -18,6 +18,8 @@ use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AuthController extends Controller {
+  protected const LOGIN_LOCALE_SESSION_KEY = 'login_locale';
+
   private static function createRedirectUrl(string $provider):string {
     return config('app.url')."/oauth/callback/$provider";
   }
@@ -74,11 +76,22 @@ class AuthController extends Controller {
       Auth::login($user);
     }
 
-    return redirect(RouteServiceProvider::HOME);
+    $login_locale = session()?->pull(self::LOGIN_LOCALE_SESSION_KEY);
+
+    return redirect(RouteServiceProvider::HOME.($login_locale ?? ''));
   }
 
-  public function login():RedirectResponse {
-    return redirect('/'.App::getLocale().'/oauth/redirect/discord');
+  public function login(Request $request):RedirectResponse {
+    $locale = $request->route('locale') ?? App::getLocale();
+    $possible_locales = [
+      ...config('languages.supported_locales'),
+      ...array_keys(config('languages.locale_route_alias')),
+    ];
+    if (in_array($locale, $possible_locales, true)){
+      session()?->put(self::LOGIN_LOCALE_SESSION_KEY, $locale);
+    }
+
+    return redirect("/$locale/oauth/redirect/discord");
   }
 
   /**

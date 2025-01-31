@@ -3,6 +3,7 @@ import { currentLanguageInject, pagePropsInject } from '@/injection-keys';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCollapsible from '@/Reusable/HtCollapsible.vue';
 import HtLinkButton from '@/Reusable/HtLinkButton.vue';
+import { FALLBACK_LANGUAGE } from '@/utils/language-settings';
 import { faCaretDown, faCaretUp, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link } from '@inertiajs/vue3';
 import { computed, inject, ref } from 'vue';
@@ -30,14 +31,14 @@ const toggleUserDropdown = (e: MouseEvent) => {
     >
       <li>
         <Link
-          :href="route('settings', { locale: currentLanguage?.locale })"
+          :href="route('settings', { locale: currentLanguage?.locale ?? FALLBACK_LANGUAGE })"
         >
           {{ $t('global.nav.botSettings') }}
         </Link>
       </li>
       <li>
         <Link
-          :href="route('profile.edit', { locale: currentLanguage?.locale })"
+          :href="route('profile.edit', { locale: currentLanguage?.locale ?? FALLBACK_LANGUAGE })"
         >
           {{ $t('global.nav.profile') }}
         </Link>
@@ -69,7 +70,7 @@ const toggleUserDropdown = (e: MouseEvent) => {
     <HtLinkButton
       v-else
       color="primary"
-      :href="route('login', { locale: currentLanguage?.locale })"
+      :href="route('login', { locale: currentLanguage?.locale ?? FALLBACK_LANGUAGE })"
       :external="true"
       :target-blank="false"
     >
