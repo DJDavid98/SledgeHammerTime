@@ -19,6 +19,7 @@ class LanguageDetector {
   ];
 
   protected const LOCALIZED_PATH_REGEX = '/^[a-z]{2}(?:[_-][a-zA-Z\d]{2,})?(?:$|\/)/';
+  protected const SESSION_APP_LOCALE_KEY = 'app_locale';
 
   public function handle(Request $request, Closure $next) {
     $request_path = $request->path();
@@ -53,6 +54,13 @@ class LanguageDetector {
 
   protected function detectLocale():string {
     $ui_locale_map = Config::get('languages.ui_locale_map');
+    $ui_locale_map_flip = array_flip($ui_locale_map);
+    $app_locale = session()?->get(self::SESSION_APP_LOCALE_KEY);
+    if (is_string($app_locale) && array_key_exists($app_locale, $ui_locale_map_flip)){
+      // Restore selected locale from session
+      return $ui_locale_map_flip[$app_locale];
+    }
+
     $accepts_list = AcceptLanguage::get();
     foreach ($accepts_list as $accepts){
       $language_key = $accepts['language'].($accepts['region'] ? "-{$accepts['region']}" : '');
@@ -60,7 +68,7 @@ class LanguageDetector {
         continue;
       }
 
-      App::setLocale($ui_locale_map[$language_key]);
+      $this->setLocale($ui_locale_map[$language_key]);
 
       return $language_key;
     }
@@ -78,7 +86,7 @@ class LanguageDetector {
     // Check UI to Laravel locale mapping
     $ui_locale_map = Config::get('languages.ui_locale_map');
     if (array_key_exists($locale, $ui_locale_map)){
-      App::setlocale($ui_locale_map[$locale]);
+      $this->setLocale($ui_locale_map[$locale]);
 
       return $locale;
     }
@@ -86,11 +94,19 @@ class LanguageDetector {
     // Check Laravel to UI reverse locale mapping
     $ui_locale_map_flip = array_flip($ui_locale_map);
     if (array_key_exists($locale, $ui_locale_map_flip)){
-      App::setlocale($locale);
+      $this->setLocale($locale);
 
       return $ui_locale_map_flip[$locale];
     }
 
     return config('app.fallback_locale');
+  }
+
+  /**
+   * Set the application locale and save it in the current session
+   */
+  protected function setLocale(string $app_locale):void {
+    session()?->put(self::SESSION_APP_LOCALE_KEY, $app_locale);
+    App::setlocale($app_locale);
   }
 }
