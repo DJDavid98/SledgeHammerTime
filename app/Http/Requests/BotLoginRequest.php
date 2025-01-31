@@ -22,7 +22,7 @@ class BotLoginRequest extends FormRequest {
       'name' => ['required', 'string', 'max:32'],
       'display_name' => ['nullable', 'string', 'max:32'],
       'discriminator' => ['required', 'integer', 'min:0', 'max:9999'],
-      'avatar' => ['required', 'nullable', 'string', 'max:64'],
+      'avatar' => ['nullable', 'string', 'max:64'],
     ];
   }
 }
