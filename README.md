@@ -33,7 +33,7 @@ English and Hungarian translations have been included, so no translators will be
 
 ### Credits
 
-- 🇸🇦 Arabic: [Raphael Santiago](https://crowdin.com/profile/raphael.santiago.53)
+- 🇸🇦 Arabic: [REMOVED_USER](https://crowdin.com/profile/REMOVED_USER)
 - 🇧🇬 Bulgarian
   - [Alexander](https://crowdin.com/profile/Mr.Shad)
   - [Rxshi](https://crowdin.com/profile/Rxshi)
@@ -125,11 +125,11 @@ English and Hungarian translations have been included, so no translators will be
 - 🇷🇴 Romanian: [mihai](https://crowdin.com/profile/mihaiofficialRO)
 - 🇷🇺 Russian
   - [Alexander](https://crowdin.com/profile/Mr.Shad)
+  - [Aligatoor](https://crowdin.com/profile/Aligatoor)
   - [GameHacker](https://crowdin.com/profile/GameHacker)
   - [JudDayLum Official](https://crowdin.com/profile/JudDayLum)
   - [JudeDM](https://crowdin.com/profile/JudeDM)
   - [Luna](https://crowdin.com/profile/NightyCloud)
-  - [Nikita Sharikov](https://crowdin.com/profile/Aligatoor)
   - [stolarchukboris](https://crowdin.com/profile/PleasedontslammykeyboarddfsdoijfwR)
   - [Vladimir](https://crowdin.com/profile/bill876)
   - [Крутой Бо](https://crowdin.com/profile/arturfomenko8)
