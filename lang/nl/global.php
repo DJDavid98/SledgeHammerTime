@@ -2,13 +2,13 @@
 
 return [
   'seoDescription' => 'Generate timestamp indicators for Discord chat messages',
-  'changeLanguage' => 'Wijzig taal',
+  'changeLanguage' => 'Change language',
   'incompleteTranslations' => 'Translations are incomplete',
   'contributeTranslations' => 'Contribute',
-  'guest' => 'Gast',
+  'guest' => 'Guest',
   'nav' => [
-    'botSettings' => 'Bot-instellingen',
-    'profile' => 'Profiel',
+    'botSettings' => 'Bot Settings',
+    'profile' => 'Profile',
   ],
   'sidebar' => [
     'inputSettings' => [
