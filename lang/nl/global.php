@@ -3,6 +3,8 @@
 return [
   'seoDescription' => 'Generate timestamp indicators for Discord chat messages',
   'changeLanguage' => 'Wijzig taal',
+  'incompleteTranslations' => 'Translations are incomplete',
+  'contributeTranslations' => 'Contribute',
   'guest' => 'Gast',
   'nav' => [
     'botSettings' => 'Bot-instellingen',
@@ -31,8 +33,6 @@ return [
       'openSourceSoftware' => 'Open-source software',
       'viewSourceCode' => 'View source code',
       'notAffiliated' => 'This project is not affiliated with Discord.',
-      'incompleteTranslations' => 'Translations are incomplete',
-      'contributeTranslations' => 'Contribute',
     ],
   ],
 ];
