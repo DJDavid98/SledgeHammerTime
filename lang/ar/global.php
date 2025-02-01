@@ -1,14 +1,14 @@
 <?php
 
 return [
-  'seoDescription' => 'إنشاء مؤشرات الطابع الزمني لرسائل دردشة ديسكورد',
-  'changeLanguage' => 'تغيير اللغة',
+  'seoDescription' => 'Generate timestamp indicators for Discord chat messages',
+  'changeLanguage' => 'Change language',
   'incompleteTranslations' => 'Translations are incomplete',
   'contributeTranslations' => 'Contribute',
-  'guest' => 'ضيف',
+  'guest' => 'Guest',
   'nav' => [
-    'botSettings' => 'إعدادات البوت',
-    'profile' => 'الملف الشخصي',
+    'botSettings' => 'Bot Settings',
+    'profile' => 'Profile',
   ],
   'sidebar' => [
     'inputSettings' => [
