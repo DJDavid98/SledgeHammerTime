@@ -5,6 +5,8 @@ import { LanguageConfig } from '@/model/language-config';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCollapsible from '@/Reusable/HtCollapsible.vue';
 import HtLinkButton from '@/Reusable/HtLinkButton.vue';
+import HtProgress from '@/Reusable/HtProgress.vue';
+import { reportData } from '@/utils/crowdin';
 import { AvailableLanguage, LANGUAGES } from '@/utils/language-settings';
 import { faCaretDown, faCaretUp, faGlobe, faLifeRing } from '@fortawesome/free-solid-svg-icons';
 import { router } from '@inertiajs/vue3';
@@ -35,6 +37,16 @@ const sortedLanguages = computed(() =>
       return key in currentLanguage.value.languages;
     })
     .sort(([a], [b]) => extendedNativeLocaleNames[a].localeCompare(extendedNativeLocaleNames[b])),
+);
+
+const displayContributionHints = computed(() =>
+  Boolean(currentLanguage?.value?.locale && !noTranslationsNeededLocales.has(currentLanguage.value?.locale),
+  ));
+
+const currentLanguageApprovalPercent = computed(() =>
+  currentLanguage?.value.locale
+    ? reportData.progress[currentLanguage.value.locale].approval
+    : 100,
 );
 
 const searchParamsString = computed(() => {
@@ -98,6 +110,15 @@ onMounted(router.on('success', navigateListener));
         </template>
       </div>
     </HtCollapsible>
+    <div
+      v-if="displayContributionHints && currentLanguageApprovalPercent < 100"
+      class="language-progress mb-2"
+    >
+      <p class="mb-1">
+        {{ $t('global.incompleteTranslations') }}
+      </p>
+      <HtProgress :progress="currentLanguageApprovalPercent" />
+    </div>
     <div class="language-controls">
       <HtButton
         :block="true"
@@ -111,15 +132,16 @@ onMounted(router.on('success', navigateListener));
         <span>{{ $t('global.changeLanguage') }}</span>
       </HtButton>
       <HtLinkButton
-        v-if="currentLanguage?.locale && !noTranslationsNeededLocales.has(currentLanguage.locale)"
+        v-if="displayContributionHints"
         color="success"
         class="contribute-button"
-        :icon-only="true"
         :icon-start="faLifeRing"
         :href="`https://crowdin.com/project/${currentLanguage?.crowdinProjectId}/${currentLanguage?.languageConfig?.crowdinLocale || currentLanguage?.locale}`"
         :external="true"
         :target-blank="true"
-      />
+      >
+        <span>{{ $t('global.contributeTranslations') }}</span>
+      </HtLinkButton>
     </div>
   </div>
 </template>

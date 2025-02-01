@@ -65,7 +65,11 @@ $size-map: (
   syntax-display-padding-horizontal: .5em,
   syntax-display-border-radius: .3em,
   syntax-display-line-height: 1.5em,
+  progress-bar-height: .75em,
 );
+
+$_text-color-light: #313131;
+$_text-color-dark: #C1C2C5;
 
 $color-map: (
   layout-bg: (
@@ -73,8 +77,8 @@ $color-map: (
     dark: #000
   ),
   layout-color: (
-    light: #212121,
-    dark: #C1C2C5,
+    light: $_text-color-light,
+    dark: $_text-color-dark,
   ),
   header-bg: (
     light: color.adjust(#5865f2, $lightness: 27%, $saturation: -10%),
@@ -93,8 +97,8 @@ $color-map: (
     dark: #1A1B1E
   ),
   card-color: (
-    light: #212121,
-    dark: #C1C2C5,
+    light: $_text-color-light,
+    dark: $_text-color-dark,
   ),
   alert-bg: (
     light: rgba(230, 229, 227, .5),
@@ -229,8 +233,12 @@ $color-map: (
     dark: color.adjust(#5865f2, $lightness: 10%),
   ),
   open-source: (
-    light: #3da639,
+    light: color.adjust(#3da639, $lightness: -10%),
     dark: color.adjust(#3da639, $lightness: 10%),
+  ),
+  translation-contribution-cta: (
+    light: #559933,
+    dark: color.adjust(#559933, $lightness: 10%),
   ),
 );
 

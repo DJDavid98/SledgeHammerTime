@@ -36,17 +36,32 @@
 
 }
 
+.language-progress {
+  color: design.app-color-light('translation-contribution-cta');
+
+  @include design.if-dark {
+    color: design.app-color-dark('translation-contribution-cta');
+  }
+}
+
 .language-controls {
   display: flex;
   flex-flow: row nowrap;
   gap: design.app-size('language-selector-spacing');
 
+  .change-language-button,
+  .contribute-button {
+    white-space: nowrap;
+  }
+
   .change-language-button {
-    flex: 1 1 100%;
+    flex: 1 0 50%;
   }
 
   .contribute-button {
-    flex: 0 0 auto;
+    flex: 0 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

@@ -15,15 +15,13 @@ const tags = computed(() => {
   while ((match = regex.exec(textRef.value)) !== null) {
     tagsObject[parseInt(match[1], 10)] = match[2];
   }
-  console.debug('tagsObject', tagsObject);
   return tagsObject;
 });
 
 const parts = computed(() => {
   let indexAdd = 0;
   const partsValue = textRef.value.replace(/<(\d+)>.*<\/\1>/g, '<$1/>').split(/<\d+\/>/g);
-  console.debug('partsValue', partsValue);
-  const reducedPartsValue = partsValue.reduce((acc: string[], v, i): string[] => {
+  return partsValue.reduce((acc: string[], v, i): string[] => {
     indexAdd++;
     const tagIndex = i + indexAdd;
     if (tagIndex in tags.value) {
@@ -31,8 +29,6 @@ const parts = computed(() => {
     }
     return [...acc, v];
   }, []);
-  console.debug('reducedPartsValue', reducedPartsValue);
-  return reducedPartsValue;
 });
 </script>
 
