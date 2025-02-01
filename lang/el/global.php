@@ -1,14 +1,14 @@
 <?php
 
 return [
-  'seoDescription' => 'Δημιουργήστε δείκτες χρονοσήμανσης για μηνύματα συνομιλίας Discord',
-  'changeLanguage' => 'Αλλαγή γλώσσας',
+  'seoDescription' => 'Generate timestamp indicators for Discord chat messages',
+  'changeLanguage' => 'Change language',
   'incompleteTranslations' => 'Translations are incomplete',
   'contributeTranslations' => 'Contribute',
-  'guest' => 'Επισκέπτης',
+  'guest' => 'Guest',
   'nav' => [
-    'botSettings' => 'Ρυθμίσεις Bot',
-    'profile' => 'Προφίλ',
+    'botSettings' => 'Bot Settings',
+    'profile' => 'Profile',
   ],
   'sidebar' => [
     'inputSettings' => [
