@@ -3,8 +3,8 @@
 return [
   'seoDescription' => 'Generálj időpont jelölőket a Discord üzeneteidhez',
   'changeLanguage' => 'Nyelv változtatás',
-  'incompleteTranslations' => 'Translations are incomplete',
-  'contributeTranslations' => 'Contribute',
+  'incompleteTranslations' => 'A fordítások hiányosak',
+  'contributeTranslations' => 'Közreműködés',
   'guest' => 'Látogató',
   'nav' => [
     'botSettings' => 'Bot Beállítások',
@@ -12,27 +12,27 @@ return [
   ],
   'sidebar' => [
     'inputSettings' => [
-      'title' => 'Input settings',
+      'title' => 'Beviteli beállítások',
       'customInputs' => [
-        'label' => 'Custom inputs',
-        'description' => "Replaces the default inputs with ones that match the current language instead of your browser's",
+        'label' => 'Egyéni beviteli mezők',
+        'description' => "Lecseréli az alapértelmezett beviteli mezőket olyanokkal, melyek az aktuális nyelvhez igazodnak a böngészőé helyett",
       ],
       'separateInputs' => [
-        'label' => 'Separate inputs',
-        'description' => "Display two different inputs for date and time instead of a combined one (which is not supported in some browsers)",
+        'label' => 'Külön beviteli mezők',
+        'description' => "Két különböző mezőt jelenít meg a dátumnak és az időnek egy összevont helyett (ami néhány böngészőben nem támogatott)",
       ],
     ],
     'credits' => [
-      'title' => 'Credits',
-      'developedBy' => 'Developed by <1></1>',
-      'using' => 'Using <1></1>',
+      'title' => 'Névjegy',
+      'developedBy' => 'Fejlesztette: <1></1>',
+      'using' => 'Ezek felhasználásával: <1></1>',
       'fontAwesomeFree' => 'Font Awesome Free',
       'laravel' => 'Laravel',
       'vueJs' => 'Vue.js',
-      'translatedBy' => 'Translations by <1></1>',
-      'openSourceSoftware' => 'Open-source software',
-      'viewSourceCode' => 'View source code',
-      'notAffiliated' => 'This project is not affiliated with Discord.',
+      'translatedBy' => 'Fordítók: <1></1>',
+      'openSourceSoftware' => 'Nyílt forráskódú szoftver',
+      'viewSourceCode' => 'Forráskód megtekintése',
+      'notAffiliated' => 'A projektnek semmilyen kapcsolata nincs a Discord-al.',
     ],
   ],
 ];
