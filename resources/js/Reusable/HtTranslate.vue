@@ -40,6 +40,7 @@ const parts = computed(() => {
     <slot
       v-if="i in tags"
       :name="i"
+      :text="part"
     />
     <template v-else-if="part.length > 0">
       {{ part }}

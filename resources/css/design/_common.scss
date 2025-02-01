@@ -23,6 +23,7 @@ $size-map: (
   button-content-gap: .3rem,
   card-padding: 1rem,
   card-border-radius: .5rem,
+  card-spacing: .5rem,
   alert-spacing: 1rem,
   alert-border-radius: .5rem,
   sidebar-spacing: .5rem,
@@ -239,6 +240,38 @@ $color-map: (
   translation-contribution-cta: (
     light: #559933,
     dark: color.adjust(#559933, $lightness: 10%),
+  ),
+  add-app-bg: (
+    light: #FFFFFF,
+    dark: #323338,
+  ),
+  add-app-color: (
+    light: #313338,
+    dark: #DBDEE1,
+  ),
+  add-app-logo-border: (
+    light: rgba(0, 0, 0, 0.08),
+    dark: rgba(255, 255, 255, 0.08),
+  ),
+  add-app-link-bg: (
+    light: #F2F3F5,
+    dark: #2b2d31,
+  ),
+  add-app-link-hover-bg: (
+    light: #EBEBED,
+    dark: #3b3c41,
+  ),
+  add-app-link-icon: (
+    light: #4E5058,
+    dark: #b6bac0,
+  ),
+  add-app-link-title: (
+    light: #060607,
+    dark: #fff,
+  ),
+  add-app-link-description: (
+    light: #5C5E66,
+    dark: #969ba4,
   ),
 );
 

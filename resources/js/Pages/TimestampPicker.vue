@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TimestampDisplay from '@/Components/home/TimestampDisplay.vue';
+import UsefulLinks from '@/Components/home/UsefulLinks.vue';
 import { timestamp } from '@/injection-keys';
 import Layout from '@/Layouts/DefaultLayout.vue';
 import { TimezoneSelection } from '@/model/timezone-selection';
@@ -80,5 +81,7 @@ watch(currentTimestamp, () => {
 
   <Layout>
     <TimestampDisplay />
+
+    <UsefulLinks />
   </Layout>
 </template>
