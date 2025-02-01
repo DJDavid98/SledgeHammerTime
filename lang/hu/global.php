@@ -3,6 +3,8 @@
 return [
   'seoDescription' => 'Generálj időpont jelölőket a Discord üzeneteidhez',
   'changeLanguage' => 'Nyelv változtatás',
+  'incompleteTranslations' => 'Translations are incomplete',
+  'contributeTranslations' => 'Contribute',
   'guest' => 'Látogató',
   'nav' => [
     'botSettings' => 'Bot Beállítások',
@@ -31,8 +33,6 @@ return [
       'openSourceSoftware' => 'Open-source software',
       'viewSourceCode' => 'View source code',
       'notAffiliated' => 'This project is not affiliated with Discord.',
-      'incompleteTranslations' => 'Translations are incomplete',
-      'contributeTranslations' => 'Contribute',
     ],
   ],
 ];
