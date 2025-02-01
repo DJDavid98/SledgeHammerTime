@@ -6,6 +6,7 @@ return [
     'label' => [
       'date' => 'Dátum',
       'time' => 'Idő',
+      'dateAndTime' => 'Date and time',
       'timezone' => 'Időzóna',
       'modeOffset' => 'Abszolút Eltolás',
       'modeZoneName' => 'Zóna Név',
