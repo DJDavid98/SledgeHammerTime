@@ -57,10 +57,26 @@ const translationCredits = computed(() => {
           <template #1>
             <ul class="external-libraries-credit">
               <li>
-                <a href="https://fontawesome.com/license/free">{{ $t('global.sidebar.credits.fontAwesomeFree') }}</a>
+                <a
+                  href="https://fontawesome.com/license/free"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >{{ $t('global.sidebar.credits.fontAwesomeFree') }}</a>
               </li>
-              <li><a href="https://laravel.com/">{{ $t('global.sidebar.credits.laravel') }}</a></li>
-              <li><a href="https://vuejs.org/">{{ $t('global.sidebar.credits.vueJs') }}</a></li>
+              <li>
+                <a
+                  href="https://laravel.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >{{ $t('global.sidebar.credits.laravel') }}</a>
+              </li>
+              <li>
+                <a
+                  href="https://vuejs.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >{{ $t('global.sidebar.credits.vueJs') }}</a>
+              </li>
             </ul>
           </template>
         </HtTranslate>
