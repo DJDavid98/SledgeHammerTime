@@ -1,5 +1,5 @@
 <?php
 
 return [
-  'title' => 'Limbaj de design',
+  'title' => 'Design Language',
 ];
