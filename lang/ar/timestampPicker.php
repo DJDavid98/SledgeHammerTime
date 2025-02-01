@@ -6,6 +6,7 @@ return [
     'label' => [
       'date' => 'تاريخ',
       'time' => 'الوقت',
+      'dateAndTime' => 'Date and time',
       'timezone' => 'المنطقة الزمنية',
       'modeOffset' => 'Absolute Offset',
       'modeZoneName' => 'اسم المنطقة',
