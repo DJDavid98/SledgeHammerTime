@@ -6,6 +6,7 @@ return [
     'label' => [
       'date' => 'Ημερομηνία',
       'time' => 'Ώρα',
+      'dateAndTime' => 'Date and time',
       'timezone' => 'Ζώνη ώρας',
       'modeOffset' => 'Απόλυτη Μετατόπιση',
       'modeZoneName' => 'Όνομα Ζώνης ώρας',
