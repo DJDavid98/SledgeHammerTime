@@ -1,43 +1,43 @@
 <?php
 
 return [
-  'title' => 'Ρυθμίσεις Bot',
-  'description' => 'Παρακάτω μπορείτε να δείτε τις τρέχουσες ρυθμίσεις σας στο HammerTime Bot για κάθε συνδεδεμένο λογαριασμό.',
+  'title' => 'Bot Settings',
+  'description' => 'Below you can see your current settings in the HammerTime Bot for each connected account.',
   'fields' => [
     'rawData' => [
-      'displayName' => 'Ανεπεξέργαστα δεδομένα (για σκοπούς εντοπισμού σφαλμάτων)',
+      'displayName' => 'Raw data (for debugging purposes)',
     ],
     'timezone' => [
-      'displayName' => 'Ζώνη ώρας',
+      'displayName' => 'Timezone',
     ],
     'format' => [
-      'displayName' => 'Μορφοποίηση',
+      'displayName' => 'Format',
       'option' => [
-        'd' => 'Σύντομη ημερομηνία',
-        'f' => 'Ημερομηνία και ώρα',
-        't' => 'Σύντομη ώρα',
-        'D' => 'Πλήρης ημερομηνία',
-        'F' => 'Ημέρα, ημερομηνία και ώρα',
-        'R' => 'Σχετική',
-        'T' => 'Πλήρης ώρα',
-        'default' => 'Προεπιλογή',
+        'd' => 'Short date',
+        'f' => 'Date and time',
+        't' => 'Short time',
+        'D' => 'Long date',
+        'F' => 'Weekday, date and time',
+        'R' => 'Relative',
+        'T' => 'Long time',
+        'default' => 'Default',
       ],
     ],
     'columns' => [
-      'displayName' => 'Στήλες',
+      'displayName' => 'Columns',
       'option' => [
-        'syntax' => 'Σύνταξη',
-        'preview' => 'Προεπισκόπηση',
-        'both' => 'Σύνταξη και προεπισκόπηση',
-        'default' => 'Προεπιλογή',
+        'syntax' => 'Syntax only',
+        'preview' => 'Preview only',
+        'both' => 'Both syntax and preview',
+        'default' => 'Default',
       ],
     ],
     'ephemeral' => [
-      'displayName' => 'Ορατότητα',
+      'displayName' => 'Ephemeral',
     ],
     'header' => [
-      'displayName' => 'Επικεφαλίδα',
+      'displayName' => 'Header',
     ],
   ],
-  'saveSuccess' => 'Οι ρυθμίσεις σας αποθηκεύτηκαν με επιτυχία.',
+  'saveSuccess' => 'Your settings have been saved successfully.',
 ];
