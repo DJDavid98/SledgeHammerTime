@@ -1,43 +1,43 @@
 <?php
 
 return [
-  'title' => 'إعدادات البوت',
-  'description' => 'يمكنك أدناه رؤية إعداداتك الحالية في HammerTime بوت لكل حساب متصل.',
+  'title' => 'Bot Settings',
+  'description' => 'Below you can see your current settings in the HammerTime Bot for each connected account.',
   'fields' => [
     'rawData' => [
-      'displayName' => 'البيانات الخام (لأغراض تصحيح الأخطاء)',
+      'displayName' => 'Raw data (for debugging purposes)',
     ],
     'timezone' => [
-      'displayName' => 'المنطقة الزمنية',
+      'displayName' => 'Timezone',
     ],
     'format' => [
-      'displayName' => 'تنسيق',
+      'displayName' => 'Format',
       'option' => [
-        'd' => 'تاريخ قصير',
-        'f' => 'التاريخ و الوقت',
-        't' => 'وقت قصير',
-        'D' => 'تاريخ طويل',
-        'F' => 'يوم الأسبوع، التاريخ والوقت',
-        'R' => 'تناسبي',
-        'T' => 'وقت طويل',
-        'default' => 'افتراضي',
+        'd' => 'Short date',
+        'f' => 'Date and time',
+        't' => 'Short time',
+        'D' => 'Long date',
+        'F' => 'Weekday, date and time',
+        'R' => 'Relative',
+        'T' => 'Long time',
+        'default' => 'Default',
       ],
     ],
     'columns' => [
-      'displayName' => 'أعمدة',
+      'displayName' => 'Columns',
       'option' => [
-        'syntax' => 'صيغة فقط',
-        'preview' => 'معاينة فقط',
-        'both' => 'كل من الصيغة والمعاينة',
-        'default' => 'افتراضي',
+        'syntax' => 'Syntax only',
+        'preview' => 'Preview only',
+        'both' => 'Both syntax and preview',
+        'default' => 'Default',
       ],
     ],
     'ephemeral' => [
-      'displayName' => 'سريع الزوال',
+      'displayName' => 'Ephemeral',
     ],
     'header' => [
-      'displayName' => 'رأس',
+      'displayName' => 'Header',
     ],
   ],
-  'saveSuccess' => 'تم حفظ إعداداتك بنجاح.',
+  'saveSuccess' => 'Your settings have been saved successfully.',
 ];
