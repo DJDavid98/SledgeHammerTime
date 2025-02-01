@@ -6,6 +6,7 @@ return [
     'label' => [
       'date' => 'Date',
       'time' => 'Time',
+      'dateAndTime' => 'Date and time',
       'timezone' => 'Timezone',
       'modeOffset' => 'Absolute Offset',
       'modeZoneName' => 'Zone Name',
