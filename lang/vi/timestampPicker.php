@@ -27,4 +27,19 @@ return [
     'resultColumn' => 'Example result',
     'clickToCopy' => 'Copy to clipboard',
   ],
+  'usefulLinks' => [
+    'lead' => 'You may also find these useful:',
+    'server' => [
+      'header' => 'Official HammerTime Server',
+      'p' => 'Discuss the website, test the syntax and suggest features',
+    ],
+    'bot' => [
+      'header' => 'HammerTime App',
+      'p' => 'Generate timestamps from within Discord using slash commands',
+    ],
+    'textColor' => [
+      'header' => 'Rebane\'s <1>Colored</1> Text Generator',
+      'p' => 'A simple app that creates colored Discord messages using ANSI color codes',
+    ],
+  ],
 ];
