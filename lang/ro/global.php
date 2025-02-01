@@ -1,14 +1,14 @@
 <?php
 
 return [
-  'seoDescription' => 'Generarea indicatorilor timestamp pentru mesajele de chat Discord',
-  'changeLanguage' => 'Schimbă limba',
+  'seoDescription' => 'Generate timestamp indicators for Discord chat messages',
+  'changeLanguage' => 'Change language',
   'incompleteTranslations' => 'Translations are incomplete',
   'contributeTranslations' => 'Contribute',
-  'guest' => 'Vizitator',
+  'guest' => 'Guest',
   'nav' => [
-    'botSettings' => 'Setări Bot',
-    'profile' => 'Profil',
+    'botSettings' => 'Bot Settings',
+    'profile' => 'Profile',
   ],
   'sidebar' => [
     'inputSettings' => [
