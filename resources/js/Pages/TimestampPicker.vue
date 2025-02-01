@@ -42,6 +42,11 @@ const changeDateString = (value: string) => {
 const changeTimeString = (value: string) => {
   timeString.value = value;
 };
+const changeDateTimeString = (value: string) => {
+  const [newDateString, newTimeString] = value.split(/[ T]/);
+  dateString.value = newDateString;
+  timeString.value = newTimeString;
+};
 const changeTimezone = (value: TimezoneSelection) => {
   currentTimezone.value = value;
 };
@@ -57,6 +62,7 @@ provide(timestamp, {
   currentTimezone,
   changeDateString,
   changeTimeString,
+  changeDateTimeString,
   changeTimezone,
   setCurrentTime,
 });

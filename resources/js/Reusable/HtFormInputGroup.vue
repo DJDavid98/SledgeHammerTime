@@ -1,12 +1,13 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   dir?: 'ltr' | 'rtl';
+  class?: string;
 }>();
 </script>
 
 <template>
   <fieldset
-    class="form-input-group"
+    :class="['form-input-group', props.class]"
     :dir="dir"
   >
     <slot />

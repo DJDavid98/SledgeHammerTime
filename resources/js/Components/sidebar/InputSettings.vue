@@ -34,7 +34,6 @@ const settings = inject(localSettings);
         </template>
       </HtFormCheckbox>
       <HtFormCheckbox
-        v-if="false"
         id="separate-inputs"
         :label="$t('global.sidebar.inputSettings.separateInputs.label')"
         :checked="!settings?.combinedInputsEnabled"

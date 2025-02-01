@@ -46,6 +46,10 @@
     }
   }
 
+  &.wide {
+    max-width: 100%;
+  }
+
   &.visible {
     display: block !important;
   }

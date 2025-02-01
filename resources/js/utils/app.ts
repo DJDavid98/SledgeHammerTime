@@ -3,11 +3,11 @@ import { LanguageConfig } from '@/model/language-config';
 import { PageProps } from '@/types';
 import { AvailableLanguage, LANGUAGES } from '@/utils/language-settings';
 import { rangeLimitInput } from '@/utils/time';
-import { Ref } from 'vue';
+import { ModelRef, Ref } from 'vue';
 
 export const getAppName = () => import.meta.env.VITE_APP_NAME || 'Laravel';
 
-export const inputRangeLimitBlurHandlerFactory = (numberRef: Ref<number>) => (e: FocusEvent): void => {
+export const inputRangeLimitBlurHandlerFactory = (numberRef: Ref<number> | ModelRef<number>) => (e: FocusEvent): void => {
   const limitedValue = rangeLimitInput(e.target);
   if (limitedValue === numberRef.value)
     return;

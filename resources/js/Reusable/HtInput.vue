@@ -15,7 +15,7 @@ const props = defineProps<{
   disabled?: boolean;
   hideSelection?: boolean;
   positionAnchorName?: string;
-  type?: 'text' | 'number' | 'date' | 'time';
+  type?: 'text' | 'number' | 'date' | 'time' | 'datetime-local';
   min?: string | number;
   max?: string | number;
   tabindex?: string | number;

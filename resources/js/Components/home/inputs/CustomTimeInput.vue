@@ -4,6 +4,7 @@ import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUp
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
 import { DialMode } from '@/utils/dial';
+import { keyboardOrMouseEventHandlerFactory } from '@/utils/events';
 import { createCurrentTsWithTimezone } from '@/utils/time';
 import { computed, getCurrentInstance, inject, provide, useTemplateRef } from 'vue';
 
@@ -15,24 +16,15 @@ const selectedTime = computed(() => momentLocale.value ? ts?.currentTimestamp.va
 const timepicker = useTemplateRef<TimePickerPopupApi>('time-picker');
 const inputEl = useTemplateRef<InputApi>('input-el');
 
-const openPopup = (e: KeyboardEvent | MouseEvent) => {
-  let viaKeyboard = false;
-  if ('key' in e) {
-    if (e.key === 'Tab' || e.key === 'Shift') {
-      return;
-    }
-    viaKeyboard = true;
-  }
+const openPopup = keyboardOrMouseEventHandlerFactory((e: KeyboardEvent | MouseEvent, viaKeyboard) => {
+  if (!ts) return;
 
-  e.preventDefault();
-  if (ts) {
-    const currentTsWithTimezone = createCurrentTsWithTimezone(ts.currentTimestamp.value, ts.currentTimezone.value);
-    timepicker.value?.open(currentTsWithTimezone, viaKeyboard ? inputEl.value?.inputEl : null);
-    window.requestAnimationFrame(() => {
-      timepicker.value?.changeFocus(DialMode.Hours, true);
-    });
-  }
-};
+  const currentTsWithTimezone = createCurrentTsWithTimezone(ts.currentTimestamp.value, ts.currentTimezone.value);
+  timepicker.value?.open(currentTsWithTimezone, viaKeyboard ? inputEl.value?.inputEl : null);
+  window.requestAnimationFrame(() => {
+    timepicker.value?.changeFocus(DialMode.Hours, true);
+  });
+});
 
 const changeTime = (value: string) => {
   ts?.changeTimeString(value);
@@ -41,7 +33,6 @@ const changeTime = (value: string) => {
 const positionAnchorName = '--time-input';
 provide(positionAnchor, positionAnchorName);
 </script>
-
 
 <template>
   <div>

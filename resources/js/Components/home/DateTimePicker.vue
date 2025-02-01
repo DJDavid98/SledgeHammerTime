@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import CustomDateInput from '@/Components/home/inputs/CustomDateInput.vue';
+import CustomDateTimeInput from '@/Components/home/inputs/CustomDateTimeInput.vue';
 import CustomTimeInput from '@/Components/home/inputs/CustomTimeInput.vue';
 import NativeDateInput from '@/Components/home/inputs/NativeDateInput.vue';
+import NativeDateTimeInput from '@/Components/home/inputs/NativeDateTimeInput.vue';
 import NativeTimeInput from '@/Components/home/inputs/NativeTimeInput.vue';
 import TimeZonePicker from '@/Components/home/inputs/TimeZoneInput.vue';
 import { localSettings, timestamp } from '@/injection-keys';
@@ -18,20 +20,31 @@ const settings = inject(localSettings);
 
 <template>
   <HtFormControlGroup>
-    <HtFormControl
-      id="datepicker"
-      :label="$t('timestampPicker.picker.label.date')"
-    >
-      <CustomDateInput v-if="settings?.customInputEnabled" />
-      <NativeDateInput v-else />
-    </HtFormControl>
-    <HtFormControl
-      id="timepicker"
-      :label="$t('timestampPicker.picker.label.time')"
-    >
-      <CustomTimeInput v-if="settings?.customInputEnabled" />
-      <NativeTimeInput v-else />
-    </HtFormControl>
+    <template v-if="settings?.combinedInputsEnabled">
+      <HtFormControl
+        id="datetimepicker"
+        :label="$t('timestampPicker.picker.label.dateAndTime')"
+      >
+        <CustomDateTimeInput v-if="settings?.customInputEnabled" />
+        <NativeDateTimeInput v-else />
+      </HtFormControl>
+    </template>
+    <template v-else>
+      <HtFormControl
+        id="datepicker"
+        :label="$t('timestampPicker.picker.label.date')"
+      >
+        <CustomDateInput v-if="settings?.customInputEnabled" />
+        <NativeDateInput v-else />
+      </HtFormControl>
+      <HtFormControl
+        id="timepicker"
+        :label="$t('timestampPicker.picker.label.time')"
+      >
+        <CustomTimeInput v-if="settings?.customInputEnabled" />
+        <NativeTimeInput v-else />
+      </HtFormControl>
+    </template>
     <HtFormControl
       id="timezonepicker"
       :label="$t('timestampPicker.picker.label.timezone')"

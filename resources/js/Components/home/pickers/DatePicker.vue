@@ -1,23 +1,25 @@
 <script setup lang="ts">
 import Popup, { CustomPopupApi, Focusable } from '@/Components/CustomPopup.vue';
-import DatePickerCalendar, { DatePickerCalendarApi } from '@/Components/home/pickers/DatePickerCalendar.vue';
-import HtButton from '@/Reusable/HtButton.vue';
-import HtButtonGroup from '@/Reusable/HtButtonGroup.vue';
+import DatePickerCalendar from '@/Components/home/pickers/controls/DatePickerCalendar.vue';
+import PickerFormActions from '@/Components/home/pickers/controls/PickerFormActions.vue';
+import DatePickerInputs from '@/Components/home/pickers/DatePickerInputs.vue';
+import { useDatePicker } from '@/composables/useDatePicker';
 import HtFormInputGroup from '@/Reusable/HtFormInputGroup.vue';
-import HtInput from '@/Reusable/HtInput.vue';
-import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
-import { pad } from '@/utils/pad';
 import { limitDate, limitMonth } from '@/utils/time';
 import { Moment } from 'moment-timezone';
-import { ref, useTemplateRef, watch } from 'vue';
+import { useTemplateRef, watch } from 'vue';
 
-const year = ref(new Date(0).getUTCFullYear());
-const month = ref(1);
-const date = ref(1);
-const calendar = ref<DatePickerCalendarApi>();
-const yearInput = ref<HTMLInputElement>();
-const monthInput = ref<HTMLInputElement>();
-const dateInput = ref<HTMLInputElement>();
+const {
+  year,
+  month,
+  date,
+  calendar,
+  dateInput, monthInput, yearInput,
+  changeDateFocus,
+  datePickerOpen,
+  setDate,
+  getSelectedDate,
+} = useDatePicker();
 
 const emit = defineEmits<{
   (e: 'selected', date: string): void;
@@ -27,8 +29,7 @@ const popupRef = useTemplateRef<CustomPopupApi>('popup-el');
 const formRef = useTemplateRef<HTMLFormElement>('form-el');
 
 const select = () => {
-  const formattedDate = [year.value, month.value, date.value].map(n => pad(n, 2)).join('-');
-  emit('selected', formattedDate); // Emit the selected date back to the MainDatepicker
+  emit('selected', getSelectedDate());
 };
 const selectAndClose = () => {
   const focusedEl = formRef.value?.querySelector<HTMLElement>(':focus');
@@ -39,60 +40,29 @@ const selectAndClose = () => {
   close();
 };
 const open = (initialValue: Moment, focusOnClose?: Focusable | null) => {
-  year.value = initialValue.year();
-  month.value = initialValue.month() + 1;
-  date.value = initialValue.date();
+  datePickerOpen(initialValue);
   popupRef.value?.open(focusOnClose);
 };
-const setDate = (newYear: number, newMonth: number, newDate: number) => {
-  year.value = newYear;
-  month.value = newMonth;
-  date.value = newDate;
+const setDateAndSelect = (newYear: number, newMonth: number, newDate: number) => {
+  setDate(newYear, newMonth, newDate);
   select();
 };
 const close = () => {
   popupRef.value?.close();
 };
 
-const handleYearBlur = inputRangeLimitBlurHandlerFactory(year);
-const handleMonthBlur = inputRangeLimitBlurHandlerFactory(month);
-const handleDateBlur = inputRangeLimitBlurHandlerFactory(date);
-
 watch([year, month, date], () => {
   calendar.value?.setSelection(year.value, month.value, date.value);
 });
 
-const changeFocus = (input: 'year' | 'month' | 'date', setSelection: boolean = false) => {
-  switch (input) {
-    case 'year':
-      yearInput.value?.focus();
-      if (setSelection) {
-        yearInput.value?.select();
-      }
-      break;
-    case 'month':
-      monthInput.value?.focus();
-      if (setSelection) {
-        monthInput.value?.select();
-      }
-      break;
-    case 'date':
-      dateInput.value?.focus();
-      if (setSelection) {
-        dateInput.value?.select();
-      }
-      break;
-  }
-};
-
 export interface DatePickerApi {
   open: typeof open;
-  changeFocus: typeof changeFocus;
+  changeFocus: typeof changeDateFocus;
 }
 
 defineExpose<DatePickerApi>({
   open,
-  changeFocus,
+  changeFocus: changeDateFocus,
 });
 </script>
 
@@ -103,47 +73,16 @@ defineExpose<DatePickerApi>({
       @submit.prevent="selectAndClose"
     >
       <HtFormInputGroup dir="ltr">
-        <HtInput
-          ref="yearInput"
-          v-model="year"
-          type="number"
-          class="grid-flex-item flex-basis-40"
-          @blur="handleYearBlur"
-        />
-        <HtInput
-          ref="monthInput"
-          v-model="month"
-          type="number"
-          class="grid-flex-item flex-basis-30"
-          min="1"
-          max="12"
-          @blur="handleMonthBlur"
-        />
-        <HtInput
-          ref="dateInput"
-          v-model="date"
-          type="number"
-          class="grid-flex-item flex-basis-30"
-          min="1"
-          max="31"
-          @blur="handleDateBlur"
+        <DatePickerInputs
+          v-model:date-input="dateInput"
+          v-model:month-input="monthInput"
+          v-model:year-input="yearInput"
+          v-model:year="year"
+          v-model:month="month"
+          v-model:date="date"
         />
       </HtFormInputGroup>
-      <HtButtonGroup>
-        <HtButton
-          color="primary"
-          :justify-center="true"
-          type="submit"
-        >
-          {{ $t('actions.save_and_close') }}
-        </HtButton>
-        <HtButton
-          :justify-center="true"
-          @click="close"
-        >
-          {{ $t('actions.close') }}
-        </HtButton>
-      </HtButtonGroup>
+      <PickerFormActions @close="close" />
     </form>
     <hr>
     <DatePickerCalendar
@@ -151,7 +90,7 @@ defineExpose<DatePickerApi>({
       :selected-year="year"
       :selected-month="limitMonth(month)"
       :selected-date="limitDate(date)"
-      @set-date="setDate"
+      @set-date="setDateAndSelect"
     />
   </Popup>
 </template>

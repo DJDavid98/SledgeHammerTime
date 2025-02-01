@@ -10,6 +10,7 @@ export const timestamp = Symbol() as InjectionKey<{
   currentTimezone: Ref<TimezoneSelection>,
   changeDateString: (value: string) => void,
   changeTimeString: (value: string) => void,
+  changeDateTimeString: (value: string) => void,
   changeTimezone: (value: TimezoneSelection) => void,
   setCurrentTime: () => void,
 }>;

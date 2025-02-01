@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DatePicker, { DatePickerApi } from '@/Components/home/pickers/DatePicker.vue';
+import DateTimePicker, { DateTimePickerApi } from '@/Components/home/pickers/DateTimePicker.vue';
 import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
@@ -10,24 +10,24 @@ const ts = inject(timestamp);
 const id = inject(formControlId);
 
 const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
-const selectedDate = computed(() => momentLocale.value ? ts?.currentTimestamp.value.locale(momentLocale.value).format('LL') : '');
-const datepicker = useTemplateRef<DatePickerApi>('date-picker');
+const selectedDateTime = computed(() => momentLocale.value ? ts?.currentTimestamp.value.locale(momentLocale.value).format('LLL') : '');
+const datetimepicker = useTemplateRef<DateTimePickerApi>('date-time-picker');
 const inputEl = useTemplateRef<InputApi>('input-el');
 
 const openPopup = keyboardOrMouseEventHandlerFactory((e: KeyboardEvent | MouseEvent, viaKeyboard: boolean) => {
   if (!ts) return;
 
-  datepicker.value?.open(ts.currentTimestamp.value, viaKeyboard ? inputEl.value?.inputEl : null);
+  datetimepicker.value?.open(ts.currentTimestamp.value, viaKeyboard ? inputEl.value?.inputEl : null);
   window.requestAnimationFrame(() => {
-    datepicker.value?.changeFocus('year', true);
+    datetimepicker.value?.changeFocus('year', true);
   });
 });
 
-const changeDate = (value: string) => {
-  ts?.changeDateString(value);
+const changeDateTime = (value: string) => {
+  ts?.changeDateTimeString(value);
 };
 
-const positionAnchorName = '--date-input';
+const positionAnchorName = '--date-time-input';
 provide(positionAnchor, positionAnchorName);
 </script>
 
@@ -36,16 +36,16 @@ provide(positionAnchor, positionAnchorName);
     <HtInput
       :id="id"
       ref="input-el"
-      :model-value="selectedDate"
+      :model-value="selectedDateTime"
       :readonly="true"
       :hide-selection="true"
       :position-anchor-name="positionAnchorName"
       @click.prevent="openPopup"
       @keydown="openPopup"
     />
-    <DatePicker
-      ref="date-picker"
-      @selected="changeDate"
+    <DateTimePicker
+      ref="date-time-picker"
+      @selected="changeDateTime"
     />
   </div>
 </template>
