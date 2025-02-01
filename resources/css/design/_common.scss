@@ -30,6 +30,10 @@ $size-map: (
   sidebar-border: .0625rem,
   sidebar-divider-border: .0625rem,
   sidebar-default-open-min-width: 1024px,
+  sidebar-section-spacing: .625rem,
+  sidebar-section-heading-font: 1.375rem,
+  sidebar-dev-credit-font-size: 1.25rem,
+  sidebar-dev-credit-line-height: 1.55,
   popup-border: .125rem,
   popup-box-shadow: 1rem,
   input-text-padding: .25rem,
@@ -219,6 +223,14 @@ $color-map: (
   syntax-display-code-bg: (
     light: #ccc,
     dark: #444,
+  ),
+  sidebar-content-link: (
+    light: #5865f2,
+    dark: color.adjust(#5865f2, $lightness: 10%),
+  ),
+  open-source: (
+    light: #3da639,
+    dark: color.adjust(#3da639, $lightness: 10%),
   ),
 );
 

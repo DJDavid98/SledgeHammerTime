@@ -11,7 +11,7 @@ import '../css/app.scss';
 import './bootstrap';
 
 const appName = getAppName();
-const langJsonImporters = import.meta.glob('../../lang/php_*.json');
+const langJsonImporters = import.meta.glob('../../lang/php_*.json', { eager: true });
 const langJsonPaths = Object.keys(langJsonImporters);
 const findLangJsonPath = (lang: string) => langJsonPaths.find(path => path.endsWith(`lang/php_${lang}.json`));
 
@@ -34,7 +34,7 @@ createInertiaApp({
             if (!jsonPathForLocale) {
               throw new Error(`Could not find lang json path for lang ${lang}`);
             }
-            const result = await langJsonImporters[jsonPathForLocale]();
+            const result = langJsonImporters[jsonPathForLocale];
             if (typeof result !== 'object' || result === null || !('default' in result)) {
               throw new Error(`Missing default export in json for lang ${lang}`);
             }

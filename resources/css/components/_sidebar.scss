@@ -84,6 +84,29 @@
   }
 }
 
+.sidebar-content {
+  padding: design.app-size('sidebar-spacing');
+
+  section {
+    margin-bottom: design.app-size('sidebar-section-spacing');
+
+    header {
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: design.app-size('sidebar-section-spacing');
+      font-size: design.app-size('sidebar-section-heading-font');
+    }
+  }
+
+  a {
+    color: design.app-color-light('sidebar-content-link');
+
+    @include design.if-dark {
+      color: design.app-color-dark('sidebar-content-link');
+    }
+  }
+}
+
 .sidebar-spacing-wrapper {
   transition: padding .1s ease-in-out;
 

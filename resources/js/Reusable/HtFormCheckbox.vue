@@ -7,6 +7,7 @@ defineProps<{
   id: string,
   label: string,
   name?: string,
+  checked?: boolean;
 }>();
 
 const model = defineModel<boolean>();
@@ -19,7 +20,7 @@ const model = defineModel<boolean>();
         <input
           :id="id"
           type="checkbox"
-          :checked="model"
+          :checked="checked ?? model"
           :name="name"
           class="form-checkbox-input"
         >
