@@ -3,6 +3,8 @@
 return [
   'seoDescription' => 'إنشاء مؤشرات الطابع الزمني لرسائل دردشة ديسكورد',
   'changeLanguage' => 'تغيير اللغة',
+  'incompleteTranslations' => 'Translations are incomplete',
+  'contributeTranslations' => 'Contribute',
   'guest' => 'ضيف',
   'nav' => [
     'botSettings' => 'إعدادات البوت',
@@ -31,8 +33,6 @@ return [
       'openSourceSoftware' => 'Open-source software',
       'viewSourceCode' => 'View source code',
       'notAffiliated' => 'This project is not affiliated with Discord.',
-      'incompleteTranslations' => 'Translations are incomplete',
-      'contributeTranslations' => 'Contribute',
     ],
   ],
 ];
