@@ -1,27 +1,27 @@
 <?php
 
 return [
-  'title' => 'Προφίλ',
+  'title' => 'Profile',
   'information' => [
-    'heading' => 'Πληροφορίες Προφίλ',
-    'description' => "Ενημερώστε τις πληροφορίες προφίλ του λογαριασμού σας.",
-    'displayName' => 'Εμφανιζόμενο Όνομα',
-    'saveSuccess' => 'Το προφίλ σας έχει ενημερωθεί με επιτυχία.',
+    'heading' => 'Profile Information',
+    'description' => "Update your account's profile information.",
+    'displayName' => 'Display Name',
+    'saveSuccess' => 'Your profile has been updated successfully.',
   ],
   'accounts' => [
-    'heading' => 'Συνδεδεμένοι Λογαριασμοί',
+    'heading' => 'Connected Accounts',
     'description' => [
-      'Ένας λογαριασμός HammerTime θα σας επιτρέψει να συνδέσετε πολλαπλούς λογαριασμούς του Discord για να είστε σε θέση να διαχειριστείτε τις ρυθμίσεις τους από ένα μέρος στο μέλλον.',
-      'Παρακάτω μπορείτε να βρείτε μια λίστα με όλους τους λογαριασμούς του Discord που σχετίζονται με αυτόν τον λογαριασμό HammerTime.',
+      'A HammerTime account is going to let you link multiple Discord accounts to be able to manage their resources in one place in the future.',
+      'Below you can find a list of all Discord accounts associated with this HammerTime account.',
     ],
   ],
   'deletion' => [
-    'heading' => 'Διαγραφή Λογαριασμού',
-    'description' => 'Μόλις διαγραφεί ο λογαριασμός σας, όλες οι ρυθμίσεις και τα δεδομένα του θα διαγραφούν οριστικά. Πριν διαγράψετε το λογαριασμό σας, παρακαλούμε κατεβάστε τυχόν δεδομένα ή πληροφορίες που επιθυμείτε να διατηρήσετε.',
-    'deleteButton' => 'Διαγραφή Λογαριασμού',
+    'heading' => 'Account Deletion',
+    'description' => 'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.',
+    'deleteButton' => 'Delete Account',
     'confirmDialog' => [
-      'header' => 'Σίγουρα θέλετε να διαγράψετε τον λογαριασμό σας;',
-      'body' => 'Μόλις διαγραφεί ο λογαριασμός σας, όλες οι ρυθμίσεις και τα δεδομένα του θα διαγραφούν οριστικά.',
+      'header' => 'Are you sure you want to delete your account?',
+      'body' => 'Once your account is deleted, all of its resources and data will be permanently deleted.',
     ],
   ],
 ];
