@@ -1,10 +1,24 @@
 <script setup lang="ts">
 import DeveloperCredit from '@/Components/sidebar/DeveloperCredit.vue';
 import TranslationCredits from '@/Components/sidebar/TranslationCredits.vue';
+import { currentLanguageInject } from '@/injection-keys';
 import HtTranslate from '@/Reusable/HtTranslate.vue';
+import { reportData } from '@/utils/crowdin';
+import { normalizeCredit } from '@/utils/translation';
 import { faGithub, faOsi } from '@fortawesome/free-brands-svg-icons';
 import { faBan, faCode, faInfo, faLanguage, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { computed, inject } from 'vue';
+
+const currentLanguage = inject(currentLanguageInject);
+
+const translationCredits = computed(() => {
+  if (!currentLanguage?.value?.languageConfig?.credits) return null;
+
+  return currentLanguage?.value?.languageConfig?.credits
+    .map((c) => normalizeCredit(c, reportData))
+    .sort((cr1, cr2) => cr1.displayName.localeCompare(cr2.displayName));
+});
 </script>
 
 <template>
@@ -52,7 +66,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
         </HtTranslate>
       </div>
     </div>
-    <div class="credits-block">
+    <div
+      v-if="translationCredits && translationCredits.length > 0"
+      class="credits-block"
+    >
       <div class="credits-block-icon">
         <FontAwesomeIcon
           :icon="faLanguage"
@@ -62,7 +79,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
       <div class="credits-block-content">
         <HtTranslate i18n-key="global.sidebar.credits.translatedBy">
           <template #1>
-            <TranslationCredits />
+            <TranslationCredits :credits="translationCredits" />
           </template>
         </HtTranslate>
       </div>

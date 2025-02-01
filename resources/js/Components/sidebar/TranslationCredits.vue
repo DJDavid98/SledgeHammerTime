@@ -1,20 +1,10 @@
 <script setup lang="ts">
-
-import { currentLanguageInject } from '@/injection-keys';
 import HtAvatar from '@/Reusable/HtAvatar.vue';
-import { reportData } from '@/utils/crowdin';
-import { normalizeCredit } from '@/utils/translation';
-import { computed, inject } from 'vue';
+import { NormalizedCredits } from '@/utils/translation';
 
-const currentLanguage = inject(currentLanguageInject);
-
-const translationCredits = computed(() => {
-  if (!currentLanguage?.value?.languageConfig?.credits) return null;
-
-  return currentLanguage?.value?.languageConfig?.credits
-    .map((c) => normalizeCredit(c, reportData))
-    .sort((cr1, cr2) => cr1.displayName.localeCompare(cr2.displayName));
-});
+defineProps<{
+  credits: NormalizedCredits[];
+}>();
 </script>
 
 <template>
@@ -22,7 +12,7 @@ const translationCredits = computed(() => {
     class="translation-credits"
   >
     <a
-      v-for="(credit, i) in translationCredits"
+      v-for="(credit, i) in credits"
       :key="i"
       class="translator-item"
       :href="credit.url"
