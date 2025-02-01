@@ -6,7 +6,7 @@ return [
     'label' => [
       'date' => 'Dátum',
       'time' => 'Idő',
-      'dateAndTime' => 'Date and time',
+      'dateAndTime' => 'Dátum és idő',
       'timezone' => 'Időzóna',
       'modeOffset' => 'Abszolút Eltolás',
       'modeZoneName' => 'Zóna Név',
@@ -28,18 +28,18 @@ return [
     'clickToCopy' => 'Vágólapra másolás',
   ],
   'usefulLinks' => [
-    'lead' => 'You may also find these useful:',
+    'lead' => 'Ezeket is hasznosnak találhatod:',
     'server' => [
-      'header' => 'Official HammerTime Server',
-      'p' => 'Discuss the website, test the syntax and suggest features',
+      'header' => 'Hivatalos HammerTime Szerver',
+      'p' => 'Csevegj a weboldalról, próbáld ki a kódokat és javasolj funkciókat',
     ],
     'bot' => [
       'header' => 'HammerTime App',
-      'p' => 'Generate timestamps from within Discord using slash commands',
+      'p' => 'Generálj időbélyegeket slash parancsok használatával',
     ],
     'textColor' => [
-      'header' => 'Rebane\'s <1>Colored</1> Text Generator',
-      'p' => 'A simple app that creates colored Discord messages using ANSI color codes',
+      'header' => 'Rebane <1>Színezett</1> Szöveg Generálója',
+      'p' => 'Egy egyszerű oldal, ami ANSI színkódokkal színezett Discord üzeneteket készít',
     ],
   ],
 ];
