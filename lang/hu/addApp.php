@@ -1,13 +1,13 @@
 <?php
 
 return [
-  "title" => "Select where you would like to add the app",
+  "title" => "Válaszd ki, hova szeretnéd hozzáadni az appot",
   "user" => [
-    "title" => "Add to My Apps",
-    "description" => "Use this app everywhere!",
+    "title" => "Hozzáadás a Saját alkalmazások területhez",
+    "description" => "Mindenhol használhatod ezt az alakalmazást!",
   ],
   "guild" => [
-    "title" => "Add to Server",
-    "description" => "Customize your server by adding this app",
+    "title" => "Hozzáadás szerverhez",
+    "description" => "Személyre szabhatod a szerveredet az alkalmazás hozzáadásával",
   ],
 ];
