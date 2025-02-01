@@ -3,6 +3,8 @@
 return [
   'seoDescription' => 'Δημιουργήστε δείκτες χρονοσήμανσης για μηνύματα συνομιλίας Discord',
   'changeLanguage' => 'Αλλαγή γλώσσας',
+  'incompleteTranslations' => 'Translations are incomplete',
+  'contributeTranslations' => 'Contribute',
   'guest' => 'Επισκέπτης',
   'nav' => [
     'botSettings' => 'Ρυθμίσεις Bot',
@@ -31,8 +33,6 @@ return [
       'openSourceSoftware' => 'Open-source software',
       'viewSourceCode' => 'View source code',
       'notAffiliated' => 'This project is not affiliated with Discord.',
-      'incompleteTranslations' => 'Translations are incomplete',
-      'contributeTranslations' => 'Contribute',
     ],
   ],
 ];
