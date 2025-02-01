@@ -38,8 +38,8 @@ return [
       'p' => 'Generate timestamps from within Discord using slash commands',
     ],
     'textColor' => [
-      'header' => 'Rebane\'s <1>Colored</1> Text Generator',
-      'p' => 'A simple app that creates colored Discord messages using ANSI color codes',
+      'header' => 'Rebane\'s <1>Coloured</1> Text Generator',
+      'p' => 'A simple app that creates coloured Discord messages using ANSI colour codes',
     ],
   ],
 ];
