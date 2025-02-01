@@ -6,6 +6,7 @@ return [
     'label' => [
       'date' => 'Data',
       'time' => 'Timpu',
+      'dateAndTime' => 'Date and time',
       'timezone' => 'Fus orar',
       'modeOffset' => 'Offset absolut',
       'modeZoneName' => 'Numele zonei',
