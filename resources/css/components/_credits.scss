@@ -28,6 +28,10 @@
   line-height: design.app-size('sidebar-dev-credit-line-height');
 
   .developer-avatar {
+    img {
+      display: block;
+    }
+
     @include design.if-ltr {
       margin-right: design.app-size('sidebar-spacing');
     }
@@ -63,7 +67,9 @@
     text-transform: none;
 
     .translator-avatar {
-      display: inline-block;
+      img {
+        display: block;
+      }
 
       @include design.if-ltr {
         margin-right: design.app-size('sidebar-spacing');
