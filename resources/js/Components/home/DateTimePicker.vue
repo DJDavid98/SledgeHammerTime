@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import DatePicker from '@/Components/home/inputs/DateInput.vue';
-import TimePicker from '@/Components/home/inputs/TimeInput.vue';
+import CustomDateInput from '@/Components/home/inputs/CustomDateInput.vue';
+import CustomTimeInput from '@/Components/home/inputs/CustomTimeInput.vue';
+import NativeDateInput from '@/Components/home/inputs/NativeDateInput.vue';
+import NativeTimeInput from '@/Components/home/inputs/NativeTimeInput.vue';
 import TimeZonePicker from '@/Components/home/inputs/TimeZoneInput.vue';
-import { timestamp } from '@/injection-keys';
+import { localSettings, timestamp } from '@/injection-keys';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtFormControl from '@/Reusable/HtFormControl.vue';
 import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
@@ -11,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { inject } from 'vue';
 
 const ts = inject(timestamp);
+const settings = inject(localSettings);
 </script>
 
 <template>
@@ -19,13 +22,15 @@ const ts = inject(timestamp);
       id="datepicker"
       :label="$t('timestampPicker.picker.label.date')"
     >
-      <DatePicker />
+      <CustomDateInput v-if="settings?.customInputEnabled" />
+      <NativeDateInput v-else />
     </HtFormControl>
     <HtFormControl
       id="timepicker"
       :label="$t('timestampPicker.picker.label.time')"
     >
-      <TimePicker />
+      <CustomTimeInput v-if="settings?.customInputEnabled" />
+      <NativeTimeInput v-else />
     </HtFormControl>
     <HtFormControl
       id="timezonepicker"

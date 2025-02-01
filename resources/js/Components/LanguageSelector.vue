@@ -27,6 +27,9 @@ const extendedNativeLocaleNames: Record<AvailableLanguage, string> = {
   'sr': nativeLocaleNames['sr_Latn'],
 };
 
+const noTranslationsNeededLocales = new Set(['en', 'en-GB', 'hu']);
+const languagesDropdownVisible = ref(false);
+
 const sortedLanguages = computed(() =>
   (Object.entries(LANGUAGES) as [AvailableLanguage, LanguageConfig][])
     .filter(([key, config]) => {
@@ -40,8 +43,8 @@ const sortedLanguages = computed(() =>
 );
 
 const displayContributionHints = computed(() =>
-  Boolean(currentLanguage?.value?.locale && !noTranslationsNeededLocales.has(currentLanguage.value?.locale),
-  ));
+  Boolean(currentLanguage?.value?.locale && !noTranslationsNeededLocales.has(currentLanguage.value?.locale)),
+);
 
 const currentLanguageApprovalPercent = computed(() =>
   currentLanguage?.value.locale
@@ -52,9 +55,6 @@ const currentLanguageApprovalPercent = computed(() =>
 const searchParamsString = computed(() => {
   return searchParams.value.size > 0 ? `?${searchParams.value}` : '';
 });
-
-const noTranslationsNeededLocales = new Set(['en', 'en-GB', 'hu']);
-const languagesDropdownVisible = ref(false);
 
 const navigateListener = () => {
   searchParams.value = new URLSearchParams(window.location.search);

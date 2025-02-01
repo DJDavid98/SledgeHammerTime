@@ -73,7 +73,7 @@ export const useLocalSettings = (currentLanguage?: Ref<CurrentLanguageData>) => 
     rawSidebarOnRight: sidebarOnRight,
     sidebarOffDesktop,
     toggleCustomInput(e: Event & { target: HTMLInputElement }) {
-      customInputEnabled.value = !e.target.checked;
+      customInputEnabled.value = e.target.checked;
     },
     toggleSeparateInputs(e: Event & { target: HTMLInputElement }) {
       combinedInputsEnabled.value = !e.target.checked;
