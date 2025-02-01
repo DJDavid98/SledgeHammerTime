@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import LanguageSelector from '@/Components/LanguageSelector.vue';
-import Credits from '@/Components/sidebar/Credits.vue';
+import InputSettings from '@/Components/sidebar/InputSettings.vue';
+import SidebarCredits from '@/Components/sidebar/SidebarCredits.vue';
 import UserInfo from '@/Components/UserInfo.vue';
 import { localSettings, sidebarState } from '@/injection-keys';
 import HtButton from '@/Reusable/HtButton.vue';
@@ -30,8 +31,8 @@ const isOpen = computed(() => Boolean(state?.isOpen));
     </div>
     <hr class="sidebar-divider">
     <div class="sidebar-content">
-      <!-- <InputSettings /> -->
-      <Credits />
+      <InputSettings />
+      <SidebarCredits />
     </div>
     <hr class="sidebar-divider">
     <div class="sidebar-bottom">

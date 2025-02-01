@@ -8,6 +8,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   size: 24,
   alt: '',
+  src: undefined,
 });
 
 const fallbackImage = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
