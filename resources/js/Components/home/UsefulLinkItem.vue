@@ -4,7 +4,7 @@ import { currentLanguageInject } from '@/injection-keys';
 import { FALLBACK_LANGUAGE } from '@/utils/language-settings';
 import { inject } from 'vue';
 
-const props = defineProps<{
+defineProps<{
   href: string;
   image: string;
   name?: string;
