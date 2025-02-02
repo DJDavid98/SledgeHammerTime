@@ -19,6 +19,8 @@ const loadingImage = ref(new Image());
 const currentSrc = computed(() => loadedUrl.value ?? fallbackImage);
 
 watch(() => props.src, (newSrc) => {
+  if (loadedUrl.value === newSrc) return;
+
   loadedUrl.value = null;
   if (newSrc) {
     loadingImage.value.src = newSrc;
