@@ -13,7 +13,7 @@ import { router } from '@inertiajs/vue3';
 import { computed, inject, onMounted, ref } from 'vue';
 import nativeLocaleNames from '../../../vendor/laravel-lang/native-locale-names/data/_native.json';
 
-const searchParams = ref<URLSearchParams>(new URLSearchParams(window.location.search));
+const searchParams = ref<URLSearchParams | null>(null);
 
 const currentLanguage = inject(currentLanguageInject);
 
@@ -53,7 +53,7 @@ const currentLanguageApprovalPercent = computed(() =>
 );
 
 const searchParamsString = computed(() => {
-  return searchParams.value.size > 0 ? `?${searchParams.value}` : '';
+  return searchParams.value && searchParams.value.size > 0 ? `?${searchParams.value}` : '';
 });
 
 const navigateListener = () => {
@@ -85,11 +85,9 @@ onMounted(router.on('success', navigateListener));
       class="language-list"
       :max-height="200"
     >
-      <div
-        dir="ltr"
-      >
+      <div dir="ltr">
         <template v-for="[sortedLocale, config] in sortedLanguages">
-          <li
+          <div
             v-if="sortedLocale !== currentLanguage?.locale"
             :key="sortedLocale"
           >
@@ -106,7 +104,7 @@ onMounted(router.on('success', navigateListener));
               </span>
               <span class="language-name">{{ extendedNativeLocaleNames[sortedLocale] }}</span>
             </a>
-          </li>
+          </div>
         </template>
       </div>
     </HtCollapsible>

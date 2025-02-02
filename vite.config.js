@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
       alias: {
         '~@picocss': resolve(__dirname, 'node_modules/@picocss'),
         '~the-new-css-reset': resolve(__dirname, 'node_modules/the-new-css-reset'),
+        '~@fortawesome': resolve(__dirname, 'node_modules/@fortawesome'),
         '@': resolve(__dirname, 'resources/js'),
       },
     },

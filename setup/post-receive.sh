@@ -12,7 +12,9 @@ if [[ "$refname" ==  "$RUN_FOR_REF" ]]; then
     CMD_MIGRATE="php artisan migrate --force"
     CMD_NPM="npm ci"
     CMD_BUILD="npm run build"
+    CMD_BUILD_SSR="npm run build:ssr"
     CMD_LARAVEL_OPTIMIZE="php artisan optimize"
+    CMD_PM2="pm2 restart pm2.json"
 
     echo "$ $CMD_CD"
     eval ${CMD_CD}
@@ -37,6 +39,10 @@ if [[ "$refname" ==  "$RUN_FOR_REF" ]]; then
     if $GIT diff --name-only $oldrev $newrev | grep "^resources/"; then
         echo "$ $CMD_BUILD"
         eval $CMD_BUILD
+        echo "$ $CMD_BUILD_SSR"
+        eval $CMD_BUILD_SSR
+        echo "$ $CMD_PM2"
+        eval $CMD_PM2
     else
         echo "# Skipping asset rebuild, no changes in resources folder"
     fi

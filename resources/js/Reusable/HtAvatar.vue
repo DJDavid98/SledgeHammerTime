@@ -14,15 +14,17 @@ const props = withDefaults(defineProps<{
 const fallbackImage = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
 const loadedUrl = ref<null | string>(null);
-const loadingImage = ref(new Image());
+const loadingImage = ref<HTMLImageElement | null>(null);
+const isSsr = typeof window === 'undefined';
 
-const currentSrc = computed(() => loadedUrl.value ?? fallbackImage);
+const currentSrc = computed(() => isSsr ? props.src : (loadedUrl.value ?? fallbackImage));
 
 watch(() => props.src, (newSrc) => {
-  if (loadedUrl.value === newSrc) return;
+  if (isSsr || loadedUrl.value === newSrc) return;
 
   loadedUrl.value = null;
   if (newSrc) {
+    loadingImage.value ??= new Image();
     loadingImage.value.src = newSrc;
   }
 }, { immediate: true });
@@ -31,10 +33,13 @@ const handleImageLoaded = (e: Event) => {
   loadedUrl.value = (e.target as HTMLImageElement).src;
 };
 onMounted(() => {
+  if (isSsr) return;
+
+  loadingImage.value ??= new Image();
   loadingImage.value.addEventListener('load', handleImageLoaded);
 });
 onUnmounted(() => {
-  loadingImage.value.removeEventListener('load', handleImageLoaded);
+  loadingImage.value?.removeEventListener('load', handleImageLoaded);
 });
 </script>
 

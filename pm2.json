@@ -1,0 +1,15 @@
+{
+  "apps": [
+    {
+      "name": "SledgeHammerTime",
+      "script": "artisan",
+      "args": ["inertia:start-ssr"],
+      "instances": "1",
+      "wait_ready": true,
+      "autorestart": true,
+      "interpreter": "php",
+      "watch": false,
+      "time": true
+    }
+  ]
+}

@@ -13,16 +13,17 @@ const state = inject(sidebarState);
 const localSettingsValue = inject(localSettings);
 const isOnRight = computed(() => Boolean(localSettingsValue?.sidebarOnRight));
 const isOpen = computed(() => Boolean(state?.isOpen));
+
+const close = () => {
+  state?.setIsOpen(false);
+};
 </script>
 
 
 <template>
   <aside :class="['sidebar', `position-${isOnRight ? 'right' : 'left'}`, { 'is-open': isOpen }]">
-    <div
-      v-if="state"
-      class="sidebar-top"
-    >
-      <HtButton @click="state.setIsOpen(false)">
+    <div class="sidebar-top">
+      <HtButton @click="close">
         <FontAwesomeIcon :icon="faTimes" />
       </HtButton>
       <HtButton @click="localSettingsValue?.toggleSidebarOnRight()">

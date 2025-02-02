@@ -19,7 +19,7 @@ import { computed, provide, readonly, Ref, ref, watch } from 'vue';
 const page = usePage();
 
 const props = computed(() => {
-  const url = new URL(page.url, window.location.href);
+  const url = new URL(page.url, typeof window !== 'undefined' ? window.location.href : page.props.ziggy.location);
   const dtParam = url.searchParams.get('dt');
   const tzParam = url.searchParams.get('tz');
   return {

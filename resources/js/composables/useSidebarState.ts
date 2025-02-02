@@ -2,7 +2,7 @@ import { LocalSettingsValue } from '@/injection-keys';
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue';
 
 export function useSidebarState(localSettingsValue: LocalSettingsValue) {
-  const defaultIsOpen: Ref<boolean> = ref(false);
+  const defaultIsOpen: Ref<boolean> = ref(true);
   const openState: Ref<boolean | null> = ref(null);
   const isOpen = computed(() => openState.value ?? defaultIsOpen.value);
 

@@ -6,11 +6,15 @@ import { ComponentInternalInstance, computed, ComputedRef, inject, watch } from 
 export const useMomentLocaleForceUpdate = (instance: ComponentInternalInstance | null): ComputedRef<string | undefined> => {
   const currentLanguage = inject(currentLanguageInject);
   const momentLocale = computed(() => currentLanguage?.value.languageConfig?.momentLocale || currentLanguage?.value.locale || FALLBACK_LANGUAGE);
-  watch(momentLocale, (currentMomentLocale) => {
-    loadMomentLocale(currentMomentLocale).then(() => {
-      instance?.proxy?.$forceUpdate();
-    });
-  }, { immediate: true });
+
+  if (typeof window !== 'undefined') {
+    watch(momentLocale, (currentMomentLocale) => {
+      loadMomentLocale(currentMomentLocale).then(() => {
+
+        instance?.proxy?.$forceUpdate();
+      });
+    }, { immediate: true });
+  }
 
   return momentLocale;
 };

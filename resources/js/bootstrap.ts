@@ -4,12 +4,15 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+import { config as fontAwesomeConfig } from '@fortawesome/fontawesome-svg-core';
 import axios from 'axios';
 import './moment';
 
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+fontAwesomeConfig.autoAddCss = false;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

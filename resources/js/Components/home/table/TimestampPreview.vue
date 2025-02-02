@@ -20,9 +20,11 @@ watch(() => props.fromNow, (fromNow) => {
   }
 
   if (fromNow) {
-    updateInterval.value = setInterval(() => {
-      instance?.proxy?.$forceUpdate();
-    }, 1e3);
+    if (typeof window !== 'undefined') {
+      updateInterval.value = setInterval(() => {
+        instance?.proxy?.$forceUpdate();
+      }, 1e3);
+    }
   } else {
     updateInterval.value = null;
   }
@@ -34,7 +36,7 @@ const localTimestamp = computed(() => props.ts?.local());
 <template>
   <span
     v-if="localTimestamp && momentLocale"
-    :data-tooltip="localTimestamp.locale($page.props.app.locale).format('LLLL')"
+    :data-tooltip="localTimestamp.locale(momentLocale).format('LLLL')"
   >
     <template v-if="format">
       {{ localTimestamp.locale(momentLocale).format(format) }}
