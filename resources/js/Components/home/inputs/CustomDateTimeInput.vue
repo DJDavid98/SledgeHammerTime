@@ -4,13 +4,15 @@ import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUp
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
 import { keyboardOrMouseEventHandlerFactory } from '@/utils/events';
+import { isoFormat } from '@/utils/time';
+import moment from 'moment-timezone';
 import { computed, getCurrentInstance, inject, provide, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
 
 const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
-const selectedDateTime = computed(() => momentLocale.value ? ts?.currentTimestamp.value.locale(momentLocale.value).format('LLL') : '');
+const selectedDateTime = computed(() => momentLocale.value ? moment(`${ts?.currentDate.value} ${ts?.currentTime.value}`, isoFormat).locale(momentLocale.value).format('LLL') : '');
 const datetimepicker = useTemplateRef<DateTimePickerApi>('date-time-picker');
 const inputEl = useTemplateRef<InputApi>('input-el');
 

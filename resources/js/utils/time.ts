@@ -9,19 +9,10 @@ import moment, { Moment } from 'moment-timezone';
 export const isoTimeFormat = 'HH:mm:ss';
 export const isoFormattingDateFormat = 'YYYY-MM-DD';
 export const isoParsingDateFormat = 'Y-MM-DD';
+export const isoFormat = `${isoFormattingDateFormat} ${isoTimeFormat}`;
+export const urlFormat = `YYYYMMDD.HHmmss`;
 
-export const gmtZoneRegex = /^Etc\/(GMT([+-]\d+)?)$/;
 export const offsetZoneRegex = /^(?:Etc\/)?(?:GMT|UTC)\+?(-?\d{1,2})(?::?(\d{2}))?$/i;
-
-const formatGmtZoneLabel = (offset = '') => `GMT${offset} (UTC${offset})`;
-
-export const transformGmtZoneName = (value: string): string =>
-  value.replace(gmtZoneRegex, (_, extractedIdentifier: string) =>
-    extractedIdentifier.replace(/^GMT(?:([+-])(\d+))?$/, (__, sign: string, offset: string) => {
-      const newSign = sign ? (sign === '+' ? '-' : '+') : '';
-      return formatGmtZoneLabel(`${newSign}${offset ?? ''}`);
-    }),
-  );
 
 export const getSortedNormalizedTimezoneNames = (): string[] =>
   moment.tz
@@ -33,10 +24,6 @@ export const getTimezoneValue = (timezone: string) => ({
   value: timezone,
   label: timezone,
 });
-
-export const momentToTimeInputValue = (time: Moment = moment(), format = `${isoFormattingDateFormat}\\T${isoTimeFormat}`): string =>
-  // Force English locale so values are always in the expected format
-  time.clone().locale('en').format(format);
 
 export const rangeLimit = (value: number, min: number, max: number): number => {
   let log = false;
@@ -134,37 +121,43 @@ export const limitDate = (value: number): number => {
 
 export const getMeridiemLabel = (isAm: boolean, minutes = 0) => moment.localeData().meridiem(isAm ? 10 : 22, minutes, false);
 
-export const getInitialMoment = (timezone: TimezoneSelection, defaultTs?: number): Moment => {
-  const hasDefaultTs = typeof defaultTs === 'number';
-  const value = hasDefaultTs
-    ? moment.tz(new Date(defaultTs * 1e3), 'UTC')
-    : moment();
+export const getInitialDateTime = (timezone: TimezoneSelection, defaultDateTime?: string | null, zeroSeconds = false): [string, string] => {
+  if (typeof defaultDateTime === 'string') {
+    const parseResult = moment(defaultDateTime, urlFormat);
+    const dateString = parseResult.format(isoFormattingDateFormat);
+    let timeString = parseResult.format(isoTimeFormat);
+    if (zeroSeconds) {
+      timeString = timeString.replace(/:\d{2}$/, ':00');
+    }
+    return [dateString, timeString];
+  }
+  let localMoment: Moment;
   switch (timezone.type) {
     case TimeZoneSelectionType.OFFSET:
-      value.utcOffset(getUtcOffsetString(timezone));
+      localMoment = moment.utc().utcOffset(getUtcOffsetString(timezone));
       break;
     case TimeZoneSelectionType.ZONE_NAME:
-      value.tz(timezone.name);
+      localMoment = moment.tz(timezone.name);
       break;
   }
-  return value;
+  if (zeroSeconds) {
+    localMoment.seconds(0);
+  }
+  const [dateString, timeString] = localMoment.format(isoFormat).split(/[T ]/);
+  return [dateString, timeString];
 };
-export const getCurrentTimestampMoment = (inputString: string, formatString: string, timezone: TimezoneSelection): Moment => {
+export const getDateTimeMoment = (inputString: string, formatString: string, timezone: TimezoneSelection): Moment => {
   switch (timezone.type) {
     case TimeZoneSelectionType.OFFSET:
-      return moment.tz(inputString, formatString, 'UTC').utcOffset(convertTimeZoneSelectionToString(timezone));
+      return moment.utc(inputString, formatString).utcOffset(getUtcOffsetString(timezone), true);
     case TimeZoneSelectionType.ZONE_NAME:
       return moment.tz(inputString, formatString, timezone.name);
   }
 };
 
-export const getDefaultInitialMoment = (defaultTs: number | undefined, timezone: TimezoneSelection): Moment => {
-  const hasDefaultTs = typeof defaultTs === 'number';
-  const value = getInitialMoment(timezone, defaultTs);
-  if (!hasDefaultTs) {
-    value.seconds(0);
-  }
-  return value;
+export const getDefaultInitialDateTime = (defaultDateTime: string | undefined | null, timezone: TimezoneSelection): [string, string] => {
+  const hasDefaultTs = typeof defaultDateTime === 'string';
+  return getInitialDateTime(timezone, defaultDateTime, !hasDefaultTs);
 };
 
 export const guessInitialTimezoneName = (): string => {
@@ -211,7 +204,7 @@ export const getUtcOffsetString = (zoneSelectionByOffset: TimezoneSelectionByOff
 export const createCurrentTsWithTimezone = (currentTimestamp: Moment, currentTimezone: TimezoneSelection) => {
   switch (currentTimezone.type) {
     case TimeZoneSelectionType.OFFSET:
-      return moment(currentTimestamp).utcOffset(getUtcOffsetString(currentTimezone));
+      return moment.utc(currentTimestamp).utcOffset(getUtcOffsetString(currentTimezone));
     case TimeZoneSelectionType.ZONE_NAME:
       // TODO Figure out why `ts.currentTimestamp` does not have a timezone to begin with???
       console.debug('currentTimestamp.value.tz()', currentTimestamp.tz());

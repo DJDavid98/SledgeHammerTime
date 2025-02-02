@@ -28,7 +28,6 @@ const timezoneSelectRef = useTemplateRef<InputApi>('timezone-select');
 const formRef = useTemplateRef<HTMLFormElement>('form-el');
 
 const select = () => {
-  console.log('mode.value', mode.value);
   switch (mode.value) {
     case TimeZoneSelectionType.OFFSET:
       emit('change', { type: TimeZoneSelectionType.OFFSET, hours: offsetHours.value, minutes: offsetMinutes.value });

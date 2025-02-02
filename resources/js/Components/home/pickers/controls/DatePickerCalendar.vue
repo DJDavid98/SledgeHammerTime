@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useCurrentDate } from '@/composables/useCurrentDate';
+import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtButtonGroup from '@/Reusable/HtButtonGroup.vue';
 import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
@@ -13,13 +14,12 @@ import {
   WeekdayItem,
   WEEKEND_DAYS,
 } from '@/utils/calendar';
-import { loadMomentLocale } from '@/utils/moment';
 import { faBackwardFast, faChevronLeft, faChevronRight, faForwardFast } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { usePage } from '@inertiajs/vue3';
 import classNames from 'classnames';
 import moment from 'moment-timezone';
-import { computed, ref } from 'vue';
+import { computed, getCurrentInstance, ref, watch } from 'vue';
 
 const props = defineProps<{
   selectedYear: number,
@@ -37,9 +37,10 @@ const date = ref(props.selectedDate);
 const momentLocaleData = ref<moment.Locale | null>(null);
 
 const locale = computed(() => usePage().props.app.locale);
+const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
 
-loadMomentLocale(locale.value).then(() => {
-  momentLocaleData.value = moment.localeData(locale.value);
+watch(momentLocale, () => {
+  momentLocaleData.value = moment.localeData(momentLocale.value);
 });
 
 const firstDayOfWeek = computed(() => {

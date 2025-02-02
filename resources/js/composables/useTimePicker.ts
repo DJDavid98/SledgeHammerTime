@@ -1,11 +1,10 @@
 import { TimePickerDialAPI } from '@/Components/home/pickers/controls/TimePickerDial.vue';
+import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
 import { DialMode } from '@/utils/dial';
-import { AvailableLanguage } from '@/utils/language-settings';
 import { pad } from '@/utils/pad';
 import { toTwelveHours, toTwentyFourHours } from '@/utils/time';
-import { usePage } from '@inertiajs/vue3';
 import moment, { Moment } from 'moment-timezone';
-import { computed, ref } from 'vue';
+import { computed, getCurrentInstance, ref } from 'vue';
 
 export const useTimePicker = () => {
   const hours = ref(0);
@@ -18,10 +17,10 @@ export const useTimePicker = () => {
   const dial = ref<TimePickerDialAPI>();
   const renderDial = ref(false);
 
-  const page = usePage();
-  const locale = computed(() => page.props.app.locale as AvailableLanguage);
+  const instance = getCurrentInstance();
+  const momentLocale = useMomentLocaleForceUpdate(instance);
   const twelveHourMode = computed(() => {
-    const longTimeFormat = moment.localeData(locale.value).longDateFormat('LT');
+    const longTimeFormat = moment.localeData(momentLocale.value).longDateFormat('LT');
     return /A$/i.test(longTimeFormat);
   });
 

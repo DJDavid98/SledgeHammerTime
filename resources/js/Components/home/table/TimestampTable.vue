@@ -3,6 +3,7 @@ import SyntaxDisplay from '@/Components/home/table/SyntaxDisplay.vue';
 import TimestampPreview from '@/Components/home/table/TimestampPreview.vue';
 import { timestamp } from '@/injection-keys';
 import HtTable from '@/Reusable/HtTable.vue';
+import { getDateTimeMoment, isoFormat } from '@/utils/time';
 import { faCalendar as faRegularCalendar } from '@fortawesome/free-regular-svg-icons';
 import { faCalendar, faClock, faCode, faUserClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -10,7 +11,9 @@ import { computed, inject } from 'vue';
 
 const ts = inject(timestamp);
 
-const unixTs = computed(() => ts?.currentTimestamp.value.unix());
+const currentTimestamp = computed(() => ts?.currentTimezone.value && getDateTimeMoment(ts?.currentDate.value + ' ' + ts?.currentTime.value, isoFormat, ts.currentTimezone.value));
+
+const unixTs = computed(() => currentTimestamp.value?.unix());
 </script>
 
 <template>
@@ -46,7 +49,7 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
         </td>
         <td>
           <TimestampPreview
-            :ts="ts?.currentTimestamp"
+            :ts="currentTimestamp"
             format="L"
           />
         </td>
@@ -60,7 +63,7 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
         </td>
         <td>
           <TimestampPreview
-            :ts="ts?.currentTimestamp"
+            :ts="currentTimestamp"
             format="LL"
           />
         </td>
@@ -83,7 +86,7 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
         </td>
         <td>
           <TimestampPreview
-            :ts="ts?.currentTimestamp"
+            :ts="currentTimestamp"
             format="LT"
           />
         </td>
@@ -97,7 +100,7 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
         </td>
         <td>
           <TimestampPreview
-            :ts="ts?.currentTimestamp"
+            :ts="currentTimestamp"
             format="LTS"
           />
         </td>
@@ -127,7 +130,7 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
         </td>
         <td>
           <TimestampPreview
-            :ts="ts?.currentTimestamp"
+            :ts="currentTimestamp"
             format="LLL"
           />
         </td>
@@ -141,7 +144,7 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
         </td>
         <td>
           <TimestampPreview
-            :ts="ts?.currentTimestamp"
+            :ts="currentTimestamp"
             format="LLLL"
           />
         </td>
@@ -161,7 +164,7 @@ const unixTs = computed(() => ts?.currentTimestamp.value.unix());
         </td>
         <td>
           <TimestampPreview
-            :ts="ts?.currentTimestamp"
+            :ts="currentTimestamp"
             :from-now="true"
           />
         </td>

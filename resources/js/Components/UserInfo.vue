@@ -3,7 +3,6 @@ import { currentLanguageInject, pagePropsInject } from '@/injection-keys';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCollapsible from '@/Reusable/HtCollapsible.vue';
 import HtLinkButton from '@/Reusable/HtLinkButton.vue';
-import { FALLBACK_LANGUAGE } from '@/utils/language-settings';
 import { faCaretDown, faCaretUp, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link } from '@inertiajs/vue3';
 import { computed, inject, ref } from 'vue';

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { formControlId, timestamp } from '@/injection-keys';
 import HtInput from '@/Reusable/HtInput.vue';
-import { isoTimeFormat } from '@/utils/time';
 import { inject, ref, watch } from 'vue';
 
 const ts = inject(timestamp);
@@ -13,13 +12,13 @@ const changeTime = () => {
   ts?.changeTimeString(selectedTime.value);
 };
 
-watch(() => ts?.currentTimestamp, (currentTimestamp) => {
-  if (!currentTimestamp) {
+watch(() => ts?.currentTime, (currentTime) => {
+  if (!currentTime) {
     selectedTime.value = '';
     return;
   }
 
-  selectedTime.value = currentTimestamp.value.format(isoTimeFormat);
+  selectedTime.value = currentTime.value;
 }, { immediate: true });
 </script>
 

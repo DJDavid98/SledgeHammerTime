@@ -17,7 +17,7 @@ export const momentLocaleMap = {
   // @ts-expect-error (Import is correct)
   'el': () => import('moment/dist/locale/el'),
   // @ts-expect-error (Import is correct)
-  'en-GB': () => import('moment/dist/locale/en-gb'),
+  'en-gb': () => import('moment/dist/locale/en-gb'),
   // @ts-expect-error (Import is correct)
   'es': () => import('moment/dist/locale/es'),
   // @ts-expect-error (Import is correct)
@@ -53,7 +53,7 @@ export const momentLocaleMap = {
   // @ts-expect-error (Import is correct)
   'pt': () => import('moment/dist/locale/pt'),
   // @ts-expect-error (Import is correct)
-  'pt-BR': () => import('moment/dist/locale/pt-br'),
+  'pt-br': () => import('moment/dist/locale/pt-br'),
   // @ts-expect-error (Import is correct)
   'ro': () => import('moment/dist/locale/ro'),
   // @ts-expect-error (Import is correct)
@@ -73,9 +73,9 @@ export const momentLocaleMap = {
   // @ts-expect-error (Import is correct)
   'vi': () => import('moment/dist/locale/vi'),
   // @ts-expect-error (Import is correct)
-  'zh-CN': () => import('moment/dist/locale/zh-cn'),
+  'zh-cn': () => import('moment/dist/locale/zh-cn'),
   // @ts-expect-error (Import is correct)
-  'zh-TW': () => import('moment/dist/locale/zh-tw'),
+  'zh-tw': () => import('moment/dist/locale/zh-tw'),
 };
 
 moment.tz.load(latestTimezoneData);

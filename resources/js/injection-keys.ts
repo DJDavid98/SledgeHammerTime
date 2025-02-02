@@ -7,6 +7,8 @@ import { ComputedRef, InjectionKey, Ref } from 'vue';
 
 export const timestamp = Symbol() as InjectionKey<{
   currentTimestamp: ComputedRef<Moment>,
+  currentDate: Readonly<Ref<string>>,
+  currentTime: Readonly<Ref<string>>,
   currentTimezone: Ref<TimezoneSelection>,
   changeDateString: (value: string) => void,
   changeTimeString: (value: string) => void,

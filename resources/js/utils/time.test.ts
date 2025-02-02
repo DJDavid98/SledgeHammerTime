@@ -7,7 +7,7 @@ import {
 import {
   coerceToTwelveHours,
   createCurrentTsWithTimezone,
-  getDefaultInitialMoment,
+  getDefaultInitialDateTime,
   getDefaultInitialTimezone,
   getUtcOffsetString,
   rangeLimit,
@@ -137,19 +137,20 @@ describe('rangeLimit', () => {
 
 describe('getDefaultInitialMoment', () => {
   it('should return a date with the seconds set to 0', () => {
-    const result = getDefaultInitialMoment(undefined, {
+    const result = getDefaultInitialDateTime(undefined, {
       type: TimeZoneSelectionType.ZONE_NAME,
       name: 'UTC',
     });
-    expect(moment.isMoment(result)).toBe(true);
-    expect(result.seconds()).toBe(0);
+    expect(result).toHaveLength(2);
+    expect(result[1]).toMatch(/:00$/);
   });
   it('should return the same timestamp when passed an initial value', () => {
-    const result = getDefaultInitialMoment(55, {
+    const result = getDefaultInitialDateTime('1970-01-01T00:00:55', {
       type: TimeZoneSelectionType.ZONE_NAME,
       name: 'UTC',
     });
-    expect(result.unix()).toBe(55);
+    expect(result).toHaveLength(2);
+    expect(result[1]).toMatch(/:55$/);
   });
 });
 

@@ -6,36 +6,34 @@ import Layout from '@/Layouts/DefaultLayout.vue';
 import { TimezoneSelection } from '@/model/timezone-selection';
 import {
   convertTimeZoneSelectionToString,
-  getCurrentTimestampMoment,
-  getDefaultInitialMoment,
+  getDateTimeMoment,
+  getDefaultInitialDateTime,
   getDefaultInitialTimezone,
-  getInitialMoment,
-  isoFormattingDateFormat,
+  getInitialDateTime,
   isoParsingDateFormat,
   isoTimeFormat,
 } from '@/utils/time';
 import { Head, router, usePage } from '@inertiajs/vue3';
-import { computed, provide, Ref, ref, watch } from 'vue';
+import { computed, provide, readonly, Ref, ref, watch } from 'vue';
 
 const page = usePage();
 
 const props = computed(() => {
   const url = new URL(page.url, window.location.href);
-  const tParam = url.searchParams.get('t');
-  const tParamNumber = typeof tParam === 'string' ? parseInt(tParam, 10) : undefined;
+  const dtParam = url.searchParams.get('dt');
   const tzParam = url.searchParams.get('tz');
   return {
-    defaultTs: tParamNumber,
+    defaultDateTime: dtParam,
     defaultTimezone: typeof tzParam === 'string' ? tzParam : undefined,
   };
 });
 
 const currentTimezone: Ref<TimezoneSelection> = ref(getDefaultInitialTimezone(props.value.defaultTimezone));
-const initialDate = getDefaultInitialMoment(props.value.defaultTs, currentTimezone.value);
-const dateString = ref(initialDate.format(isoFormattingDateFormat));
-const timeString = ref(initialDate.format(isoTimeFormat));
+const [initialDate, initialTime] = getDefaultInitialDateTime(props.value.defaultDateTime, currentTimezone.value);
+const dateString = ref(initialDate);
+const timeString = ref(initialTime);
 
-const currentTimestamp = computed(() => getCurrentTimestampMoment(`${dateString.value} ${timeString.value}`, `${isoParsingDateFormat} ${isoTimeFormat}`, currentTimezone.value));
+const currentTimestamp = computed(() => getDateTimeMoment(`${dateString.value} ${timeString.value}`, `${isoParsingDateFormat} ${isoTimeFormat}`, currentTimezone.value));
 
 const changeDateString = (value: string) => {
   dateString.value = value;
@@ -52,14 +50,16 @@ const changeTimezone = (value: TimezoneSelection) => {
   currentTimezone.value = value;
 };
 const setCurrentTime = () => {
-  const now = getInitialMoment(currentTimezone.value);
-  changeDateString(now.format(isoFormattingDateFormat));
-  changeTimeString(now.format(isoTimeFormat));
+  const [newDateString, newTimeString] = getInitialDateTime(currentTimezone.value);
+  changeDateString(newDateString);
+  changeTimeString(newTimeString);
 };
 const locale = computed(() => page.props.app.locale);
 
 provide(timestamp, {
   currentTimestamp,
+  currentDate: readonly(dateString),
+  currentTime: readonly(timeString),
   currentTimezone,
   changeDateString,
   changeTimeString,
@@ -68,9 +68,9 @@ provide(timestamp, {
   setCurrentTime,
 });
 
-watch(currentTimestamp, () => {
+watch([dateString, timeString, currentTimezone], () => {
   const params = new URLSearchParams();
-  params.set('t', currentTimestamp.value.unix().toString());
+  params.set('dt', (dateString.value + '.' + timeString.value).replace(/[^\d.]/g, ''));
   params.set('tz', convertTimeZoneSelectionToString(currentTimezone.value));
   router.get(`${route('home', { locale: locale.value })}?${params}`, undefined, { replace: true });
 });

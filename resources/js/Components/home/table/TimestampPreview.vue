@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
 import { Moment } from 'moment-timezone';
-import { computed, getCurrentInstance, Ref, ref, watch } from 'vue';
+import { computed, getCurrentInstance, ref, watch } from 'vue';
 
 const props = defineProps<{
-  ts: Ref<Moment> | undefined,
+  ts: Moment | undefined,
   format?: string;
   fromNow?: boolean;
 }>();
@@ -28,7 +28,7 @@ watch(() => props.fromNow, (fromNow) => {
   }
 }, { immediate: true });
 
-const localTimestamp = computed(() => props.ts?.value.local());
+const localTimestamp = computed(() => props.ts?.local());
 </script>
 
 <template>

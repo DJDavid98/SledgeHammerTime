@@ -5,14 +5,19 @@ import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
 import { DialMode } from '@/utils/dial';
 import { keyboardOrMouseEventHandlerFactory } from '@/utils/events';
-import { createCurrentTsWithTimezone } from '@/utils/time';
+import { createCurrentTsWithTimezone, getDateTimeMoment, isoTimeFormat } from '@/utils/time';
 import { computed, getCurrentInstance, inject, provide, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
 
 const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
-const selectedTime = computed(() => momentLocale.value ? ts?.currentTimestamp.value.locale(momentLocale.value).format('LTS') : '');
+const selectedTime = computed(() => {
+  return momentLocale.value && ts?.currentTime.value && ts?.currentTimezone.value
+    ? getDateTimeMoment(ts?.currentTime.value, isoTimeFormat, ts.currentTimezone.value)
+      .locale(momentLocale.value).format('LTS')
+    : '';
+});
 const timepicker = useTemplateRef<TimePickerPopupApi>('time-picker');
 const inputEl = useTemplateRef<InputApi>('input-el');
 
