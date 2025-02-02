@@ -6,6 +6,7 @@ return [
     'label' => [
       'date' => 'Dátum',
       'time' => 'Idő',
+      'dateAndTime' => 'Dátum és idő',
       'timezone' => 'Időzóna',
       'modeOffset' => 'Abszolút Eltolás',
       'modeZoneName' => 'Zóna Név',
@@ -25,5 +26,20 @@ return [
     'syntaxColumn' => 'Üzenet formája',
     'resultColumn' => 'Példa megjelenés',
     'clickToCopy' => 'Vágólapra másolás',
+  ],
+  'usefulLinks' => [
+    'lead' => 'Ezeket is hasznosnak találhatod:',
+    'server' => [
+      'header' => 'Hivatalos HammerTime Szerver',
+      'p' => 'Csevegj a weboldalról, próbáld ki a kódokat és javasolj funkciókat',
+    ],
+    'bot' => [
+      'header' => 'HammerTime App',
+      'p' => 'Generálj időbélyegeket slash parancsok használatával',
+    ],
+    'textColor' => [
+      'header' => 'Rebane <1>Színezett</1> Szöveg Generálója',
+      'p' => 'Egy egyszerű oldal, ami ANSI színkódokkal színezett Discord üzeneteket készít',
+    ],
   ],
 ];
