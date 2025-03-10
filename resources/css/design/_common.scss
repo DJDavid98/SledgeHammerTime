@@ -300,3 +300,8 @@ html {
   font-size: var(--base-size);
   font-family: var(--font-family-base);
 }
+
+body.no-anim * {
+  transition: none !important;
+  animation: none !important;
+}

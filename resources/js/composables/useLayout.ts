@@ -24,6 +24,10 @@ export const useLayout = () => {
     routerHandlerCleanup = router.on('success', (event) => {
       pagePropsRef.value = event.detail.page.props;
     });
+
+    if (document) {
+      document.body.classList.remove('no-anim');
+    }
   });
   onUnmounted(() => {
     routerHandlerCleanup?.();

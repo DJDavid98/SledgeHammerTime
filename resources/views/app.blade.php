@@ -20,7 +20,7 @@
   @vite(['resources/js/app.ts', "resources/js/Pages/{$page['component']}.vue"])
   @inertiaHead
 </head>
-<body>
+<body class="no-anim">
 @inertia
 </body>
 </html>
