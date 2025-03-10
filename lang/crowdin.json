@@ -1,5 +1,5 @@
 {
-  "meta": "Generated at 2025-02-02T19:27:45.061Z",
+  "meta": "Generated at 2025-03-10T20:10:34.714Z",
   "users": {
     "25282": {
       "username": "Liggli",
@@ -140,7 +140,7 @@
     },
     "13617551": {
       "username": "DJDavid98",
-      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/13617551/medium/c029a87fe6b3d7a92587750621476764.png",
+      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/13617551/medium/c4a6f133823da7c77709a8b0bf26e1b2.png",
       "languages": [
         "ar",
         "bg",
@@ -379,9 +379,9 @@
       ]
     },
     "14914643": {
-      "username": "younessmouhid",
+      "username": "user99",
       "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/14914643/medium/49fd62344c8aaf711202fc5617a117fa.png",
-      "fullName": "yngams",
+      "fullName": "yn",
       "languages": [
         "ar"
       ]
@@ -986,7 +986,7 @@
     },
     "ar": {
       "approval": 0,
-      "translation": 53
+      "translation": 48
     },
     "bg": {
       "approval": 0,
@@ -1010,11 +1010,11 @@
     },
     "el": {
       "approval": 0,
-      "translation": 63
+      "translation": 57
     },
     "en-GB": {
-      "approval": 100,
-      "translation": 100
+      "approval": 90,
+      "translation": 90
     },
     "es": {
       "approval": 0,
@@ -1041,8 +1041,8 @@
       "translation": 0
     },
     "hu": {
-      "approval": 100,
-      "translation": 100
+      "approval": 90,
+      "translation": 90
     },
     "id": {
       "approval": 0,
@@ -1082,7 +1082,7 @@
     },
     "nl": {
       "approval": 0,
-      "translation": 15
+      "translation": 13
     },
     "pl": {
       "approval": 0,
@@ -1098,7 +1098,7 @@
     },
     "ro": {
       "approval": 0,
-      "translation": 63
+      "translation": 100
     },
     "ru": {
       "approval": 0,

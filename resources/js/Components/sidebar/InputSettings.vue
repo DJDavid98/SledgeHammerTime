@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import FormMessage from '@/Components/FormMessage.vue';
 import { localSettings } from '@/injection-keys';
-import HtFormCheckbox from '@/Reusable/HtFormCheckbox.vue';
+import HtFormCheckboxControlled from '@/Reusable/HtFormCheckboxControlled.vue';
 import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -20,7 +20,7 @@ const settings = inject(localSettings);
       <span class="ms-1">{{ $t('global.sidebar.inputSettings.title') }}</span>
     </header>
     <HtFormControlGroup>
-      <HtFormCheckbox
+      <HtFormCheckboxControlled
         id="custom-inputs"
         :label="$t('global.sidebar.inputSettings.customInputs.label')"
         :checked="Boolean(settings?.customInputEnabled)"
@@ -32,8 +32,8 @@ const settings = inject(localSettings);
             class="mt-1"
           />
         </template>
-      </HtFormCheckbox>
-      <HtFormCheckbox
+      </HtFormCheckboxControlled>
+      <HtFormCheckboxControlled
         id="separate-inputs"
         :label="$t('global.sidebar.inputSettings.separateInputs.label')"
         :checked="!settings?.combinedInputsEnabled"
@@ -45,7 +45,7 @@ const settings = inject(localSettings);
             class="mt-1"
           />
         </template>
-      </HtFormCheckbox>
+      </HtFormCheckboxControlled>
     </HtFormControlGroup>
   </section>
 </template>
