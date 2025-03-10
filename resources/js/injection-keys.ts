@@ -35,8 +35,8 @@ export interface LocalSettingsValue {
   readonly rawSidebarOnRight: boolean | null;
   readonly sidebarOnRight: boolean | null;
   readonly sidebarOffDesktop: boolean | null;
-  readonly toggleCustomInput: (e: Event & { target: HTMLInputElement }) => void;
-  readonly toggleSeparateInputs: (e: Event & { target: HTMLInputElement }) => void;
+  readonly toggleCustomInput: (e: Event) => void;
+  readonly toggleSeparateInputs: (e: Event) => void;
   readonly toggleSidebarOnRight: VoidFunction;
   readonly toggleSidebarOffDesktop: VoidFunction;
   readonly setSidebarOffDesktop: (value: boolean) => void;

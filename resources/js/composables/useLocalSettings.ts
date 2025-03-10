@@ -72,10 +72,14 @@ export const useLocalSettings = (currentLanguage?: Ref<CurrentLanguageData>) => 
     sidebarOnRight: effectiveSidebarOnRight,
     rawSidebarOnRight: sidebarOnRight,
     sidebarOffDesktop,
-    toggleCustomInput(e: Event & { target: HTMLInputElement }) {
+    toggleCustomInput(e: Event) {
+      if (!(e.target instanceof HTMLInputElement)) return;
+
       customInputEnabled.value = e.target.checked;
     },
-    toggleSeparateInputs(e: Event & { target: HTMLInputElement }) {
+    toggleSeparateInputs(e: Event) {
+      if (!(e.target instanceof HTMLInputElement)) return;
+
       combinedInputsEnabled.value = !e.target.checked;
     },
     toggleSidebarOnRight() {
