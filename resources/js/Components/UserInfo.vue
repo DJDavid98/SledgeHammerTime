@@ -51,6 +51,7 @@ const routeLocale = computed(() => currentLanguage?.value.locale ?? FALLBACK_LAN
           method="post"
           as="button"
           class="cursor-pointer"
+          @click.passive="userDropdownVisible = false"
         >
           {{ $t('actions.log_out') }}
         </Link>
