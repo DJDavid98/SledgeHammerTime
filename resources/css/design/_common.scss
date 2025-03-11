@@ -1,6 +1,7 @@
 @use "sass:color";
 
 $z-index-map: (
+  combobox-suggestions: 5,
   sidebar: 4,
   header: 3,
   focus: 2,

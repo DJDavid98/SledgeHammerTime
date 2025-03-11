@@ -92,7 +92,10 @@ defineExpose<TimeZonePickerApi>({
 </script>
 
 <template>
-  <Popup ref="popup-el">
+  <Popup
+    ref="popup-el"
+    :allow-overflow="true"
+  >
     <form
       ref="form-el"
       @submit.prevent="selectAndClose"

@@ -40,7 +40,7 @@ defineExpose<FormSelectApi>({
       ref="select-el"
       v-model="model"
       :name="name"
-      :class="['input-text hide-selection', props.class]"
+      :class="['form-select-input input-text hide-selection', props.class]"
       @keydown="emit('keydown', $event)"
       @change="emit('change', $event)"
       @focus.passive="emit('focus', $event)"
