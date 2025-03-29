@@ -3,6 +3,13 @@
 return [
   'title' => 'Bot Settings',
   'description' => 'Below you can see your current settings in the HammerTime Bot for each connected account.',
+  'advancedSettings' => [
+    'toggleText' => 'Advanced settings',
+    'atCommandName' => 'at',
+    'hourOptionName' => 'hour',
+    'minuteOptionName' => 'minute',
+    'secondOptionName' => 'second',
+  ],
   'fields' => [
     'rawData' => [
       'displayName' => 'Raw data (for debugging purposes)',
@@ -38,8 +45,14 @@ return [
     'header' => [
       'displayName' => 'Header',
     ],
-    'defaultMinutes' => [
-      'displayName' => 'Default minutes',
+    'defaultAtHour' => [
+      'displayName' => 'Default ":hourOptionName" option for /:atCommandName command',
+    ],
+    'defaultAtMinute' => [
+      'displayName' => 'Default ":minuteOptionName" option for /:atCommandName command',
+    ],
+    'defaultAtSecond' => [
+      'displayName' => 'Default ":secondOptionName" option for /:atCommandName command',
     ],
   ],
   'saveSuccess' => 'Your settings have been saved successfully.',
