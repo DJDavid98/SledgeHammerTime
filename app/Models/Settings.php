@@ -54,6 +54,8 @@ class Settings extends Model {
         return true;
       case SettingNames::TIMEZONE:
         return "GMT";
+      case SettingNames::DEFAULT_MINUTES:
+        return null;
       default:
         throw new \Exception("Invalid setting: $setting");
     }
@@ -65,6 +67,7 @@ class Settings extends Model {
       case SettingNames::FORMAT->value:
       case SettingNames::COLUMNS->value:
       case SettingNames::TIMEZONE->value:
+      case SettingNames::DEFAULT_MINUTES->value:
         return $value === self::getDefaultValue($setting);
       default:
         return false;

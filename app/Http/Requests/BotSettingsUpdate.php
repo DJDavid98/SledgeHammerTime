@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\SettingNames;
 use App\Rules\DiscordTimestampFormatOption;
 use App\Rules\MomentTimezoneName;
 use App\Rules\TimestampMessageColumnsOption;
@@ -30,11 +31,12 @@ class BotSettingsUpdate extends FormRequest {
    */
   public function rules():array {
     return [
-      'timezone' => ['nullable', 'string', new MomentTimezoneName()],
-      'format' => ['nullable', 'string', new DiscordTimestampFormatOption()],
-      'ephemeral' => ['nullable', 'boolean'],
-      'header' => ['nullable', 'boolean'],
-      'columns' => ['nullable', 'string', new TimestampMessageColumnsOption()],
+      SettingNames::TIMEZONE->value => ['nullable', 'string', new MomentTimezoneName()],
+      SettingNames::FORMAT->value => ['nullable', 'string', new DiscordTimestampFormatOption()],
+      SettingNames::EPHEMERAL->value => ['nullable', 'boolean'],
+      SettingNames::HEADER->value => ['nullable', 'boolean'],
+      SettingNames::COLUMNS->value => ['nullable', 'string', new TimestampMessageColumnsOption()],
+      SettingNames::DEFAULT_MINUTES->value => ['nullable', 'integer', 'between:0,59'],
     ];
   }
 }

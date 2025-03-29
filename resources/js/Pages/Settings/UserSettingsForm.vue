@@ -2,6 +2,7 @@
 import DiscordUserInfo, { DiscordUserInfoProps } from '@/Components/DiscordUserInfo.vue';
 import FormMessage from '@/Components/FormMessage.vue';
 import TimeZoneInput from '@/Components/TimeZoneSelect.vue';
+import { devModeInject } from '@/injection-keys';
 import { UserSettings } from '@/model/user-settings';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
@@ -9,8 +10,10 @@ import HtFormCheckboxModelled from '@/Reusable/HtFormCheckboxModelled.vue';
 import HtFormControl from '@/Reusable/HtFormControl.vue';
 import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
 import HtFormSelect from '@/Reusable/HtFormSelect.vue';
+import HtInput from '@/Reusable/HtInput.vue';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from '@inertiajs/vue3';
+import { inject } from 'vue';
 
 const props = defineProps<{
   entry: {
@@ -21,6 +24,7 @@ const props = defineProps<{
   columnsOptions?: Record<string, string>;
 }>();
 
+const devMode = inject(devModeInject);
 
 const form = useForm({
   timezone: props.entry.settings.timezone ?? '',
@@ -28,6 +32,7 @@ const form = useForm({
   ephemeral: props.entry.settings.ephemeral ?? true,
   header: props.entry.settings.header ?? true,
   columns: props.entry.settings.columns ?? props.formatOptions?.[0] ?? null,
+  defaultMinutes: props.entry.settings.defaultMinutes ?? null,
 });
 </script>
 
@@ -85,7 +90,7 @@ const form = useForm({
 
         <HtFormControl
           v-if="columnsOptions"
-          :id="'columns'+entry.user.id"
+          :id="'columns-'+entry.user.id"
           :label="$t('botSettings.fields.columns.displayName')"
         >
           <HtFormSelect
@@ -139,7 +144,31 @@ const form = useForm({
             />
           </template>
         </HtFormCheckboxModelled>
+
+        <HtFormControl
+          v-if="devMode"
+          :id="'defaultMinutes-'+entry.user.id"
+          :label="$t('botSettings.fields.defaultMinutes.displayName')"
+        >
+          <HtInput
+            v-model="form.defaultMinutes"
+            name="defaultMinutes"
+            class="mt-1"
+            type="number"
+            :min="0"
+            :max="59"
+          />
+          <template #message>
+            <FormMessage
+              type="error"
+              class="mt-2"
+              :message="form.errors.defaultMinutes"
+            />
+          </template>
+        </HtFormControl>
       </HtFormControlGroup>
+
+      <pre v-if="devMode"><code>{{ JSON.stringify(form.data(), null, 2) }}</code></pre>
 
       <div>
         <HtButton

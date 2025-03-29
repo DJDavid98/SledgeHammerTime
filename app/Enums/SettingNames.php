@@ -8,4 +8,5 @@ enum SettingNames: string {
   case EPHEMERAL = "ephemeral";
   case HEADER = "header";
   case TIMEZONE = "timezone";
+  case DEFAULT_MINUTES = "defaultMinutes";
 }

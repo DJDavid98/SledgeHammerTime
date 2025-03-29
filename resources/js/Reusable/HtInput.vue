@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
-import { useTemplateRef } from 'vue';
+import { formControlId } from '@/injection-keys';
+import { computed, inject, useTemplateRef } from 'vue';
 
 const emit = defineEmits<{
   (e: 'click', ev: MouseEvent): void;
@@ -22,9 +23,13 @@ const props = defineProps<{
   'class'?: string;
 }>();
 
-const model = defineModel<string | number>();
+const model = defineModel<string | number | null>();
 
 const inputRef = useTemplateRef<HTMLInputElement>('input-el');
+
+const providedId = inject(formControlId);
+
+const effectiveId = computed(() => props.id ?? providedId);
 
 export interface InputApi {
   focus: () => void;
@@ -41,10 +46,10 @@ defineExpose({
 
 <template>
   <input
-    :id="id"
+    :id="effectiveId"
     ref="input-el"
+    v-model="model"
     :type="type"
-    :value="model"
     :class="['input-text', props.class, { 'hide-selection': hideSelection }]"
     :readonly="readonly"
     :disabled="disabled"

@@ -1,9 +1,11 @@
+import { IDDQD, useCheatCode } from '@/composables/useCheatCode';
 import { useIsLightTheme } from '@/composables/useIsLightTheme';
 import { useLocalSettings } from '@/composables/useLocalSettings';
 import { useSidebarState } from '@/composables/useSidebarState';
 import {
   CurrentLanguageData,
   currentLanguageInject,
+  devModeInject,
   localSettings,
   pagePropsInject,
   sidebarState,
@@ -19,6 +21,8 @@ import { onMounted, onUnmounted, provide, readonly, ref, watch } from 'vue';
 export const useLayout = () => {
   const pagePropsRef = ref<PageProps>(usePage().props);
   provide(pagePropsInject, pagePropsRef);
+  const devModeRef = useCheatCode(IDDQD);
+  provide(devModeInject, devModeRef);
   let routerHandlerCleanup: VoidFunction | undefined;
   onMounted(() => {
     routerHandlerCleanup = router.on('success', (event) => {

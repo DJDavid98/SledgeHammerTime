@@ -4,4 +4,5 @@ export interface UserSettings {
   header: boolean | null;
   columns: string | null;
   format: string | null;
+  defaultMinutes: number | null;
 }

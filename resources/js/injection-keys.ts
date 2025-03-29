@@ -59,3 +59,5 @@ export interface CurrentLanguageData {
 }
 
 export const currentLanguageInject = Symbol() as InjectionKey<Ref<CurrentLanguageData>>;
+
+export const devModeInject = Symbol() as InjectionKey<Ref<boolean>>;
