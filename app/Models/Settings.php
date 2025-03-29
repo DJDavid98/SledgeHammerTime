@@ -35,20 +35,20 @@ class Settings extends Model {
     return SettingNames::from($this->setting);
   }
 
-  public static function mergeWithDefaults(array $userSettings):array {
+  public static function mergeWithDefaults(array $userSettings, bool $editing = false):array {
     return array_reduce(SettingNames::cases(), fn(array $acc, SettingNames $case) => [
       ...$acc,
-      $case->value => $userSettings[$case->value] ?? self::getDefaultValue($case),
+      $case->value => $userSettings[$case->value] ?? self::getDefaultValue($case, $editing),
     ], []);
   }
 
-  public static function getDefaultValue(string|SettingNames $setting) {
+  public static function getDefaultValue(string|SettingNames $setting, bool $editing = false) {
     $settingName = is_string($setting) ? SettingNames::from($setting) : $setting;
     switch ($settingName){
       case SettingNames::FORMAT:
-        return DiscordTimestampFormat::DEFAULT->value;
+        return $editing ? DiscordTimestampFormat::DEFAULT->value : null;
       case SettingNames::COLUMNS:
-        return TimestampMessageColumns::DEFAULT->value;
+        return $editing ? TimestampMessageColumns::DEFAULT->value : null;
       case SettingNames::EPHEMERAL:
       case SettingNames::HEADER:
         return true;
@@ -71,7 +71,7 @@ class Settings extends Model {
       case SettingNames::EPHEMERAL->value:
         return false;
       default:
-        return $value === self::getDefaultValue($setting);
+        return $value === self::getDefaultValue($setting, editing: true);
     }
   }
 }
