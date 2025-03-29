@@ -20,6 +20,7 @@ class BotSettingsController extends Controller {
 
     return Inertia::render('Settings/BotSettings', [
       'userSettings' => $userSettings ?? [],
+      'defaultSettings' => Settings::mergeWithDefaults([]),
       'formatOptions' => array_map(static fn($x) => $x->value, DiscordTimestampFormat::cases()),
       'columnsOptions' => array_map(static fn($x) => $x->value, TimestampMessageColumns::cases()),
     ]);

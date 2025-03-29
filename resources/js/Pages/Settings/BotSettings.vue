@@ -11,6 +11,7 @@ defineProps<{
     user: DiscordUserInfoProps,
     settings: Partial<UserSettings>
   }>;
+  defaultSettings: UserSettings;
   formatOptions?: string[];
   columnsOptions?: Record<string, string>;
 }>();
@@ -32,6 +33,7 @@ defineProps<{
       v-for="entry in userSettings"
       :key="entry.user.id"
       :entry="entry"
+      :default-settings="defaultSettings"
       :format-options="formatOptions"
       :columns-options="columnsOptions"
     />

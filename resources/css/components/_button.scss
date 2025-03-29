@@ -75,6 +75,7 @@
   @include design.button-color-variation('primary');
   @include design.button-color-variation('success');
   @include design.button-color-variation('danger');
+  @include design.button-color-variation('warning');
 
   .loading-icon {
     position: absolute;

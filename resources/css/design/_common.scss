@@ -173,6 +173,18 @@ $color-map: (
     light: color.adjust(#993333, $lightness: 20%, $saturation: -10%),
     dark: color.adjust(#993333, $lightness: -10%, $saturation: -10%),
   ),
+  button-warning-color: (
+    light: #000,
+    dark: #fff,
+  ),
+  button-warning-bg: (
+    light: color.adjust(#997733, $lightness: 30%),
+    dark: #997733,
+  ),
+  button-warning-border-color: (
+    light: color.adjust(#997733, $lightness: 20%, $saturation: -10%),
+    dark: color.adjust(#997733, $lightness: -10%, $saturation: -10%),
+  ),
   sidebar-bg: (
     light: color.adjust(#5865f2, $lightness: 27%, $saturation: -10%),
     dark: #1a1b1e,

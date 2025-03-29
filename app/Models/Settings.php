@@ -27,7 +27,7 @@ class Settings extends Model {
     'value' => Json::class,
   ];
 
-  function discordUser():BelongsTo {
+  public function discordUser():BelongsTo {
     return $this->belongsTo(DiscordUser::class);
   }
 
@@ -35,14 +35,14 @@ class Settings extends Model {
     return SettingNames::from($this->setting);
   }
 
-  static function mergeWithDefaults(array $userSettings):array {
+  public static function mergeWithDefaults(array $userSettings):array {
     return array_reduce(SettingNames::cases(), fn(array $acc, SettingNames $case) => [
       ...$acc,
-      $case->value => $userSettings[$case->value] ?? null,
+      $case->value => $userSettings[$case->value] ?? self::getDefaultValue($case),
     ], []);
   }
 
-  static function getDefaultValue(string|SettingNames $setting) {
+  public static function getDefaultValue(string|SettingNames $setting) {
     $settingName = is_string($setting) ? SettingNames::from($setting) : $setting;
     switch ($settingName){
       case SettingNames::FORMAT:
@@ -54,23 +54,24 @@ class Settings extends Model {
         return true;
       case SettingNames::TIMEZONE:
         return "GMT";
-      case SettingNames::DEFAULT_MINUTES:
+      case SettingNames::DEFAULT_AT_HOUR:
+      case SettingNames::DEFAULT_AT_MINUTE:
         return null;
+      case SettingNames::DEFAULT_AT_SECOND:
+        return 0;
       default:
         throw new \Exception("Invalid setting: $setting");
     }
   }
 
-  static function shouldDeleteIfMatchingDefault(string $setting, $value):bool {
+  public static function shouldDeleteIfMatchingDefault(string $setting, $value):bool {
     if ($value === null) return true;
     switch ($setting){
-      case SettingNames::FORMAT->value:
-      case SettingNames::COLUMNS->value:
-      case SettingNames::TIMEZONE->value:
-      case SettingNames::DEFAULT_MINUTES->value:
-        return $value === self::getDefaultValue($setting);
-      default:
+      case SettingNames::HEADER->value:
+      case SettingNames::EPHEMERAL->value:
         return false;
+      default:
+        return $value === self::getDefaultValue($setting);
     }
   }
 }

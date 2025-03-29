@@ -6,33 +6,38 @@ import { devModeInject } from '@/injection-keys';
 import { UserSettings } from '@/model/user-settings';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
+import HtCollapsible from '@/Reusable/HtCollapsible.vue';
 import HtFormCheckboxModelled from '@/Reusable/HtFormCheckboxModelled.vue';
 import HtFormControl from '@/Reusable/HtFormControl.vue';
 import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
 import HtFormSelect from '@/Reusable/HtFormSelect.vue';
 import HtInput from '@/Reusable/HtInput.vue';
-import { faSave } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronUp, faExclamationTriangle, faSave } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from '@inertiajs/vue3';
-import { inject } from 'vue';
+import { inject, ref } from 'vue';
 
 const props = defineProps<{
   entry: {
     user: DiscordUserInfoProps,
     settings: Partial<UserSettings>
   };
+  defaultSettings: UserSettings;
   formatOptions?: string[];
   columnsOptions?: Record<string, string>;
 }>();
 
 const devMode = inject(devModeInject);
+const showAdvancedSettings = ref(false);
 
 const form = useForm({
-  timezone: props.entry.settings.timezone ?? '',
-  format: props.entry.settings.format ?? props.formatOptions?.[0] ?? null,
-  ephemeral: props.entry.settings.ephemeral ?? true,
-  header: props.entry.settings.header ?? true,
-  columns: props.entry.settings.columns ?? props.formatOptions?.[0] ?? null,
-  defaultMinutes: props.entry.settings.defaultMinutes ?? null,
+  timezone: props.entry.settings.timezone ?? props.defaultSettings.timezone ?? '',
+  format: props.entry.settings.format ?? props.formatOptions?.[0] ?? props.defaultSettings.format,
+  ephemeral: props.entry.settings.ephemeral ?? props.defaultSettings.ephemeral ?? true,
+  header: props.entry.settings.header ?? props.defaultSettings.header ?? true,
+  columns: props.entry.settings.columns ?? props.formatOptions?.[0] ?? props.defaultSettings.columns,
+  defaultAtHour: props.entry.settings.defaultAtHour ?? props.defaultSettings.defaultAtHour,
+  defaultAtMinute: props.entry.settings.defaultAtMinute ?? props.defaultSettings.defaultAtMinute,
+  defaultAtSecond: props.entry.settings.defaultAtSecond ?? props.defaultSettings.defaultAtSecond,
 });
 </script>
 
@@ -145,27 +150,91 @@ const form = useForm({
           </template>
         </HtFormCheckboxModelled>
 
-        <HtFormControl
+        <div
           v-if="devMode"
-          :id="'defaultMinutes-'+entry.user.id"
-          :label="$t('botSettings.fields.defaultMinutes.displayName')"
+          class="form-control-wrap"
         >
-          <HtInput
-            v-model="form.defaultMinutes"
-            name="defaultMinutes"
-            class="mt-1"
-            type="number"
-            :min="0"
-            :max="59"
-          />
-          <template #message>
-            <FormMessage
-              type="error"
-              class="mt-2"
-              :message="form.errors.defaultMinutes"
-            />
-          </template>
-        </HtFormControl>
+          <HtButton
+            color="warning"
+            :pressed="showAdvancedSettings"
+            :icon-start="faExclamationTriangle"
+            :icon-end="showAdvancedSettings ? faChevronUp : faChevronDown"
+            @click="showAdvancedSettings = !showAdvancedSettings"
+          >
+            {{ $t('botSettings.advancedSettings.toggleText') }}
+          </HtButton>
+          <HtCollapsible :visible="showAdvancedSettings">
+            <HtFormControl
+              :id="'defaultAtHour-'+entry.user.id"
+              :label="$t('botSettings.fields.defaultAtHour.displayName', {
+                atCommandName: $t('botSettings.advancedSettings.atCommandName'),
+                hourOptionName: $t('botSettings.advancedSettings.hourOptionName'),
+              })"
+            >
+              <HtInput
+                v-model="form.defaultAtHour"
+                name="defaultAtHour"
+                class="mt-1"
+                type="number"
+                :min="0"
+                :max="23"
+              />
+              <template #message>
+                <FormMessage
+                  type="error"
+                  class="mt-2"
+                  :message="form.errors.defaultAtHour"
+                />
+              </template>
+            </HtFormControl>
+            <HtFormControl
+              :id="'defaultAtMinute-'+entry.user.id"
+              :label="$t('botSettings.fields.defaultAtMinute.displayName', {
+                atCommandName: $t('botSettings.advancedSettings.atCommandName'),
+                minuteOptionName: $t('botSettings.advancedSettings.minuteOptionName'),
+              })"
+            >
+              <HtInput
+                v-model="form.defaultAtMinute"
+                name="defaultAtMinute"
+                class="mt-1"
+                type="number"
+                :min="0"
+                :max="59"
+              />
+              <template #message>
+                <FormMessage
+                  type="error"
+                  class="mt-2"
+                  :message="form.errors.defaultAtMinute"
+                />
+              </template>
+            </HtFormControl>
+            <HtFormControl
+              :id="'defaultAtSecond-'+entry.user.id"
+              :label="$t('botSettings.fields.defaultAtSecond.displayName', {
+                atCommandName: $t('botSettings.advancedSettings.atCommandName'),
+                secondOptionName: $t('botSettings.advancedSettings.secondOptionName'),
+              })"
+            >
+              <HtInput
+                v-model="form.defaultAtSecond"
+                name="defaultAtSecond"
+                class="mt-1"
+                type="number"
+                :min="0"
+                :max="59"
+              />
+              <template #message>
+                <FormMessage
+                  type="error"
+                  class="mt-2"
+                  :message="form.errors.defaultAtSecond"
+                />
+              </template>
+            </HtFormControl>
+          </HtCollapsible>
+        </div>
       </HtFormControlGroup>
 
       <pre v-if="devMode"><code>{{ JSON.stringify(form.data(), null, 2) }}</code></pre>

@@ -36,7 +36,9 @@ class BotSettingsUpdate extends FormRequest {
       SettingNames::EPHEMERAL->value => ['nullable', 'boolean'],
       SettingNames::HEADER->value => ['nullable', 'boolean'],
       SettingNames::COLUMNS->value => ['nullable', 'string', new TimestampMessageColumnsOption()],
-      SettingNames::DEFAULT_MINUTES->value => ['nullable', 'integer', 'between:0,59'],
+      SettingNames::DEFAULT_AT_HOUR->value => ['nullable', 'integer', 'between:0,23'],
+      SettingNames::DEFAULT_AT_MINUTE->value => ['nullable', 'integer', 'between:0,59'],
+      SettingNames::DEFAULT_AT_SECOND->value => ['nullable', 'integer', 'between:0,59'],
     ];
   }
 }
