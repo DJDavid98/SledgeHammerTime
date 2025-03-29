@@ -38,6 +38,9 @@ return [
     'header' => [
       'displayName' => 'Fejléc',
     ],
+    'defaultMinutes' => [
+      'displayName' => 'Default minutes',
+    ],
   ],
   'saveSuccess' => 'A beállításaid sikeresen mentéstre kerültek.',
 ];
