@@ -38,6 +38,9 @@ return [
     'header' => [
       'displayName' => 'Header',
     ],
+    'defaultMinutes' => [
+      'displayName' => 'Default minutes',
+    ],
   ],
   'saveSuccess' => 'Your settings have been saved successfully.',
 ];
