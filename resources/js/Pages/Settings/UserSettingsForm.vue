@@ -10,6 +10,7 @@ import HtCollapsible from '@/Reusable/HtCollapsible.vue';
 import HtFormCheckboxModelled from '@/Reusable/HtFormCheckboxModelled.vue';
 import HtFormControl from '@/Reusable/HtFormControl.vue';
 import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
+import HtFormControlWrap from '@/Reusable/HtFormControlWrap.vue';
 import HtFormSelect from '@/Reusable/HtFormSelect.vue';
 import HtInput from '@/Reusable/HtInput.vue';
 import { faChevronDown, faChevronUp, faExclamationTriangle, faSave } from '@fortawesome/free-solid-svg-icons';
@@ -150,10 +151,7 @@ const form = useForm({
           </template>
         </HtFormCheckboxModelled>
 
-        <div
-          v-if="devMode"
-          class="form-control-wrap"
-        >
+        <HtFormControlWrap>
           <HtButton
             color="warning"
             :pressed="showAdvancedSettings"
@@ -234,7 +232,7 @@ const form = useForm({
               </template>
             </HtFormControl>
           </HtCollapsible>
-        </div>
+        </HtFormControlWrap>
       </HtFormControlGroup>
 
       <pre v-if="devMode"><code>{{ JSON.stringify(form.data(), null, 2) }}</code></pre>

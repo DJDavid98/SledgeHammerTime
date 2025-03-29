@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import HtFormControlWrap from '@/Reusable/HtFormControlWrap.vue';
+
 defineProps<{
   id: string,
   label: string,
@@ -21,7 +23,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="form-control-wrap">
+  <HtFormControlWrap>
     <div class="form-control-radio">
       <span class="form-radio-input-wrap">
         <input
@@ -42,5 +44,5 @@ const emit = defineEmits<{
       >{{ label }}</label>
     </div>
     <slot name="message" />
-  </div>
+  </HtFormControlWrap>
 </template>

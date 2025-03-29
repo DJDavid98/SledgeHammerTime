@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { formControlId } from '@/injection-keys';
+import HtFormControlWrap from '@/Reusable/HtFormControlWrap.vue';
 import { provide } from 'vue';
 
 const props = defineProps<{
@@ -11,7 +12,7 @@ provide(formControlId, props.id);
 </script>
 
 <template>
-  <div class="form-control-wrap">
+  <HtFormControlWrap>
     <div class="form-control">
       <label
         class="form-control-label"
@@ -20,5 +21,5 @@ provide(formControlId, props.id);
       <slot />
     </div>
     <slot name="message" />
-  </div>
+  </HtFormControlWrap>
 </template>

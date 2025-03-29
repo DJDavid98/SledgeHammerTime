@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import HtFormControlWrap from '@/Reusable/HtFormControlWrap.vue';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -9,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="form-control-wrap">
+  <HtFormControlWrap>
     <div class="form-control-checkbox">
       <span class="form-checkbox-input-wrap">
         <slot name="input" />
@@ -25,5 +26,5 @@ defineProps<{
       >{{ label }}</label>
     </div>
     <slot name="message" />
-  </div>
+  </HtFormControlWrap>
 </template>
