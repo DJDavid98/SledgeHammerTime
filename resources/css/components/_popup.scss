@@ -36,6 +36,10 @@
     margin: 0;
     overflow: hidden;
 
+    &.allow-overflow {
+      overflow: visible;
+    }
+
     @supports (position-anchor: --test) {
       transform: none;
 

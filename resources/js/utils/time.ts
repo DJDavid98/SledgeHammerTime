@@ -20,6 +20,8 @@ export const getSortedNormalizedTimezoneNames = (): string[] =>
     .filter((name) => !name.startsWith('Etc/GMT'))
     .sort((a, b) => a.localeCompare(b));
 
+export const timezoneNames = getSortedNormalizedTimezoneNames();
+
 export const getTimezoneValue = (timezone: string) => ({
   value: timezone,
   label: timezone,

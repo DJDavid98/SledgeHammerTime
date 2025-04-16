@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "sass:color";
 @use "../design";
 
 .form-control-group {
@@ -202,7 +203,7 @@
   display: inline-block;
   position: relative;
 
-  > select {
+  > .form-select-input {
     $padding-value: calc(#{design.app-size('input-text-padding') * 2} + #{design.app-size('form-select-icon-padding') * 2} + #{design.app-size('form-select-icon-size')});
     @include design.if-ltr {
       padding-right: $padding-value;
@@ -221,8 +222,8 @@
     align-items: center;
     justify-content: center;
     padding: 0 design.app-size('form-select-icon-padding');
-    pointer-events: none;
     font-size: design.app-size('form-select-icon-size');
+    cursor: pointer;
 
     @include design.if-ltr {
       right: 0;
@@ -230,6 +231,78 @@
 
     @include design.if-rtl {
       left: 0;
+    }
+  }
+}
+
+.form-control-wrap.combo-box, .form-control-combobox, .combobox-suggestions {
+  z-index: design.app-z-index('combobox-suggestions');
+}
+
+.form-control-combobox.suggestions-open > .form-select-input {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.combobox-suggestions {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  max-height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: design.app-size('input-text-border') solid design.app-color-light('input-text-border-color');
+  color: design.app-color-light('input-text-color');
+  background-color: design.app-color-light('input-text-bg');
+  border-bottom-left-radius: design.app-size('input-text-border-radius');
+  border-bottom-right-radius: design.app-size('input-text-border-radius');
+  box-sizing: border-box;
+
+  @include design.if-dark {
+    color: design.app-color-dark('input-text-color');
+    background-color: design.app-color-dark('input-text-bg');
+    border-color: design.app-color-dark('input-text-border-color');
+  }
+
+  .combobox-suggestion-item {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: design.app-size('input-text-padding');
+    cursor: pointer;
+
+    mark {
+      font-weight: bold;
+    }
+
+    &.selected {
+      color: design.app-color-light('button-primary-color');
+      background-color: design.app-color-light('button-primary-bg');
+
+      @include design.if-dark {
+        color: design.app-color-dark('button-primary-color');
+        background-color: design.app-color-dark('button-primary-bg');
+      }
+
+      &.highlighted, &:hover {
+        background-color: color.adjust(design.app-color-light('button-primary-bg'), $saturation: -15%);
+
+        @include design.if-dark {
+          background-color: color.adjust(design.app-color-dark('button-primary-bg'), $saturation: -15%);
+        }
+      }
+    }
+
+    &.highlighted {
+      color: design.app-color-light('button-default-color');
+      background-color: design.app-color-light('button-default-bg');
+
+      @include design.if-dark {
+        color: design.app-color-dark('button-default-color');
+        background-color: design.app-color-dark('button-default-bg');
+      }
     }
   }
 }
