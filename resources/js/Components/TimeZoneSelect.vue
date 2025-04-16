@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import HtFormSelect, { FormSelectApi } from '@/Reusable/HtFormSelect.vue';
-import { getSortedNormalizedTimezoneNames, getTimezoneValue } from '@/utils/time';
+import HtFormCombobox, { FormComboboxApi } from '@/Reusable/HtFormCombobox.vue';
+import { ComboboxOption } from '@/utils/combobox';
+import { getTimezoneValue, timezoneNames } from '@/utils/time';
 import { useTemplateRef } from 'vue';
 
 const props = defineProps<{
@@ -9,7 +10,7 @@ const props = defineProps<{
   tabindex?: string | number;
 }>();
 
-const timezones = getSortedNormalizedTimezoneNames().map(getTimezoneValue);
+const timezones = timezoneNames.map(getTimezoneValue);
 
 const model = defineModel<string>();
 const emit = defineEmits<{
@@ -17,18 +18,15 @@ const emit = defineEmits<{
   (e: 'focus'): void;
 }>();
 
-const formSelectRef = useTemplateRef<FormSelectApi>('form-select');
+const formComboboxRef = useTemplateRef<FormComboboxApi>('form-combobox');
 
-const changeTimezone = (e: Event) => {
-  const { target } = e;
-  if (target instanceof HTMLSelectElement) {
-    model.value = target.value;
-    emit('change', target.value);
-  }
+const changeTimezone = (option: ComboboxOption) => {
+  model.value = option.value;
+  emit('change', option.value);
 };
 
 const focus = () => {
-  formSelectRef.value?.focus();
+  formComboboxRef.value?.focus();
 };
 
 export interface TimeZoneSelectApi {
@@ -41,21 +39,14 @@ defineExpose<TimeZoneSelectApi>({
 </script>
 
 <template>
-  <HtFormSelect
-    ref="form-select"
+  <HtFormCombobox
+    ref="form-combobox"
     v-model="model"
     :name="name"
     :class="props.class ?? 'mb-0'"
     :tabindex="tabindex"
+    :options="timezones"
     @change="changeTimezone"
     @focus="emit('focus')"
-  >
-    <option
-      v-for="zone in timezones"
-      :key="zone.label"
-      :value="zone.value"
-    >
-      {{ zone.label }}
-    </option>
-  </HtFormSelect>
+  />
 </template>

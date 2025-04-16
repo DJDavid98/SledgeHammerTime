@@ -52,6 +52,7 @@ const form = useForm({
         <HtFormControl
           :id="'timezone-'+entry.user.id"
           :label="$t('botSettings.fields.timezone.displayName')"
+          :combo-box="true"
         >
           <TimeZoneInput
             v-model="form.timezone"

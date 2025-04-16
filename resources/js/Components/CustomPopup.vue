@@ -9,9 +9,11 @@ export interface Focusable {
 const props = withDefaults(defineProps<{
   show?: boolean;
   wide?: boolean;
+  allowOverflow?: boolean;
 }>(), {
   show: false,
   wide: false,
+  allowOverflow: false,
 });
 
 const emit = defineEmits<{
@@ -78,7 +80,7 @@ defineExpose<CustomPopupApi>({
 <template>
   <dialog
     ref="dialogEl"
-    :class="['popup', {visible: show, wide, 'has-anchor': Boolean(positionAnchorName)}]"
+    :class="['popup', {visible: show, wide, 'has-anchor': Boolean(positionAnchorName), 'allow-overflow': allowOverflow}]"
     :style="positionAnchorName ? `position-anchor: ${positionAnchorName}` : undefined"
     @mousedown="handleMousedown"
     @mouseup="handleMouseup"
