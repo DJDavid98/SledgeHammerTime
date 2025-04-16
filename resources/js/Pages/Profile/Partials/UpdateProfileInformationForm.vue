@@ -57,9 +57,11 @@ const form = useForm({
         {{ $t('actions.save') }}
       </HtButton>
 
-      <p v-if="form.recentlySuccessful">
-        {{ $t('profile.information.saveSuccess') }}
-      </p>
+      <FormMessage
+        type="success"
+        :message="form.recentlySuccessful ? $t('profile.information.saveSuccess') : undefined"
+        class="mt-2"
+      />
     </div>
   </form>
 </template>

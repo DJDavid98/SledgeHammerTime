@@ -251,6 +251,7 @@ const form = useForm({
         <FormMessage
           type="success"
           :message="form.recentlySuccessful ? $t('botSettings.saveSuccess') : undefined"
+          class="mt-2"
         />
       </div>
     </form>
