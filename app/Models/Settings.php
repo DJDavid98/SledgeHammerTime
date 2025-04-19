@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property SettingNames $name
+ */
 class Settings extends Model {
   use HasFactory;
 
@@ -51,6 +54,7 @@ class Settings extends Model {
         return $editing ? TimestampMessageColumns::DEFAULT->value : null;
       case SettingNames::EPHEMERAL:
       case SettingNames::HEADER:
+      case SettingNames::BOLD_PREVIEW:
         return true;
       case SettingNames::TIMEZONE:
         return "GMT";
@@ -69,6 +73,7 @@ class Settings extends Model {
     switch ($setting){
       case SettingNames::HEADER->value:
       case SettingNames::EPHEMERAL->value:
+      case SettingNames::BOLD_PREVIEW->value:
         return false;
       default:
         return $value === self::getDefaultValue($setting, editing: true);

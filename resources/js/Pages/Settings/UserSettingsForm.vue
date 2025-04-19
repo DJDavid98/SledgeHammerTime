@@ -35,6 +35,7 @@ const form = useForm({
   format: props.entry.settings.format ?? props.formatOptions?.[0] ?? props.defaultSettings.format,
   ephemeral: props.entry.settings.ephemeral ?? props.defaultSettings.ephemeral ?? true,
   header: props.entry.settings.header ?? props.defaultSettings.header ?? true,
+  boldPreview: props.entry.settings.boldPreview ?? props.defaultSettings.boldPreview ?? true,
   columns: props.entry.settings.columns ?? props.formatOptions?.[0] ?? props.defaultSettings.columns,
   defaultAtHour: props.entry.settings.defaultAtHour ?? props.defaultSettings.defaultAtHour,
   defaultAtMinute: props.entry.settings.defaultAtMinute ?? props.defaultSettings.defaultAtMinute,
@@ -148,6 +149,22 @@ const form = useForm({
               type="error"
               class="mt-2"
               :message="form.errors.header"
+            />
+          </template>
+        </HtFormCheckboxModelled>
+
+        <HtFormCheckboxModelled
+          v-if="devMode"
+          :id="'boldPreview-'+entry.user.id"
+          v-model="form.boldPreview"
+          name="boldPreview"
+          :label="$t('botSettings.fields.boldPreview.displayName')"
+        >
+          <template #message>
+            <FormMessage
+              type="error"
+              class="mt-2"
+              :message="form.errors.boldPreview"
             />
           </template>
         </HtFormCheckboxModelled>

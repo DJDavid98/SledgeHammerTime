@@ -35,6 +35,7 @@ class BotSettingsUpdate extends FormRequest {
       SettingNames::FORMAT->value => ['nullable', 'string', new DiscordTimestampFormatOption()],
       SettingNames::EPHEMERAL->value => ['nullable', 'boolean'],
       SettingNames::HEADER->value => ['nullable', 'boolean'],
+      SettingNames::BOLD_PREVIEW->value => ['nullable', 'boolean'],
       SettingNames::COLUMNS->value => ['nullable', 'string', new TimestampMessageColumnsOption()],
       SettingNames::DEFAULT_AT_HOUR->value => ['nullable', 'integer', 'between:0,23'],
       SettingNames::DEFAULT_AT_MINUTE->value => ['nullable', 'integer', 'between:0,59'],
