@@ -45,6 +45,9 @@ return [
     'header' => [
       'displayName' => 'Header',
     ],
+    'boldPreview' => [
+      'displayName' => 'Format preview as bold',
+    ],
     'defaultAtHour' => [
       'displayName' => 'Default ":hourOptionName" option for /:atCommandName command',
     ],
