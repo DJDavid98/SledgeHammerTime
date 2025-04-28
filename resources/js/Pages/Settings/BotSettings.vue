@@ -4,6 +4,7 @@ import Layout from '@/Layouts/DefaultLayout.vue';
 import { UserSettings } from '@/model/user-settings';
 import UserSettingsForm from '@/Pages/Settings/UserSettingsForm.vue';
 import HtCard from '@/Reusable/HtCard.vue';
+import { getHtmlTitle } from '@/utils/app';
 import { Head } from '@inertiajs/vue3';
 
 defineProps<{
@@ -18,11 +19,13 @@ defineProps<{
 </script>
 
 <template>
-  <Head :title="$t('botSettings.title')" />
+  <Head :title="getHtmlTitle($t('botSettings.title'))" />
 
   <Layout>
     <HtCard>
-      <h2>{{ $t('botSettings.title') }}</h2>
+      <template #header>
+        <h2>{{ $t('botSettings.title') }}</h2>
+      </template>
 
       <p class="mt-1">
         {{ $t('botSettings.description') }}

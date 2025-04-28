@@ -45,9 +45,9 @@ const form = useForm({
 
 <template>
   <HtCard>
-    <header>
+    <template #header>
       <DiscordUserInfo v-bind="entry.user" />
-    </header>
+    </template>
     <form @submit.prevent="form.put(route('settings.set', { discordUserId: entry.user.id }))">
       <HtFormControlGroup :vertical="true">
         <HtFormControl

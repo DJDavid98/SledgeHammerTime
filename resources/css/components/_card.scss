@@ -10,4 +10,28 @@
     background-color: design.app-color-dark('card-bg');
     color: design.app-color-dark('card-color');
   }
+
+  &.error {
+    background-color: design.app-color-light('card-error-bg');
+    color: design.app-color-light('card-error-color');
+
+    @include design.if-dark {
+      background-color: design.app-color-dark('card-error-bg');
+      color: design.app-color-dark('card-error-color');
+    }
+  }
+
+  .card-header {
+    &:not(:last-child) {
+      margin-bottom: design.app-size('card-padding');
+    }
+
+    &:empty {
+      display: none;
+    }
+
+    h2 {
+      font-size: design.app-size('card-header-2-font-size');
+    }
+  }
 }

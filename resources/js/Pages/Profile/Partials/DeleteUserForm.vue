@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Modal from '@/Components/CustomModal.vue';
 import HtButton from '@/Reusable/HtButton.vue';
+import HtCard from '@/Reusable/HtCard.vue';
 import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
 
@@ -33,18 +34,22 @@ const closeModal = () => {
 </script>
 
 <template>
-  <h2>{{ $t('profile.deletion.heading') }}</h2>
+  <HtCard>
+    <template #header>
+      <h2>{{ $t('profile.deletion.heading') }}</h2>
+    </template>
 
-  <p class="mt-1">
-    {{ $t('profile.deletion.description') }}
-  </p>
+    <p class="mt-1">
+      {{ $t('profile.deletion.description') }}
+    </p>
 
-  <HtButton
-    color="danger"
-    @click="confirmUserDeletion"
-  >
-    {{ $t('profile.deletion.deleteButton') }}
-  </HtButton>
+    <HtButton
+      color="danger"
+      @click="confirmUserDeletion"
+    >
+      {{ $t('profile.deletion.deleteButton') }}
+    </HtButton>
+  </HtCard>
 
   <Modal
     :show="confirmingUserDeletion"

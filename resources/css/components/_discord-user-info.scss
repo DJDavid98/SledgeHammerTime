@@ -6,7 +6,6 @@
   justify-content: flex-start;
   align-items: center;
   gap: design.app-size('discord-user-info-spacing');
-  margin-bottom: design.app-size('content-spacing');
 
   .user-image {
     width: design.app-size('discord-user-info-image-size');

@@ -3,6 +3,7 @@ import { DiscordUserInfoProps } from '@/Components/DiscordUserInfo.vue';
 import Layout from '@/Layouts/DefaultLayout.vue';
 import ConnectedAccounts from '@/Pages/Profile/Partials/ConnectedAccounts.vue';
 import HtCard from '@/Reusable/HtCard.vue';
+import { getHtmlTitle } from '@/utils/app';
 import { Head } from '@inertiajs/vue3';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
@@ -13,23 +14,19 @@ defineProps<{
 </script>
 
 <template>
-  <Head :title="$t('profile.title')" />
+  <Head :title="getHtmlTitle($t('profile.title'))" />
 
   <Layout>
     <HtCard>
-      <h2>{{ $t('profile.title') }}</h2>
+      <template #header>
+        <h2>{{ $t('profile.title') }}</h2>
+      </template>
     </HtCard>
 
-    <HtCard>
-      <UpdateProfileInformationForm />
-    </HtCard>
+    <UpdateProfileInformationForm />
 
-    <HtCard>
-      <ConnectedAccounts :discord-users="discordUsers" />
-    </HtCard>
+    <ConnectedAccounts :discord-users="discordUsers" />
 
-    <HtCard>
-      <DeleteUserForm />
-    </HtCard>
+    <DeleteUserForm />
   </Layout>
 </template>

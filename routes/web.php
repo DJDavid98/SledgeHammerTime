@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BotSettingsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotFoundController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\StaticController;
@@ -70,3 +71,4 @@ foreach ($languages as $language => $_){
 }
 $defineRoutes(true);
 
+Route::fallback([NotFoundController::class, 'notFound']);

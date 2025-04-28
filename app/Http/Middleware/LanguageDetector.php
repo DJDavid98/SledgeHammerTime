@@ -11,11 +11,11 @@ use Teto\HTTP\AcceptLanguage;
 class LanguageDetector {
   protected array $ignored_segments = [
     // Server invite redirect
-    'discord',
+    'discord' => ['GET'],
     // Login magic links
-    'bot-login',
+    'bot-login' => ['POST'],
     // oAuth flow related
-    'oauth',
+    'oauth' => ['GET'],
   ];
 
   protected const LOCALIZED_PATH_REGEX = '/^[a-z]{2}(?:[_-][a-zA-Z\d]{2,})?(?:$|\/)/';
@@ -23,6 +23,7 @@ class LanguageDetector {
 
   public function handle(Request $request, Closure $next) {
     $request_path = $request->path();
+    $request_method = $request->method();
     $first_route_segment = $request->segment(1);
     $is_localized_path = preg_match(self::LOCALIZED_PATH_REGEX, $request_path);
     if ($is_localized_path){
@@ -31,7 +32,7 @@ class LanguageDetector {
       $route_locale = $this->validateLocale($first_route_segment);
     }
     else {
-      if (in_array($first_route_segment, $this->ignored_segments, true)){
+      if (in_array($first_route_segment, $this->ignored_segments, true) && in_array($request_method, $this->ignored_segments[$first_route_segment], true)){
         return $next($request);
       }
 
@@ -39,7 +40,7 @@ class LanguageDetector {
       $route_locale = $this->detectLocale();
     }
 
-    if ($first_route_segment === $route_locale || $request->method() !== 'GET'){
+    if ($first_route_segment === $route_locale || $request_method !== 'GET'){
       // No redirection
       return $next($request);
     }

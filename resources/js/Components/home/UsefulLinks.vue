@@ -6,9 +6,11 @@ import HtTranslate from '@/Reusable/HtTranslate.vue';
 
 <template>
   <HtCard class="useful-links-card">
-    <p class="lead-text">
-      {{ $t('timestampPicker.usefulLinks.lead') }}
-    </p>
+    <template #header>
+      <p class="lead-text">
+        {{ $t('timestampPicker.usefulLinks.lead') }}
+      </p>
+    </template>
     <div class="links">
       <UsefulLinkItem
         :name="$t('timestampPicker.usefulLinks.server.header')"

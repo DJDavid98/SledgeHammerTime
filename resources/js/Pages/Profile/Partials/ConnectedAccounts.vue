@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DiscordUserInfo, { DiscordUserInfoProps } from '@/Components/DiscordUserInfo.vue';
+import HtCard from '@/Reusable/HtCard.vue';
 
 defineProps<{
   discordUsers: DiscordUserInfoProps[]
@@ -7,8 +8,10 @@ defineProps<{
 </script>
 
 <template>
-  <header>
-    <h2>{{ $t('profile.accounts.heading') }}</h2>
+  <HtCard>
+    <template #header>
+      <h2>{{ $t('profile.accounts.heading') }}</h2>
+    </template>
 
     <p class="mt-1">
       {{ $t('profile.accounts.description.0') }}
@@ -17,11 +20,11 @@ defineProps<{
     <p class="mt-1 mb-3">
       {{ $t('profile.accounts.description.1') }}
     </p>
-  </header>
 
-  <DiscordUserInfo
-    v-for="info of discordUsers"
-    v-bind="info"
-    :key="info.id"
-  />
+    <DiscordUserInfo
+      v-for="info of discordUsers"
+      v-bind="info"
+      :key="info.id"
+    />
+  </HtCard>
 </template>
