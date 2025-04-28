@@ -3,6 +3,13 @@
 return [
   'title' => 'Bot Beállítások',
   'description' => 'Alább láthatod a jelenlegi beállításaidat a HammerTime Bot-ban, minden összekapcsolt fiókodhoz.',
+  'advancedSettings' => [
+    'toggleText' => 'Haladó beállítások',
+    'atCommandName' => 'ekkor',
+    'hourOptionName' => 'óra',
+    'minuteOptionName' => 'perc',
+    'secondOptionName' => 'másodperc',
+  ],
   'fields' => [
     'rawData' => [
       'displayName' => 'Nyers adatok (hibakeresés céljából)',
@@ -37,6 +44,18 @@ return [
     ],
     'header' => [
       'displayName' => 'Fejléc',
+    ],
+    'boldPreview' => [
+      'displayName' => 'Előnézet formázása félkövéren',
+    ],
+    'defaultAtHour' => [
+      'displayName' => 'Alapértelmezett ":hourOptionName" paraméter az /:atCommandName parancshoz',
+    ],
+    'defaultAtMinute' => [
+      'displayName' => 'Alapértelmezett ":minuteOptionName" paraméter az /:atCommandName parancshoz',
+    ],
+    'defaultAtSecond' => [
+      'displayName' => 'Alapértelmezett ":secondOptionName" paraméter az /:atCommandName parancshoz',
     ],
   ],
   'saveSuccess' => 'A beállításaid sikeresen mentéstre kerültek.',
