@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/discord', [RedirectController::class, 'discord']);
+Route::get('/bot-login', [NotFoundController::class, 'notFound']);
+Route::get('/bot-login/{discordUserId}', [NotFoundController::class, 'notFound']);
 Route::get('/bot-login/{discordUserId}/{locale}', [AuthController::class, 'botLogin'])->name('botLogin');
 Route::get('/{locale?}', [HomeController::class, 'index'])->name('home');
 Route::get('/{locale}/discord', [RedirectController::class, 'discord'])->name('discord');
