@@ -3,6 +3,10 @@
 return [
   'seoDescription' => 'Generálj időpont jelölőket a Discord üzeneteidhez',
   'changeLanguage' => 'Nyelv változtatás',
+  "notFound" => [
+    "heading" => "Page Not Found",
+    "content" => "Nothing to see here.",
+  ],
   'incompleteTranslations' => 'A fordítások hiányosak',
   'contributeTranslations' => 'Közreműködés',
   'guest' => 'Látogató',
