@@ -11,11 +11,11 @@ use Teto\HTTP\AcceptLanguage;
 class LanguageDetector {
   protected array $ignored_segments = [
     // Server invite redirect
-    'discord' => ['GET'],
+    'discord',
     // Login magic links
-    'bot-login' => ['POST'],
+    'bot-login',
     // oAuth flow related
-    'oauth' => ['GET'],
+    'oauth',
   ];
 
   protected const LOCALIZED_PATH_REGEX = '/^[a-z]{2}(?:[_-][a-zA-Z\d]{2,})?(?:$|\/)/';
@@ -32,7 +32,7 @@ class LanguageDetector {
       $route_locale = $this->validateLocale($first_route_segment);
     }
     else {
-      if (in_array($first_route_segment, $this->ignored_segments, true) && in_array($request_method, $this->ignored_segments[$first_route_segment], true)){
+      if (in_array($first_route_segment, $this->ignored_segments, true)){
         return $next($request);
       }
 
