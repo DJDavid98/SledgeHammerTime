@@ -39,7 +39,7 @@ const closeModal = () => {
       <h2>{{ $t('profile.deletion.heading') }}</h2>
     </template>
 
-    <p class="mt-1">
+    <p class="mt-1 mb-3">
       {{ $t('profile.deletion.description') }}
     </p>
 

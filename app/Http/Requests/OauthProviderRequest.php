@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Enums\SocialProvider;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Enum;
 
@@ -15,7 +14,7 @@ class OauthProviderRequest extends FormRequest {
    * @return bool
    */
   public function authorize() {
-    return !Auth::check();
+    return true;
   }
 
   /**

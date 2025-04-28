@@ -70,7 +70,6 @@ export const useCheatCode = (codeFilter: KeyFilter[]): Ref<boolean> => {
   onUnmounted(removeListener);
 
   watch(keyHistory, (history) => {
-
     if (history.length !== codeHistory.value.length) {
       return;
     }

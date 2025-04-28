@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
   Route::get('login', [AuthController::class, 'login']);
+
+  Route::get('/oauth/callback/{provider}', [AuthController::class, 'callbackGuest']);
 });
 
 Route::middleware('auth')->group(function () {
@@ -29,6 +31,7 @@ Route::middleware('auth')->group(function () {
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
   Route::put('/settings/{discordUserId}', [BotSettingsController::class, 'set'])->name('settings.set');
   Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+  Route::get('/oauth/callback/{provider}', [AuthController::class, 'callbackAuthenticated']);
 });
 
 Route::get('/discord', [RedirectController::class, 'discord']);
@@ -38,10 +41,10 @@ Route::get('/bot-login/{discordUserId}/{locale}', [AuthController::class, 'botLo
 Route::get('/{locale?}', [HomeController::class, 'index'])->name('home');
 Route::get('/{locale}/discord', [RedirectController::class, 'discord'])->name('discord');
 
-Route::middleware('guest')->group(function () {
-  Route::get('/oauth/callback/{provider}', [AuthController::class, 'callback']);
-  Route::get('/{locale}/oauth/redirect/{provider}', [AuthController::class, 'redirect']);
-});
+Route::get('/oauth', [NotFoundController::class, 'notFound']);
+Route::get('/oauth/callback', [NotFoundController::class, 'notFound']);
+Route::get('/{locale}/oauth/redirect', [NotFoundController::class, 'notFound']);
+Route::get('/{locale}/oauth/redirect/{provider}', [AuthController::class, 'redirect']);
 
 $languages = config('languages');
 $addLocalePrefix = function (string $path, bool $set_names):string {
@@ -53,9 +56,10 @@ $defineRoutes = function (bool $set_names) use ($addLocalePrefix) {
   $addBotRoute = Route::get($addLocalePrefix('/add-bot', $set_names), [StaticController::class, 'addBot']);
   $addBotRedirectRoute = Route::get($addLocalePrefix('/add-bot/{installType}', $set_names), [RedirectController::class, 'addBotLink']);
   $designRoute = Route::get($addLocalePrefix('/design', $set_names), [StaticController::class, 'design']);
-  $loginRoute = Route::middleware('guest')->get($addLocalePrefix('/login', $set_names), [AuthController::class, 'login']);
+  $loginRoute = Route::get($addLocalePrefix('/login', $set_names), [AuthController::class, 'login']);
 
-  Route::middleware('guest')->get($addLocalePrefix('/oauth/callback/{provider}', $set_names), [AuthController::class, 'callback']);
+  Route::middleware('guest')->get($addLocalePrefix('/oauth/callback/{provider}', $set_names), [AuthController::class, 'callbackGuest']);
+  Route::middleware('auth')->get($addLocalePrefix('/oauth/callback/{provider}', $set_names), [AuthController::class, 'callbackAuthenticated']);
 
   if ($set_names){
     $loginRoute->name('login');

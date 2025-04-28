@@ -40,45 +40,80 @@ class AuthController extends Controller {
     return $driver->redirect();
   }
 
-  public function callback(OauthProviderRequest $request) {
+  public function callbackGuest(OauthProviderRequest $request) {
     $validated = $request->validated();
     $driver = Socialite::driver($validated['provider'])->stateless();
     $data = $driver->user();
-    if ($validated['provider'] === SocialProvider::Discord->value){
-      $discord_user = DiscordUser::updateOrCreate([
-        'id' => $data->getId(),
-      ], [
-        'id' => $data->getId(),
-        'name' => $data->user['username'],
-        'display_name' => $data->user['global_name'] ?? null,
-        'discriminator' => $data->user['discriminator'],
-        'avatar' => $data->user['avatar'],
-        'access_token' => $data->token,
-        'refresh_token' => $data->refreshToken,
-        'scopes' => $data->accessTokenResponseBody['scope'],
-        'token_expires' => (new Carbon())->add('seconds', $data->expiresIn),
-      ]);
-
-      /**
-       * @type $user User
-       */
-      $user = $discord_user->user()->first();
-      if (!$user){
-        $user = Auth::user();
-        if (!$user){
-          $user = User::create([
-            'name' => $discord_user->public_name,
-          ]);
-        }
-        $discord_user->update(['user_id' => $user->id]);
-      }
-
-      Auth::login($user);
+    if ($validated['provider'] !== SocialProvider::Discord->value){
+      abort(500, "Validated provider {$validated['provider']} does not match expectations");
     }
+
+    $discord_user = $this->updateOrCreateDiscordUser($data);
+
+    /**
+     * @type $user User
+     */
+    $user = $discord_user->user()->first();
+    if (!$user){
+      $user = Auth::user();
+      if (!$user){
+        $user = User::create([
+          'name' => $discord_user->public_name,
+        ]);
+      }
+      $discord_user->update(['user_id' => $user->id]);
+    }
+
+    Auth::login($user);
 
     $login_locale = session()?->pull(self::LOGIN_LOCALE_SESSION_KEY);
 
     return redirect(RouteServiceProvider::HOME.($login_locale ?? ''));
+  }
+
+  public function callbackAuthenticated(OauthProviderRequest $request) {
+    /**
+     * @type $user User|null
+     */
+    $user = Auth::user();
+    if (!$user){
+      abort(403, "User is not logged in");
+    }
+
+    $validated = $request->validated();
+    $driver = Socialite::driver($validated['provider'])->stateless();
+    $data = $driver->user();
+    if ($validated['provider'] !== SocialProvider::Discord->value){
+      abort(500, "Validated provider {$validated['provider']} does not match expectations");
+    }
+
+    $discord_user = $this->updateOrCreateDiscordUser($data);
+    $discord_user->update(['user_id' => $user->id]);
+
+    $login_locale = session()?->pull(self::LOGIN_LOCALE_SESSION_KEY) ?? App::getLocale();
+
+    return redirect()->route('profile.edit', ['locale' => $login_locale]);
+  }
+
+  protected function updateOrCreateDiscordUser($data) {
+    /**
+     * @var DiscordUser $result
+     */
+    $result = DiscordUser::updateOrCreate([
+      'id' => $data->getId(),
+    ], [
+      'id' => $data->getId(),
+      'name' => $data->user['username'],
+      'display_name' => $data->user['global_name'] ?? null,
+      'discriminator' => $data->user['discriminator'],
+      'avatar' => $data->user['avatar'],
+      'access_token' => $data->token,
+      'refresh_token' => $data->refreshToken,
+      'scopes' => $data->accessTokenResponseBody['scope'],
+      'token_expires' => (new Carbon())->add('seconds', $data->expiresIn),
+    ]);
+
+    return $result;
   }
 
   public function login(Request $request):RedirectResponse {
