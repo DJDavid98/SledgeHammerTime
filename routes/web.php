@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
   Route::put('/settings/{discordUserId}', [BotSettingsController::class, 'set'])->name('settings.set');
   Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-  Route::get('/oauth/callback/{provider}', [AuthController::class, 'callbackAuthenticated']);
+  Route::get('/oauth/callback-auth/{provider}', [AuthController::class, 'callbackAuthenticated']);
 });
 
 Route::get('/discord', [RedirectController::class, 'discord']);
@@ -59,7 +59,7 @@ $defineRoutes = function (bool $set_names) use ($addLocalePrefix) {
   $loginRoute = Route::get($addLocalePrefix('/login', $set_names), [AuthController::class, 'login']);
 
   Route::middleware('guest')->get($addLocalePrefix('/oauth/callback/{provider}', $set_names), [AuthController::class, 'callbackGuest']);
-  Route::middleware('auth')->get($addLocalePrefix('/oauth/callback/{provider}', $set_names), [AuthController::class, 'callbackAuthenticated']);
+  Route::middleware('auth')->get($addLocalePrefix('/oauth/callback-auth/{provider}', $set_names), [AuthController::class, 'callbackAuthenticated']);
 
   if ($set_names){
     $loginRoute->name('login');

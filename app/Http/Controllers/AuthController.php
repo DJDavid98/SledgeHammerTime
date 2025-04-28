@@ -21,7 +21,9 @@ class AuthController extends Controller {
   protected const LOGIN_LOCALE_SESSION_KEY = 'login_locale';
 
   private static function createRedirectUrl(string $provider):string {
-    return config('app.url')."/oauth/callback/$provider";
+    $callback_path = Auth::check() ? 'callback-auth' : 'callback';
+
+    return config('app.url')."/oauth/$callback_path/$provider";
   }
 
   public function redirect(OauthProviderRequest $request) {

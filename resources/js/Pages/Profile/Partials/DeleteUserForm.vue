@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import Modal from '@/Components/CustomModal.vue';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
+import HtCollapsible from '@/Reusable/HtCollapsible.vue';
+import { faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
 
@@ -45,37 +46,40 @@ const closeModal = () => {
 
     <HtButton
       color="danger"
+      :pressed="confirmingUserDeletion"
+      :disabled="confirmingUserDeletion"
       @click="confirmUserDeletion"
     >
       {{ $t('profile.deletion.deleteButton') }}
     </HtButton>
+    <HtCollapsible :visible="confirmingUserDeletion">
+      <p class="mb-2">
+        {{ $t('profile.deletion.confirmDialog.header') }}
+      </p>
+
+      <p class="mb-2">
+        {{ $t('profile.deletion.confirmDialog.body') }}
+      </p>
+
+      <div>
+        <HtButton
+          class="me-3"
+          :icon-start="faTimes"
+          @click="closeModal"
+        >
+          {{ $t('actions.cancel') }}
+        </HtButton>
+
+        <HtButton
+          color="danger"
+          :disabled="form.processing"
+          :aria-busy="form.processing ? 'true' : undefined"
+          :icon-start="faTrash"
+          @click="deleteUser"
+        >
+          {{ $t('actions.confirm') }}
+        </HtButton>
+      </div>
+    </HtCollapsible>
   </HtCard>
-
-  <Modal
-    :show="confirmingUserDeletion"
-    @close="closeModal"
-  >
-    <template #header>
-      {{ $t('profile.deletion.confirmDialog.header') }}
-    </template>
-
-    <p class="mt-1">
-      {{ $t('profile.deletion.confirmDialog.body') }}
-    </p>
-
-    <template #footer>
-      <HtButton @click="closeModal">
-        {{ $t('actions.cancel') }}
-      </HtButton>
-
-      <HtButton
-        color="danger"
-        :disabled="form.processing"
-        :aria-busy="form.processing ? 'true' : undefined"
-        @click="deleteUser"
-      >
-        {{ $t('actions.confirm') }}
-      </HtButton>
-    </template>
-  </Modal>
 </template>
