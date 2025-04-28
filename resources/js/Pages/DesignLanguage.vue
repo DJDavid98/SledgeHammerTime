@@ -8,7 +8,6 @@ import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
 import HtContent from '@/Reusable/HtContent.vue';
 import HtHeader from '@/Reusable/HtHeader.vue';
-import { getHtmlTitle } from '@/utils/app';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { Head } from '@inertiajs/vue3';
@@ -26,7 +25,7 @@ provide(localSettings, localSettingsValue);
 </script>
 
 <template>
-  <Head :title="getHtmlTitle($t('design.title'))" />
+  <Head :title="$t('design.title')" />
 
   <HtHeader>
     <template #left>

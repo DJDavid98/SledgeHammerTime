@@ -2,12 +2,11 @@
 
 import Layout from '@/Layouts/DefaultLayout.vue';
 import HtAlert from '@/Reusable/HtAlert.vue';
-import { getHtmlTitle } from '@/utils/app';
 import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-  <Head :title="getHtmlTitle($t('global.notFound.heading'))" />
+  <Head :title="$t('global.notFound.heading')" />
 
   <Layout>
     <HtAlert

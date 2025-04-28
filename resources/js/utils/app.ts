@@ -7,8 +7,6 @@ import { ModelRef, Ref } from 'vue';
 
 export const getAppName = () => import.meta.env.VITE_APP_NAME || 'Laravel';
 
-export const getHtmlTitle = (prefix?: string) => prefix ? `${prefix} | ${getAppName()}` : getAppName();
-
 export const inputRangeLimitBlurHandlerFactory = (numberRef: Ref<number> | ModelRef<number>) => (e: FocusEvent): void => {
   const limitedValue = rangeLimitInput(e.target);
   if (limitedValue === numberRef.value)

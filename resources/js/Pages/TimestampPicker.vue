@@ -4,7 +4,6 @@ import UsefulLinks from '@/Components/home/UsefulLinks.vue';
 import { timestamp } from '@/injection-keys';
 import Layout from '@/Layouts/DefaultLayout.vue';
 import { TimezoneSelection } from '@/model/timezone-selection';
-import { getHtmlTitle } from '@/utils/app';
 import {
   convertTimeZoneSelectionToString,
   getDateTimeMoment,
@@ -78,7 +77,7 @@ watch([dateString, timeString, currentTimezone], () => {
 </script>
 
 <template>
-  <Head :title="getHtmlTitle()" />
+  <Head title="" />
 
   <Layout>
     <TimestampDisplay />

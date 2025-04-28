@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MinimalLayout from '@/Layouts/MinimalLayout.vue';
 import AddLink from '@/Pages/AddApp/AddLink.vue';
-import { getAppName, getHtmlTitle } from '@/utils/app';
+import { getAppName } from '@/utils/app';
 import { faSquarePlus, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Head } from '@inertiajs/vue3';
 
@@ -9,7 +9,7 @@ const appName = getAppName();
 </script>
 
 <template>
-  <Head :title="getHtmlTitle($t('timestampPicker.usefulLinks.bot.header'))" />
+  <Head :title="$t('timestampPicker.usefulLinks.bot.header')" />
   <MinimalLayout>
     <div class="page">
       <img
