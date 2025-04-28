@@ -4,11 +4,11 @@ return [
   'title' => 'Bot Beállítások',
   'description' => 'Alább láthatod a jelenlegi beállításaidat a HammerTime Bot-ban, minden összekapcsolt fiókodhoz.',
   'advancedSettings' => [
-    'toggleText' => 'Advanced settings',
-    'atCommandName' => 'at',
-    'hourOptionName' => 'hour',
-    'minuteOptionName' => 'minute',
-    'secondOptionName' => 'second',
+    'toggleText' => 'Haladó beállítások',
+    'atCommandName' => 'ekkor',
+    'hourOptionName' => 'óra',
+    'minuteOptionName' => 'perc',
+    'secondOptionName' => 'másodperc',
   ],
   'fields' => [
     'rawData' => [
@@ -46,16 +46,16 @@ return [
       'displayName' => 'Fejléc',
     ],
     'boldPreview' => [
-      'displayName' => 'Format preview as bold',
+      'displayName' => 'Előnézet formázása félkövéren',
     ],
     'defaultAtHour' => [
-      'displayName' => 'Default ":hourOptionName" option for /:atCommandName command',
+      'displayName' => 'Alapértelmezett ":hourOptionName" paraméter az /:atCommandName parancshoz',
     ],
     'defaultAtMinute' => [
-      'displayName' => 'Default ":minuteOptionName" option for /:atCommandName command',
+      'displayName' => 'Alapértelmezett ":minuteOptionName" paraméter az /:atCommandName parancshoz',
     ],
     'defaultAtSecond' => [
-      'displayName' => 'Default ":secondOptionName" option for /:atCommandName command',
+      'displayName' => 'Alapértelmezett ":secondOptionName" paraméter az /:atCommandName parancshoz',
     ],
   ],
   'saveSuccess' => 'A beállításaid sikeresen mentéstre kerültek.',
