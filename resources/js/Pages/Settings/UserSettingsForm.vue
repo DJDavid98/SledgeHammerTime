@@ -154,7 +154,6 @@ const form = useForm({
         </HtFormCheckboxModelled>
 
         <HtFormCheckboxModelled
-          v-if="devMode"
           :id="'boldPreview-'+entry.user.id"
           v-model="form.boldPreview"
           name="boldPreview"
