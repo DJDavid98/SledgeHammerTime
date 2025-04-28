@@ -3,6 +3,10 @@
 return [
   'seoDescription' => 'Generate timestamp indicators for Discord chat messages',
   'changeLanguage' => 'Change language',
+  "notFound" => [
+    "heading" => "Page Not Found",
+    "content" => "Nothing to see here.",
+  ],
   'incompleteTranslations' => 'Translations are incomplete',
   'contributeTranslations' => 'Contribute',
   'guest' => 'Guest',
