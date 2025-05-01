@@ -11,8 +11,10 @@
 |
 */
 
+use App\Console\Commands\UpdateDiscordBotListCommands;
 use App\Console\Commands\UpdateDiscordBotListStatistics;
 use App\Console\Commands\UpdateTopGgStatistics;
 
 Schedule::command(UpdateTopGgStatistics::class)->hourly();
 Schedule::command(UpdateDiscordBotListStatistics::class)->hourly();
+Schedule::command(UpdateDiscordBotListCommands::class)->daily();
