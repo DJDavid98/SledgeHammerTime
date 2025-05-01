@@ -21,5 +21,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/login-link/{discordUserId}/{locale}', [BotApiController::class, 'loginLink']);
     Route::get('/settings/{discordUserId}', [BotApiController::class, 'settings']);
     Route::post('/shard-statistics', [BotApiController::class, 'updateShardStats']);
+    Route::put('/bot-commands', [BotApiController::class, 'updateBotCommands']);
   });
 });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BotLoginRequest;
 use App\Http\Requests\SaveShardStatsRequest;
+use App\Http\Requests\UpdateBotCommandsRequest;
+use App\Models\BotCommand;
 use App\Models\BotShard;
 use App\Models\DiscordUser;
 use App\Models\Settings;
@@ -64,5 +66,24 @@ class BotApiController extends Controller {
     ]);
 
     return response()->json($shard);
+  }
+
+  function updateBotCommands(UpdateBotCommandsRequest $request) {
+    $requestData = $request->validated();
+
+    $commands = [];
+    foreach ($requestData as $commandData){
+      $command = BotCommand::updateOrCreate([
+        'name' => $commandData['name'],
+      ], [
+        'id' => $commandData['id'],
+        'name' => $commandData['name'],
+        'description' => $commandData['description'],
+        'type' => $commandData['type'],
+      ]);
+      $commands[] = $command;
+    }
+
+    return response()->json($commands);
   }
 }
