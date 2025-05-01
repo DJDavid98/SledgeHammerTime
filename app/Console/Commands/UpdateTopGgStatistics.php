@@ -12,7 +12,7 @@ class UpdateTopGgStatistics extends Command {
    *
    * @var string
    */
-  protected $signature = 'app:update-top-gg-statistics';
+  protected $signature = 'app:update-topgg-stats';
 
   /**
    * The console command description.
@@ -25,6 +25,12 @@ class UpdateTopGgStatistics extends Command {
    * Execute the console command.
    */
   public function handle() {
+    $token = config('services.top-gg.token');
+    if (empty($token)){
+      $this->warn("You do not have a Top.gg token set, which is required to use this command.");
+
+      return 1;
+    }
 
     $statsData = [
       'server_count' => (int)BotShard::sum('server_count'),
@@ -36,7 +42,7 @@ class UpdateTopGgStatistics extends Command {
     $result = Http::asJson()
       ->baseUrl(config('services.top-gg.base_url'))
       ->withHeaders([
-        'Authorization' => config('services.top-gg.token'),
+        'Authorization' => $token,
       ])
       ->post($endpoint, $statsData);
 

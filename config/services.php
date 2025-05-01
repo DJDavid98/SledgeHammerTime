@@ -41,4 +41,10 @@ return [
     'token' => env('TOP_GG_TOKEN'),
     'base_url' => 'https://top.gg/api',
   ],
+
+  'discord-bot-list' => [
+    'token' => env('DISCORD_BOT_LIST_TOKEN'),
+    'base_url' => 'https://discordbotlist.com/api/v1',
+    'bot_id' => env('DISCORD_BOT_LIST_BOT_ID'),
+  ],
 ];
