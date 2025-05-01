@@ -251,7 +251,7 @@ return [
         'specialization'           => 'especialização',
         'started_at'               => 'começou às',
         'state'                    => 'estado',
-        'status'                   => 'status',
+        'status'                   => 'estado',
         'street'                   => 'rua',
         'student'                  => 'estudante',
         'subject'                  => 'assunto',
