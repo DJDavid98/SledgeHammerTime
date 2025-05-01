@@ -28,6 +28,7 @@ class UpdateTopGgStatistics extends Command {
 
     $statsData = [
       'server_count' => (int)BotShard::sum('server_count'),
+      'shard_count' => BotShard::count(),
     ];
     $this->info("Updating Top.gg bot stats…\n".var_export($statsData, return: true));
 
