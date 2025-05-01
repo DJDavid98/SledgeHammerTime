@@ -37,4 +37,8 @@ return [
     'redirect' => env('APP_URL').'/oauth/callback/discord',
   ],
 
+  'top-gg' => [
+    'token' => env('TOP_GG_TOKEN'),
+    'base_url' => 'https://top.gg/api',
+  ],
 ];

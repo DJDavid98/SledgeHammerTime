@@ -11,3 +11,6 @@
 |
 */
 
+use App\Console\Commands\UpdateTopGgStatistics;
+
+Schedule::command(UpdateTopGgStatistics::class)->hourly();
