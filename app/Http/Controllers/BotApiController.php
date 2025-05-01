@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BotLoginRequest;
+use App\Http\Requests\SaveShardStatsRequest;
+use App\Models\BotShard;
 use App\Models\DiscordUser;
 use App\Models\Settings;
 use App\Models\User;
@@ -43,5 +45,24 @@ class BotApiController extends Controller {
     $mergedSettings = Settings::mergeWithDefaults($settings);
 
     return response()->json($mergedSettings);
+  }
+
+  function getShardStats() {
+    return response()->json(BotShard::all());
+  }
+
+  function updateShardStats(SaveShardStatsRequest $request) {
+    $requestData = $request->validated();
+
+    $shard = BotShard::updateOrCreate([
+      'id' => $requestData['id'],
+    ], [
+      'id' => $requestData['id'],
+      'server_count' => $requestData['server_count'],
+      'member_count' => $requestData['member_count'],
+      'started_at' => $requestData['started_at'],
+    ]);
+
+    return response()->json($shard);
   }
 }
