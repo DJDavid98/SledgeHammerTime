@@ -92,7 +92,7 @@ onMounted(router.on('success', navigateListener));
             :key="sortedLocale"
           >
             <a
-              :href="route('home', { locale: sortedLocale })+searchParamsString"
+              :href="route(route().current() ?? 'home', { locale: sortedLocale })+searchParamsString"
               :class="['language-link', { disabled: !currentLanguage?.supportedLanguages?.has(sortedLocale) }]"
               :dir="config.rtl ? 'rtl' : 'ltr'"
             >
