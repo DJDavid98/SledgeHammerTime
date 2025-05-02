@@ -4,7 +4,8 @@ return [
   'heading' => 'Discord App',
   'description' => 'The HammerTime App lets you obtain easy-to-copy timestamp codes from within the Discord user interface using slash and context menu commands.',
   'customizeSettings' => 'Some of its functionality can also be customized by logging in, then visiting the <1>Bot Settings</1> page (also available by clicking your username in the sidebar).',
-  'addBotLead' => 'Add the bot to your server or your account and use it whenever you need a timestamp but don\'t feel like opening the browser.',
+  'addBotLead' => 'Add the app to your server or your account and use it whenever you need a timestamp but don\'t feel like opening the browser.',
+  'shareableLink' => 'You can also share the link below with others which will let them add the app without any additional distractions:',
   'commandsReference' => [
     'title' => 'Commands Reference',
     'description' => 'Below you will find a list of all commands and their options for your reference. This page currently shows the same descriptions that you would see in Discord as you are running the command, but it might be extended with additional information and examples later on.',
