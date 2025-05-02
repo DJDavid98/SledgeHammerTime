@@ -15,7 +15,7 @@ return [
     'body' => "A böngésződ vagy nem támogatja a JavaScript-et vagy jelenleg ki van kapcsolva. Egyes böngészők biztonsági okokból alapértelmezetten kikapcsolják, viszont ennek az alkalmazásnak szüksége van rá. Kérlek engedélyezd és töltsd újra az oldalt, vagy használj egy másik böngészőt.",
   ],
   'nav' => [
-    'botSettings' => 'Bot Beállítások',
+    'botSettings' => 'App Settings',
     'profile' => 'Profil',
   ],
   'sidebar' => [

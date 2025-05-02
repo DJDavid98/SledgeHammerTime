@@ -1,8 +1,9 @@
 <?php
 
 return [
-  'title' => 'Bot Beállítások',
-  'description' => 'Alább láthatod a jelenlegi beállításaidat a HammerTime Bot-ban, minden összekapcsolt fiókodhoz.',
+  'title' => 'App Settings',
+  'description' => 'Below you can see your current settings in the HammerTime App for each connected account.',
+  'learnMore' => 'Not sure what the app is or curious about what it can do? Visit the <1>Discord App</1> link to learn more.',
   'advancedSettings' => [
     'toggleText' => 'Haladó beállítások',
     'atCommandName' => 'ekkor',
