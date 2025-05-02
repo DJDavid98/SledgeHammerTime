@@ -141,3 +141,14 @@
     border-left: 0 !important;
   }
 }
+
+@mixin sidebar-link-style {
+  a {
+    color: functions.app-color-light('sidebar-content-link');
+    text-decoration: underline;
+
+    @include if-dark {
+      color: functions.app-color-dark('sidebar-content-link');
+    }
+  }
+}

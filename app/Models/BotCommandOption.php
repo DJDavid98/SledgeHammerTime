@@ -14,6 +14,8 @@ class BotCommandOption extends Model {
     'name',
     'type',
     'description',
+    'required',
+    'order',
   ];
 
   function command():BelongsTo {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BotInfoController;
 use App\Http\Controllers\BotSettingsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotFoundController;
@@ -57,6 +58,7 @@ $defineRoutes = function (bool $set_names) use ($addLocalePrefix) {
   $addBotRedirectRoute = Route::get($addLocalePrefix('/add-bot/{installType}', $set_names), [RedirectController::class, 'addBotLink']);
   $designRoute = Route::get($addLocalePrefix('/design', $set_names), [StaticController::class, 'design']);
   $loginRoute = Route::get($addLocalePrefix('/login', $set_names), [AuthController::class, 'login']);
+  $botInfoRoute = Route::get($addLocalePrefix('/app', $set_names), [BotInfoController::class, 'index']);
 
   Route::middleware('guest')->get($addLocalePrefix('/oauth/callback/{provider}', $set_names), [AuthController::class, 'callbackGuest']);
   Route::middleware('auth')->get($addLocalePrefix('/oauth/callback-auth/{provider}', $set_names), [AuthController::class, 'callbackAuthenticated']);
@@ -68,6 +70,7 @@ $defineRoutes = function (bool $set_names) use ($addLocalePrefix) {
     $addBotRoute->name('addBot');
     $addBotRedirectRoute->name('addBotRedirect');
     $designRoute->name('design');
+    $botInfoRoute->name('botInfo');
   }
 };
 foreach ($languages as $language => $_){

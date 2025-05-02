@@ -2,6 +2,7 @@
 
 import { currentLanguageInject } from '@/injection-keys';
 import { FALLBACK_LANGUAGE } from '@/utils/language-settings';
+import { Link } from '@inertiajs/vue3';
 import { inject } from 'vue';
 
 defineProps<{
@@ -17,9 +18,11 @@ const currentLanguage = inject(currentLanguageInject);
 
 <template>
   <div class="useful-link">
-    <a
+    <component
+      :is="isLocal ? Link : 'a'"
       :href="isLocal ? route(href, { locale: currentLanguage?.locale ?? FALLBACK_LANGUAGE }) : href"
-      target="_blank"
+      :target="isLocal ? undefined : '_blank'"
+      :rel="isLocal ? undefined : 'noopener noreferrer'"
       class="link-wrap"
     >
       <div class="link-card">
@@ -40,6 +43,6 @@ const currentLanguage = inject(currentLanguageInject);
           </span>
         </div>
       </div>
-    </a>
+    </component>
   </div>
 </template>

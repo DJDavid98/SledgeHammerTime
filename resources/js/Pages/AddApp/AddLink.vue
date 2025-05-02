@@ -6,18 +6,23 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { inject } from 'vue';
 
-defineProps<{
+withDefaults(defineProps<{
   installType: 'user' | 'guild';
   startIcon: IconDefinition;
   title: string;
   description: string;
-}>();
+  openInNewTab: boolean;
+}>(), {
+  openInNewTab: false,
+});
 const currentLanguage = inject(currentLanguageInject);
 </script>
 
 <template>
   <a
     :href="route('addBotRedirect', { locale: currentLanguage?.locale ?? FALLBACK_LANGUAGE, installType })"
+    :target="openInNewTab ? '_blank' : undefined"
+    :rel="openInNewTab ? 'noopener noreferrer' : undefined"
     class="add-link"
   >
     <FontAwesomeIcon

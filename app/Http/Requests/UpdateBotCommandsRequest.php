@@ -36,6 +36,7 @@ class UpdateBotCommandsRequest extends FormRequest {
       '*.options' => 'nullable|array|max:25',
       '*.options.*.name' => 'required|string|min:1|max:32',
       '*.options.*.type' => ['required', 'integer', new Enum(DiscordBotCommandOptionType::class)],
+      '*.options.*.required' => 'boolean',
       '*.options.*.name_localizations' => ['nullable', 'array', new ValidBotLocaleKeys()],
       '*.options.*.name_localizations.*' => 'string|min:1|max:32',
       '*.options.*.description' => 'nullable|string|min:1|max:100',

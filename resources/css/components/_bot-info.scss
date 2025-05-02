@@ -1,0 +1,40 @@
+@use "../design";
+
+.bot-info p, .bot-command-info {
+  @include design.sidebar-link-style;
+}
+
+.bot-command-info {
+  &:not(:last-child) {
+    margin-bottom: design.app-size('card-padding');
+  }
+
+  > :not(:last-child) {
+    margin-bottom: design.app-size('card-spacing');
+  }
+
+  .bot-command-name {
+    font-size: design.app-size('bot-command-heading-3');
+
+    .bot-command-type {
+      font-size: .8em;
+      opacity: .75;
+    }
+  }
+
+  h4 {
+    font-size: design.app-size('bot-command-heading-4');
+  }
+
+  .bot-command-options {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: design.app-size('card-spacing');
+
+    .bot-command-option-name {
+      &.required {
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -14,6 +14,8 @@ class BotCommand extends Model {
   ];
 
   function options():HasMany {
-    return $this->hasMany(BotCommandOption::class);
+    return $this->hasMany(BotCommandOption::class)
+      ->orderBy('required', 'desc')
+      ->orderBy('order');
   }
 }
