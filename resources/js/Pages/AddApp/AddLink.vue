@@ -2,7 +2,7 @@
 import { currentLanguageInject } from '@/injection-keys';
 import { FALLBACK_LANGUAGE } from '@/utils/language-settings';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { inject } from 'vue';
 
@@ -35,7 +35,7 @@ const currentLanguage = inject(currentLanguageInject);
       <p class="add-link-description">{{ description }}</p>
     </div>
     <FontAwesomeIcon
-      :icon="faChevronRight"
+      :icon="currentLanguage?.languageConfig?.rtl ? faChevronLeft : faChevronRight"
       class="ms-2 add-link-icon"
     />
   </a>

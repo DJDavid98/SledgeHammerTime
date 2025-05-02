@@ -64,14 +64,28 @@ withDefaults(defineProps<{
     .add-link {
       flex: 1 1 auto;
 
-      &:first-child {
-        border-top-left-radius: 0.5em;
-        border-bottom-left-radius: 0.5em;
+      @include design.if-ltr {
+        &:first-child {
+          border-top-left-radius: 0.5em;
+          border-bottom-left-radius: 0.5em;
+        }
+
+        &:last-child {
+          border-top-right-radius: 0.5em;
+          border-bottom-right-radius: 0.5em;
+        }
       }
 
-      &:last-child {
-        border-top-right-radius: 0.5em;
-        border-bottom-right-radius: 0.5em;
+      @include design.if-rtl {
+        &:first-child {
+          border-top-right-radius: 0.5em;
+          border-bottom-right-radius: 0.5em;
+        }
+
+        &:last-child {
+          border-top-left-radius: 0.5em;
+          border-bottom-left-radius: 0.5em;
+        }
       }
     }
   }
