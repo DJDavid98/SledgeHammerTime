@@ -15,7 +15,7 @@ return [
     'body' => "Your browser either does not support JavaScript or it's currently disabled. Some browsers disable JavaScript by default for security reasons, but it's necessary for this application. Please enable it and refresh the page, or use a different browser.",
   ],
   'nav' => [
-    'botSettings' => 'Bot Settings',
+    'botSettings' => 'App Settings',
     'profile' => 'Profile',
   ],
   'sidebar' => [
