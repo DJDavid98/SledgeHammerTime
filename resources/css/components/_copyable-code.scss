@@ -1,13 +1,13 @@
 @use "../design";
 
-.syntax-display {
+.copyable-code {
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
   gap: design.app-size('syntax-display-spacing');
 
-  .syntax-display-code {
+  .copyable-code-data {
     user-select: all;
     padding: design.app-size('syntax-display-padding-vertical') design.app-size('syntax-display-padding-horizontal');
     line-height: design.app-size('syntax-display-line-height');

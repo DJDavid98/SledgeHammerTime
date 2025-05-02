@@ -4,6 +4,7 @@ import AddAppLinks from '@/Pages/AddApp/AddAppLinks.vue';
 import { BotCommand } from '@/Pages/BotInfo/BotCommandInfo.vue';
 import CommandsReference from '@/Pages/BotInfo/CommandsReference.vue';
 import HtCard from '@/Reusable/HtCard.vue';
+import HtCopyableCode from '@/Reusable/HtCopyableCode.vue';
 import HtTranslate from '@/Reusable/HtTranslate.vue';
 import { BotCommandTranslation, getBotCommandTranslationKey } from '@/utils/translation';
 import { Head, Link } from '@inertiajs/vue3';
@@ -54,6 +55,10 @@ const flatTranslations = computed(() => props.translations.reduce((acc, translat
         :horizontal="true"
         :open-in-new-tab="true"
       />
+      <p class="mt-3 mb-3">
+        {{ $t('botInfo.shareableLink') }}
+      </p>
+      <HtCopyableCode :data="route('addBot', route().params)" />
     </HtCard>
 
     <CommandsReference
