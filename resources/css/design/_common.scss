@@ -245,7 +245,7 @@ $color-map: (
     light: #ccc,
     dark: #444,
   ),
-  sidebar-content-link: (
+  content-link: (
     light: #5865f2,
     dark: color.adjust(#5865f2, $lightness: 10%),
   ),

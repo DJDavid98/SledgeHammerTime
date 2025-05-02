@@ -1,7 +1,7 @@
 @use "../design";
 
 .bot-info p, .bot-command-info {
-  @include design.sidebar-link-style;
+  @include design.content-link-style;
 }
 
 .bot-info-image {

@@ -142,13 +142,13 @@
   }
 }
 
-@mixin sidebar-link-style {
+@mixin content-link-style {
   a {
-    color: functions.app-color-light('sidebar-content-link');
+    color: functions.app-color-light('content-link');
     text-decoration: underline;
 
     @include if-dark {
-      color: functions.app-color-dark('sidebar-content-link');
+      color: functions.app-color-dark('content-link');
     }
   }
 }

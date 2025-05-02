@@ -99,10 +99,10 @@
   }
 
   a {
-    color: design.app-color-light('sidebar-content-link');
+    color: design.app-color-light('content-link');
 
     @include design.if-dark {
-      color: design.app-color-dark('sidebar-content-link');
+      color: design.app-color-dark('content-link');
     }
   }
 }
