@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BotCommand extends Model {
   protected $fillable = [
@@ -11,4 +12,8 @@ class BotCommand extends Model {
     'description',
     'type',
   ];
+
+  function options():HasMany {
+    return $this->hasMany(BotCommandOption::class);
+  }
 }

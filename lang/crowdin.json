@@ -1,5 +1,5 @@
 {
-  "meta": "Generated at 2025-05-01T18:02:07.061Z",
+  "meta": "Generated at 2025-05-02T14:50:30.080Z",
   "users": {
     "25282": {
       "username": "Liggli",
@@ -766,6 +766,14 @@
         "nb"
       ]
     },
+    "16478035": {
+      "username": "zhengyang3552",
+      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/16478035/medium/a113cf30633b2c4bb00255d33def4534.png",
+      "fullName": "正阳",
+      "languages": [
+        "zh"
+      ]
+    },
     "16587533": {
       "username": "melishy",
       "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/16587533/medium/69333d4c608f1a0284c2cd46f6562b05.jpeg",
@@ -1098,7 +1106,7 @@
     },
     "ro": {
       "approval": 0,
-      "translation": 87
+      "translation": 100
     },
     "ru": {
       "approval": 0,
@@ -1134,7 +1142,7 @@
     },
     "zh": {
       "approval": 0,
-      "translation": 0
+      "translation": 49
     }
   }
 }

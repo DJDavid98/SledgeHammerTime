@@ -81,6 +81,17 @@ class BotApiController extends Controller {
         'description' => $commandData['description'],
         'type' => $commandData['type'],
       ]);
+      if (!empty($commandData['options'])){
+        foreach ($commandData['options'] as $optionData){
+          $command->options()->updateOrCreate([
+            'name' => $optionData['name'],
+          ], [
+            'name' => $optionData['name'],
+            'description' => $optionData['description'],
+            'type' => $optionData['type'],
+          ]);
+        }
+      }
       $commands[] = $command;
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\DiscordBotCommandOptionType;
 use App\Enums\DiscordBotCommandType;
 use App\Rules\ValidBotLocaleKeys;
 use Auth;
@@ -32,6 +33,14 @@ class UpdateBotCommandsRequest extends FormRequest {
       '*.description' => 'nullable|string|min:1|max:100',
       '*.description_localizations' => ['nullable', 'array', new ValidBotLocaleKeys()],
       '*.description_localizations.*' => 'string|min:1|max:100',
+      '*.options' => 'nullable|array|max:25',
+      '*.options.*.name' => 'required|string|min:1|max:32',
+      '*.options.*.type' => ['required', 'integer', new Enum(DiscordBotCommandOptionType::class)],
+      '*.options.*.name_localizations' => ['nullable', 'array', new ValidBotLocaleKeys()],
+      '*.options.*.name_localizations.*' => 'string|min:1|max:32',
+      '*.options.*.description' => 'nullable|string|min:1|max:100',
+      '*.options.*.description_localizations' => ['nullable', 'array', new ValidBotLocaleKeys()],
+      '*.options.*.description_localizations.*' => 'string|min:1|max:100',
     ];
   }
 }
