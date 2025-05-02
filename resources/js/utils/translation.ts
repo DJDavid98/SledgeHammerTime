@@ -33,3 +33,25 @@ export const normalizeCredit = (credit: TranslationCredit, reportData?: IndexedR
     avatarUrl: credit.avatarUrl ?? details?.avatarUrl,
   };
 };
+
+export interface BotCommandTranslation {
+  id: string;
+  command_id: string;
+  option_id: string | null;
+  locale: string;
+  field: string;
+  value: string;
+}
+
+interface GetBotCommandTranslationKeyOptions {
+  command_id: string;
+  option_id?: string | null;
+  field: string;
+}
+
+export const getBotCommandTranslationKey = ({
+  command_id,
+  option_id = null,
+  field,
+}: GetBotCommandTranslationKeyOptions) =>
+  `${command_id}.${option_id}.${field}`;

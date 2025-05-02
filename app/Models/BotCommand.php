@@ -13,9 +13,17 @@ class BotCommand extends Model {
     'type',
   ];
 
+  protected $casts = [
+    'id' => 'string',
+  ];
+
   function options():HasMany {
     return $this->hasMany(BotCommandOption::class)
       ->orderBy('required', 'desc')
       ->orderBy('order');
+  }
+
+  function translations():HasMany {
+    return $this->hasMany(BotCommandTranslation::class, 'command_id')->whereNull('option_id');
   }
 }

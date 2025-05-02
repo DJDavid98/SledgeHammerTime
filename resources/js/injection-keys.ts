@@ -5,7 +5,7 @@ import { AvailableLanguage } from '@/utils/language-settings';
 import { Moment } from 'moment-timezone';
 import { ComputedRef, InjectionKey, Ref } from 'vue';
 
-export const timestamp = Symbol() as InjectionKey<{
+export const timestamp = Symbol('timestamp') as InjectionKey<{
   currentTimestamp: ComputedRef<Moment>,
   currentDate: Readonly<Ref<string>>,
   currentTime: Readonly<Ref<string>>,
@@ -17,11 +17,11 @@ export const timestamp = Symbol() as InjectionKey<{
   setCurrentTime: () => void,
 }>;
 
-export const theme = Symbol() as InjectionKey<{
+export const theme = Symbol('theme') as InjectionKey<{
   readonly isLightTheme: boolean
 }>;
 
-export const sidebarState = Symbol() as InjectionKey<{
+export const sidebarState = Symbol('sidebarState') as InjectionKey<{
   readonly isOpen: boolean | null,
   readonly setIsOpen: (value: boolean) => void;
 }>;
@@ -42,13 +42,13 @@ export interface LocalSettingsValue {
   readonly setSidebarOffDesktop: (value: boolean) => void;
 }
 
-export const localSettings = Symbol() as InjectionKey<LocalSettingsValue>;
+export const localSettings = Symbol('localSettings') as InjectionKey<LocalSettingsValue>;
 
-export const formControlId = Symbol() as InjectionKey<string>;
+export const formControlId = Symbol('formControlId') as InjectionKey<string>;
 
-export const positionAnchor = Symbol() as InjectionKey<`--${string}`>;
+export const positionAnchor = Symbol('positionAnchor') as InjectionKey<`--${string}`>;
 
-export const pagePropsInject = Symbol() as InjectionKey<Ref<PageProps>>;
+export const pagePropsInject = Symbol('pagePropsInject') as InjectionKey<Ref<PageProps>>;
 
 export interface CurrentLanguageData {
   locale: AvailableLanguage;
@@ -58,6 +58,6 @@ export interface CurrentLanguageData {
   crowdinProjectId: string;
 }
 
-export const currentLanguageInject = Symbol() as InjectionKey<Ref<CurrentLanguageData>>;
+export const currentLanguageInject = Symbol('currentLanguageInject') as InjectionKey<Ref<CurrentLanguageData>>;
 
-export const devModeInject = Symbol() as InjectionKey<Ref<boolean>>;
+export const devModeInject = Symbol('devModeInject') as InjectionKey<Ref<boolean>>;
