@@ -1,0 +1,109 @@
+@use "../design";
+
+.add-app-links {
+  gap: 0.15em;
+  display: flex;
+  flex-direction: column;
+
+  .add-link {
+    &:first-child {
+      border-top-left-radius: 0.5em;
+      border-top-right-radius: 0.5em;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 0.5em;
+      border-bottom-right-radius: 0.5em;
+    }
+  }
+
+  @include design.screen-above('md') {
+    &.horizontal {
+      flex-flow: row;
+      justify-content: stretch;
+      width: 100%;
+
+      .add-link {
+        flex: 1 1 auto;
+
+        @include design.if-ltr {
+          &:first-child {
+            border-radius: 0.5em 0 0 0.5em;
+          }
+
+          &:last-child {
+            border-radius: 0 0.5em 0.5em 0;
+          }
+        }
+
+        @include design.if-rtl {
+          &:first-child {
+            border-radius: 0 0.5em 0.5em 0;
+          }
+
+          &:last-child {
+            border-radius: 0.5em 0 0 0.5em;
+          }
+        }
+      }
+    }
+  }
+}
+
+.add-link {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 1em;
+  padding: 0.5em 1em;
+  background-color: design.app-color-light('add-app-link-bg');
+  text-decoration: none;
+
+  &:hover {
+    background-color: design.app-color-light('add-app-link-hover-bg');
+  }
+
+  @include design.if-dark {
+    background-color: design.app-color-dark('add-app-link-bg');
+
+    &:hover {
+      background-color: design.app-color-dark('add-app-link-hover-bg');
+    }
+  }
+}
+
+.add-link-icon {
+  color: design.app-color-light('add-app-link-icon');
+  font-size: 1.4em;
+
+  @include design.if-dark {
+    color: design.app-color-dark('add-app-link-icon');
+  }
+}
+
+.add-link-text {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.15em;
+
+  .add-link-title {
+    font-size: 1rem;
+    color: design.app-color-light('add-app-link-title');
+    margin: 0;
+
+    @include design.if-dark {
+      color: design.app-color-dark('add-app-link-title');
+    }
+  }
+
+  .add-link-description {
+    font-size: 0.8rem;
+    color: design.app-color-light('add-app-link-description');
+    margin: 0;
+
+    @include design.if-dark {
+      color: design.app-color-dark('add-app-link-description');
+    }
+  }
+}

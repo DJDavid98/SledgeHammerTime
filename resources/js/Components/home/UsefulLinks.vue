@@ -22,7 +22,7 @@ import HtTranslate from '@/Reusable/HtTranslate.vue';
       <UsefulLinkItem
         :name="$t('timestampPicker.usefulLinks.bot.header')"
         :desc="$t('timestampPicker.usefulLinks.bot.p')"
-        href="addBot"
+        href="botInfo"
         :is-local="true"
         image="/useful-links/bot.png"
       />

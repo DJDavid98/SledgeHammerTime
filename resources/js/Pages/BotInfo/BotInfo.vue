@@ -29,6 +29,11 @@ const flatTranslations = computed(() => props.translations.reduce((acc, translat
   <Layout>
     <HtCard class="bot-info">
       <template #header>
+        <img
+          class="bot-info-image"
+          src="/useful-links/bot.png"
+          alt=""
+        >
         <h2>{{ $t('botInfo.heading') }}</h2>
       </template>
 
@@ -58,7 +63,7 @@ const flatTranslations = computed(() => props.translations.reduce((acc, translat
       <p class="mt-3 mb-3">
         {{ $t('botInfo.shareableLink') }}
       </p>
-      <HtCopyableCode :data="route('addBot', route().params)" />
+      <HtCopyableCode :data="route('addBotNoLocale')" />
     </HtCard>
 
     <CommandsReference

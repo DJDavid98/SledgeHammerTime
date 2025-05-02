@@ -54,7 +54,6 @@ $addLocalePrefix = function (string $path, bool $set_names):string {
 $defineRoutes = function (bool $set_names) use ($addLocalePrefix) {
   $settingsRoute = Route::middleware('auth')->get($addLocalePrefix('/settings', $set_names), [BotSettingsController::class, 'edit']);
   $profileEditRoute = Route::middleware('auth')->get($addLocalePrefix('/profile', $set_names), [ProfileController::class, 'edit']);
-  $addBotRoute = Route::get($addLocalePrefix('/add-bot', $set_names), [StaticController::class, 'addBot']);
   $addBotRedirectRoute = Route::get($addLocalePrefix('/add-bot/{installType}', $set_names), [RedirectController::class, 'addBotLink']);
   $designRoute = Route::get($addLocalePrefix('/design', $set_names), [StaticController::class, 'design']);
   $loginRoute = Route::get($addLocalePrefix('/login', $set_names), [AuthController::class, 'login']);
@@ -64,10 +63,13 @@ $defineRoutes = function (bool $set_names) use ($addLocalePrefix) {
   Route::middleware('auth')->get($addLocalePrefix('/oauth/callback-auth/{provider}', $set_names), [AuthController::class, 'callbackAuthenticated']);
 
   if ($set_names){
+    $addBotPath = '/add-bot';
+    Route::get($addLocalePrefix($addBotPath, $set_names), [StaticController::class, 'addBot'])->name('addBot');
+    Route::get($addBotPath, [StaticController::class, 'addBot'])->name('addBotNoLocale');
+
     $loginRoute->name('login');
     $settingsRoute->name('settings');
     $profileEditRoute->name('profile.edit');
-    $addBotRoute->name('addBot');
     $addBotRedirectRoute->name('addBotRedirect');
     $designRoute->name('design');
     $botInfoRoute->name('botInfo');

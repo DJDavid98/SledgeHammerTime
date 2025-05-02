@@ -4,6 +4,29 @@
   @include design.sidebar-link-style;
 }
 
+.bot-info-image {
+  max-width: 300px;
+  border-radius: .5em;
+  aspect-ratio: 879 / 495;
+  display: block;
+  width: 300px;
+
+  @include design.screen-below('md') {
+    margin: 0 auto design.app-size('card-padding');
+    max-width: 100%;
+  }
+
+  @include design.screen-above('md') {
+    margin: 0 0 design.app-size('card-padding') design.app-size('card-padding');
+    @include design.if-ltr {
+      float: right;
+    }
+    @include design.if-rtl {
+      float: left;
+    }
+  }
+}
+
 .bot-command-info {
   &:not(:last-child) {
     margin-bottom: design.app-size('card-padding');
