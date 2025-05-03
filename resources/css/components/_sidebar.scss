@@ -30,7 +30,7 @@
 
   &.position-left {
     left: 0;
-    transform: translateX(-#{design.app-value('sidebar-max-width')});
+    transform: translateX(calc(-1 * #{design.app-value('sidebar-max-width')}));
   }
 
   &.position-right {

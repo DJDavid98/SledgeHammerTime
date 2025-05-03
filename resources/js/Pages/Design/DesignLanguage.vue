@@ -86,11 +86,15 @@ provide(localSettings, localSettingsValue);
         <h2>2nd Level Card header</h2>
       </template>
 
-      <p>Logo</p>
+      <p class="mb-3">
+        Logo
+      </p>
 
       <ApplicationLogo :size="100" />
 
-      <p>Components</p>
+      <p class="mb-3">
+        Components
+      </p>
 
       <div>
         <HtButton>Simple button</HtButton>
@@ -159,7 +163,7 @@ provide(localSettings, localSettingsValue);
         Sidebar control
       </template>
 
-      <dl>
+      <dl class="mb-3">
         <dt>isOpen</dt>
         <dd>{{ sidebarStateValue.isOpen }}</dd>
         <dt>isOnRight</dt>
@@ -167,11 +171,17 @@ provide(localSettings, localSettingsValue);
       </dl>
 
       <div>
-        <HtButton @click="sidebarStateValue.setIsOpen(true)">
+        <HtButton
+          color="success"
+          @click="sidebarStateValue.setIsOpen(true)"
+        >
           Open
         </HtButton>
         &nbsp;
-        <HtButton @click="sidebarStateValue.setIsOpen(false)">
+        <HtButton
+          color="danger"
+          @click="sidebarStateValue.setIsOpen(false)"
+        >
           Close
         </HtButton>
         &nbsp;
@@ -182,7 +192,3 @@ provide(localSettings, localSettingsValue);
     </HtCard>
   </HtContent>
 </template>
-
-<style scoped>
-
-</style>

@@ -6,10 +6,11 @@ import HtFormControlId from '@/Reusable/HtFormControlId.vue';
 import HtFormInputGroup from '@/Reusable/HtFormInputGroup.vue';
 import HtInput from '@/Reusable/HtInput.vue';
 import HtInputGropupText from '@/Reusable/HtInputGropupText.vue';
+import HtLinkButton from '@/Reusable/HtLinkButton.vue';
 import HtTable from '@/Reusable/HtTable.vue';
 import HtTranslate from '@/Reusable/HtTranslate.vue';
 import { getAppName } from '@/utils/app';
-import { faFileExport } from '@fortawesome/free-solid-svg-icons';
+import { faFileExport, faLink } from '@fortawesome/free-solid-svg-icons';
 import { onMounted, ref } from 'vue';
 
 interface NumberCssVar {
@@ -140,7 +141,16 @@ onMounted(() => {
       {{ $t('global.designEditor.description') }}
     </p>
 
-    <p class="mb-3">
+    <HtLinkButton
+      color="primary"
+      :icon-start="faLink"
+      :href="route('design', route().params)"
+      :external="false"
+    >
+      {{ $t('global.designEditor.designPageLink') }}
+    </HtLinkButton>
+
+    <p class="mt-3 mb-3">
       <HtTranslate i18n-key="global.designEditor.exportInfo">
         <template #1="slotProps">
           <a
