@@ -33,6 +33,7 @@ const showAdvancedSettings = ref(false);
 const form = useForm({
   timezone: props.entry.settings.timezone ?? props.defaultSettings.timezone ?? '',
   format: props.entry.settings.format ?? props.formatOptions?.[0] ?? props.defaultSettings.format,
+  formatMinimalReply: props.entry.settings.formatMinimalReply ?? props.defaultSettings.formatMinimalReply ?? true,
   ephemeral: props.entry.settings.ephemeral ?? props.defaultSettings.ephemeral ?? true,
   header: props.entry.settings.header ?? props.defaultSettings.header ?? true,
   boldPreview: props.entry.settings.boldPreview ?? props.defaultSettings.boldPreview ?? true,
@@ -95,6 +96,21 @@ const form = useForm({
             />
           </template>
         </HtFormControl>
+
+        <HtFormCheckboxModelled
+          :id="'formatMinimalReply-'+entry.user.id"
+          v-model="form.formatMinimalReply"
+          name="formatMinimalReply"
+          :label="$t('botSettings.fields.formatMinimalReply.displayName')"
+        >
+          <template #message>
+            <FormMessage
+              type="error"
+              class="mt-2"
+              :message="form.errors.formatMinimalReply"
+            />
+          </template>
+        </HtFormCheckboxModelled>
 
         <HtFormControl
           v-if="columnsOptions"

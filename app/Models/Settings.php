@@ -55,6 +55,7 @@ class Settings extends Model {
       case SettingNames::EPHEMERAL:
       case SettingNames::HEADER:
       case SettingNames::BOLD_PREVIEW:
+      case SettingNames::FORMAT_MINIMAL_REPLY:
         return true;
       case SettingNames::TIMEZONE:
         return "GMT";

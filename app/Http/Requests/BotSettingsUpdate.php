@@ -33,6 +33,7 @@ class BotSettingsUpdate extends FormRequest {
     return [
       SettingNames::TIMEZONE->value => ['nullable', 'string', new MomentTimezoneName()],
       SettingNames::FORMAT->value => ['nullable', 'string', new DiscordTimestampFormatOption()],
+      SettingNames::FORMAT_MINIMAL_REPLY->value => ['nullable', 'boolean'],
       SettingNames::EPHEMERAL->value => ['nullable', 'boolean'],
       SettingNames::HEADER->value => ['nullable', 'boolean'],
       SettingNames::BOLD_PREVIEW->value => ['nullable', 'boolean'],

@@ -12,4 +12,5 @@ enum SettingNames: string {
   case FORMAT = "format";
   case HEADER = "header";
   case TIMEZONE = "timezone";
+  case FORMAT_MINIMAL_REPLY = "formatMinimalReply";
 }
