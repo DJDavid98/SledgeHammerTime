@@ -43,4 +43,12 @@ return [
       'notAffiliated' => 'This project is not affiliated with Discord.',
     ],
   ],
+  'designEditor' => [
+    'title' => 'Design Editor',
+    'description' => 'You can adjust many aspects of the website\'s appearance using the inputs in the table below. Variable names are based on identifiers in the code and therefore cannot be translated. Values will be reset when refreshing the page.',
+    'exportInfo' => 'You may export your changes to a UserStyle file, which can be used with an extension such as <1>Stylus</1> to customize the app\'s appearance permanently. Note, however, that these variables may change at any point, requiring you to manually update your custom styles.',
+    'export' => 'Export as UserStyle',
+    'variableColumnHeader' => 'CSS Variable',
+    'valueColumnHeader' => 'Value',
+  ],
 ];
