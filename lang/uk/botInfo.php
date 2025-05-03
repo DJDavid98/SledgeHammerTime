@@ -7,6 +7,14 @@ return [
   'customizeSettingsAuthenticated' => 'Some of its functionality can also be customized by visiting the <1>App Settings</1> page (also available by clicking your username in the sidebar).',
   'addAppLead' => 'Add the app to your server or your account and use it whenever you need a timestamp but don\'t feel like opening the browser.',
   'shareableLink' => 'You can also share the link below with others which will let them add the app without any additional distractions:',
+  'shardStats' => [
+    'title' => 'Shard Statistics',
+    'description' => 'After an app reaches a certain number of servers where it is installed, Discord requires apps to use sharding, which essentially means splitting up the handling of interactions between multiple processes. Below you can see some basic information about each shard recently used by the app.',
+    'shardId' => 'Shard ID',
+    'serverCount' => 'Connected Servers',
+    'startupTime' => 'Startup Time',
+    'lastUpdateTime' => 'Last Updated',
+  ],
   'commandsReference' => [
     'title' => 'Commands Reference',
     'description' => 'Below you will find a list of all commands and their options for your reference. This page currently shows the same descriptions that you would see in Discord as you are running the command, but it might be extended with additional information and examples later on.',
