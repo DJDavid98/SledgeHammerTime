@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<{
    * Defaults to gray when not provided
    */
   color?: ButtonColors,
-  'class'?: string | Record<string, boolean>,
+  'class'?: string | Record<string, boolean> | Array<string | undefined | Record<string, boolean>>,
   disabled?: boolean,
   tabindex?: string | number,
   block?: boolean,

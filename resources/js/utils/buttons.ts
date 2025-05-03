@@ -1,7 +1,7 @@
 export type ButtonColors = 'primary' | 'success' | 'danger' | 'warning';
 
 export interface GetButtonClassesOptions {
-  'class'?: string | Record<string, boolean>,
+  'class'?: string | Record<string, boolean> | Array<string | undefined | Record<string, boolean>>,
   color?: ButtonColors,
   block?: boolean;
   pressed?: boolean;
@@ -11,7 +11,8 @@ export interface GetButtonClassesOptions {
 }
 
 export const getButtonClasses = (props: GetButtonClassesOptions) => {
-  return ['button', props.class, {
+  const propsClass = Array.isArray(props.class) ? props.class : [props.class];
+  return ['button', ...propsClass, {
     [`color-${props.color}`]: props.color,
     block: props.block,
     pressed: props.pressed,
