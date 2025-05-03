@@ -31,6 +31,9 @@ return [
         'default' => 'Alapértelmezett',
       ],
     ],
+    'formatMinimalReply' => [
+      'displayName' => 'Minimal reply when using format option',
+    ],
     'columns' => [
       'displayName' => 'Oszlopok',
       'option' => [
