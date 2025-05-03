@@ -2,19 +2,22 @@
 @use "sass:map";
 @use "common";
 
+$z-index-var-prefix: 'ht-z-index';
+
 @function app-z-index($key) {
   @if (map.has-key(common.$z-index-map, $key)) {
-    @return map.get(common.$z-index-map, $key);
+    // @return map.get(common.$z-index-map, $key);
+    @return var(--#{$z-index-var-prefix}-#{$key});
   }
 
   @return 0;
 }
 
-$size-var-prefix: 'ht-size';
+$value-var-prefix: 'ht-value';
 
-@function app-size($key) {
-  @if (map.has-key(common.$size-map, $key)) {
-    @return var(--#{$size-var-prefix}-#{$key});
+@function app-value($key) {
+  @if (map.has-key(common.$value-map, $key)) {
+    @return var(--#{$value-var-prefix}-#{$key});
   }
 
   @return 0;

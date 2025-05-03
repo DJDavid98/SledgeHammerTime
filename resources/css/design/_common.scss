@@ -1,14 +1,23 @@
 @use "sass:color";
 
 $z-index-map: (
-  combobox-suggestions: 5,
-  sidebar: 4,
-  header: 3,
-  focus: 2,
-  default: 1,
+  background: 1,
+  default: 2,
+  focus: 3,
+  header: 4,
+  sidebar: 5,
+  combobox-suggestions: 6,
 );
 
-$size-map: (
+$value-map: (
+  base-font-size: 16px,
+  font-family-base: #{'Montserrat', sans-serif},
+  font-family-mono: #{'Source Code Pro', 'Consolas', monospace},
+  bg-gradient-opacity: .5,
+  bg-gradient-start-position: 0%,
+  bg-gradient-mid-position: 50%,
+  bg-gradient-end-position: 100%,
+  bg-gradient-angle: 15deg,
   header-height: 3.25rem,
   header-spacing-horizontal: .625rem,
   header-spacing-vertical: .625rem,
@@ -39,11 +48,11 @@ $size-map: (
   sidebar-dev-credit-line-height: 1.55,
   popup-border: .125rem,
   popup-box-shadow: 1rem,
-  input-text-padding: .25rem,
-  input-text-border: .0625rem,
-  input-text-border-radius: .25rem,
-  input-text-box-shadow-inset-y: .05rem,
-  input-text-box-shadow: .15rem,
+  input-field-padding: .25rem,
+  input-field-border: .0625rem,
+  input-field-border-radius: .25rem,
+  input-field-box-shadow-inset-y: .05rem,
+  input-field-box-shadow: .15rem,
   form-control-spacing: .5rem,
   focus-outline: .2em,
   language-selector-spacing: .5em,
@@ -64,10 +73,11 @@ $size-map: (
   table-cell-spacing: .5em,
   table-border-size: .0625em,
   code-border: .0625em,
-  copyable-text-padding-vertical: .15em,
-  copyable-text-padding-horizontal: .5em,
-  copyable-text-border-radius: .3em,
-  copyable-text-line-height: 1.5em,
+  code-padding-vertical: .15em,
+  code-padding-horizontal: .5em,
+  code-border-radius: .3em,
+  code-line-height: 1.5em,
+  code-small-font-size: .75em,
   progress-bar-height: .75em,
   bot-command-heading-3: 1.5em,
   bot-command-heading-4: 1.25em,
@@ -77,6 +87,9 @@ $_text-color-light: #313131;
 $_text-color-dark: #C1C2C5;
 $_button-primary-bg-dark: #5865f2;
 $_button-primary-bg-light: color.adjust($_button-primary-bg-dark, $lightness: 22%);
+$_bg-gradient-start: #585ef2;
+$_bg-gradient-mid: #5865f2;
+$_bg-gradient-end: #a55ea5;
 
 $color-map: (
   layout-bg: (
@@ -86,6 +99,18 @@ $color-map: (
   layout-color: (
     light: $_text-color-light,
     dark: $_text-color-dark,
+  ),
+  bg-gradient-start: (
+    light: $_bg-gradient-start,
+    dark: $_bg-gradient-start,
+  ),
+  bg-gradient-mid: (
+    light: $_bg-gradient-mid,
+    dark: $_bg-gradient-mid,
+  ),
+  bg-gradient-end: (
+    light: $_bg-gradient-end,
+    dark: $_bg-gradient-end,
   ),
   header-bg: (
     light: color.adjust(#5865f2, $lightness: 27%, $saturation: -10%),
@@ -207,23 +232,23 @@ $color-map: (
     light: color.adjust(#5865f2, $lightness: 20%, $saturation: -10%),
     dark: #2c2e33,
   ),
-  input-text-color: (
+  input-field-color: (
     light: #212121,
     dark: #c1c2c5,
   ),
-  input-text-bg: (
+  input-field-bg: (
     light: color.adjust(#5865f2, $lightness: 25%, $saturation: -10%),
     dark: #25262b,
   ),
-  input-text-border-color: (
+  input-field-border-color: (
     light: color.adjust(#5865f2, $lightness: 20%, $saturation: -10%),
     dark: #373a40,
   ),
-  input-text-focus-border-color: (
+  input-field-focus-border-color: (
     light: color.adjust(#5865f2, $lightness: 20%),
     dark: #5865f2,
   ),
-  input-text-box-shadow: (
+  input-field-box-shadow: (
     light: rgba(0, 0, 0, .25),
     dark: rgba(0, 0, 0, .5),
   ),

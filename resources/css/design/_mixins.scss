@@ -10,9 +10,15 @@
   }
 }
 
-@mixin size-variables {
-  @each $key, $value in common.$size-map {
-    --#{functions.$size-var-prefix}-#{$key}: #{$value};
+@mixin value-variables {
+  @each $key, $value in common.$value-map {
+    --#{functions.$value-var-prefix}-#{$key}: #{$value};
+  }
+}
+
+@mixin z-index-variables {
+  @each $key, $value in common.$z-index-map {
+    --#{functions.$z-index-var-prefix}-#{$key}: #{$value};
   }
 }
 
@@ -169,10 +175,10 @@
 
 @mixin base-font {
   //noinspection CssNoGenericFontName
-  font-family: var(--font-family-base);
+  font-family: functions.app-value('font-family-base');
 }
 
 @mixin monospace-font {
   //noinspection CssNoGenericFontName
-  font-family: var(--font-family-mono);
+  font-family: functions.app-value('font-family-mono');
 }

@@ -3,7 +3,7 @@
 .grid-flex {
   display: flex;
   justify-content: space-between;
-  gap: design.app-size('grid-column-gap');
+  gap: design.app-value('grid-column-gap');
 
   .grid-flex-item {
     flex-grow: 1;

@@ -5,19 +5,19 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: design.app-size('user-info-spacing');
+  gap: design.app-value('user-info-spacing');
 }
 
 .user-dropdown {
   list-style: disc;
   list-style-position: outside;
-  margin: design.app-size('user-info-spacing') 0;
+  margin: design.app-value('user-info-spacing') 0;
 
   @include design.if-ltr {
-    padding-left: design.app-size('content-spacing');
+    padding-left: design.app-value('content-spacing');
   }
   @include design.if-rtl {
-    padding-right: design.app-size('content-spacing');
+    padding-right: design.app-value('content-spacing');
   }
 
   a, button {

@@ -5,15 +5,15 @@
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
-  gap: design.app-size('discord-user-info-spacing');
+  gap: design.app-value('discord-user-info-spacing');
 
   .user-image {
-    width: design.app-size('discord-user-info-image-size');
-    height: design.app-size('discord-user-info-image-size');
-    border-radius: design.app-size('discord-user-info-image-border-radius');
+    width: design.app-value('discord-user-info-image-size');
+    height: design.app-value('discord-user-info-image-size');
+    border-radius: design.app-value('discord-user-info-image-border-radius');
   }
 
   .user-name {
-    font-size: design.app-size('discord-user-info-name-font-size');
+    font-size: design.app-value('discord-user-info-name-font-size');
   }
 }

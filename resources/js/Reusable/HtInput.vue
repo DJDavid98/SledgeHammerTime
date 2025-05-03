@@ -16,7 +16,7 @@ const props = defineProps<{
   disabled?: boolean;
   hideSelection?: boolean;
   positionAnchorName?: string;
-  type?: 'text' | 'number' | 'date' | 'time' | 'datetime-local';
+  type?: 'text' | 'number' | 'date' | 'time' | 'datetime-local' | 'color';
   min?: string | number;
   max?: string | number;
   tabindex?: string | number;
@@ -50,7 +50,7 @@ defineExpose({
     ref="input-el"
     v-model="model"
     :type="type"
-    :class="['input-text', props.class, { 'hide-selection': hideSelection }]"
+    :class="['input-field', props.class, { 'hide-selection': hideSelection }]"
     :readonly="readonly"
     :disabled="disabled"
     :min="min"

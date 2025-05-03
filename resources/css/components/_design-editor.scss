@@ -1,0 +1,28 @@
+@use "../design";
+
+.design-editor {
+  @include design.content-link-style;
+}
+
+.design-editor-table {
+  td, th {
+    padding: .5rem;
+
+    @include design.if-ltr {
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+    @include design.if-rtl {
+      &:first-child {
+        padding-right: 0;
+      }
+      &:last-child {
+        padding-left: 0;
+      }
+    }
+  }
+}

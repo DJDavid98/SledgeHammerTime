@@ -3,9 +3,9 @@
 .alert {
   display: flex;
   flex-flow: row nowrap;
-  gap: design.app-size('alert-spacing');
-  padding: design.app-size('alert-spacing');
-  border-radius: design.app-size('alert-border-radius');
+  gap: design.app-value('alert-spacing');
+  padding: design.app-value('alert-spacing');
+  border-radius: design.app-value('alert-border-radius');
   background-color: design.app-color-light('alert-bg');
   color: design.app-color-light('alert-color');
 
@@ -32,7 +32,7 @@
     }
 
     &:not(:empty) + .alert-text {
-      margin-top: design.app-size('alert-spacing');
+      margin-top: design.app-value('alert-spacing');
     }
   }
 

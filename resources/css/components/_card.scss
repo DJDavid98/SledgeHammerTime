@@ -1,8 +1,8 @@
 @use "../design";
 
 .card {
-  border-radius: design.app-size('card-border-radius');
-  padding: design.app-size('card-padding');
+  border-radius: design.app-value('card-border-radius');
+  padding: design.app-value('card-padding');
   background-color: design.app-color-light('card-bg');
   color: design.app-color-light('card-color');
 
@@ -23,7 +23,7 @@
 
   .card-header {
     &:not(:last-child) {
-      margin-bottom: design.app-size('card-padding');
+      margin-bottom: design.app-value('card-padding');
     }
 
     &:empty {
@@ -31,7 +31,7 @@
     }
 
     h2 {
-      font-size: design.app-size('card-header-2-font-size');
+      font-size: design.app-value('card-header-2-font-size');
     }
   }
 }

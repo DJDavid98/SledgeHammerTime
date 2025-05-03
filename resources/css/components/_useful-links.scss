@@ -33,8 +33,8 @@
       }
 
       .link-card {
-        border-radius: design.app-size('card-border-radius');
-        padding: design.app-size('card-padding');
+        border-radius: design.app-value('card-border-radius');
+        padding: design.app-value('card-padding');
         background-color: rgba(255, 255, 255, .05);
       }
 
@@ -72,11 +72,11 @@
         flex-flow: column nowrap;
         justify-content: center;
         align-items: center;
-        padding-top: design.app-size('card-spacing');
+        padding-top: design.app-value('card-spacing');
       }
 
       .link-name {
-        margin-bottom: design.app-size('card-spacing');
+        margin-bottom: design.app-value('card-spacing');
         font-weight: bold;
         text-decoration: underline;
         text-align: center;

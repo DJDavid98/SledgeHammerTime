@@ -6,8 +6,8 @@
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
-  gap: design.app-size('form-control-spacing');
-  margin-bottom: design.app-size('form-control-spacing');
+  gap: design.app-value('form-control-spacing');
+  margin-bottom: design.app-value('form-control-spacing');
 
   &.vertical {
     flex-flow: column nowrap;
@@ -23,7 +23,7 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-start;
-  gap: design.app-size('form-control-spacing');
+  gap: design.app-value('form-control-spacing');
 }
 
 .form-control-checkbox {
@@ -32,40 +32,40 @@
   .form-checkbox-input-wrap {
     position: relative;
     display: inline-block;
-    width: design.app-size('form-checkbox-width');
-    height: design.app-size('form-checkbox-height');
-    border: design.app-size('form-checkbox-border') solid design.app-color-light('input-text-border-color');
-    background-color: design.app-color-light('input-text-bg');
-    border-radius: design.app-size('form-checkbox-border-radius');
+    width: design.app-value('form-checkbox-width');
+    height: design.app-value('form-checkbox-height');
+    border: design.app-value('form-checkbox-border') solid design.app-color-light('input-field-border-color');
+    background-color: design.app-color-light('input-field-bg');
+    border-radius: design.app-value('form-checkbox-border-radius');
     vertical-align: text-top;
 
     &:focus {
       z-index: design.app-z-index('focus');
-      border-color: design.app-color-light('input-text-focus-border-color');
+      border-color: design.app-color-light('input-field-focus-border-color');
     }
 
     &:focus-visible {
-      outline: design.app-size('focus-outline') solid design.app-color-light('input-text-focus-border-color');
+      outline: design.app-value('focus-outline') solid design.app-color-light('input-field-focus-border-color');
     }
 
     @include design.if-dark {
-      border-color: design.app-color-dark('input-text-border-color');
-      background-color: design.app-color-dark('input-text-bg');
+      border-color: design.app-color-dark('input-field-border-color');
+      background-color: design.app-color-dark('input-field-bg');
 
       &:focus {
-        border-color: design.app-color-dark('input-text-focus-border-color');
+        border-color: design.app-color-dark('input-field-focus-border-color');
       }
 
       &:focus-visible {
-        outline-color: design.app-color-dark('input-text-focus-border-color');
+        outline-color: design.app-color-dark('input-field-focus-border-color');
       }
     }
 
     @include design.if-ltr {
-      margin-right: design.app-size('form-control-spacing');
+      margin-right: design.app-value('form-control-spacing');
     }
     @include design.if-rtl {
-      margin-left: design.app-size('form-control-spacing');
+      margin-left: design.app-value('form-control-spacing');
     }
 
     .form-checkbox-check-icon,
@@ -87,12 +87,12 @@
       text-align: center;
       transform: translate(-0.1em, 0.05em);
       opacity: 0;
-      color: design.app-color-light('input-text-color');
+      color: design.app-color-light('input-field-color');
       transition: opacity .1s linear;
       font-size: .8em;
 
       @include design.if-dark {
-        color: design.app-color-dark('input-text-color');
+        color: design.app-color-dark('input-field-color');
       }
     }
 
@@ -112,24 +112,24 @@
   .form-radio-input-wrap {
     position: relative;
     display: inline-block;
-    width: design.app-size('form-checkbox-width');
-    height: design.app-size('form-checkbox-height');
+    width: design.app-value('form-checkbox-width');
+    height: design.app-value('form-checkbox-height');
     vertical-align: text-top;
 
     &:focus {
       z-index: design.app-z-index('focus');
-      border-color: design.app-color-light('input-text-focus-border-color');
+      border-color: design.app-color-light('input-field-focus-border-color');
     }
 
     &:focus-visible {
-      outline: design.app-size('focus-outline') solid design.app-color-light('input-text-focus-border-color');
+      outline: design.app-value('focus-outline') solid design.app-color-light('input-field-focus-border-color');
     }
 
     @include design.if-ltr {
-      margin-right: design.app-size('form-control-spacing');
+      margin-right: design.app-value('form-control-spacing');
     }
     @include design.if-rtl {
-      margin-left: design.app-size('form-control-spacing');
+      margin-left: design.app-value('form-control-spacing');
     }
 
     .form-radio-input,
@@ -148,44 +148,44 @@
 
     .form-radio-input {
       border: 0;
-      border: design.app-size('form-checkbox-border') solid design.app-color-light('input-text-border-color');
-      background-color: design.app-color-light('input-text-bg');
+      border: design.app-value('form-checkbox-border') solid design.app-color-light('input-field-border-color');
+      background-color: design.app-color-light('input-field-bg');
       border-radius: 50%;
 
       &:focus {
-        border-color: design.app-color-light('input-text-focus-border-color');
+        border-color: design.app-color-light('input-field-focus-border-color');
       }
 
       &:focus-visible {
-        outline: design.app-size('focus-outline') solid design.app-color-light('input-text-focus-border-color');
+        outline: design.app-value('focus-outline') solid design.app-color-light('input-field-focus-border-color');
       }
 
       @include design.if-dark {
-        background-color: design.app-color-dark('input-text-bg');
-        border-color: design.app-color-dark('input-text-border-color');
+        background-color: design.app-color-dark('input-field-bg');
+        border-color: design.app-color-dark('input-field-border-color');
 
         &:focus {
-          border-color: design.app-color-dark('input-text-focus-border-color');
+          border-color: design.app-color-dark('input-field-focus-border-color');
         }
 
         &:focus-visible {
-          outline-color: design.app-color-dark('input-text-focus-border-color');
+          outline-color: design.app-color-dark('input-field-focus-border-color');
         }
       }
     }
 
     .form-radio-select-icon {
       opacity: 0;
-      background-color: design.app-color-light('input-text-color');
+      background-color: design.app-color-light('input-field-color');
       transition: opacity .1s linear;
       display: block;
-      width: design.app-size('form-radio-select-icon');
-      height: design.app-size('form-radio-select-icon');
-      margin: calc((100% - #{design.app-size('form-radio-select-icon')}) * 0.5);
+      width: design.app-value('form-radio-select-icon');
+      height: design.app-value('form-radio-select-icon');
+      margin: calc((100% - #{design.app-value('form-radio-select-icon')}) * 0.5);
       pointer-events: none;
 
       @include design.if-dark {
-        background-color: design.app-color-dark('input-text-color');
+        background-color: design.app-color-dark('input-field-color');
       }
     }
 
@@ -204,7 +204,7 @@
   position: relative;
 
   > .form-select-input {
-    --padding-value: calc(#{design.app-size('input-text-padding')} * 2 + #{design.app-size('form-select-icon-padding')} * 2 + #{design.app-size('form-select-icon-size')});
+    --padding-value: calc(#{design.app-value('input-field-padding')} * 2 + #{design.app-value('form-select-icon-padding')} * 2 + #{design.app-value('form-select-icon-size')});
     @include design.if-ltr {
       padding-right: var(--padding-value);
     }
@@ -221,8 +221,8 @@
     flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
-    padding: 0 design.app-size('form-select-icon-padding');
-    font-size: design.app-size('form-select-icon-size');
+    padding: 0 design.app-value('form-select-icon-padding');
+    font-size: design.app-value('form-select-icon-size');
     cursor: pointer;
 
     @include design.if-ltr {
@@ -251,17 +251,17 @@
   max-height: 50vh;
   overflow-y: auto;
   overflow-x: hidden;
-  border: design.app-size('input-text-border') solid design.app-color-light('input-text-border-color');
-  color: design.app-color-light('input-text-color');
-  background-color: design.app-color-light('input-text-bg');
-  border-bottom-left-radius: design.app-size('input-text-border-radius');
-  border-bottom-right-radius: design.app-size('input-text-border-radius');
+  border: design.app-value('input-field-border') solid design.app-color-light('input-field-border-color');
+  color: design.app-color-light('input-field-color');
+  background-color: design.app-color-light('input-field-bg');
+  border-bottom-left-radius: design.app-value('input-field-border-radius');
+  border-bottom-right-radius: design.app-value('input-field-border-radius');
   box-sizing: border-box;
 
   @include design.if-dark {
-    color: design.app-color-dark('input-text-color');
-    background-color: design.app-color-dark('input-text-bg');
-    border-color: design.app-color-dark('input-text-border-color');
+    color: design.app-color-dark('input-field-color');
+    background-color: design.app-color-dark('input-field-bg');
+    border-color: design.app-color-dark('input-field-border-color');
   }
 
   .combobox-suggestion-item {
@@ -270,7 +270,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    padding: design.app-size('input-text-padding');
+    padding: design.app-value('input-field-padding');
     cursor: pointer;
 
     mark {
@@ -310,18 +310,18 @@
 .form-input-group {
   display: flex;
   flex-flow: row nowrap;
-  margin-bottom: design.app-size('form-control-spacing');
+  margin-bottom: design.app-value('form-control-spacing');
 
-  > .input-text {
+  > .input-field {
     min-width: 0;
     flex-grow: 1;
   }
 
-  &:not([dir="rtl"]) > .input-text {
+  &:not([dir="rtl"]) > .input-field {
     @include design.combined-border-radius;
   }
 
-  &[dir="rtl"] > .input-text {
+  &[dir="rtl"] > .input-field {
     @include design.combined-border-radius-inverted;
   }
 }

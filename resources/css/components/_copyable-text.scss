@@ -29,18 +29,5 @@
 
   .copyable-text-data {
     user-select: all;
-    padding: design.app-size('copyable-text-padding-vertical') design.app-size('copyable-text-padding-horizontal');
-    line-height: design.app-size('copyable-text-line-height');
-    border-radius: design.app-size('copyable-text-border-radius');
-    color: design.app-color-light('code-color');
-    background-color: design.app-color-light('code-bg');
-    box-sizing: border-box;
-    border: design.app-size('code-border') solid design.app-color-light('code-border');
-
-    @include design.if-dark {
-      color: design.app-color-dark('code-color');
-      background-color: design.app-color-dark('code-bg');
-      border-color: design.app-color-dark('code-border');
-    }
   }
 }

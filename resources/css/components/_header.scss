@@ -4,7 +4,7 @@
 .header {
   position: sticky;
   z-index: design.app-z-index('header');
-  height: design.app-size('header-height');
+  height: design.app-value('header-height');
   top: 0;
   left: 0;
   right: 0;
@@ -13,10 +13,10 @@
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  padding: design.app-size('header-spacing-vertical') design.app-size('header-spacing-horizontal');
-  gap: design.app-size('header-spacing');
+  padding: design.app-value('header-spacing-vertical') design.app-value('header-spacing-horizontal');
+  gap: design.app-value('header-spacing');
   box-sizing: border-box;
-  border-bottom: design.app-size('header-border') solid design.app-color-light('header-border');
+  border-bottom: design.app-value('header-border') solid design.app-color-light('header-border');
 
   @include design.if-dark {
     background-color: design.app-color-dark('header-bg');
@@ -28,7 +28,7 @@
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-    font-size: design.app-size('header-brand-font-size');
+    font-size: design.app-value('header-brand-font-size');
     color: design.app-color-light('header-brand');
 
     @include design.if-dark {

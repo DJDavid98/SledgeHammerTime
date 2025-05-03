@@ -3,53 +3,58 @@
 @use "common";
 
 :root {
-  --base-size: 16px;
-  --bg-gradient-opacity: .5;
-  --font-family-base: 'Montserrat', sans-serif;
-  --font-family-mono: 'Source Code Pro', 'Consolas', monospace;
-  --bg-gradient-start-color: rgb(88 94 242 / var(--bg-gradient-opacity));
-  --bg-gradient-mid-color: rgb(88 101 242 / var(--bg-gradient-opacity));
-  --bg-gradient-end-color: rgb(165 94 165 / var(--bg-gradient-opacity));
-  --bg-gradient-start-position: 0%;
-  --bg-gradient-mid-position: 50%;
-  --bg-gradient-end-position: 100%;
-  --bg-gradient-angle-default: 15deg;
-
   @include mixins.color-variables;
-  @include mixins.size-variables;
+  @include mixins.value-variables;
+  @include mixins.z-index-variables;
 }
 
 html {
-  font-size: var(--base-size);
+  font-size: #{functions.app-value('base-font-size')};
   @include mixins.base-font;
+  background-color: functions.app-color-light('layout-bg');
 }
 
 body {
-  --bg-gradient-angle: var(--bg-gradient-angle-default);
+  --bg-gradient-angle: #{functions.app-value('bg-gradient-angle')};
+  --bg-gradient-start: #{functions.app-color-light('bg-gradient-start')};
+  --bg-gradient-mid: #{functions.app-color-light('bg-gradient-mid')};
+  --bg-gradient-end: #{functions.app-color-light('bg-gradient-end')};
   min-height: 100vh;
   @include mixins.base-font;
-  background-image: linear-gradient(calc(180deg - var(--bg-gradient-angle)), var(--bg-gradient-start-color) var(--bg-gradient-start-position), var(--bg-gradient-mid-color) var(--bg-gradient-mid-position), var(--bg-gradient-end-color) var(--bg-gradient-end-position));
-  background-color: functions.app-color-light('layout-bg');
-  background-repeat: no-repeat;
   color: functions.app-color-light('layout-color');
 
+  &:before {
+    content: "";
+    display: block;
+    position: fixed;
+    z-index: functions.app-z-index('background');
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: functions.app-value('bg-gradient-opacity');
+    background-image: linear-gradient(calc(180deg - var(--bg-gradient-angle)), var(--bg-gradient-start) #{functions.app-value('bg-gradient-start-position')}, var(--bg-gradient-mid) #{functions.app-value('bg-gradient-mid-position')}, var(--bg-gradient-end) #{functions.app-value('bg-gradient-end-position')});
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    pointer-events: none;
+  }
+
   @include mixins.if-dark {
+    --bg-gradient-start: #{functions.app-color-dark('bg-gradient-start')};
+    --bg-gradient-mid: #{functions.app-color-dark('bg-gradient-mid')};
+    --bg-gradient-end: #{functions.app-color-dark('bg-gradient-end')};
     background-color: functions.app-color-dark('layout-bg');
     color: functions.app-color-dark('layout-color');
   }
 
   @include mixins.if-rtl {
-    --bg-gradient-angle: calc(-1 * var(--bg-gradient-angle-default));
+    --bg-gradient-angle: calc(-1 * #{functions.app-value('bg-gradient-angle')});
   }
 
   &.no-anim * {
     transition: none !important;
     animation: none !important;
   }
-}
-
-code {
-  @include mixins.monospace-font;
 }
 
 * {

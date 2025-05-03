@@ -8,6 +8,7 @@ import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
 import HtFormInputGroup from '@/Reusable/HtFormInputGroup.vue';
 import HtFormRadio from '@/Reusable/HtFormRadio.vue';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
+import HtInputGropupText from '@/Reusable/HtInputGropupText.vue';
 import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
 import { guessInitialTimezoneName } from '@/utils/time';
 import { ref, useTemplateRef } from 'vue';
@@ -111,7 +112,7 @@ defineExpose<TimeZonePickerApi>({
         />
       </HtFormControlGroup>
       <HtFormInputGroup dir="ltr">
-        <span class="input-text hide-selection grid-flex-item flex-basis-auto">GMT (UTC)</span>
+        <HtInputGropupText>GMT (UTC)</HtInputGropupText>
         <HtInput
           ref="offset-hours"
           v-model="offsetHours"

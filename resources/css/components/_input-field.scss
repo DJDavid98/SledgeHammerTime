@@ -1,0 +1,63 @@
+@use "../design";
+
+.input-field {
+  display: block;
+  border: design.app-value('input-field-border') solid design.app-color-light('input-field-border-color');
+  border-radius: design.app-value('input-field-border-radius');
+  box-shadow: inset 0 design.app-value('input-field-box-shadow-inset-y') design.app-value('input-field-box-shadow') design.app-color-light('input-field-box-shadow');
+
+  &:not([type="color"]) {
+    color: design.app-color-light('input-field-color');
+    background-color: design.app-color-light('input-field-bg');
+    padding: design.app-value('input-field-padding');
+  }
+
+  &[type="color"] {
+    &::-moz-color-swatch {
+      border: none;
+    }
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+      border-radius: 0;
+    }
+
+    &::-webkit-color-swatch {
+      border: none;
+    }
+  }
+
+  &:focus {
+    z-index: design.app-z-index('focus');
+    border-color: design.app-color-light('input-field-focus-border-color');
+  }
+
+  &:focus-visible {
+    outline: design.app-value('focus-outline') solid design.app-color-light('input-field-focus-border-color');
+  }
+
+  @include design.if-dark {
+    &:not([type="color"]) {
+      color: design.app-color-dark('input-field-color');
+      background-color: design.app-color-dark('input-field-bg');
+    }
+    border-color: design.app-color-dark('input-field-border-color');
+    box-shadow: inset 0 design.app-value('input-field-box-shadow-inset-y') design.app-value('input-field-box-shadow') design.app-color-dark('input-field-box-shadow');
+
+    &:focus {
+      border-color: design.app-color-dark('input-field-focus-border-color');
+    }
+
+    &:focus-visible {
+      outline-color: design.app-color-dark('input-field-focus-border-color');
+    }
+  }
+
+  &.hide-selection {
+    caret-color: transparent;
+
+    &::selection {
+      background-color: transparent;
+    }
+  }
+}

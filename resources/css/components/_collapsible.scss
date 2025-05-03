@@ -7,7 +7,7 @@
   transition: height, margin;
   transition-duration: .2s;
   transition-timing-function: linear;
-  border-radius: design.app-size('collapsible-border-radius');
+  border-radius: design.app-value('collapsible-border-radius');
   background-color: design.app-color-light('collapsible-bg');
   box-sizing: border-box;
   margin: 0;
@@ -22,7 +22,7 @@
   }
 
   &.visible {
-    margin: design.app-size('collapsible-padding') 0;
+    margin: design.app-value('collapsible-padding') 0;
 
     &.limited-height {
       overflow: auto !important;
@@ -31,6 +31,6 @@
 
 
   > * {
-    margin: design.app-size('collapsible-padding');
+    margin: design.app-value('collapsible-padding');
   }
 }

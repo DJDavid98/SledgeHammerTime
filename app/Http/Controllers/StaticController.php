@@ -10,6 +10,6 @@ class StaticController extends Controller {
   }
 
   public function design() {
-    return Inertia::render('DesignLanguage');
+    return Inertia::render('Design/DesignLanguage');
   }
 }

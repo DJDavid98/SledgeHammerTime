@@ -12,12 +12,12 @@
   width: 300px;
 
   @include design.screen-below('md') {
-    margin: 0 auto design.app-size('card-padding');
+    margin: 0 auto design.app-value('card-padding');
     max-width: 100%;
   }
 
   @include design.screen-above('md') {
-    margin: 0 0 design.app-size('card-padding') design.app-size('card-padding');
+    margin: 0 0 design.app-value('card-padding') design.app-value('card-padding');
     @include design.if-ltr {
       float: right;
     }
@@ -29,15 +29,15 @@
 
 .bot-command-info {
   &:not(:last-child) {
-    margin-bottom: design.app-size('card-padding');
+    margin-bottom: design.app-value('card-padding');
   }
 
   > :not(:last-child) {
-    margin-bottom: design.app-size('card-spacing');
+    margin-bottom: design.app-value('card-spacing');
   }
 
   .bot-command-name {
-    font-size: design.app-size('bot-command-heading-3');
+    font-size: design.app-value('bot-command-heading-3');
 
     .bot-command-type {
       font-size: .8em;
@@ -46,13 +46,13 @@
   }
 
   h4 {
-    font-size: design.app-size('bot-command-heading-4');
+    font-size: design.app-value('bot-command-heading-4');
   }
 
   .bot-command-options {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: design.app-size('card-spacing');
+    gap: design.app-value('card-spacing');
 
     .bot-command-option-name {
       &.required {

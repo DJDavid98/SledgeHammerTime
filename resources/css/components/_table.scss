@@ -17,12 +17,12 @@
   }
 
   th, td {
-    padding: design.app-size('table-cell-spacing');
+    padding: design.app-value('table-cell-spacing');
     vertical-align: middle;
   }
 
   tbody tr {
-    border-top: design.app-size('table-border-size') solid design.app-color-light('table-border');
+    border-top: design.app-value('table-border-size') solid design.app-color-light('table-border');
 
     @include design.if-dark {
       border-top-color: design.app-color-dark('table-border');

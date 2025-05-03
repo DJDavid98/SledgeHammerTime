@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import HtCode from '@/Reusable/HtCode.vue';
 import HtCopyButton from '@/Reusable/HtCopyButton.vue';
 
 withDefaults(defineProps<{
@@ -18,11 +19,11 @@ withDefaults(defineProps<{
       class="copyable-text-button"
       :text="data"
     />
-    <component
-      :is="monospace ? 'code' : 'span'"
+    <HtCode
+      :base-font="!monospace"
       class="copyable-text-data"
     >
       {{ data }}
-    </component>
+    </HtCode>
   </div>
 </template>

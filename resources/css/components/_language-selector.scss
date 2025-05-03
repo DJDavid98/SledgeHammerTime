@@ -3,7 +3,7 @@
 .language-selector {
   display: flex;
   flex-flow: column nowrap;
-  margin-bottom: design.app-size('content-spacing');
+  margin-bottom: design.app-value('content-spacing');
 }
 
 .language-info {
@@ -11,8 +11,8 @@
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
-  gap: design.app-size('language-selector-spacing');
-  margin-bottom: design.app-size('language-selector-spacing');
+  gap: design.app-value('language-selector-spacing');
+  margin-bottom: design.app-value('language-selector-spacing');
 
   .language-flag {
     font-size: 1rem;
@@ -47,7 +47,7 @@
 .language-controls {
   display: flex;
   flex-flow: row nowrap;
-  gap: design.app-size('language-selector-spacing');
+  gap: design.app-value('language-selector-spacing');
 
   .change-language-button,
   .contribute-button {
@@ -71,6 +71,6 @@
     flex-flow: row nowrap;
     align-items: center;
     justify-content: flex-start;
-    gap: design.app-size('language-selector-spacing');
+    gap: design.app-value('language-selector-spacing');
   }
 }
