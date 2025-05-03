@@ -3,7 +3,7 @@
 import { pagePropsInject } from '@/injection-keys';
 import AddAppLinks from '@/Pages/AddApp/AddAppLinks.vue';
 import HtCard from '@/Reusable/HtCard.vue';
-import HtCopyableCode from '@/Reusable/HtCopyableCode.vue';
+import HtCopyableText from '@/Reusable/HtCopyableText.vue';
 import HtTranslate from '@/Reusable/HtTranslate.vue';
 import { Link } from '@inertiajs/vue3';
 import { computed, inject } from 'vue';
@@ -67,6 +67,9 @@ const userInfo = computed(() => page?.value?.auth?.user);
     <p class="mt-3 mb-3">
       {{ $t('botInfo.shareableLink') }}
     </p>
-    <HtCopyableCode :data="route('addBotNoLocale')" />
+    <HtCopyableText
+      :data="route('addBotNoLocale')"
+      :monospace="false"
+    />
   </HtCard>
 </template>

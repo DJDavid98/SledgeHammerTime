@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HtCopyableCode from '@/Reusable/HtCopyableCode.vue';
+import HtCopyableText from '@/Reusable/HtCopyableText.vue';
 import { computed } from 'vue';
 
 const props = defineProps<{
@@ -11,5 +11,5 @@ const data = computed(() => props.format ? `<t:${props.unixTs}:${props.format}>`
 </script>
 
 <template>
-  <HtCopyableCode :data="data" />
+  <HtCopyableText :data="data" />
 </template>

@@ -5,6 +5,7 @@ import { computed, ref } from 'vue';
 
 const props = defineProps<{
   text: string | number | undefined;
+  class?: string;
 }>();
 
 const copied = ref<boolean>(false);
@@ -29,7 +30,7 @@ const handleClick = () => {
 <template>
   <HtButton
     :color="copied ? 'success' : 'primary'"
-    class="cursor-pointer"
+    :class="['cursor-pointer', props.class]"
     :title="$t('timestampPicker.table.clickToCopy')"
     :pressed="copied"
     :icon-only="true"

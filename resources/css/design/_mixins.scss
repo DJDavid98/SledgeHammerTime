@@ -166,3 +166,13 @@
     }
   }
 }
+
+@mixin base-font {
+  //noinspection CssNoGenericFontName
+  font-family: var(--font-family-base);
+}
+
+@mixin monospace-font {
+  //noinspection CssNoGenericFontName
+  font-family: var(--font-family-mono);
+}

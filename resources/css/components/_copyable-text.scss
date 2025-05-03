@@ -1,0 +1,46 @@
+@use "../design";
+
+.copyable-text {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  @include design.if-ltr {
+    .copyable-text-button {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .copyable-text-data {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+  @include design.if-rtl {
+    .copyable-text-button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .copyable-text-data {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .copyable-text-data {
+    user-select: all;
+    padding: design.app-size('copyable-text-padding-vertical') design.app-size('copyable-text-padding-horizontal');
+    line-height: design.app-size('copyable-text-line-height');
+    border-radius: design.app-size('copyable-text-border-radius');
+    color: design.app-color-light('code-color');
+    background-color: design.app-color-light('code-bg');
+    box-sizing: border-box;
+    border: design.app-size('code-border') solid design.app-color-light('code-border');
+
+    @include design.if-dark {
+      color: design.app-color-dark('code-color');
+      background-color: design.app-color-dark('code-bg');
+      border-color: design.app-color-dark('code-border');
+    }
+  }
+}

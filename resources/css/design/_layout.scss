@@ -3,6 +3,7 @@
 @use "common";
 
 :root {
+  --base-size: 16px;
   --bg-gradient-opacity: .5;
   --font-family-base: 'Montserrat', sans-serif;
   --font-family-mono: 'Source Code Pro', 'Consolas', monospace;
@@ -18,10 +19,15 @@
   @include mixins.size-variables;
 }
 
+html {
+  font-size: var(--base-size);
+  @include mixins.base-font;
+}
+
 body {
   --bg-gradient-angle: var(--bg-gradient-angle-default);
   min-height: 100vh;
-  font-family: var(--font-family-base);
+  @include mixins.base-font;
   background-image: linear-gradient(calc(180deg - var(--bg-gradient-angle)), var(--bg-gradient-start-color) var(--bg-gradient-start-position), var(--bg-gradient-mid-color) var(--bg-gradient-mid-position), var(--bg-gradient-end-color) var(--bg-gradient-end-position));
   background-color: functions.app-color-light('layout-bg');
   background-repeat: no-repeat;
@@ -35,10 +41,15 @@ body {
   @include mixins.if-rtl {
     --bg-gradient-angle: calc(-1 * var(--bg-gradient-angle-default));
   }
+
+  &.no-anim * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 code {
-  font-family: var(--font-family-mono);
+  @include mixins.monospace-font;
 }
 
 * {
