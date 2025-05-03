@@ -52,6 +52,8 @@ const getCssVarDisplayName = (cssVar: string) =>
 const parseCssValue = (value: string, name: string): CssVar => {
   if (value.endsWith('rem')) return { type: 'number', step: 0.0625, unit: 'rem', value: parseFloat(value) };
   if (value.endsWith('em')) return { type: 'number', step: 0.0625, unit: 'em', value: parseFloat(value) };
+  if (value.endsWith('ms')) return { type: 'number', step: 50, unit: 'ms', value: parseFloat(value) };
+  if (value.endsWith('s')) return { type: 'number', step: 0.1, unit: 's', value: parseFloat(value) };
   if (value.endsWith('%')) return { type: 'number', step: 1, unit: '%', value: parseFloat(value) };
   if (value.endsWith('deg')) return { type: 'number', step: 1, unit: 'deg', value: parseFloat(value) };
   if (value.endsWith('px')) return { type: 'number', step: 1, unit: 'px', value: parseFloat(value) };
