@@ -31,6 +31,9 @@ return [
         'default' => 'Default',
       ],
     ],
+    'formatMinimalReply' => [
+      'displayName' => 'Minimal reply when using format option',
+    ],
     'columns' => [
       'displayName' => 'Columns',
       'option' => [
