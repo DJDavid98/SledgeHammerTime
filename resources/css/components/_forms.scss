@@ -90,6 +90,7 @@
       color: design.app-color-light('input-field-color');
       transition: opacity .1s linear;
       font-size: .8em;
+      pointer-events: none;
 
       @include design.if-dark {
         color: design.app-color-dark('input-field-color');
