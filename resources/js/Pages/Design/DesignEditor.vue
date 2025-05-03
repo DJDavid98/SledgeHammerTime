@@ -48,13 +48,18 @@ const getCssVarDisplayName = (cssVar: string) =>
     .replace(/-+/g, ' ')
     .replace(/((?:^| )[a-z])/g, (m) => m.toUpperCase());
 
-const parseCssValue = (value: string): CssVar => {
+const parseCssValue = (value: string, name: string): CssVar => {
   if (value.endsWith('rem')) return { type: 'number', step: 0.0625, unit: 'rem', value: parseFloat(value) };
   if (value.endsWith('em')) return { type: 'number', step: 0.0625, unit: 'em', value: parseFloat(value) };
   if (value.endsWith('%')) return { type: 'number', step: 1, unit: '%', value: parseFloat(value) };
   if (value.endsWith('deg')) return { type: 'number', step: 1, unit: 'deg', value: parseFloat(value) };
   if (value.endsWith('px')) return { type: 'number', step: 1, unit: 'px', value: parseFloat(value) };
-  if (!isNaN(parseFloat(value))) return { type: 'number', step: 0.05, unit: '', value: parseFloat(value) };
+  if (!isNaN(parseFloat(value))) return {
+    type: 'number',
+    step: name.includes('z-index') ? 1 : 0.05,
+    unit: '',
+    value: parseFloat(value),
+  };
   if (/^#([\da-f]{3})$/i.test(value)) {
     return {
       type: 'color',
@@ -113,7 +118,7 @@ onMounted(() => {
     const varName = styles[i];
     if (varName && varName.startsWith(varNamePrefix)) {
       const value = styles.getPropertyValue(varName).trim();
-      const parsed = parseCssValue(value);
+      const parsed = parseCssValue(value, varName);
       if (parsed.type === 'number') {
         parsed.negative = parsed.value < 0;
       }
