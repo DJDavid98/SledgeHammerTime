@@ -2,6 +2,7 @@
 import Layout from '@/Layouts/DefaultLayout.vue';
 import { BotCommand } from '@/Pages/BotInfo/BotCommandInfo.vue';
 import BotInfoCard from '@/Pages/BotInfo/BotInfoCard.vue';
+import BotShardsInfo, { BotShard } from '@/Pages/BotInfo/BotShardsInfo.vue';
 import CommandsReference from '@/Pages/BotInfo/CommandsReference.vue';
 import { BotCommandTranslation, getBotCommandTranslationKey } from '@/utils/translation';
 import { Head } from '@inertiajs/vue3';
@@ -10,6 +11,7 @@ import { computed } from 'vue';
 const props = defineProps<{
   commands: BotCommand[];
   translations: BotCommandTranslation[];
+  shards: BotShard[];
 }>();
 
 const flatTranslations = computed(() => props.translations.reduce((acc, translation) => {
@@ -25,6 +27,8 @@ const flatTranslations = computed(() => props.translations.reduce((acc, translat
 
   <Layout>
     <BotInfoCard />
+
+    <BotShardsInfo :shards="shards" />
 
     <CommandsReference
       :commands="commands"

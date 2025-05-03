@@ -50,10 +50,6 @@ class BotApiController extends Controller {
     return response()->json($mergedSettings);
   }
 
-  function getShardStats() {
-    return response()->json(BotShard::all());
-  }
-
   function updateShardStats(SaveShardStatsRequest $request) {
     $requestData = $request->validated();
 
@@ -65,6 +61,7 @@ class BotApiController extends Controller {
       'member_count' => $requestData['member_count'],
       'started_at' => $requestData['started_at'],
     ]);
+    $shard->touch();
 
     return response()->json($shard);
   }

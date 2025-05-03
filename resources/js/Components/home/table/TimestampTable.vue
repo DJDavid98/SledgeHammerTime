@@ -2,6 +2,7 @@
 import SyntaxDisplay from '@/Components/home/table/SyntaxDisplay.vue';
 import TimestampPreview from '@/Components/home/table/TimestampPreview.vue';
 import { timestamp } from '@/injection-keys';
+import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import HtTable from '@/Reusable/HtTable.vue';
 import { getDateTimeMoment, isoFormat } from '@/utils/time';
 import { faCalendar as faRegularCalendar } from '@fortawesome/free-regular-svg-icons';
@@ -44,13 +45,13 @@ const unixTs = computed(() => currentTimestamp.value?.unix());
         <td>
           <SyntaxDisplay
             :unix-ts="unixTs"
-            format="d"
+            :format="MessageTimestampFormat.SHORT_DATE"
           />
         </td>
         <td>
           <TimestampPreview
             :ts="currentTimestamp"
-            format="L"
+            :format="MessageTimestampFormat.SHORT_DATE"
           />
         </td>
       </tr>
@@ -58,13 +59,13 @@ const unixTs = computed(() => currentTimestamp.value?.unix());
         <td>
           <SyntaxDisplay
             :unix-ts="unixTs"
-            format="D"
+            :format="MessageTimestampFormat.LONG_DATE"
           />
         </td>
         <td>
           <TimestampPreview
             :ts="currentTimestamp"
-            format="LL"
+            :format="MessageTimestampFormat.LONG_DATE"
           />
         </td>
       </tr>
@@ -81,13 +82,13 @@ const unixTs = computed(() => currentTimestamp.value?.unix());
         <td>
           <SyntaxDisplay
             :unix-ts="unixTs"
-            format="t"
+            :format="MessageTimestampFormat.SHORT_TIME"
           />
         </td>
         <td>
           <TimestampPreview
             :ts="currentTimestamp"
-            format="LT"
+            :format="MessageTimestampFormat.SHORT_TIME"
           />
         </td>
       </tr>
@@ -95,13 +96,13 @@ const unixTs = computed(() => currentTimestamp.value?.unix());
         <td>
           <SyntaxDisplay
             :unix-ts="unixTs"
-            format="T"
+            :format="MessageTimestampFormat.LONG_TIME"
           />
         </td>
         <td>
           <TimestampPreview
             :ts="currentTimestamp"
-            format="LTS"
+            :format="MessageTimestampFormat.LONG_TIME"
           />
         </td>
       </tr>
@@ -125,13 +126,13 @@ const unixTs = computed(() => currentTimestamp.value?.unix());
         <td>
           <SyntaxDisplay
             :unix-ts="unixTs"
-            format="f"
+            :format="MessageTimestampFormat.SHORT_FULL"
           />
         </td>
         <td>
           <TimestampPreview
             :ts="currentTimestamp"
-            format="LLL"
+            :format="MessageTimestampFormat.SHORT_FULL"
           />
         </td>
       </tr>
@@ -139,13 +140,13 @@ const unixTs = computed(() => currentTimestamp.value?.unix());
         <td>
           <SyntaxDisplay
             :unix-ts="unixTs"
-            format="F"
+            :format="MessageTimestampFormat.LONG_FULL"
           />
         </td>
         <td>
           <TimestampPreview
             :ts="currentTimestamp"
-            format="LLLL"
+            :format="MessageTimestampFormat.LONG_FULL"
           />
         </td>
       </tr>
@@ -159,7 +160,7 @@ const unixTs = computed(() => currentTimestamp.value?.unix());
         <td>
           <SyntaxDisplay
             :unix-ts="unixTs"
-            format="R"
+            :format="MessageTimestampFormat.RELATIVE"
           />
         </td>
         <td>

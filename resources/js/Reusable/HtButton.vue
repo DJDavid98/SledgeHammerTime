@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<{
   block?: boolean,
   pressed?: boolean,
   justifyCenter?: boolean,
+  title?: string,
 } & Partial<HtButtonContentProps>>(), {
   type: 'button',
   color: undefined,
@@ -29,6 +30,7 @@ const props = withDefaults(defineProps<{
   iconStart: undefined,
   iconEnd: undefined,
   justifyCenter: false,
+  title: undefined,
 });
 
 const buttonClasses = computed(() => getButtonClasses(props));
@@ -44,6 +46,7 @@ const emit = defineEmits<{
     :class="buttonClasses"
     :disabled="props.disabled || props.loading"
     :tabindex="tabindex"
+    :title="title"
     @click="emit('click', $event)"
   >
     <HtButtonContent

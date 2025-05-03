@@ -57,7 +57,7 @@ const userInfo = computed(() => page?.value?.auth?.user);
       </HtTranslate>
     </p>
     <p class="mb-3">
-      {{ $t('botInfo.addBotLead') }}
+      {{ $t('botInfo.addAppLead') }}
     </p>
 
     <AddAppLinks

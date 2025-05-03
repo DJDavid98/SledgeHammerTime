@@ -56,7 +56,7 @@ const settings = inject(localSettings);
       class="form-control"
     >
       <HtButton
-        :data-tooltip="$t('timestampPicker.picker.tooltip.setToCurrent')"
+        :title="$t('timestampPicker.picker.tooltip.setToCurrent')"
         class="mt-4 mb-0 secondary outline"
         role="button"
         @click="ts.setCurrentTime"

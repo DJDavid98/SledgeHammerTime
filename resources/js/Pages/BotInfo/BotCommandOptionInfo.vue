@@ -17,8 +17,8 @@ const props = defineProps<{
 
 const localizedName = computed(() => {
   const key = getBotCommandTranslationKey({
-    command_id: props.commandId,
-    option_id: props.option.id,
+    commandId: props.commandId,
+    optionId: props.option.id,
     field: 'name',
   });
 
@@ -26,8 +26,8 @@ const localizedName = computed(() => {
 });
 const localizedDescription = computed(() => {
   const key = getBotCommandTranslationKey({
-    command_id: props.commandId,
-    option_id: props.option.id,
+    commandId: props.commandId,
+    optionId: props.option.id,
     field: 'description',
   });
 
