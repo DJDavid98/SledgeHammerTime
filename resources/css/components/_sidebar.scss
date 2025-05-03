@@ -63,7 +63,7 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    flex: 0 0 #{design.app-size('header-height') - design.app-size('header-border') - design.app-size('sidebar-spacing') * 2};
+    flex: 0 0 calc(#{design.app-size('header-height')} - #{design.app-size('header-border')} - #{design.app-size('sidebar-spacing')} * 2);
   }
 
   .sidebar-content {

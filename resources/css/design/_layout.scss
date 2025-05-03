@@ -1,5 +1,6 @@
 @use "functions";
 @use "mixins";
+@use "common";
 
 :root {
   --bg-gradient-opacity: .5;
@@ -12,6 +13,9 @@
   --bg-gradient-mid-position: 50%;
   --bg-gradient-end-position: 100%;
   --bg-gradient-angle-default: 15deg;
+
+  @include mixins.color-variables;
+  @include mixins.size-variables;
 }
 
 body {

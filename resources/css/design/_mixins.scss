@@ -2,6 +2,20 @@
 @use "functions";
 @use "sass:map";
 
+@mixin color-variables {
+  @each $key, $variants in common.$color-map {
+    @each $variant, $value in $variants {
+      --#{functions.$color-var-prefix}-#{$key}-#{$variant}: #{$value};
+    }
+  }
+}
+
+@mixin size-variables {
+  @each $key, $value in common.$size-map {
+    --#{functions.$size-var-prefix}-#{$key}: #{$value};
+  }
+}
+
 @mixin if-dark {
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) & {

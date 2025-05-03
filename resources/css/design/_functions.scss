@@ -10,9 +10,11 @@
   @return 0;
 }
 
+$size-var-prefix: 'ht-size';
+
 @function app-size($key) {
   @if (map.has-key(common.$size-map, $key)) {
-    @return map.get(common.$size-map, $key);
+    @return var(--#{$size-var-prefix}-#{$key});
   }
 
   @return 0;
@@ -26,15 +28,17 @@
   @return _app-color($key, true)
 }
 
+$color-var-prefix: 'ht-color';
+
 @function _app-color($key, $dark: false) {
   @if (map.has-key(common.$color-map, $key)) {
-    $color: 'light';
+    $variant: 'light';
     @if ($dark) {
-      $color: 'dark';
+      $variant: 'dark';
     }
     $color-data: map.get(common.$color-map, $key);
-    @if (map.has-key($color-data, $color)) {
-      @return map.get($color-data, $color);
+    @if (map.has-key($color-data, $variant)) {
+      @return var(--#{$color-var-prefix}-#{$key}-#{$variant});
     }
   }
 

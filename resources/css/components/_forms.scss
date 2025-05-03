@@ -181,7 +181,7 @@
       display: block;
       width: design.app-size('form-radio-select-icon');
       height: design.app-size('form-radio-select-icon');
-      margin: (100% - design.app-size('form-radio-select-icon')) * 0.5;
+      margin: calc((100% - #{design.app-size('form-radio-select-icon')}) * 0.5);
       pointer-events: none;
 
       @include design.if-dark {
@@ -204,12 +204,12 @@
   position: relative;
 
   > .form-select-input {
-    $padding-value: calc(#{design.app-size('input-text-padding') * 2} + #{design.app-size('form-select-icon-padding') * 2} + #{design.app-size('form-select-icon-size')});
+    --padding-value: calc(#{design.app-size('input-text-padding')} * 2 + #{design.app-size('form-select-icon-padding')} * 2 + #{design.app-size('form-select-icon-size')});
     @include design.if-ltr {
-      padding-right: $padding-value;
+      padding-right: var(--padding-value);
     }
     @include design.if-rtl {
-      padding-left: $padding-value;
+      padding-left: var(--padding-value);
     }
   }
 
@@ -287,10 +287,10 @@
       }
 
       &.highlighted, &:hover {
-        background-color: color.adjust(design.app-color-light('button-primary-bg'), $saturation: -15%);
+        background-color: design.app-color-light('combobox-highlighted-item-bg');
 
         @include design.if-dark {
-          background-color: color.adjust(design.app-color-dark('button-primary-bg'), $saturation: -15%);
+          background-color: design.app-color-dark('combobox-highlighted-item-bg');
         }
       }
     }

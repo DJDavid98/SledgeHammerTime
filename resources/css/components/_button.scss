@@ -18,7 +18,7 @@
   box-sizing: border-box;
   display: inline-block;
   cursor: pointer;
-  transform: translateY(design.app-size('button-shadow-size') * -1);
+  transform: translateY(calc(#{design.app-size('button-shadow-size')} * -1));
 
   @include design.if-dark {
     color: design.app-color-dark('button-default-color');

@@ -75,6 +75,8 @@ $size-map: (
 
 $_text-color-light: #313131;
 $_text-color-dark: #C1C2C5;
+$_button-primary-bg-dark: #5865f2;
+$_button-primary-bg-light: color.adjust($_button-primary-bg-dark, $lightness: 22%);
 
 $color-map: (
   layout-bg: (
@@ -146,12 +148,12 @@ $color-map: (
     dark: #fff,
   ),
   button-primary-bg: (
-    light: color.adjust(#5865f2, $lightness: 22%),
-    dark: #5865f2,
+    light: $_button-primary-bg-light,
+    dark: $_button-primary-bg-dark,
   ),
   button-primary-border-color: (
-    light: color.adjust(#5865f2, $lightness: 12%, $saturation: -10%),
-    dark: color.adjust(#5865f2, $lightness: -10%, $saturation: -10%),
+    light: color.adjust($_button-primary-bg-dark, $lightness: 12%, $saturation: -10%),
+    dark: color.adjust($_button-primary-bg-dark, $lightness: -10%, $saturation: -10%),
   ),
   button-success-color: (
     light: #000,
@@ -256,6 +258,10 @@ $color-map: (
   translation-contribution-cta: (
     light: #559933,
     dark: color.adjust(#559933, $lightness: 10%),
+  ),
+  combobox-highlighted-item-bg: (
+    light: color.adjust($_button-primary-bg-light, $saturation: -15%),
+    dark: color.adjust($_button-primary-bg-dark, $saturation: -15%),
   ),
   add-app-bg: (
     light: #FFFFFF,
