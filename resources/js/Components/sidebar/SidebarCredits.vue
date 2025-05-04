@@ -109,7 +109,7 @@ const translationCredits = computed(() => {
     </p>
     <p class="view-source mb-3">
       <a
-        href="https://github.com/DJDavid98/SledgeHammerTime"
+        href="https://github.com/WentTheFox/SledgeHammerTime"
         rel="noopener noreferrer"
         target="_blank"
       >
