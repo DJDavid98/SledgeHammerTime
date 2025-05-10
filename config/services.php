@@ -34,7 +34,8 @@ return [
   'discord' => [
     'client_id' => env('DISCORD_CLIENT_ID'),
     'client_secret' => env('DISCORD_CLIENT_SECRET'),
-    'redirect' => env('APP_URL').'/oauth/callback/discord',
+    // Changed in controllers, but required in config
+    'redirect' => 'https://example.com',
   ],
 
   'top-gg' => [

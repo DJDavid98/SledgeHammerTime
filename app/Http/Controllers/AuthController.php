@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Socialite\Contracts\Provider as ProviderContract;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -26,9 +27,15 @@ class AuthController extends Controller {
     return config('app.url')."/oauth/$callback_path/$provider";
   }
 
+  private static function createSocialiteDriver(string $provider):ProviderContract {
+    return Socialite::driver($provider)
+      ->redirectUrl(self::createRedirectUrl($provider))
+      ->stateless();
+  }
+
   public function redirect(OauthProviderRequest $request) {
     $validated = $request->validated();
-    $driver = Socialite::driver($validated['provider'])->stateless();
+    $driver = self::createSocialiteDriver($validated['provider']);
     switch ($validated['provider']){
       case SocialProvider::Discord->value:
         // Overwrite scopes from socialite provider package, we do not need nor want user e-mails
@@ -37,14 +44,13 @@ class AuthController extends Controller {
       default:
         throw new NotFoundHttpException();
     }
-    $driver->redirectUrl(self::createRedirectUrl($validated['provider']));
 
     return $driver->redirect();
   }
 
   public function callbackGuest(OauthProviderRequest $request) {
     $validated = $request->validated();
-    $driver = Socialite::driver($validated['provider'])->stateless();
+    $driver = self::createSocialiteDriver($validated['provider']);
     $data = $driver->user();
     if ($validated['provider'] !== SocialProvider::Discord->value){
       abort(500, "Validated provider {$validated['provider']} does not match expectations");
@@ -83,7 +89,7 @@ class AuthController extends Controller {
     }
 
     $validated = $request->validated();
-    $driver = Socialite::driver($validated['provider'])->stateless();
+    $driver = self::createSocialiteDriver($validated['provider']);
     $data = $driver->user();
     if ($validated['provider'] !== SocialProvider::Discord->value){
       abort(500, "Validated provider {$validated['provider']} does not match expectations");
