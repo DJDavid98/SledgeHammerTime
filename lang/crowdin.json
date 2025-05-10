@@ -1,5 +1,5 @@
 {
-  "meta": "Generated at 2025-05-03T05:34:46.547Z",
+  "meta": "Generated at 2025-05-10T21:11:00.376Z",
   "users": {
     "25282": {
       "username": "Liggli",
@@ -140,7 +140,7 @@
     },
     "13617551": {
       "username": "WentTheFox",
-      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/13617551/medium/893dbc1c1c4691848275dee5a80dc503.png",
+      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/13617551/medium/b5733ac4b768dead8b474091a6a73a96.jpg",
       "languages": [
         "ar",
         "bg",
@@ -994,7 +994,7 @@
     },
     "ar": {
       "approval": 0,
-      "translation": 25
+      "translation": 21
     },
     "bg": {
       "approval": 0,
@@ -1018,11 +1018,11 @@
     },
     "el": {
       "approval": 0,
-      "translation": 66
+      "translation": 55
     },
     "en-GB": {
-      "approval": 66,
-      "translation": 66
+      "approval": 55,
+      "translation": 55
     },
     "es": {
       "approval": 0,
@@ -1049,8 +1049,8 @@
       "translation": 0
     },
     "hu": {
-      "approval": 66,
-      "translation": 66
+      "approval": 55,
+      "translation": 55
     },
     "id": {
       "approval": 0,
@@ -1058,7 +1058,7 @@
     },
     "it": {
       "approval": 0,
-      "translation": 54
+      "translation": 45
     },
     "ja": {
       "approval": 0,
@@ -1090,7 +1090,7 @@
     },
     "nl": {
       "approval": 0,
-      "translation": 5
+      "translation": 4
     },
     "pl": {
       "approval": 0,
@@ -1106,7 +1106,7 @@
     },
     "ro": {
       "approval": 0,
-      "translation": 66
+      "translation": 100
     },
     "ru": {
       "approval": 0,
@@ -1142,7 +1142,7 @@
     },
     "zh": {
       "approval": 0,
-      "translation": 31
+      "translation": 26
     }
   }
 }

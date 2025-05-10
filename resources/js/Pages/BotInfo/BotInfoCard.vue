@@ -4,12 +4,17 @@ import { pagePropsInject } from '@/injection-keys';
 import AddAppLinks from '@/Pages/AddApp/AddAppLinks.vue';
 import HtCard from '@/Reusable/HtCard.vue';
 import HtCopyableText from '@/Reusable/HtCopyableText.vue';
+import HtLinkButton from '@/Reusable/HtLinkButton.vue';
 import HtTranslate from '@/Reusable/HtTranslate.vue';
+import { faDiscord } from '@fortawesome/free-brands-svg-icons';
+import { faExternalLink } from '@fortawesome/free-solid-svg-icons';
 import { Link } from '@inertiajs/vue3';
 import { computed, inject } from 'vue';
 
 const page = inject(pagePropsInject);
 const userInfo = computed(() => page?.value?.auth?.user);
+
+defineProps<{ discordAppId: string }>();
 </script>
 
 <template>
@@ -64,6 +69,19 @@ const userInfo = computed(() => page?.value?.auth?.user);
       :horizontal="true"
       :open-in-new-tab="true"
     />
+    <p class="mt-3 mb-3">
+      {{ $t('botInfo.appDiscoveryLead') }}
+    </p>
+    <HtLinkButton
+      :href="'https://discord.com/discovery/applications/'+discordAppId"
+      :external="true"
+      :target-blank="true"
+      color="primary"
+      :icon-start="faDiscord"
+      :icon-end="faExternalLink"
+    >
+      {{ $t('botInfo.appDiscoveryCta') }}
+    </HtLinkButton>
     <p class="mt-3 mb-3">
       {{ $t('botInfo.shareableLink') }}
     </p>

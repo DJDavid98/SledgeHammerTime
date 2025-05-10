@@ -9,6 +9,7 @@ import { Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 const props = defineProps<{
+  discordAppId: string;
   commands: BotCommand[];
   translations: BotCommandTranslation[];
   shards: BotShard[];
@@ -26,7 +27,7 @@ const flatTranslations = computed(() => props.translations.reduce((acc, translat
   <Head :title="$t('botInfo.heading')" />
 
   <Layout>
-    <BotInfoCard />
+    <BotInfoCard :discord-app-id="discordAppId" />
 
     <BotShardsInfo :shards="shards" />
 
