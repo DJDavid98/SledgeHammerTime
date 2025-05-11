@@ -63,7 +63,7 @@ return [
     ],
     'telemetry' => [
       'displayName' => 'Telemetria gyűjtésének engedélyezése',
-      'explanation' => 'This is entirely optional and has no effect your ability to use the bot. See the <1/> page for details.',
+      'explanation' => 'Ez teljesen opcionális, és nincs hatással arra, hogy tudod-e használni az appot. További információ itt: <1/>.',
     ],
   ],
   'saveSuccess' => 'A beállításaid sikeresen mentéstre kerültek.',
