@@ -62,8 +62,8 @@ return [
       'displayName' => 'Alapértelmezett ":secondOptionName" paraméter az /:atCommandName parancshoz',
     ],
     'telemetry' => [
-      'displayName' => 'Allow Telemetry collection',
-      'explanation' => 'This is entirely optional and has no effect your ability to use the bot, see the <1/> page for details.',
+      'displayName' => 'Telemetria gyűjtésének engedélyezése',
+      'explanation' => 'This is entirely optional and has no effect your ability to use the bot. See the <1/> page for details.',
     ],
   ],
   'saveSuccess' => 'A beállításaid sikeresen mentéstre kerültek.',
