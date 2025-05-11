@@ -6,8 +6,8 @@ return [
   'customizeSettingsGuest' => 'A működése részben testreszabható <1>bejelentkezés</1> után az <3>App Beállítások</3> oldal meglátogatásával (az oldalsávban a felhasználónevedre kattintva is elérhető).',
   'customizeSettingsAuthenticated' => 'A működése részben testreszabható az <1>App Beállítások</1> oldal meglátogatásával (az oldalsávban a felhasználónevedre kattintva is elérhető).',
   'addAppLead' => 'Add hozzá az appot a szerveredhez vagy a fiókodhoz, és amikor időbélyegre van szükséged, használd azt a böngésző helyett.',
-  'appDiscoveryLead' => 'The app can be found on Discord\'s App Discovery page, which you can check out here:',
-  'appDiscoveryCta' => 'View on App Discovery',
+  'appDiscoveryLead' => 'Az alkalmazás megtalálható a Discord App Discovery oldalán, amelyet itt nézhetsz meg:',
+  'appDiscoveryCta' => 'Megtekintés az App Discovery-n',
   'shareableLink' => 'Az alábbi linket is megoszthatod másokkal, amivel bármilyen zavaró tényező nélkül hozzá tudják adni az appot:',
   'shardStats' => [
     'title' => 'Shard Statisztikák',
