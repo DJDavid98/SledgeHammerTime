@@ -17,14 +17,14 @@ import HtTranslate from '@/Reusable/HtTranslate.vue';
         :desc="$t('timestampPicker.usefulLinks.server.p')"
         href="discord"
         :is-local="true"
-        image="/useful-links/server.png"
+        image="/useful-links/server.png?v=3"
       />
       <UsefulLinkItem
         :name="$t('timestampPicker.usefulLinks.bot.header')"
         :desc="$t('timestampPicker.usefulLinks.bot.p')"
         href="botInfo"
         :is-local="true"
-        image="/useful-links/bot.png"
+        image="/useful-links/bot.png?v=2"
       />
       <UsefulLinkItem
         :desc="$t('timestampPicker.usefulLinks.textColor.p')"
