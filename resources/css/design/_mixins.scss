@@ -23,14 +23,16 @@
 }
 
 @mixin if-dark {
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) & {
+  @media not print {
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) & {
+        @content;
+      }
+    }
+
+    :root[data-theme="dark"] {
       @content;
     }
-  }
-
-  :root[data-theme="dark"] {
-    @content;
   }
 }
 
@@ -181,4 +183,22 @@
 @mixin monospace-font {
   //noinspection CssNoGenericFontName
   font-family: functions.app-value('font-family-mono');
+}
+
+@mixin heading-font-sizes {
+  h2 {
+    font-size: functions.app-value('content-heading-2');
+  }
+  h3 {
+    font-size: functions.app-value('content-heading-3');
+  }
+  h4 {
+    font-size: functions.app-value('content-heading-4');
+  }
+}
+
+@mixin heading-margins {
+  h2, h3, h4 {
+    margin-bottom: functions.app-value('content-heading-margin-bottom');
+  }
 }

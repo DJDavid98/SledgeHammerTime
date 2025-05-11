@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TimestampPreview from '@/Components/home/table/TimestampPreview.vue';
+import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import HtCard from '@/Reusable/HtCard.vue';
 import HtTable from '@/Reusable/HtTable.vue';
 import moment, { Moment } from 'moment-timezone';
@@ -72,13 +73,13 @@ const enhancedShards = computed(() => props.shards.map((shard): EnhancedBotShard
           <td>
             <TimestampPreview
               :ts="shard.startedAt"
-              :from-now="true"
+              :format="MessageTimestampFormat.RELATIVE"
             />
           </td>
           <td>
             <TimestampPreview
               :ts="shard.updatedAt"
-              :from-now="true"
+              :format="MessageTimestampFormat.RELATIVE"
             />
           </td>
         </tr>

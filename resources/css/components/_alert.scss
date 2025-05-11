@@ -40,6 +40,8 @@
     &:empty {
       display: none;
     }
+
+    @include design.content-link-style;
   }
 
   &.warning {

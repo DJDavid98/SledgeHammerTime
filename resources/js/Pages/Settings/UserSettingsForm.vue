@@ -4,6 +4,7 @@ import FormMessage from '@/Components/FormMessage.vue';
 import TimeZoneInput from '@/Components/TimeZoneSelect.vue';
 import { devModeInject } from '@/injection-keys';
 import { UserSettings } from '@/model/user-settings';
+import HtAlert from '@/Reusable/HtAlert.vue';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
 import HtCollapsible from '@/Reusable/HtCollapsible.vue';
@@ -13,8 +14,10 @@ import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
 import HtFormControlWrap from '@/Reusable/HtFormControlWrap.vue';
 import HtFormSelect from '@/Reusable/HtFormSelect.vue';
 import HtInput from '@/Reusable/HtInput.vue';
+import HtTranslate from '@/Reusable/HtTranslate.vue';
+import { LegalSectionIds } from '@/utils/legal';
 import { faChevronDown, faChevronUp, faExclamationTriangle, faSave } from '@fortawesome/free-solid-svg-icons';
-import { useForm } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 import { inject, ref } from 'vue';
 
 const props = defineProps<{
@@ -38,6 +41,7 @@ const form = useForm({
   header: props.entry.settings.header ?? props.defaultSettings.header ?? true,
   boldPreview: props.entry.settings.boldPreview ?? props.defaultSettings.boldPreview ?? true,
   columns: props.entry.settings.columns ?? props.formatOptions?.[0] ?? props.defaultSettings.columns,
+  telemetry: props.entry.settings.telemetry ?? props.defaultSettings.telemetry ?? true,
   defaultAtHour: props.entry.settings.defaultAtHour ?? props.defaultSettings.defaultAtHour,
   defaultAtMinute: props.entry.settings.defaultAtMinute ?? props.defaultSettings.defaultAtMinute,
   defaultAtSecond: props.entry.settings.defaultAtSecond ?? props.defaultSettings.defaultAtSecond,
@@ -183,6 +187,37 @@ const form = useForm({
             />
           </template>
         </HtFormCheckboxModelled>
+
+        <HtAlert
+          type="info"
+          :closable="false"
+        >
+          <template #text>
+            <p class="mb-2">
+              <HtTranslate i18n-key="botSettings.fields.telemetry.explanation">
+                <template #1>
+                  <Link :href="`${route('legal', route().params)}#${LegalSectionIds.TELEMETRY_STATISTICS}`">
+                    {{ $t('global.nav.legal') }}
+                  </Link>
+                </template>
+              </HtTranslate>
+            </p>
+            <HtFormCheckboxModelled
+              :id="'telemetry-'+entry.user.id"
+              v-model="form.telemetry"
+              name="telemetry"
+              :label="$t('botSettings.fields.telemetry.displayName')"
+            >
+              <template #message>
+                <FormMessage
+                  type="error"
+                  class="mt-2"
+                  :message="form.errors.telemetry"
+                />
+              </template>
+            </HtFormCheckboxModelled>
+          </template>
+        </HtAlert>
 
         <HtFormControlWrap>
           <HtButton

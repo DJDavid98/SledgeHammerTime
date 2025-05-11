@@ -57,6 +57,7 @@ $defineRoutes = function (bool $set_names) use ($addLocalePrefix) {
   $profileEditRoute = Route::middleware('auth')->get($addLocalePrefix('/profile', $set_names), [ProfileController::class, 'edit']);
   $addBotRedirectRoute = Route::get($addLocalePrefix('/add-bot/{installType}', $set_names), [RedirectController::class, 'addBotLink']);
   $designRoute = Route::get($addLocalePrefix('/design', $set_names), [StaticController::class, 'design']);
+  $legalRoute = Route::get($addLocalePrefix('/legal', $set_names), [StaticController::class, 'legal']);
   $loginRoute = Route::get($addLocalePrefix('/login', $set_names), [AuthController::class, 'login']);
   $botInfoRoute = Route::get($addLocalePrefix('/app', $set_names), [BotInfoController::class, 'index']);
 
@@ -73,6 +74,7 @@ $defineRoutes = function (bool $set_names) use ($addLocalePrefix) {
     $profileEditRoute->name('profile.edit');
     $addBotRedirectRoute->name('addBotRedirect');
     $designRoute->name('design');
+    $legalRoute->name('legal');
     $botInfoRoute->name('botInfo');
   }
 };

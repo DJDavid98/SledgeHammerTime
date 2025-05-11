@@ -8,6 +8,7 @@ import {
   devModeInject,
   localSettings,
   pagePropsInject,
+  scrollToAnchorInject,
   sidebarState,
   theme,
 } from '@/injection-keys';
@@ -70,4 +71,44 @@ export const useLayout = () => {
   const localSettingsValue = readonly(useLocalSettings(currentLanguage));
   provide(sidebarState, readonly(useSidebarState(localSettingsValue)));
   provide(localSettings, localSettingsValue);
+
+
+  let scrollFunction: ((progress?: number) => void) | null = null;
+  const scrollMaxFrames = 2;
+  const scrollToAnchor = (id: string | undefined) => {
+    if (!id) return;
+
+    const scrollTargetEl = document.getElementById(id);
+    if (!scrollTargetEl) {
+      console.warn(`No scroll target found with ID ${id}`);
+      return;
+    }
+
+    const headerEl = document.querySelector('header.header');
+    if (!headerEl) {
+      console.warn(`Could not find app header`);
+      return;
+    }
+
+    const headerHeight = headerEl.getBoundingClientRect().height;
+
+    const containerEl = document.documentElement;
+    const getTargetScrollTop = () => {
+      const containerScrollTop = Math.max(0, containerEl.scrollTop - headerHeight);
+      return containerScrollTop + scrollTargetEl.getBoundingClientRect().top;
+    };
+    scrollFunction = (scrollFrame = 0) => {
+      const targetScrollTop = getTargetScrollTop();
+      requestAnimationFrame(() => {
+        containerEl.scrollTo(0, targetScrollTop);
+        if (scrollFrame < scrollMaxFrames) {
+          scrollFunction?.(scrollFrame + 1);
+        } else {
+          scrollFunction = null;
+        }
+      });
+    };
+    scrollFunction();
+  };
+  provide(scrollToAnchorInject, scrollToAnchor);
 };

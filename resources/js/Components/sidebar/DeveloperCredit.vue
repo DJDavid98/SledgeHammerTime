@@ -1,19 +1,17 @@
-<template>
-  <a
-    class="developer-credit"
-    target="_blank"
-    rel="noopener noreferrer"
-    href="https://djdavid98.art"
-  >
-    <div class="developer-avatar">
-      <HtAvatar
-        src="https://gravatar.com/avatar/f341ebe7cfc73b35ff4ec66897b5c30d?size=64"
-      />
-    </div>
-    <span class="developer-name">WentTheFox</span>
-  </a>
-</template>
-
 <script setup lang="ts">
 import HtAvatar from '@/Reusable/HtAvatar.vue';
+import HtExternalLink from '@/Reusable/HtExternalLink.vue';
+import { DEVELOPER_AVATAR_URL, DEVELOPER_NAME, DEVELOPER_URL } from '@/utils/app';
 </script>
+
+<template>
+  <HtExternalLink
+    class="developer-credit"
+    :href="DEVELOPER_URL"
+  >
+    <div class="developer-avatar">
+      <HtAvatar :src="DEVELOPER_AVATAR_URL" />
+    </div>
+    <span class="developer-name">{{ DEVELOPER_NAME }}</span>
+  </HtExternalLink>
+</template>

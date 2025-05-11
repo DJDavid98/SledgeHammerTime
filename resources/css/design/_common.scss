@@ -24,6 +24,11 @@ $value-map: (
   header-border: 0.0625rem,
   header-brand-font-size: 1.25rem,
   content-spacing: 1rem,
+  content-container-max-width: 1080px,
+  content-heading-2: 1.6em,
+  content-heading-3: 1.4em,
+  content-heading-4: 1.25em,
+  content-heading-margin-bottom: .25em,
   button-padding-horizontal: .5rem,
   button-padding-vertical: .25rem,
   button-border-width: .0625rem,
@@ -34,7 +39,6 @@ $value-map: (
   card-padding: 1rem,
   card-border-radius: .5rem,
   card-spacing: .5rem,
-  card-header-2-font-size: 1.5rem,
   alert-spacing: 1rem,
   alert-border-radius: .5rem,
   sidebar-spacing: .5rem,
@@ -79,8 +83,6 @@ $value-map: (
   code-line-height: 1.5em,
   code-small-font-size: .75em,
   progress-bar-height: .75em,
-  bot-command-heading-3: 1.5em,
-  bot-command-heading-4: 1.25em,
   loading-indicator-full-revolution-time: 5s,
 );
 

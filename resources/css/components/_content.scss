@@ -3,7 +3,7 @@
 .content-container {
   margin: 0 auto;
   width: 100%;
-  max-width: 1080px;
+  max-width: design.app-value('content-container-max-width');
   padding: design.app-value('content-spacing');
 
   .content {

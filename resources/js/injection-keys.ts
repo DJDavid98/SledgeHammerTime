@@ -61,3 +61,7 @@ export interface CurrentLanguageData {
 export const currentLanguageInject = Symbol('currentLanguageInject') as InjectionKey<Ref<CurrentLanguageData>>;
 
 export const devModeInject = Symbol('devModeInject') as InjectionKey<Ref<boolean>>;
+
+export type ScrollToSectionFunction = (id: string | undefined) => void;
+
+export const scrollToAnchorInject = Symbol('scrollToSectionInject') as InjectionKey<ScrollToSectionFunction>;

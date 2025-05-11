@@ -12,4 +12,10 @@ class StaticController extends Controller {
   public function design() {
     return Inertia::render('Design/DesignLanguage');
   }
+
+  public function legal() {
+    return Inertia::render('Legal/LegalInfo', [
+      'fallbackLocale' => config('app.fallback_locale'),
+    ]);
+  }
 }

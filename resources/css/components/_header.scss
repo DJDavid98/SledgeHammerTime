@@ -18,6 +18,10 @@
   box-sizing: border-box;
   border-bottom: design.app-value('header-border') solid design.app-color-light('header-border');
 
+  @media print {
+    display: none;
+  }
+
   @include design.if-dark {
     background-color: design.app-color-dark('header-bg');
     border-bottom-color: design.app-color-dark('header-border');

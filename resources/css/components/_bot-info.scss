@@ -37,16 +37,10 @@
   }
 
   .bot-command-name {
-    font-size: design.app-value('bot-command-heading-3');
-
     .bot-command-type {
       font-size: .8em;
       opacity: .75;
     }
-  }
-
-  h4 {
-    font-size: design.app-value('bot-command-heading-4');
   }
 
   .bot-command-options {

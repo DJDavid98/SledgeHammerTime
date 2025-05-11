@@ -1,0 +1,49 @@
+@use "../design";
+
+.legal-card {
+  border-radius: 0;
+  font-family: "Times New Roman", serif;
+  padding: 2em 4em;
+  margin-bottom: 0 !important;
+
+  @include design.content-link-style;
+  @include design.heading-margins;
+
+  .card-header {
+    text-align: center;
+  }
+
+  .heading-link {
+    font-size: .75em;
+
+    @media print {
+      display: none;
+    }
+  }
+
+  @media print {
+    a:after {
+      content: " [" attr(href) "]";
+      font-style: italic;
+    }
+  }
+
+  .legal-section {
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      text-align: justify;
+
+      &:not(:last-child) {
+        margin-bottom: .5rem;
+      }
+    }
+  }
+
+  sup {
+    vertical-align: super;
+    font-size: .75em;
+  }
+}

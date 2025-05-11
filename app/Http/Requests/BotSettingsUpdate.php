@@ -37,6 +37,7 @@ class BotSettingsUpdate extends FormRequest {
       SettingNames::EPHEMERAL->value => ['nullable', 'boolean'],
       SettingNames::HEADER->value => ['nullable', 'boolean'],
       SettingNames::BOLD_PREVIEW->value => ['nullable', 'boolean'],
+      SettingNames::TELEMETRY->value => ['nullable', 'boolean'],
       SettingNames::COLUMNS->value => ['nullable', 'string', new TimestampMessageColumnsOption()],
       SettingNames::DEFAULT_AT_HOUR->value => ['nullable', 'integer', 'between:0,23'],
       SettingNames::DEFAULT_AT_MINUTE->value => ['nullable', 'integer', 'between:0,59'],

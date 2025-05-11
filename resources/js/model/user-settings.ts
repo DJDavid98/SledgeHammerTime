@@ -6,6 +6,7 @@ export interface UserSettings {
   columns: string | null;
   format: string | null;
   formatMinimalReply: boolean | null;
+  telemetry: boolean | null;
   defaultAtHour: number | null;
   defaultAtMinute: number | null;
   defaultAtSecond: number | null;

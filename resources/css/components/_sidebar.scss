@@ -19,6 +19,10 @@
   will-change: transform;
   transition: transform .1s ease-in;
 
+  @media print {
+    display: none;
+  }
+
   @include design.if-prefers-reduced-motion {
     transition: none !important;
   }
@@ -112,6 +116,10 @@
   transition: padding .1s ease-in-out;
 
   @media (max-width: design.app-value('sidebar-default-open-min-width')) {
+    padding: 0 !important;
+  }
+
+  @media print {
     padding: 0 !important;
   }
 }

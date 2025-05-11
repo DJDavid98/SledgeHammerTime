@@ -7,7 +7,6 @@ import { computed, getCurrentInstance, ref, watch } from 'vue';
 const props = defineProps<{
   ts: Moment | undefined,
   format?: MessageTimestampFormat;
-  fromNow?: boolean;
 }>();
 
 const formatMap: Record<MessageTimestampFormat, string> = {
@@ -25,12 +24,14 @@ const instance = getCurrentInstance();
 
 const momentLocale = useMomentLocaleForceUpdate(instance);
 
-watch(() => props.fromNow, (fromNow) => {
+const fromNow = computed(() => props.format === MessageTimestampFormat.RELATIVE);
+
+watch(fromNow, (fromNowValue) => {
   if (updateInterval.value !== null) {
     clearInterval(updateInterval.value);
   }
 
-  if (fromNow) {
+  if (fromNowValue) {
     if (typeof window !== 'undefined') {
       updateInterval.value = setInterval(() => {
         instance?.proxy?.$forceUpdate();

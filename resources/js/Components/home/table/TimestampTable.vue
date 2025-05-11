@@ -166,7 +166,7 @@ const unixTs = computed(() => currentTimestamp.value?.unix());
         <td>
           <TimestampPreview
             :ts="currentTimestamp"
-            :from-now="true"
+            :format="MessageTimestampFormat.RELATIVE"
           />
         </td>
       </tr>

@@ -11,7 +11,10 @@
 html {
   font-size: #{functions.app-value('base-font-size')};
   @include mixins.base-font;
-  background-color: functions.app-color-light('layout-bg');
+
+  @media not print {
+    background-color: functions.app-color-light('layout-bg');
+  }
 }
 
 body {
@@ -37,6 +40,10 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     pointer-events: none;
+
+    @media print {
+      display: none !important;
+    }
   }
 
   @include mixins.if-dark {

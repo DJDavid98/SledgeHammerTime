@@ -2,6 +2,7 @@
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
 import HtCode from '@/Reusable/HtCode.vue';
+import HtExternalLink from '@/Reusable/HtExternalLink.vue';
 import HtFormControlId from '@/Reusable/HtFormControlId.vue';
 import HtFormInputGroup from '@/Reusable/HtFormInputGroup.vue';
 import HtInput from '@/Reusable/HtInput.vue';
@@ -155,13 +156,9 @@ onMounted(() => {
     <p class="mt-3 mb-3">
       <HtTranslate i18n-key="global.designEditor.exportInfo">
         <template #1="slotProps">
-          <a
-            href="https://github.com/openstyles/stylus"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
+          <HtExternalLink href="https://github.com/openstyles/stylus">
             {{ slotProps.text }}
-          </a>
+          </HtExternalLink>
         </template>
       </HtTranslate>
     </p>

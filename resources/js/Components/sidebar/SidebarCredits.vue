@@ -2,12 +2,14 @@
 import DeveloperCredit from '@/Components/sidebar/DeveloperCredit.vue';
 import TranslationCredits from '@/Components/sidebar/TranslationCredits.vue';
 import { currentLanguageInject } from '@/injection-keys';
+import HtExternalLink from '@/Reusable/HtExternalLink.vue';
 import HtTranslate from '@/Reusable/HtTranslate.vue';
 import { reportData } from '@/utils/crowdin';
 import { normalizeCredit } from '@/utils/translation';
 import { faGithub, faOsi } from '@fortawesome/free-brands-svg-icons';
-import { faBan, faCode, faInfo, faLanguage, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBan, faCode, faFileContract, faInfo, faLanguage, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { Link } from '@inertiajs/vue3';
 import { computed, inject } from 'vue';
 
 const currentLanguage = inject(currentLanguageInject);
@@ -57,25 +59,19 @@ const translationCredits = computed(() => {
           <template #1>
             <ul class="external-libraries-credit">
               <li>
-                <a
-                  href="https://fontawesome.com/license/free"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >{{ $t('global.sidebar.credits.fontAwesomeFree') }}</a>
+                <HtExternalLink href="https://fontawesome.com/license/free">
+                  {{ $t('global.sidebar.credits.fontAwesomeFree') }}
+                </HtExternalLink>
               </li>
               <li>
-                <a
-                  href="https://laravel.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >{{ $t('global.sidebar.credits.laravel') }}</a>
+                <HtExternalLink href="https://laravel.com/">
+                  {{ $t('global.sidebar.credits.laravel') }}
+                </HtExternalLink>
               </li>
               <li>
-                <a
-                  href="https://vuejs.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >{{ $t('global.sidebar.credits.vueJs') }}</a>
+                <HtExternalLink href="https://vuejs.org/">
+                  {{ $t('global.sidebar.credits.vueJs') }}
+                </HtExternalLink>
               </li>
             </ul>
           </template>
@@ -108,24 +104,29 @@ const translationCredits = computed(() => {
       {{ $t('global.sidebar.credits.openSourceSoftware') }}
     </p>
     <p class="view-source mb-3">
-      <a
-        href="https://github.com/WentTheFox/SledgeHammerTime"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+      <HtExternalLink href="https://github.com/WentTheFox/SledgeHammerTime">
         <FontAwesomeIcon
           :icon="faGithub"
           class="me-1"
         />
         {{ $t('global.sidebar.credits.viewSourceCode') }}
-      </a>
+      </HtExternalLink>
     </p>
-    <p class="not-affiliated">
+    <p class="not-affiliated mb-3">
       <FontAwesomeIcon
         :icon="faBan"
         class="me-1"
       />
       {{ $t('global.sidebar.credits.notAffiliated') }}
+    </p>
+    <p>
+      <Link :href="route('legal', route().params)">
+        <FontAwesomeIcon
+          :icon="faFileContract"
+          class="me-1"
+        />
+        {{ $t('global.nav.legal') }}
+      </Link>
     </p>
   </section>
 </template>
