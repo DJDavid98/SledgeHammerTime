@@ -6,6 +6,8 @@ return [
   'customizeSettingsGuest' => 'Some of its functionality can also be customized by <1>logging in</1>, then visiting the <3>App Settings</3> page (also available by clicking your username in the sidebar).',
   'customizeSettingsAuthenticated' => 'Some of its functionality can also be customized by visiting the <1>App Settings</1> page (also available by clicking your username in the sidebar).',
   'addAppLead' => 'Add the app to your server or your account and use it whenever you need a timestamp but don\'t feel like opening the browser.',
+  'appDiscoveryLead' => 'The app can be found on Discord\'s App Discovery page, which you can check out here:',
+  'appDiscoveryCta' => 'View on App Discovery',
   'shareableLink' => 'You can also share the link below with others which will let them add the app without any additional distractions:',
   'shardStats' => [
     'title' => 'Shard Statistics',
