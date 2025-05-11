@@ -63,7 +63,7 @@ return [
     ],
     'telemetry' => [
       'displayName' => 'Allow Telemetry collection',
-      'explanation' => 'This is entirely optional and has no effect your ability to use the bot, see the <1/> page for details.',
+      'explanation' => 'This is entirely optional and has no effect your ability to use the bot. See the <1/> page for details.',
     ],
   ],
   'saveSuccess' => 'Your settings have been saved successfully.',
