@@ -17,6 +17,7 @@ return [
   'nav' => [
     'botSettings' => 'App Settings',
     'profile' => 'Profile',
+    'legal' => 'Legal Information',
   ],
   'sidebar' => [
     'inputSettings' => [
