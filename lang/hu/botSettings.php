@@ -1,9 +1,9 @@
 <?php
 
 return [
-  'title' => 'App Settings',
-  'description' => 'Below you can see your current settings in the HammerTime App for each connected account.',
-  'learnMore' => 'Not sure what the app is or curious about what it can do? Visit the <1>Discord App</1> link to learn more.',
+  'title' => 'App Beálítások',
+  'description' => 'Alább láthatod a jelenlegi beállításaidat a HammerTime App-ban, minden összekapcsolt fiókodhoz.',
+  'learnMore' => 'Nem tudod, mi ez az app, vagy kíváncsi vagy mit tud? Látogasd meg a <1>Discord App</1> linket további információért.',
   'advancedSettings' => [
     'toggleText' => 'Haladó beállítások',
     'atCommandName' => 'ekkor',
@@ -32,7 +32,7 @@ return [
       ],
     ],
     'formatMinimalReply' => [
-      'displayName' => 'Minimal reply when using format option',
+      'displayName' => 'Rövid válasz a formátum opció használatakor',
     ],
     'columns' => [
       'displayName' => 'Oszlopok',
@@ -60,6 +60,10 @@ return [
     ],
     'defaultAtSecond' => [
       'displayName' => 'Alapértelmezett ":secondOptionName" paraméter az /:atCommandName parancshoz',
+    ],
+    'telemetry' => [
+      'displayName' => 'Allow Telemetry collection',
+      'explanation' => 'This is entirely optional and has no effect your ability to use the bot, see the <1/> page for details.',
     ],
   ],
   'saveSuccess' => 'A beállításaid sikeresen mentéstre kerültek.',
