@@ -17,7 +17,7 @@ return [
   'nav' => [
     'botSettings' => 'App Beálítások',
     'profile' => 'Profil',
-    'legal' => 'Legal Information',
+    'legal' => 'Jogi Információk',
   ],
   'sidebar' => [
     'inputSettings' => [
