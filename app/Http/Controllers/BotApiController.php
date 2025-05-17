@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BotLoginRequest;
 use App\Http\Requests\SaveShardStatsRequest;
 use App\Http\Requests\UpdateBotCommandsRequest;
+use App\Http\Requests\UpdateBotTimezonesRequest;
 use App\Models\BotCommand;
 use App\Models\BotCommandOption;
 use App\Models\BotShard;
+use App\Models\BotTimezone;
 use App\Models\DiscordUser;
 use App\Models\Settings;
 use App\Models\User;
@@ -157,5 +159,16 @@ class BotApiController extends Controller {
       $queryBy,
       ['value' => $value]
     ));
+  }
+
+  protected function updateBotTimezones(UpdateBotTimezonesRequest $request) {
+    $data = $request->validated();
+
+    foreach ($data['timezones'] as $timezoneName){
+      $botTimezoneData = ['name' => $timezoneName];
+      BotTimezone::updateOrCreate($botTimezoneData, $botTimezoneData);
+    }
+
+    return response(status: 204);
   }
 }
