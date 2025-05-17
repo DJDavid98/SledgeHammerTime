@@ -9,7 +9,7 @@ import { format, parse, setHours, setMinutes, setSeconds } from 'date-fns';
 
 export const isoTimeFormat = 'HH:mm:ss';
 export const isoFormattingDateFormat = 'y-MM-dd';
-export const isoParsingDateFormat = 'Y-MM-d';
+export const isoParsingDateFormat = 'Y-MM-dd';
 export const isoFormat = `${isoFormattingDateFormat} ${isoTimeFormat}`;
 export const urlFormat = `yMMdd.HHmmss`;
 

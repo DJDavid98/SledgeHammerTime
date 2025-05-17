@@ -133,7 +133,7 @@ describe('getDefaultInitialDateTime', () => {
     expect(result[1]).toMatch(/:00$/);
   });
   it('should return the same timestamp when passed an initial value', () => {
-    const result = getDefaultInitialDateTime('1970-01-01T00:00:55', {
+    const result = getDefaultInitialDateTime('19700101.000055', {
       type: TimeZoneSelectionType.ZONE_NAME,
       name: 'UTC',
     });
@@ -163,15 +163,15 @@ describe('createCurrentTsWithTimezone', () => {
       hours: 0,
       minutes: 0,
     };
-    expect(createCurrentTsWithTimezone(now, defaultObject).getTimezoneOffset()).toEqual(0);
+    expect(createCurrentTsWithTimezone(now, defaultObject).getTimezoneOffset()).toEqual(-0);
     expect(createCurrentTsWithTimezone(
       now,
       { ...defaultObject, hours: 1, minutes: 1 },
-    ).getTimezoneOffset()).toEqual(61);
+    ).getTimezoneOffset()).toEqual(-61);
     expect(createCurrentTsWithTimezone(
       now,
       { ...defaultObject, hours: -14, minutes: 30 },
-    ).getTimezoneOffset()).toEqual(-870);
+    ).getTimezoneOffset()).toEqual(870);
   });
   it('should return a date with the correct zone name', () => {
     const now = new TZDate(0);
@@ -179,6 +179,6 @@ describe('createCurrentTsWithTimezone', () => {
       type: TimeZoneSelectionType.ZONE_NAME,
       name: 'Europe/Budapest',
     };
-    expect(createCurrentTsWithTimezone(now, defaultObject).getTimezoneOffset()).toEqual(60);
+    expect(createCurrentTsWithTimezone(now, defaultObject).getTimezoneOffset()).toEqual(-60);
   });
 });
