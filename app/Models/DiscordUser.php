@@ -76,12 +76,16 @@ class DiscordUser extends Model {
       return json_decode($cachedData, true);
     }
 
-    $settings = $this->settings()->get(['setting', 'value'])->reduce(fn(array $acc, Settings $s) => [
-      ...$acc,
-      $s->setting => $s->value,
-    ], []);
+    $settings = $this->getSettingsRecordUncached();
     Redis::set($cacheKey, json_encode($settings, JSON_THROW_ON_ERROR), 'EX', $this->getSettingsCacheDurationSeconds());
 
     return $settings;
+  }
+
+  public function getSettingsRecordUncached():array {
+    return $this->settings()->get(['setting', 'value'])->reduce(fn(array $acc, Settings $s) => [
+      ...$acc,
+      $s->setting => $s->value,
+    ], []);
   }
 }

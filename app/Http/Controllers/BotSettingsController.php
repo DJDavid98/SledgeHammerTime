@@ -15,7 +15,7 @@ class BotSettingsController extends Controller {
   function edit() {
     $userSettings = Auth::user()?->discordUsers()->get()->map(fn(DiscordUser $du) => [
       'user' => $du->mapToUiInfo(),
-      'settings' => $du->getSettingsRecord(),
+      'settings' => $du->getSettingsRecordUncached(),
     ]);
 
     return Inertia::render('Settings/BotSettings', [

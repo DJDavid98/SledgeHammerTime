@@ -13,6 +13,12 @@ import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
 import { guessInitialTimezoneName } from '@/utils/time';
 import { ref, useTemplateRef } from 'vue';
 
+withDefaults(defineProps<{
+  saveOnClose?: boolean;
+}>(), {
+  saveOnClose: true,
+});
+
 const defaultZoneName = guessInitialTimezoneName();
 const offsetHours = ref(0);
 const offsetMinutes = ref(0);
@@ -155,7 +161,7 @@ defineExpose<TimeZonePickerApi>({
           :justify-center="true"
           type="submit"
         >
-          {{ $t('actions.save_and_close') }}
+          {{ saveOnClose ? $t('actions.save_and_close') : $t('actions.select') }}
         </HtButton>
         <HtButton
           :justify-center="true"
