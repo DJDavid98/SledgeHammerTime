@@ -6,7 +6,6 @@
 
 import { config as fontAwesomeConfig } from '@fortawesome/fontawesome-svg-core';
 import axios from 'axios';
-import './moment';
 
 window.axios = axios;
 

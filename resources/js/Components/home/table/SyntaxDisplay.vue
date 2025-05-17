@@ -4,10 +4,10 @@ import { computed } from 'vue';
 
 const props = defineProps<{
   unixTs: number | undefined;
-  format?: string;
+  tsFormat?: string;
 }>();
 
-const data = computed(() => props.format ? `<t:${props.unixTs}:${props.format}>` : props.unixTs);
+const data = computed(() => props.tsFormat ? `<t:${props.unixTs}:${props.tsFormat}>` : props.unixTs);
 </script>
 
 <template>

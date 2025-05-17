@@ -2,11 +2,11 @@ import { LanguageConfig } from '@/model/language-config';
 import { TimezoneSelection } from '@/model/timezone-selection';
 import { PageProps } from '@/types';
 import { AvailableLanguage } from '@/utils/language-settings';
-import { Moment } from 'moment-timezone';
+import { TZDate } from '@date-fns/tz';
 import { ComputedRef, InjectionKey, Ref } from 'vue';
 
 export const timestamp = Symbol('timestamp') as InjectionKey<{
-  currentTimestamp: ComputedRef<Moment>,
+  currentTimestamp: ComputedRef<TZDate>,
   currentDate: Readonly<Ref<string>>,
   currentTime: Readonly<Ref<string>>,
   currentTimezone: Ref<TimezoneSelection>,

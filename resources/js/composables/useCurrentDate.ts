@@ -1,11 +1,12 @@
-import moment from 'moment-timezone';
+import { TZDate } from '@date-fns/tz';
+import { getDate, getMonth, getYear } from 'date-fns';
 import { computed, onUnmounted, ref } from 'vue';
 
 export function useCurrentDate() {
-  const currentDate = ref(moment());
+  const currentDate = ref(new TZDate());
 
   const intervalId = setInterval(() => {
-    currentDate.value = moment();
+    currentDate.value = new TZDate();
   }, 60e3);
 
   onUnmounted(() => {
@@ -13,8 +14,8 @@ export function useCurrentDate() {
   });
 
   return computed(() => ({
-    year: currentDate.value.year(),
-    month: currentDate.value.month(),
-    date: currentDate.value.date(),
+    year: getYear(currentDate.value),
+    month: getMonth(currentDate.value),
+    date: getDate(currentDate.value),
   }));
 }

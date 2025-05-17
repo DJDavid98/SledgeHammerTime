@@ -1,30 +1,22 @@
 <script setup lang="ts">
-import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
+import { useDateFnsLocale } from '@/composables/useDateFnsLocale';
 import { MessageTimestampFormat } from '@/model/message-timestamp-format';
-import { Moment } from 'moment-timezone';
+import { getDiscordToUnicodeFormat } from '@/utils/get-discord-to-unicode-format';
+import { TZDate } from '@date-fns/tz';
+import { format, formatDistanceToNow } from 'date-fns';
 import { computed, getCurrentInstance, ref, watch } from 'vue';
 
 const props = defineProps<{
-  ts: Moment | undefined,
-  format?: MessageTimestampFormat;
+  ts: TZDate | undefined,
+  tsFormat?: MessageTimestampFormat;
 }>();
-
-const formatMap: Record<MessageTimestampFormat, string> = {
-  [MessageTimestampFormat.SHORT_DATE]: 'L',
-  [MessageTimestampFormat.LONG_DATE]: 'LL',
-  [MessageTimestampFormat.SHORT_TIME]: 'LT',
-  [MessageTimestampFormat.LONG_TIME]: 'LTS',
-  [MessageTimestampFormat.SHORT_FULL]: 'LLL',
-  [MessageTimestampFormat.LONG_FULL]: 'LLLL',
-  [MessageTimestampFormat.RELATIVE]: '',
-};
 
 const updateInterval = ref<ReturnType<typeof setInterval> | null>(null);
 const instance = getCurrentInstance();
 
-const momentLocale = useMomentLocaleForceUpdate(instance);
+const dateFnsLocale = useDateFnsLocale(instance);
 
-const fromNow = computed(() => props.format === MessageTimestampFormat.RELATIVE);
+const fromNow = computed(() => props.tsFormat === MessageTimestampFormat.RELATIVE);
 
 watch(fromNow, (fromNowValue) => {
   if (updateInterval.value !== null) {
@@ -41,21 +33,19 @@ watch(fromNow, (fromNowValue) => {
     updateInterval.value = null;
   }
 }, { immediate: true });
-
-const localTimestamp = computed(() => props.ts?.local());
 </script>
 
 <template>
   <time
-    v-if="localTimestamp && momentLocale"
-    :title="localTimestamp.locale(momentLocale).format('LLLL')"
-    :datetime="localTimestamp.toISOString()"
+    v-if="ts && dateFnsLocale && tsFormat"
+    :title="format(ts, getDiscordToUnicodeFormat(MessageTimestampFormat.LONG_FULL, dateFnsLocale.code), { locale: dateFnsLocale })"
+    :datetime="ts.toISOString()"
   >
     <template v-if="fromNow">
-      {{ localTimestamp.locale(momentLocale).fromNow() }}
+      {{ formatDistanceToNow(ts, { includeSeconds: true, addSuffix: true, locale: dateFnsLocale }) }}
     </template>
-    <template v-else-if="format">
-      {{ localTimestamp.locale(momentLocale).format(formatMap[format]) }}
+    <template v-else-if="tsFormat">
+      {{ format(ts, getDiscordToUnicodeFormat(tsFormat, dateFnsLocale.code), { locale: dateFnsLocale }) }}
     </template>
   </time>
 </template>

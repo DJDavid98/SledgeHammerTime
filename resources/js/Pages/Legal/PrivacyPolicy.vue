@@ -7,11 +7,11 @@ import HtExternalLink from '@/Reusable/HtExternalLink.vue';
 import HtTranslate from '@/Reusable/HtTranslate.vue';
 import { DEVELOPER_NAME, DEVELOPER_URL } from '@/utils/app';
 import { LegalSectionIds } from '@/utils/legal';
+import { TZDate } from '@date-fns/tz';
 import { Link } from '@inertiajs/vue3';
-import { Moment } from 'moment-timezone';
 
 defineProps<{
-  lastUpdated: Moment;
+  lastUpdated: TZDate;
 }>();
 </script>
 
@@ -29,7 +29,7 @@ defineProps<{
           <template #1>
             <TimestampPreview
               :ts="lastUpdated"
-              :format="MessageTimestampFormat.LONG_DATE"
+              :ts-format="MessageTimestampFormat.LONG_DATE"
             />
           </template>
         </HtTranslate>

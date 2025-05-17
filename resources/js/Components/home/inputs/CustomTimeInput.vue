@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import TimePicker, { TimePickerPopupApi } from '@/Components/home/pickers/TimePicker.vue';
-import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
+import { useDateFnsLocale } from '@/composables/useDateFnsLocale';
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
+import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
 import { DialMode } from '@/utils/dial';
 import { keyboardOrMouseEventHandlerFactory } from '@/utils/events';
-import { createCurrentTsWithTimezone, getDateTimeMoment, isoTimeFormat } from '@/utils/time';
+import { getDiscordToUnicodeFormat } from '@/utils/get-discord-to-unicode-format';
+import { createCurrentTsWithTimezone, fallbackIsoDate, fallbackIsoTime, getDateTimeTZDate } from '@/utils/time';
+import { format } from 'date-fns';
 import { computed, getCurrentInstance, inject, provide, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
 
-const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
+const dateFnsLocale = useDateFnsLocale(getCurrentInstance());
 const selectedTime = computed(() => {
-  return momentLocale.value && ts?.currentTime.value && ts?.currentTimezone.value
-    ? getDateTimeMoment(ts?.currentTime.value, isoTimeFormat, ts.currentTimezone.value)
-      .locale(momentLocale.value).format('LTS')
+  return dateFnsLocale.value && ts?.currentTime.value && ts?.currentTimezone.value
+    ? format(getDateTimeTZDate(fallbackIsoDate + 'T' + (ts?.currentTime.value ?? fallbackIsoTime), ts.currentTimezone.value), getDiscordToUnicodeFormat(MessageTimestampFormat.LONG_TIME, dateFnsLocale.value.code))
     : '';
 });
 const timepicker = useTemplateRef<TimePickerPopupApi>('time-picker');

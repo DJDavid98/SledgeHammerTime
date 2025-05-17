@@ -1,6 +1,6 @@
 import { DatePickerCalendarApi } from '@/Components/home/pickers/controls/DatePickerCalendar.vue';
 import { pad } from '@/utils/pad';
-import { Moment } from 'moment-timezone';
+import { TZDate } from '@date-fns/tz';
 import { ref } from 'vue';
 
 export const useDatePicker = () => {
@@ -12,10 +12,10 @@ export const useDatePicker = () => {
   const monthInput = ref<HTMLInputElement>();
   const dateInput = ref<HTMLInputElement>();
 
-  const datePickerOpen = (initialValue: Moment) => {
-    year.value = initialValue.year();
-    month.value = initialValue.month() + 1;
-    date.value = initialValue.date();
+  const datePickerOpen = (initialValue: TZDate) => {
+    year.value = initialValue.getFullYear();
+    month.value = initialValue.getMonth() + 1;
+    date.value = initialValue.getDate();
   };
 
   const setDate = (newYear: number, newMonth: number, newDate: number) => {

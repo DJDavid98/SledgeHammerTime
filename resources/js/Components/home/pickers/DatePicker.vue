@@ -6,7 +6,7 @@ import DatePickerInputs from '@/Components/home/pickers/DatePickerInputs.vue';
 import { useDatePicker } from '@/composables/useDatePicker';
 import HtFormInputGroup from '@/Reusable/HtFormInputGroup.vue';
 import { limitDate, limitMonth } from '@/utils/time';
-import { Moment } from 'moment-timezone';
+import { TZDate } from '@date-fns/tz';
 import { useTemplateRef, watch } from 'vue';
 
 const {
@@ -39,7 +39,7 @@ const selectAndClose = () => {
   select();
   close();
 };
-const open = (initialValue: Moment, focusOnClose?: Focusable | null) => {
+const open = (initialValue: TZDate, focusOnClose?: Focusable | null) => {
   datePickerOpen(initialValue);
   popupRef.value?.open(focusOnClose);
 };

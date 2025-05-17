@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCurrentDate } from '@/composables/useCurrentDate';
-import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
+import { useDateFnsLocale } from '@/composables/useDateFnsLocale';
+import { SafeIntlLocale, WeekInfo } from '@/intl-locale.class';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtButtonGroup from '@/Reusable/HtButtonGroup.vue';
 import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
@@ -8,7 +9,7 @@ import {
   CalendarDay,
   DayOfWeek,
   generateCalendar,
-  getMomentForDate,
+  getTZDateForDate,
   getWeekdayItems,
   Month,
   WeekdayItem,
@@ -18,7 +19,7 @@ import { faBackwardFast, faChevronLeft, faChevronRight, faForwardFast } from '@f
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { usePage } from '@inertiajs/vue3';
 import classNames from 'classnames';
-import moment from 'moment-timezone';
+import { format, setDay } from 'date-fns';
 import { computed, getCurrentInstance, ref, watch } from 'vue';
 
 const props = defineProps<{
@@ -34,25 +35,50 @@ const emit = defineEmits<{
 const year = ref(props.selectedYear);
 const month = ref(props.selectedMonth);
 const date = ref(props.selectedDate);
-const momentLocaleData = ref<moment.Locale | null>(null);
+const weekInfo = ref<WeekInfo | null>(null);
 
 const locale = computed(() => usePage().props.app.locale);
-const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
+const intlLocale = computed(() => new SafeIntlLocale(locale.value));
+const dateFnsLocale = useDateFnsLocale(getCurrentInstance());
+const weekdaysShort = computed(() => {
+  const firstDay = intlLocale.value.getWeekInfo().firstDay;
 
-watch(momentLocale, () => {
-  momentLocaleData.value = moment.localeData(momentLocale.value);
+  const defaultWeekdays = [1, 2, 3, 4, 5, 6, 7];
+  let weekdays: number[] = defaultWeekdays;
+  if (firstDay !== 1) {
+    const firstDayIndex = defaultWeekdays.indexOf(firstDay);
+    if (firstDayIndex > -1) {
+      weekdays = [
+        ...defaultWeekdays.slice(firstDayIndex),
+        ...defaultWeekdays.slice(0, firstDayIndex),
+      ];
+    }
+  }
+
+  const now = new Date();
+  return weekdays.map(weekday => format(setDay(now, weekday === 7 ? 0 : weekday), 'E'));
+});
+
+watch(dateFnsLocale, () => {
+  weekInfo.value = intlLocale.value?.getWeekInfo();
 });
 
 const firstDayOfWeek = computed(() => {
+  if (weekInfo.value && !weekInfo.value.fallback) {
+    return weekInfo.value.firstDay - 1;
+  }
   switch (locale.value) {
     case 'ms':
+    case 'en':
       return DayOfWeek.Sunday;
+    case 'ar':
+      return DayOfWeek.Saturday;
     default:
-      return momentLocaleData.value?.firstDayOfWeek() as DayOfWeek;
+      return DayOfWeek.Monday;
   }
 });
 
-const weekdaysItems = computed(() => getWeekdayItems(momentLocaleData.value?.weekdaysShort(), firstDayOfWeek.value));
+const weekdaysItems = computed(() => getWeekdayItems(weekdaysShort.value, firstDayOfWeek.value));
 
 const calendar = computed(() => generateCalendar({
   year: year.value,
@@ -60,12 +86,12 @@ const calendar = computed(() => generateCalendar({
   firstDayOfWeek: firstDayOfWeek.value,
 }));
 
-const dateMoment = computed(() => {
-  return getMomentForDate(year.value, month.value - 1, date.value);
+const tzDate = computed(() => {
+  return getTZDateForDate(year.value, month.value - 1, date.value);
 });
 
 const currentDate = useCurrentDate();
-const contextFormat = 'MMMM YYYY';
+const contextFormat = 'MMMM y';
 
 const isShowingCurrentMonth = computed(() => {
   return month.value === currentDate.value.month + 1 && year.value === currentDate.value.year;
@@ -167,7 +193,7 @@ defineExpose<DatePickerCalendarApi>({
         />
       </HtButton>
     </HtButtonGroup>
-    <span class="calendar-context">{{ dateMoment.locale(locale).format(contextFormat) }}</span>
+    <span class="calendar-context">{{ format(tzDate, contextFormat, { locale: dateFnsLocale }) }}</span>
     <HtButtonGroup>
       <HtButton
         :aria-label="$t('timestampPicker.picker.tooltip.nextMonth')"

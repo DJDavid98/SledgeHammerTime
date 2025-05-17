@@ -3,7 +3,7 @@ import TimestampPreview from '@/Components/home/table/TimestampPreview.vue';
 import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import HtCard from '@/Reusable/HtCard.vue';
 import HtTable from '@/Reusable/HtTable.vue';
-import moment, { Moment } from 'moment-timezone';
+import { TZDate } from '@date-fns/tz';
 import { computed } from 'vue';
 
 export interface BotShard {
@@ -18,8 +18,8 @@ export interface BotShard {
 interface EnhancedBotShard {
   id: number;
   serverCount: number;
-  startedAt: Moment | undefined;
-  updatedAt: Moment | undefined;
+  startedAt: TZDate | undefined;
+  updatedAt: TZDate | undefined;
 }
 
 const props = defineProps<{
@@ -30,8 +30,8 @@ const enhancedShards = computed(() => props.shards.map((shard): EnhancedBotShard
   return {
     id: shard.id,
     serverCount: shard.serverCount,
-    startedAt: shard.startedAt ? moment(shard.startedAt) : undefined,
-    updatedAt: shard.updatedAt ? moment(shard.updatedAt) : undefined,
+    startedAt: shard.startedAt ? new TZDate(shard.startedAt) : undefined,
+    updatedAt: shard.updatedAt ? new TZDate(shard.updatedAt) : undefined,
   };
 }));
 </script>
@@ -73,13 +73,13 @@ const enhancedShards = computed(() => props.shards.map((shard): EnhancedBotShard
           <td>
             <TimestampPreview
               :ts="shard.startedAt"
-              :format="MessageTimestampFormat.RELATIVE"
+              :ts-format="MessageTimestampFormat.RELATIVE"
             />
           </td>
           <td>
             <TimestampPreview
               :ts="shard.updatedAt"
-              :format="MessageTimestampFormat.RELATIVE"
+              :ts-format="MessageTimestampFormat.RELATIVE"
             />
           </td>
         </tr>
