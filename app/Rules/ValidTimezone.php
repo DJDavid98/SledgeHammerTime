@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class ValidTimezone implements ValidationRule {
-  protected const OFFSET_ZONE_REGEX = '/^(Etc\/)?(?:GMT|UTC)\+?(-?\d{1,2})(?::?(\d{2}))?$/i';
+  protected const OFFSET_ZONE_REGEX = '/^[+-]\d{2}:\d{2}$/';
 
   /**
    * Run the validation rule.

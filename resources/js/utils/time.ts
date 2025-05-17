@@ -16,7 +16,7 @@ export const urlFormat = `yMMdd.HHmmss`;
 export const fallbackIsoDate = '1970-01-01';
 export const fallbackIsoTime = '00:00:00';
 
-export const offsetZoneRegex = /^(Etc\/)?(?:GMT|UTC)\+?(-?\d{1,2})(?::?(\d{2}))?$/i;
+export const offsetZoneRegex = /^(?:(Etc\/)?(?:GMT|UTC))?\+?(-?\d{1,2})(?::?(\d{2}))?$/i;
 
 export const getSortedNormalizedTimezoneNames = (): string[] =>
   Intl.supportedValuesOf('timeZone')
@@ -178,7 +178,7 @@ export const getDefaultInitialTimezone = (defaultTimezoneProp?: string): Timezon
   if (defaultTimezoneProp) {
     const offsetZoneMatch = defaultTimezoneProp.match(offsetZoneRegex);
     if (offsetZoneMatch !== null) {
-      const hoursMultiplier = offsetZoneMatch[1] !== '' ? -1 : 1;
+      const hoursMultiplier = offsetZoneMatch[1] ? -1 : 1;
       const hours = rangeLimit(parseInt(offsetZoneMatch[2], 10), -14, 14);
       const minutes = rangeLimit(parseInt(offsetZoneMatch[3], 10), 0, 59);
       if (!isNaN(hours)) {
@@ -215,7 +215,7 @@ export const createCurrentTsWithTimezone = (currentTimestamp: TZDate, currentTim
 export const convertTimeZoneSelectionToString = (currentTimezone: TimezoneSelection) => {
   switch (currentTimezone.type) {
     case TimeZoneSelectionType.OFFSET:
-      return `GMT${getUtcOffsetString(currentTimezone)}`;
+      return getUtcOffsetString(currentTimezone);
     case TimeZoneSelectionType.ZONE_NAME:
       return currentTimezone.name;
   }
