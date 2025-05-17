@@ -6,7 +6,7 @@ import TimePickerInputs from '@/Components/home/pickers/TimePickerInputs.vue';
 import { useTimePicker } from '@/composables/useTimePicker';
 import HtFormInputGroup from '@/Reusable/HtFormInputGroup.vue';
 import { limitHours, limitMinutesSeconds, limitToTwelveHours } from '@/utils/time';
-import { Moment } from 'moment-timezone';
+import { TZDate } from '@date-fns/tz';
 import { useTemplateRef } from 'vue';
 
 const {
@@ -46,7 +46,7 @@ const selectAndClose = () => {
   emit('selected', getSelectedTime());
   close();
 };
-const open = (initialValue: Moment, focusOnClose?: Focusable | null) => {
+const open = (initialValue: TZDate, focusOnClose?: Focusable | null) => {
   timePickerOpen(initialValue);
   popupRef.value?.open(focusOnClose);
 };

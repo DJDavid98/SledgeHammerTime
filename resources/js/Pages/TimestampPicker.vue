@@ -6,12 +6,10 @@ import Layout from '@/Layouts/DefaultLayout.vue';
 import { TimezoneSelection } from '@/model/timezone-selection';
 import {
   convertTimeZoneSelectionToString,
-  getDateTimeMoment,
+  getDateTimeTZDate,
   getDefaultInitialDateTime,
   getDefaultInitialTimezone,
   getInitialDateTime,
-  isoParsingDateFormat,
-  isoTimeFormat,
 } from '@/utils/time';
 import { Head, router, usePage } from '@inertiajs/vue3';
 import { computed, provide, readonly, Ref, ref, watch } from 'vue';
@@ -33,7 +31,7 @@ const [initialDate, initialTime] = getDefaultInitialDateTime(props.value.default
 const dateString = ref(initialDate);
 const timeString = ref(initialTime);
 
-const currentTimestamp = computed(() => getDateTimeMoment(`${dateString.value} ${timeString.value}`, `${isoParsingDateFormat} ${isoTimeFormat}`, currentTimezone.value));
+const currentTimestamp = computed(() => getDateTimeTZDate(`${dateString.value}T${timeString.value}`, currentTimezone.value));
 
 const changeDateString = (value: string) => {
   dateString.value = value;

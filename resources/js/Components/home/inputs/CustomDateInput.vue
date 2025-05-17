@@ -1,21 +1,26 @@
 <script setup lang="ts">
 import DatePicker, { DatePickerApi } from '@/Components/home/pickers/DatePicker.vue';
-import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
+import { useDateFnsLocale } from '@/composables/useDateFnsLocale';
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
+import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
 import { keyboardOrMouseEventHandlerFactory } from '@/utils/events';
-import { getDateTimeMoment, isoParsingDateFormat } from '@/utils/time';
+import { getDiscordToUnicodeFormat } from '@/utils/get-discord-to-unicode-format';
+import { fallbackIsoDate, fallbackIsoTime, getDateTimeTZDate } from '@/utils/time';
+import { format } from 'date-fns';
 import { computed, getCurrentInstance, inject, provide, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
 
-const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
+const dateFnsLocale = useDateFnsLocale(getCurrentInstance());
 const selectedDate = computed(() => {
-  return momentLocale.value && ts?.currentDate.value && ts?.currentTimezone.value
-    ? getDateTimeMoment(ts?.currentDate.value, isoParsingDateFormat, ts.currentTimezone.value)
-      .locale(momentLocale.value).format('LL')
-    : '';
+  if (dateFnsLocale.value && ts?.currentDate.value && ts?.currentTimezone.value) {
+    const date = getDateTimeTZDate((ts?.currentDate.value ?? fallbackIsoDate) + 'T' + fallbackIsoTime, ts.currentTimezone.value);
+    return format(date, getDiscordToUnicodeFormat(MessageTimestampFormat.LONG_DATE, dateFnsLocale.value.code), { locale: dateFnsLocale.value });
+  } else {
+    return '';
+  }
 });
 const datepicker = useTemplateRef<DatePickerApi>('date-picker');
 const inputEl = useTemplateRef<InputApi>('input-el');

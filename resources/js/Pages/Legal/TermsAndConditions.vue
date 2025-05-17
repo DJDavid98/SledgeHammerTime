@@ -6,10 +6,10 @@ import HtCard from '@/Reusable/HtCard.vue';
 import HtExternalLink from '@/Reusable/HtExternalLink.vue';
 import HtTranslate from '@/Reusable/HtTranslate.vue';
 import { LegalSectionIds } from '@/utils/legal';
-import { Moment } from 'moment-timezone';
+import { TZDate } from '@date-fns/tz';
 
 defineProps<{
-  lastUpdated: Moment;
+  lastUpdated: TZDate;
 }>();
 </script>
 
@@ -27,7 +27,7 @@ defineProps<{
           <template #1>
             <TimestampPreview
               :ts="lastUpdated"
-              :format="MessageTimestampFormat.LONG_DATE"
+              :ts-format="MessageTimestampFormat.LONG_DATE"
             />
           </template>
         </HtTranslate>

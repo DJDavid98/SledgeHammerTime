@@ -9,6 +9,7 @@ import {
   drawIndividualDial,
 } from '@/utils/dial';
 import { getPositionAngleInElement, integerInRangeByAngle, Point2D } from '@/utils/math';
+import { format, setHours, setMinutes, setSeconds } from 'date-fns';
 import { computed, inject, onMounted, onUnmounted, ref, watchEffect } from 'vue';
 
 const hoursCanvas = ref<HTMLCanvasElement>();
@@ -47,6 +48,7 @@ const dialSetup = computed(() => {
   const hourRingMaxValue = props.twelveHourMode ? 13 : 12;
   const hourRingRotationOffset = props.twelveHourMode ? 1 : 0;
   const hourRingHandCircleRadius = 12;
+  const hourFormat = props.twelveHourMode ? 'h' : 'H';
   const hourRings: DialRingSettings[] = [{
     labelCount: 12,
     fontSize: 25,
@@ -55,7 +57,7 @@ const dialSetup = computed(() => {
     handCircleRadius: hourRingHandCircleRadius,
     rotationOffset: hourRingRotationOffset,
     isAm: props.twelveHourMode ? true : undefined,
-    textGetter: (moment, value) => moment.hours(value).format('H'),
+    textGetter: (date, value) => format(setHours(date, value), hourFormat),
   }, {
     labelCount: 12,
     fontSize: 25,
@@ -66,7 +68,7 @@ const dialSetup = computed(() => {
     isAm: props.twelveHourMode ? false : undefined,
     labelOffsetPercent: props.twelveHourMode ? .5 : .67,
     activationDistance: .5,
-    textGetter: (moment, value) => moment.hours(value).format('H'),
+    textGetter: (date, value) => format(setHours(date, value), hourFormat),
   }];
   const settings: Record<DialMode, Omit<DialSettings, 'mode'>> = {
     [DialMode.Hours]: {
@@ -82,7 +84,7 @@ const dialSetup = computed(() => {
         labelCount: 12,
         maxValue: 60,
         handCircleRadius: 12,
-        textGetter: (moment, value) => moment.minutes(value).format('m'),
+        textGetter: (date, value) => format(setMinutes(date, value), 'm'),
       }],
       currentValueGetter: () => props.minutes,
       handStrokeStyle: colors.value.numbers,
@@ -94,7 +96,7 @@ const dialSetup = computed(() => {
         labelCount: 12,
         maxValue: 60,
         handCircleRadius: 12,
-        textGetter: (moment, value) => moment.seconds(value).format('s'),
+        textGetter: (date, value) => format(setSeconds(date, value), 's'),
       }],
       currentValueGetter: () => props.seconds,
       handStrokeStyle: colors.value.secondsHand,

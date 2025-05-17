@@ -41,8 +41,29 @@ class Settings extends Model {
   public static function mergeWithDefaults(array $userSettings, bool $editing = false):array {
     return array_reduce(SettingNames::cases(), fn(array $acc, SettingNames $case) => [
       ...$acc,
-      $case->value => $userSettings[$case->value] ?? self::getDefaultValue($case, $editing),
+      $case->value => self::getFormattedValue($userSettings, $case) ?? self::getDefaultValue($case, $editing),
     ], []);
+  }
+
+  public static function getFormattedValue(array $userSettings, SettingNames $case) {
+    $value = $userSettings[$case->value] ?? null;
+    if ($value === null){
+      return null;
+    }
+    switch ($case){
+      case SettingNames::TIMEZONE:
+        if (preg_match('/^"?(?:(Etc\\?\/)?(?:GMT|UTC))?\+?(-?\d{1,2})(?::?(\d{2}))?"?$/i', $value, $matches)){
+          $hoursMultiplier = $matches[1] ? -1 : 1;
+          $hours = max(min((int)$matches[2], 14), -14) * $hoursMultiplier;
+          $minutes = max(min((int)($matches[3] ?? 0), 59), 0);
+
+          return sprintf("%s%s:%s", $hours < 0 ? '-' : '+', str_pad($hours, 2, '0', STR_PAD_LEFT), str_pad($minutes, 2, 0, STR_PAD_LEFT));
+        }
+
+        return $value;
+      default:
+        return $value;
+    }
   }
 
   public static function getDefaultValue(string|SettingNames $setting, bool $editing = false) {

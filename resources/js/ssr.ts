@@ -5,7 +5,6 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { i18nVue } from 'laravel-vue-i18n';
 import { createSSRApp, DefineComponent, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
-import './moment';
 
 createServer((page) =>
   createInertiaApp({

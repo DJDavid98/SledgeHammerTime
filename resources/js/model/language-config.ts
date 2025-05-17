@@ -13,7 +13,7 @@ export interface LanguageConfig {
   emoji?: string;
   customFlag?: boolean;
   rtl?: boolean;
-  momentLocale?: string;
+  dateFnsLocale?: string;
   crowdinLocale?: string;
   laravelLocale?: string;
   percent?: number;

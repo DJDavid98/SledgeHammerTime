@@ -1,6 +1,6 @@
 import { getPositionAngleInElement, Point2D } from '@/utils/math';
 import { getMeridiemLabel } from '@/utils/time';
-import moment, { Moment } from 'moment-timezone';
+import { TZDate } from '@date-fns/tz';
 import { Ref } from 'vue';
 
 export enum DialMode {
@@ -42,7 +42,7 @@ export interface DialRingSettings {
    * When defined, determines if the ring will result in an AM/PM output value
    */
   isAm?: boolean;
-  textGetter: (momentInstance: Moment, value: number) => string;
+  textGetter: (date: TZDate, value: number) => string;
 }
 
 export interface DialSettings {
@@ -122,11 +122,11 @@ export const drawIndividualDial = (env: DialEnvironment, settings: DialSettings,
         .translate(0, -labelCenterOffset)
         .transformPoint(transformOrigin),
     );
-    const tempMoment = moment();
+    const tempDate = new TZDate();
     labelPoints.forEach((point, i) => {
       const ringProgressPercent = (i / labelCount);
       const value = Math.round((minValue + ((maxValue - minValue) * ringProgressPercent)) * 100) / 100;
-      const text = textGetter(tempMoment, value);
+      const text = textGetter(tempDate, value);
       ctx.font = `${fontSize}px ${fontFamily}`;
       ctx.fillStyle = env.colors.value.numbers;
       drawTextAt(ctx, point, text, fontSize);

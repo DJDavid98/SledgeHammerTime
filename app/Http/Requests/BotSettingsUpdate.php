@@ -4,8 +4,8 @@ namespace App\Http\Requests;
 
 use App\Enums\SettingNames;
 use App\Rules\DiscordTimestampFormatOption;
-use App\Rules\MomentTimezoneName;
 use App\Rules\TimestampMessageColumnsOption;
+use App\Rules\ValidTimezone;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,7 +31,7 @@ class BotSettingsUpdate extends FormRequest {
    */
   public function rules():array {
     return [
-      SettingNames::TIMEZONE->value => ['nullable', 'string', new MomentTimezoneName()],
+      SettingNames::TIMEZONE->value => ['nullable', 'string', new ValidTimezone()],
       SettingNames::FORMAT->value => ['nullable', 'string', new DiscordTimestampFormatOption()],
       SettingNames::FORMAT_MINIMAL_REPLY->value => ['nullable', 'boolean'],
       SettingNames::EPHEMERAL->value => ['nullable', 'boolean'],

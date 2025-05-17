@@ -10,7 +10,7 @@ import { useTimePicker } from '@/composables/useTimePicker';
 import HtFormInputGroup from '@/Reusable/HtFormInputGroup.vue';
 import { DialMode } from '@/utils/dial';
 import { limitDate, limitHours, limitMinutesSeconds, limitMonth, limitToTwelveHours } from '@/utils/time';
-import { Moment } from 'moment-timezone';
+import { TZDate } from '@date-fns/tz';
 import { useTemplateRef, watch } from 'vue';
 
 const {
@@ -65,7 +65,7 @@ const selectAndClose = () => {
   select();
   close();
 };
-const open = (initialValue: Moment, focusOnClose?: Focusable | null) => {
+const open = (initialValue: TZDate, focusOnClose?: Focusable | null) => {
   datePickerOpen(initialValue);
   timePickerOpen(initialValue);
   popupRef.value?.open(focusOnClose);

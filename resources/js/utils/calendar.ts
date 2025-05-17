@@ -1,4 +1,5 @@
-import moment, { Moment } from 'moment-timezone';
+import { TZDate } from '@date-fns/tz';
+import { addDays, format, getDate, getDay, getDaysInMonth, getMonth } from 'date-fns';
 
 export interface GenerateCalendarOptions {
   year: number;
@@ -90,18 +91,18 @@ const normalizeWeekday = (weekday: DayOfWeek | number): number => {
 /**
  * Months are 0-indexed
  */
-export const getMomentForDate = (year: number, month: number, date: number) => moment({
+export const getTZDateForDate = (year: number, month: number, date: number) => new TZDate(
   year,
   month,
   date,
-  hour: 0,
-  minute: 0,
-  second: 0,
-  milliseconds: 0,
-});
+  0,
+  0,
+  0,
+  0,
+);
 
-export const getFirstDayOfWeekOffset = (firstDayOfMonthMoment: Moment, firstDayOfWeek: DayOfWeek | number): number => {
-  const firstDayWeekday = firstDayOfMonthMoment.day();
+export const getFirstDayOfWeekOffset = (firstDayOfMonthDate: TZDate, firstDayOfWeek: DayOfWeek | number): number => {
+  const firstDayWeekday = firstDayOfMonthDate.getDay();
   if (firstDayWeekday === firstDayOfWeek) {
     return 0;
   }
@@ -111,8 +112,8 @@ export const getFirstDayOfWeekOffset = (firstDayOfMonthMoment: Moment, firstDayO
   return firstDayOfWeekNormalized - firstDayWeekdayNormalized - offset;
 };
 
-export const getCalendarRows = (firstDayOfMonthMoment: Moment, firstDayOfWeekOffset: number) => {
-  const daysInMonth = firstDayOfMonthMoment.daysInMonth();
+export const getCalendarRows = (firstDayOfMonthDate: TZDate, firstDayOfWeekOffset: number) => {
+  const daysInMonth = getDaysInMonth(firstDayOfMonthDate);
   return Math.ceil((daysInMonth + Math.abs(firstDayOfWeekOffset)) / LENGTH_OF_WEEK);
 };
 
@@ -146,24 +147,24 @@ export const generateCalendar = ({
   if (month < Month.January || month > Month.December) {
     throw new Error('Month is out of bounds');
   }
-  const firstDayOfMonthMoment = getMomentForDate(year, month, FIRST_DAY_OF_MONTH);
+  const firstDayOfMonthDate = getTZDateForDate(year, month, FIRST_DAY_OF_MONTH);
 
-  const firstDayOfWeekOffset = getFirstDayOfWeekOffset(firstDayOfMonthMoment, firstDayOfWeek);
+  const firstDayOfWeekOffset = getFirstDayOfWeekOffset(firstDayOfMonthDate, firstDayOfWeek);
   const gridSize = {
     columns: LENGTH_OF_WEEK,
-    rows: getCalendarRows(firstDayOfMonthMoment, firstDayOfWeekOffset),
+    rows: getCalendarRows(firstDayOfMonthDate, firstDayOfWeekOffset),
   };
   // Pre-allocate the array, map is used instead of fill to avoid pass-by-reference errors
   const days = Array.from<CalendarDay[]>({ length: gridSize.rows }).map(() => new Array(gridSize.columns) as CalendarDay[]);
   let dayOffset = firstDayOfWeekOffset;
   for (let weekIndex = 0; weekIndex < gridSize.rows; weekIndex++) {
     for (let dayIndex = 0; dayIndex < gridSize.columns; dayIndex++) {
-      const weekDayMoment = moment(firstDayOfMonthMoment).add(dayOffset, 'days');
+      const weekDayDate = addDays(firstDayOfMonthDate, dayOffset);
       days[weekIndex][dayIndex] = {
-        date: weekDayMoment.date(),
-        weekday: weekDayMoment.day(),
-        month: weekDayMoment.month(),
-        display: weekDayMoment.format('D'),
+        date: getDate(weekDayDate),
+        weekday: getDay(weekDayDate),
+        month: getMonth(weekDayDate),
+        display: format(weekDayDate, 'd'),
       };
       dayOffset++;
     }

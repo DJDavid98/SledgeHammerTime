@@ -14,7 +14,6 @@ import {
 } from '@/injection-keys';
 import { PageProps } from '@/types';
 import { computeCurrentLanguage } from '@/utils/app';
-import { loadMomentLocale } from '@/utils/moment';
 import { router, usePage } from '@inertiajs/vue3';
 import { loadLanguageAsync } from 'laravel-vue-i18n';
 import { onMounted, onUnmounted, provide, readonly, ref, watch } from 'vue';
@@ -50,11 +49,6 @@ export const useLayout = () => {
     const { locale, languageConfig } = currentLanguage.value;
     if (typeof document !== 'undefined' && document.documentElement) {
       document.documentElement.dir = languageConfig?.rtl ? 'rtl' : 'ltr';
-    }
-
-    const momentLocale = languageConfig?.momentLocale ?? locale;
-    if (momentLocale) {
-      loadMomentLocale(momentLocale);
     }
 
     const laravelLocale = languageConfig?.laravelLocale ?? locale;

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import DiscordUserInfo, { DiscordUserInfoProps } from '@/Components/DiscordUserInfo.vue';
 import FormMessage from '@/Components/FormMessage.vue';
-import TimeZoneInput from '@/Components/TimeZoneSelect.vue';
 import { devModeInject } from '@/injection-keys';
 import { UserSettings } from '@/model/user-settings';
+import TimeZoneInputModelled from '@/Pages/Settings/ControlledTimeZoneInput.vue';
 import HtAlert from '@/Reusable/HtAlert.vue';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
@@ -60,10 +60,9 @@ const form = useForm({
           :label="$t('botSettings.fields.timezone.displayName')"
           :combo-box="true"
         >
-          <TimeZoneInput
+          <TimeZoneInputModelled
             v-model="form.timezone"
             name="timezone"
-            class-name="mt-1"
           />
           <template #message>
             <FormMessage

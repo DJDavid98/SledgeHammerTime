@@ -5,9 +5,9 @@ import HtAlert from '@/Reusable/HtAlert.vue';
 import HtCard from '@/Reusable/HtCard.vue';
 import { AvailableLanguage } from '@/utils/language-settings';
 import { usePage } from '@inertiajs/vue3';
+import { addYears } from 'date-fns';
 import Cookies from 'js-cookie';
 import { wTrans } from 'laravel-vue-i18n';
-import moment from 'moment-timezone';
 import { computed, onMounted, ref } from 'vue';
 
 const page = usePage();
@@ -18,7 +18,7 @@ const howToCookieValue = 'how-to-dismiss';
 
 const handleHowToClose = () => {
   Cookies.set(howToCookieName, howToCookieValue, {
-    expires: moment().add(2, 'years').toDate(),
+    expires: addYears(new Date(), 2),
   });
   showHowTo.value = false;
 };
