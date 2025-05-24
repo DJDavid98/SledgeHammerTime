@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
 import TimestampPreview from '@/Components/home/table/TimestampPreview.vue';
 import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import HtCard from '@/Reusable/HtCard.vue';
 import HtTable from '@/Reusable/HtTable.vue';
-import moment, { Moment } from 'moment-timezone';
+import { DTL } from '@/utils/dtl';
 import { computed } from 'vue';
 
 export interface BotShard {
@@ -18,8 +19,8 @@ export interface BotShard {
 interface EnhancedBotShard {
   id: number;
   serverCount: number;
-  startedAt: Moment | undefined;
-  updatedAt: Moment | undefined;
+  startedAt: DateTimeLibraryValue | undefined;
+  updatedAt: DateTimeLibraryValue | undefined;
 }
 
 const props = defineProps<{
@@ -30,8 +31,8 @@ const enhancedShards = computed(() => props.shards.map((shard): EnhancedBotShard
   return {
     id: shard.id,
     serverCount: shard.serverCount,
-    startedAt: shard.startedAt ? moment(shard.startedAt) : undefined,
-    updatedAt: shard.updatedAt ? moment(shard.updatedAt) : undefined,
+    startedAt: shard.startedAt ? DTL.fromIsoString(shard.startedAt) : undefined,
+    updatedAt: shard.updatedAt ? DTL.fromIsoString(shard.updatedAt) : undefined,
   };
 }));
 </script>

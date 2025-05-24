@@ -1,12 +1,12 @@
+import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
 import { LanguageConfig } from '@/model/language-config';
 import { TimezoneSelection } from '@/model/timezone-selection';
 import { PageProps } from '@/types';
 import { AvailableLanguage } from '@/utils/language-settings';
-import { Moment } from 'moment-timezone';
 import { ComputedRef, InjectionKey, Ref } from 'vue';
 
 export const timestamp = Symbol('timestamp') as InjectionKey<{
-  currentTimestamp: ComputedRef<Moment>,
+  currentTimestamp: ComputedRef<DateTimeLibraryValue>,
   currentDate: Readonly<Ref<string>>,
   currentTime: Readonly<Ref<string>>,
   currentTimezone: Ref<TimezoneSelection>,

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import HtFormCombobox, { FormComboboxApi } from '@/Reusable/HtFormCombobox.vue';
 import { ComboboxOption } from '@/utils/combobox';
-import { getTimezoneValue, timezoneNames } from '@/utils/time';
+import { DTL } from '@/utils/dtl';
+import { getTimezoneValue } from '@/utils/time';
 import { useTemplateRef } from 'vue';
 
 const props = defineProps<{
@@ -10,7 +11,7 @@ const props = defineProps<{
   tabindex?: string | number;
 }>();
 
-const timezones = timezoneNames.map(getTimezoneValue);
+const timezones = DTL.timezoneNames.map(getTimezoneValue);
 
 const model = defineModel<string>();
 const emit = defineEmits<{

@@ -1,21 +1,31 @@
 <script setup lang="ts">
 import DatePicker, { DatePickerApi } from '@/Components/home/pickers/DatePicker.vue';
-import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
+import { useDateLibraryLocale } from '@/composables/useDateLibraryLocale';
 import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
+import { DTL } from '@/utils/dtl';
 import { keyboardOrMouseEventHandlerFactory } from '@/utils/events';
-import { getDateTimeMoment, isoParsingDateFormat } from '@/utils/time';
 import { computed, getCurrentInstance, inject, provide, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
 
-const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
+const dateLibLocale = useDateLibraryLocale(getCurrentInstance());
 const selectedDate = computed(() => {
-  return momentLocale.value && ts?.currentDate.value && ts?.currentTimezone.value
-    ? getDateTimeMoment(ts?.currentDate.value, isoParsingDateFormat, ts.currentTimezone.value)
-      .locale(momentLocale.value).format('LL')
-    : '';
+  if (dateLibLocale.value) {
+    const currentDateValue = ts?.currentDate.value;
+    if (currentDateValue) {
+      const currentTimezoneValue = ts?.currentTimezone.value;
+      if (currentTimezoneValue) {
+        return DTL.getValueForIsoZonedDate(
+          currentDateValue,
+          currentTimezoneValue,
+        ).setLocale(dateLibLocale.value.name).formatDateInputDisplay();
+      }
+    }
+  }
+
+  return '';
 });
 const datepicker = useTemplateRef<DatePickerApi>('date-picker');
 const inputEl = useTemplateRef<InputApi>('input-el');

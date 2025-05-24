@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
 import TimestampPreview from '@/Components/home/table/TimestampPreview.vue';
 import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import LegalHeading from '@/Pages/Legal/LegalHeading.vue';
@@ -8,10 +9,9 @@ import HtTranslate from '@/Reusable/HtTranslate.vue';
 import { DEVELOPER_NAME, DEVELOPER_URL } from '@/utils/app';
 import { LegalSectionIds } from '@/utils/legal';
 import { Link } from '@inertiajs/vue3';
-import { Moment } from 'moment-timezone';
 
 defineProps<{
-  lastUpdated: Moment;
+  lastUpdated: DateTimeLibraryValue;
 }>();
 </script>
 

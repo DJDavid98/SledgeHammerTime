@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
 import Popup, { CustomPopupApi, Focusable } from '@/Components/CustomPopup.vue';
 import PickerFormActions from '@/Components/home/pickers/controls/PickerFormActions.vue';
 import TimePickerDial from '@/Components/home/pickers/controls/TimePickerDial.vue';
@@ -6,7 +7,6 @@ import TimePickerInputs from '@/Components/home/pickers/TimePickerInputs.vue';
 import { useTimePicker } from '@/composables/useTimePicker';
 import HtFormInputGroup from '@/Reusable/HtFormInputGroup.vue';
 import { limitHours, limitMinutesSeconds, limitToTwelveHours } from '@/utils/time';
-import { Moment } from 'moment-timezone';
 import { useTemplateRef } from 'vue';
 
 const {
@@ -46,7 +46,7 @@ const selectAndClose = () => {
   emit('selected', getSelectedTime());
   close();
 };
-const open = (initialValue: Moment, focusOnClose?: Focusable | null) => {
+const open = (initialValue: DateTimeLibraryValue, focusOnClose?: Focusable | null) => {
   timePickerOpen(initialValue);
   popupRef.value?.open(focusOnClose);
 };

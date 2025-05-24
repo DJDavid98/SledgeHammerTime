@@ -1,34 +1,14 @@
-import moment, { Moment } from 'moment-timezone';
+import {
+  DateTimeLibraryMonth,
+  DateTimeLibraryValue,
+  DateTimeLibraryWeekday,
+} from '@/classes/DateTimeLibraryValue';
+import { DTL } from '@/utils/dtl';
 
 export interface GenerateCalendarOptions {
   year: number;
-  month: Month | number;
-  firstDayOfWeek?: DayOfWeek;
-}
-
-export enum DayOfWeek {
-  Sunday,
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-  Saturday,
-}
-
-export enum Month {
-  January,
-  February,
-  March,
-  April,
-  May,
-  June,
-  July,
-  August,
-  September,
-  October,
-  November,
-  December,
+  month: DateTimeLibraryMonth | number;
+  firstDayOfWeek?: DateTimeLibraryWeekday;
 }
 
 export interface CalendarDay {
@@ -38,22 +18,22 @@ export interface CalendarDay {
   /**
    * Optional metadata used for display purposes only
    */
-  weekday?: DayOfWeek;
+  weekday?: DateTimeLibraryWeekday;
 }
 
 export interface Calendar {
   // 2D array of [week][weekday]
   days: CalendarDay[][];
-  firstDayOfWeek: DayOfWeek | number;
+  firstDayOfWeek: DateTimeLibraryWeekday | number;
 }
 
-type WeekendDays = Partial<Record<DayOfWeek, string>>;
+type WeekendDays = Partial<Record<DateTimeLibraryWeekday, string>>;
 
 const redSundayWeekendDays: WeekendDays = {
-  [DayOfWeek.Sunday]: 'red',
+  [DateTimeLibraryWeekday.Sunday]: 'red',
 };
 const redSaturdayWeekendDays: WeekendDays = {
-  [DayOfWeek.Saturday]: 'red',
+  [DateTimeLibraryWeekday.Saturday]: 'red',
 };
 const redSaturdayAndSundayWeekendDays = { ...redSaturdayWeekendDays, ...redSundayWeekendDays };
 
@@ -62,13 +42,13 @@ export const WEEKEND_DAYS: Partial<Record<string, WeekendDays>> = {
   nl: { ...redSaturdayWeekendDays, ...redSundayWeekendDays },
   he: {
     ...redSaturdayWeekendDays,
-    [DayOfWeek.Friday]: 'red',
+    [DateTimeLibraryWeekday.Friday]: 'red',
   },
   hu: redSaturdayAndSundayWeekendDays,
   it: redSaturdayAndSundayWeekendDays,
   ms: {
     ...redSundayWeekendDays,
-    [DayOfWeek.Saturday]: 'blue',
+    [DateTimeLibraryWeekday.Saturday]: 'blue',
   },
   pl: redSundayWeekendDays,
   sr: redSundayWeekendDays,
@@ -81,27 +61,14 @@ const FIRST_DAY_OF_MONTH = 1;
 /**
  * Convert a JS-based weekday to a human-readable value
  */
-const normalizeWeekday = (weekday: DayOfWeek | number): number => {
+const normalizeWeekday = (weekday: DateTimeLibraryWeekday | number): number => {
   if (weekday > 6) throw new Error('Weekday must be a valid JS weekday');
   if (weekday === 0) return 7;
   return weekday;
 };
 
-/**
- * Months are 0-indexed
- */
-export const getMomentForDate = (year: number, month: number, date: number) => moment({
-  year,
-  month,
-  date,
-  hour: 0,
-  minute: 0,
-  second: 0,
-  milliseconds: 0,
-});
-
-export const getFirstDayOfWeekOffset = (firstDayOfMonthMoment: Moment, firstDayOfWeek: DayOfWeek | number): number => {
-  const firstDayWeekday = firstDayOfMonthMoment.day();
+export const getFirstDayOfWeekOffset = (firstDayOfMonthDateTime: DateTimeLibraryValue, firstDayOfWeek: DateTimeLibraryWeekday | number): number => {
+  const firstDayWeekday = firstDayOfMonthDateTime.getWeekday();
   if (firstDayWeekday === firstDayOfWeek) {
     return 0;
   }
@@ -111,17 +78,17 @@ export const getFirstDayOfWeekOffset = (firstDayOfMonthMoment: Moment, firstDayO
   return firstDayOfWeekNormalized - firstDayWeekdayNormalized - offset;
 };
 
-export const getCalendarRows = (firstDayOfMonthMoment: Moment, firstDayOfWeekOffset: number) => {
-  const daysInMonth = firstDayOfMonthMoment.daysInMonth();
+export const getCalendarRows = (firstDayOfMonthDateTime: DateTimeLibraryValue, firstDayOfWeekOffset: number) => {
+  const daysInMonth = firstDayOfMonthDateTime.daysInMonth();
   return Math.ceil((daysInMonth + Math.abs(firstDayOfWeekOffset)) / LENGTH_OF_WEEK);
 };
 
 export interface WeekdayItem {
-  index: DayOfWeek;
+  index: DateTimeLibraryWeekday;
   name: string;
 }
 
-export const getWeekdayItems = (weekdays: string[] | undefined, firstDayOfWeek: DayOfWeek): WeekdayItem[] => {
+export const getWeekdayItems = (weekdays: string[] | undefined, firstDayOfWeek: DateTimeLibraryWeekday): WeekdayItem[] => {
   if (!weekdays) {
     return [];
   }
@@ -131,7 +98,7 @@ export const getWeekdayItems = (weekdays: string[] | undefined, firstDayOfWeek: 
     name: weekday,
   }));
 
-  if (firstDayOfWeek === DayOfWeek.Sunday) {
+  if (firstDayOfWeek === DateTimeLibraryWeekday.Sunday) {
     return items;
   }
 
@@ -141,29 +108,29 @@ export const getWeekdayItems = (weekdays: string[] | undefined, firstDayOfWeek: 
 export const generateCalendar = ({
   year,
   month,
-  firstDayOfWeek = DayOfWeek.Monday,
+  firstDayOfWeek = DateTimeLibraryWeekday.Monday,
 }: GenerateCalendarOptions): Calendar => {
-  if (month < Month.January || month > Month.December) {
+  if (month < DateTimeLibraryMonth.January || month > DateTimeLibraryMonth.December) {
     throw new Error('Month is out of bounds');
   }
-  const firstDayOfMonthMoment = getMomentForDate(year, month, FIRST_DAY_OF_MONTH);
+  const firstDayOfMonthDateTime = DTL.getValueForDate(year, month, FIRST_DAY_OF_MONTH);
 
-  const firstDayOfWeekOffset = getFirstDayOfWeekOffset(firstDayOfMonthMoment, firstDayOfWeek);
+  const firstDayOfWeekOffset = getFirstDayOfWeekOffset(firstDayOfMonthDateTime, firstDayOfWeek);
   const gridSize = {
     columns: LENGTH_OF_WEEK,
-    rows: getCalendarRows(firstDayOfMonthMoment, firstDayOfWeekOffset),
+    rows: getCalendarRows(firstDayOfMonthDateTime, firstDayOfWeekOffset),
   };
   // Pre-allocate the array, map is used instead of fill to avoid pass-by-reference errors
   const days = Array.from<CalendarDay[]>({ length: gridSize.rows }).map(() => new Array(gridSize.columns) as CalendarDay[]);
   let dayOffset = firstDayOfWeekOffset;
   for (let weekIndex = 0; weekIndex < gridSize.rows; weekIndex++) {
     for (let dayIndex = 0; dayIndex < gridSize.columns; dayIndex++) {
-      const weekDayMoment = moment(firstDayOfMonthMoment).add(dayOffset, 'days');
+      const weekDayDateTime = firstDayOfMonthDateTime.addDays(dayOffset);
       days[weekIndex][dayIndex] = {
-        date: weekDayMoment.date(),
-        weekday: weekDayMoment.day(),
-        month: weekDayMoment.month(),
-        display: weekDayMoment.format('D'),
+        date: weekDayDateTime.getDayOfMonth(),
+        weekday: weekDayDateTime.getWeekday(),
+        month: weekDayDateTime.getMonth(),
+        display: weekDayDateTime.formatCalendarDateDisplay(),
       };
       dayOffset++;
     }

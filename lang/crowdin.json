@@ -1,5 +1,5 @@
 {
-  "meta": "Generated at 2025-05-11T04:00:44.840Z",
+  "meta": "Generated at 2025-05-24T00:02:59.740Z",
   "users": {
     "25282": {
       "username": "Liggli",
@@ -994,7 +994,7 @@
     },
     "ar": {
       "approval": 0,
-      "translation": 21
+      "translation": 8
     },
     "bg": {
       "approval": 0,
@@ -1018,11 +1018,11 @@
     },
     "el": {
       "approval": 0,
-      "translation": 55
+      "translation": 22
     },
     "en-GB": {
-      "approval": 55,
-      "translation": 55
+      "approval": 100,
+      "translation": 100
     },
     "es": {
       "approval": 0,
@@ -1049,8 +1049,8 @@
       "translation": 0
     },
     "hu": {
-      "approval": 55,
-      "translation": 55
+      "approval": 100,
+      "translation": 100
     },
     "id": {
       "approval": 0,
@@ -1058,7 +1058,7 @@
     },
     "it": {
       "approval": 0,
-      "translation": 45
+      "translation": 18
     },
     "ja": {
       "approval": 0,
@@ -1090,7 +1090,7 @@
     },
     "nl": {
       "approval": 0,
-      "translation": 4
+      "translation": 1
     },
     "pl": {
       "approval": 0,
@@ -1142,7 +1142,7 @@
     },
     "zh": {
       "approval": 0,
-      "translation": 26
+      "translation": 10
     }
   }
 }

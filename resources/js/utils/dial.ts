@@ -1,6 +1,6 @@
+import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
+import { DTL } from '@/utils/dtl';
 import { getPositionAngleInElement, Point2D } from '@/utils/math';
-import { getMeridiemLabel } from '@/utils/time';
-import moment, { Moment } from 'moment-timezone';
 import { Ref } from 'vue';
 
 export enum DialMode {
@@ -42,7 +42,7 @@ export interface DialRingSettings {
    * When defined, determines if the ring will result in an AM/PM output value
    */
   isAm?: boolean;
-  textGetter: (momentInstance: Moment, value: number) => string;
+  textGetter: (momentInstance: DateTimeLibraryValue, value: number) => string;
 }
 
 export interface DialSettings {
@@ -122,11 +122,11 @@ export const drawIndividualDial = (env: DialEnvironment, settings: DialSettings,
         .translate(0, -labelCenterOffset)
         .transformPoint(transformOrigin),
     );
-    const tempMoment = moment();
+    const tempDateTime = DTL.now();
     labelPoints.forEach((point, i) => {
       const ringProgressPercent = (i / labelCount);
       const value = Math.round((minValue + ((maxValue - minValue) * ringProgressPercent)) * 100) / 100;
-      const text = textGetter(tempMoment, value);
+      const text = textGetter(tempDateTime, value);
       ctx.font = `${fontSize}px ${fontFamily}`;
       ctx.fillStyle = env.colors.value.numbers;
       drawTextAt(ctx, point, text, fontSize);
@@ -154,7 +154,7 @@ export const drawIndividualDial = (env: DialEnvironment, settings: DialSettings,
         ctx.closePath();
         ctx.font = `bold ${fontSize}px ${fontFamily}`;
         ctx.fillStyle = env.colors.value.numbers;
-        drawTextAt(ctx, origin, getMeridiemLabel(env.isAm, env.minutes), fontSize);
+        drawTextAt(ctx, origin, DTL.getMeridiemLabel(env.isAm, env.minutes), fontSize);
         ctx.beginPath();
       }
 

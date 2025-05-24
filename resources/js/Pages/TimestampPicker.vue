@@ -4,15 +4,8 @@ import UsefulLinks from '@/Components/home/UsefulLinks.vue';
 import { timestamp } from '@/injection-keys';
 import Layout from '@/Layouts/DefaultLayout.vue';
 import { TimezoneSelection } from '@/model/timezone-selection';
-import {
-  convertTimeZoneSelectionToString,
-  getDateTimeMoment,
-  getDefaultInitialDateTime,
-  getDefaultInitialTimezone,
-  getInitialDateTime,
-  isoParsingDateFormat,
-  isoTimeFormat,
-} from '@/utils/time';
+import { DTL } from '@/utils/dtl';
+import { convertTimeZoneSelectionToString } from '@/utils/time';
 import { Head, router, usePage } from '@inertiajs/vue3';
 import { computed, provide, readonly, Ref, ref, watch } from 'vue';
 
@@ -28,12 +21,12 @@ const props = computed(() => {
   };
 });
 
-const currentTimezone: Ref<TimezoneSelection> = ref(getDefaultInitialTimezone(props.value.defaultTimezone));
-const [initialDate, initialTime] = getDefaultInitialDateTime(props.value.defaultDateTime, currentTimezone.value);
+const currentTimezone: Ref<TimezoneSelection> = ref(DTL.getDefaultInitialTimezoneSelection(props.value.defaultTimezone));
+const [initialDate, initialTime] = DTL.getDefaultInitialDateTime(currentTimezone.value, props.value.defaultDateTime);
 const dateString = ref(initialDate);
 const timeString = ref(initialTime);
 
-const currentTimestamp = computed(() => getDateTimeMoment(`${dateString.value} ${timeString.value}`, `${isoParsingDateFormat} ${isoTimeFormat}`, currentTimezone.value));
+const currentTimestamp = computed(() => DTL.getValueForIsoZonedDateTime(dateString.value, timeString.value, currentTimezone.value));
 
 const changeDateString = (value: string) => {
   dateString.value = value;
@@ -50,7 +43,7 @@ const changeTimezone = (value: TimezoneSelection) => {
   currentTimezone.value = value;
 };
 const setCurrentTime = () => {
-  const [newDateString, newTimeString] = getInitialDateTime(currentTimezone.value);
+  const [newDateString, newTimeString] = DTL.getInitialDateTime(currentTimezone.value);
   changeDateString(newDateString);
   changeTimeString(newTimeString);
 };

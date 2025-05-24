@@ -13,11 +13,11 @@ const props = withDefaults(defineProps<{
 
 const fallbackImage = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
-const loadedUrl = ref<null | string>(null);
+const loadedUrl = ref<null | string>(props.src ?? null);
 const loadingImage = ref<HTMLImageElement | null>(null);
 const isSsr = typeof window === 'undefined';
 
-const currentSrc = computed(() => isSsr ? props.src : (loadedUrl.value ?? fallbackImage));
+const currentSrc = computed(() => loadedUrl.value ?? fallbackImage);
 
 watch(() => props.src, (newSrc) => {
   if (isSsr || loadedUrl.value === newSrc) return;

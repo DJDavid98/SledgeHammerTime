@@ -1,25 +1,17 @@
 <script setup lang="ts">
+import { DateTimeLibraryMonth, DateTimeLibraryWeekday } from '@/classes/DateTimeLibraryValue';
 import { useCurrentDate } from '@/composables/useCurrentDate';
-import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
+import { useDateLibraryLocale } from '@/composables/useDateLibraryLocale';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtButtonGroup from '@/Reusable/HtButtonGroup.vue';
 import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
-import {
-  CalendarDay,
-  DayOfWeek,
-  generateCalendar,
-  getMomentForDate,
-  getWeekdayItems,
-  Month,
-  WeekdayItem,
-  WEEKEND_DAYS,
-} from '@/utils/calendar';
+import { CalendarDay, generateCalendar, getWeekdayItems, WeekdayItem, WEEKEND_DAYS } from '@/utils/calendar';
+import { DTL } from '@/utils/dtl';
 import { faBackwardFast, faChevronLeft, faChevronRight, faForwardFast } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { usePage } from '@inertiajs/vue3';
 import classNames from 'classnames';
-import moment from 'moment-timezone';
-import { computed, getCurrentInstance, ref, watch } from 'vue';
+import { computed, getCurrentInstance, ref } from 'vue';
 
 const props = defineProps<{
   selectedYear: number,
@@ -34,25 +26,20 @@ const emit = defineEmits<{
 const year = ref(props.selectedYear);
 const month = ref(props.selectedMonth);
 const date = ref(props.selectedDate);
-const momentLocaleData = ref<moment.Locale | null>(null);
 
 const locale = computed(() => usePage().props.app.locale);
-const momentLocale = useMomentLocaleForceUpdate(getCurrentInstance());
-
-watch(momentLocale, () => {
-  momentLocaleData.value = moment.localeData(momentLocale.value);
-});
+const dateLibLocale = useDateLibraryLocale(getCurrentInstance());
 
 const firstDayOfWeek = computed(() => {
   switch (locale.value) {
     case 'ms':
-      return DayOfWeek.Sunday;
+      return DateTimeLibraryWeekday.Sunday;
     default:
-      return momentLocaleData.value?.firstDayOfWeek() as DayOfWeek;
+      return dateLibLocale.value?.getWeekInfo().firstDay ?? DateTimeLibraryWeekday.Monday;
   }
 });
 
-const weekdaysItems = computed(() => getWeekdayItems(momentLocaleData.value?.weekdaysShort(), firstDayOfWeek.value));
+const weekdaysItems = computed(() => getWeekdayItems(dateLibLocale.value?.getShortWeekdays() ?? [], firstDayOfWeek.value));
 
 const calendar = computed(() => generateCalendar({
   year: year.value,
@@ -60,12 +47,11 @@ const calendar = computed(() => generateCalendar({
   firstDayOfWeek: firstDayOfWeek.value,
 }));
 
-const dateMoment = computed(() => {
-  return getMomentForDate(year.value, month.value - 1, date.value);
+const dateTime = computed(() => {
+  return DTL.getValueForDate(year.value, month.value - 1, date.value);
 });
 
 const currentDate = useCurrentDate();
-const contextFormat = 'MMMM YYYY';
 
 const isShowingCurrentMonth = computed(() => {
   return month.value === currentDate.value.month + 1 && year.value === currentDate.value.year;
@@ -91,15 +77,15 @@ const stepDate = (direction: -1 | 1, add: 'month' | 'year') => {
   switch (add) {
     case 'month':
       if (direction > 0) {
-        if (month.value - 1 === Month.December) {
-          month.value = Month.January + 1;
+        if (month.value - 1 === DateTimeLibraryMonth.December) {
+          month.value = DateTimeLibraryMonth.January + 1;
           year.value++;
         } else {
           month.value++;
         }
       } else {
-        if (month.value - 1 === Month.January) {
-          month.value = Month.December + 1;
+        if (month.value - 1 === DateTimeLibraryMonth.January) {
+          month.value = DateTimeLibraryMonth.December + 1;
           year.value--;
         } else {
           month.value--;
@@ -167,7 +153,7 @@ defineExpose<DatePickerCalendarApi>({
         />
       </HtButton>
     </HtButtonGroup>
-    <span class="calendar-context">{{ dateMoment.locale(locale).format(contextFormat) }}</span>
+    <span class="calendar-context">{{ dateTime.setLocale(locale).formatCalendarContext() }}</span>
     <HtButtonGroup>
       <HtButton
         :aria-label="$t('timestampPicker.picker.tooltip.nextMonth')"

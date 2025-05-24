@@ -21,7 +21,7 @@ createServer((page) =>
           location: new URL(page.props.ziggy.location),
         })
         .use(i18nVue, {
-          lang: page.props.app.locale,
+          lang: props.initialPage.props.app.locale,
           fallbackLang: 'en',
           fallbackMissingTranslations: true,
           resolve: (lang: string) => {

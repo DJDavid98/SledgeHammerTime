@@ -7,21 +7,22 @@ const props = withDefaults(defineProps<{
   maxHeight?: number;
 }>(), {
   'class': undefined,
-  maxHeight: undefined,
+  maxHeight: 0,
 });
 
 const isSsr = typeof window === 'undefined';
 const collapsibleRef = useTemplateRef('collapsibleRef');
-const height = ref((isSsr ? props.maxHeight : undefined) ?? 0);
+const height = ref(props.maxHeight);
 const isTransitioning = ref(false);
 
-const resizeObserver = !isSsr ? new ResizeObserver(() => {
+const handleResize = () => {
   if (isTransitioning.value) return;
 
   if (collapsibleRef.value) {
-    height.value = Math.min(props.maxHeight ?? Infinity, collapsibleRef.value.scrollHeight);
+    height.value = Math.min(props.maxHeight, collapsibleRef.value.scrollHeight);
   }
-}) : undefined;
+};
+const resizeObserver = !isSsr ? new ResizeObserver(handleResize) : undefined;
 
 const handleTransitionStart = () => {
   isTransitioning.value = true;
@@ -41,6 +42,7 @@ watch(() => props.visible, (newVisible) => {
 });
 
 onMounted(() => {
+  handleResize();
   if (resizeObserver && collapsibleRef.value) {
     resizeObserver.observe(collapsibleRef.value);
     collapsibleRef.value.addEventListener('transitionstart', handleTransitionStart);
@@ -60,9 +62,9 @@ onUnmounted(() => {
 <template>
   <div
     ref="collapsibleRef"
-    :class="['collapsible', { visible: isSsr || visible, 'limited-height': !!maxHeight }, props.class]"
+    :class="['collapsible', { visible: visible, 'limited-height': !!maxHeight }, props.class]"
     :style="`height: ${height}px`"
-    :inert="!isSsr && !visible"
+    :inert="!visible"
   >
     <slot />
   </div>

@@ -4,7 +4,7 @@ import TimestampPreview from '@/Components/home/table/TimestampPreview.vue';
 import { timestamp } from '@/injection-keys';
 import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import HtTable from '@/Reusable/HtTable.vue';
-import { getDateTimeMoment, isoFormat } from '@/utils/time';
+import { DTL } from '@/utils/dtl';
 import { faCalendar as faRegularCalendar } from '@fortawesome/free-regular-svg-icons';
 import { faCalendar, faClock, faCode, faUserClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -12,9 +12,9 @@ import { computed, inject } from 'vue';
 
 const ts = inject(timestamp);
 
-const currentTimestamp = computed(() => ts?.currentTimezone.value && getDateTimeMoment(ts?.currentDate.value + ' ' + ts?.currentTime.value, isoFormat, ts.currentTimezone.value));
+const currentTimestamp = computed(() => ts?.currentTimezone.value && DTL.getValueForIsoZonedDateTime(ts?.currentDate.value, ts?.currentTime.value, ts.currentTimezone.value));
 
-const unixTs = computed(() => currentTimestamp.value?.unix());
+const unixTs = computed(() => currentTimestamp.value?.getUnixSeconds());
 </script>
 
 <template>

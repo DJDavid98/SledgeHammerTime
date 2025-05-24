@@ -10,10 +10,10 @@ import HtFormRadio from '@/Reusable/HtFormRadio.vue';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
 import HtInputGropupText from '@/Reusable/HtInputGropupText.vue';
 import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
-import { guessInitialTimezoneName } from '@/utils/time';
+import { DTL } from '@/utils/dtl';
 import { ref, useTemplateRef } from 'vue';
 
-const defaultZoneName = guessInitialTimezoneName();
+const defaultZoneName = DTL.guessInitialTimezoneName();
 const offsetHours = ref(0);
 const offsetMinutes = ref(0);
 const zoneName = ref<string>(defaultZoneName);

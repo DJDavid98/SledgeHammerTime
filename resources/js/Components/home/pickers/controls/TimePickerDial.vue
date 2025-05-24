@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
 import { theme } from '@/injection-keys';
 import {
   DialColors,
@@ -47,6 +48,8 @@ const dialSetup = computed(() => {
   const hourRingMaxValue = props.twelveHourMode ? 13 : 12;
   const hourRingRotationOffset = props.twelveHourMode ? 1 : 0;
   const hourRingHandCircleRadius = 12;
+  const hourRingTextGetter = (dateTimeValue: DateTimeLibraryValue, hour: number) =>
+    dateTimeValue.setHours(hour).formatHoursDisplay();
   const hourRings: DialRingSettings[] = [{
     labelCount: 12,
     fontSize: 25,
@@ -55,7 +58,7 @@ const dialSetup = computed(() => {
     handCircleRadius: hourRingHandCircleRadius,
     rotationOffset: hourRingRotationOffset,
     isAm: props.twelveHourMode ? true : undefined,
-    textGetter: (moment, value) => moment.hours(value).format('H'),
+    textGetter: hourRingTextGetter,
   }, {
     labelCount: 12,
     fontSize: 25,
@@ -66,7 +69,7 @@ const dialSetup = computed(() => {
     isAm: props.twelveHourMode ? false : undefined,
     labelOffsetPercent: props.twelveHourMode ? .5 : .67,
     activationDistance: .5,
-    textGetter: (moment, value) => moment.hours(value).format('H'),
+    textGetter: hourRingTextGetter,
   }];
   const settings: Record<DialMode, Omit<DialSettings, 'mode'>> = {
     [DialMode.Hours]: {
@@ -82,7 +85,7 @@ const dialSetup = computed(() => {
         labelCount: 12,
         maxValue: 60,
         handCircleRadius: 12,
-        textGetter: (moment, value) => moment.minutes(value).format('m'),
+        textGetter: (dateTimeValue, minute) => dateTimeValue.setMinutes(minute).formatMinutesDisplay(),
       }],
       currentValueGetter: () => props.minutes,
       handStrokeStyle: colors.value.numbers,
@@ -94,7 +97,7 @@ const dialSetup = computed(() => {
         labelCount: 12,
         maxValue: 60,
         handCircleRadius: 12,
-        textGetter: (moment, value) => moment.seconds(value).format('s'),
+        textGetter: (dateTimeValue, second) => dateTimeValue.setSeconds(second).formatSecondsDisplay(),
       }],
       currentValueGetter: () => props.seconds,
       handStrokeStyle: colors.value.secondsHand,

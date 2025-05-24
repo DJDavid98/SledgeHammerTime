@@ -1,9 +1,9 @@
+import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
 import { TimePickerDialAPI } from '@/Components/home/pickers/controls/TimePickerDial.vue';
-import { useMomentLocaleForceUpdate } from '@/composables/useMomentLocaleForceUpdate';
+import { useDateLibraryLocale } from '@/composables/useDateLibraryLocale';
 import { DialMode } from '@/utils/dial';
 import { pad } from '@/utils/pad';
 import { toTwelveHours, toTwentyFourHours } from '@/utils/time';
-import moment, { Moment } from 'moment-timezone';
 import { computed, getCurrentInstance, ref } from 'vue';
 
 export const useTimePicker = () => {
@@ -18,11 +18,8 @@ export const useTimePicker = () => {
   const renderDial = ref(false);
 
   const instance = getCurrentInstance();
-  const momentLocale = useMomentLocaleForceUpdate(instance);
-  const twelveHourMode = computed(() => {
-    const longTimeFormat = moment.localeData(momentLocale.value).longDateFormat('LT');
-    return /A$/i.test(longTimeFormat);
-  });
+  const dateLibLocale = useDateLibraryLocale(instance);
+  const twelveHourMode = computed(() => dateLibLocale.value?.getHourCycleInfo().hourCycle === 'h12');
 
   const setHours = (value: number, isAmValue?: boolean) => {
     hours.value = value;
@@ -60,11 +57,11 @@ export const useTimePicker = () => {
     }
   };
 
-  const timePickerOpen = (initialValue: Moment) => {
-    const initialHours = initialValue.hours();
+  const timePickerOpen = (initialValue: DateTimeLibraryValue) => {
+    const initialHours = initialValue.getHours();
     hours.value = twelveHourMode.value ? toTwelveHours(initialHours) : initialHours;
-    minutes.value = initialValue.minutes();
-    seconds.value = initialValue.seconds();
+    minutes.value = initialValue.getMinutes();
+    seconds.value = initialValue.getSeconds();
     isAm.value = initialHours < 12;
   };
 

@@ -18,6 +18,7 @@ export const momentLocaleMap = {
   'de': () => isSsr ? import('moment/locale/de') : import('moment/dist/locale/de'),
   // @ts-expect-error (Import is correct)
   'el': () => isSsr ? import('moment/locale/el') : import('moment/dist/locale/el'),
+  'en': () => Promise.resolve(),
   // @ts-expect-error (Import is correct)
   'en-gb': () => isSsr ? import('moment/locale/en-gb') : import('moment/dist/locale/en-gb'),
   // @ts-expect-error (Import is correct)

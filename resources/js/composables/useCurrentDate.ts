@@ -1,11 +1,17 @@
-import moment from 'moment-timezone';
-import { computed, onUnmounted, ref } from 'vue';
+import { DTL } from '@/utils/dtl';
+import { computed, ComputedRef, onUnmounted, ref } from 'vue';
 
-export function useCurrentDate() {
-  const currentDate = ref(moment());
+export type CurrentDateRef = ComputedRef<{
+  year: number;
+  month: number;
+  date: number;
+}>
+
+export function useCurrentDate(): CurrentDateRef {
+  const currentDate = ref(DTL.now());
 
   const intervalId = setInterval(() => {
-    currentDate.value = moment();
+    currentDate.value = DTL.now();
   }, 60e3);
 
   onUnmounted(() => {
@@ -13,8 +19,8 @@ export function useCurrentDate() {
   });
 
   return computed(() => ({
-    year: currentDate.value.year(),
-    month: currentDate.value.month(),
-    date: currentDate.value.date(),
+    year: currentDate.value.getFullYear(),
+    month: currentDate.value.getMonth(),
+    date: currentDate.value.getDayOfMonth(),
   }));
 }

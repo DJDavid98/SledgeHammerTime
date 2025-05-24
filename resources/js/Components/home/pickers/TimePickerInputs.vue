@@ -4,7 +4,8 @@ import HtFormSelect from '@/Reusable/HtFormSelect.vue';
 import HtInput from '@/Reusable/HtInput.vue';
 import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
 import { DialMode } from '@/utils/dial';
-import { coerceToTwelveHours, getMeridiemLabel } from '@/utils/time';
+import { DTL } from '@/utils/dtl';
+import { coerceToTwelveHours } from '@/utils/time';
 
 const hours = defineModel<number>('hours', { required: true });
 const minutes = defineModel<number>('minutes', { required: true });
@@ -87,10 +88,10 @@ const handleAmPmSelectKeydown = (e: KeyboardEvent) => {
     @keydown="handleAmPmSelectKeydown"
   >
     <option :value="true">
-      {{ getMeridiemLabel(true, minutes) }}
+      {{ DTL.getMeridiemLabel(true, minutes) }}
     </option>
     <option :value="false">
-      {{ getMeridiemLabel(false, minutes) }}
+      {{ DTL.getMeridiemLabel(false, minutes) }}
     </option>
   </HtFormSelect>
 </template>
