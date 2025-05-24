@@ -261,7 +261,7 @@ describe('getUtcOffsetString', () => {
 
 describe('DTLValue.replaceZone', () => {
   it('should return a moment timestamp with the correct utc offset', () => {
-    const now = DTL.fromTimestampUtc(0);
+    const now = DTL.fromTimestampMsUtc(0);
     const defaultObject: TimezoneSelectionByOffset = {
       type: TimeZoneSelectionType.OFFSET,
       hours: 0,
@@ -280,7 +280,7 @@ describe('DTLValue.replaceZone', () => {
     }).getUtcOffsetMinutes()).toEqual(-870);
   });
   it('should return a moment timestamp with the correct zone name', () => {
-    const now = DTL.fromTimestampUtc(0);
+    const now = DTL.fromTimestampMsUtc(0);
     const defaultObject: TimezoneSelectionByName = {
       type: TimeZoneSelectionType.ZONE_NAME,
       name: 'Europe/Budapest',

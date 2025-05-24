@@ -41,6 +41,11 @@ export default defineConfig(({ mode }) => {
       sequence: {
         shuffle: true,
       },
+      setupFiles: ['./setup/setup.ts'],
+      coverage: {
+        provider: 'v8',
+        include: ['resources/js/**/*.ts'],
+      },
     },
   });
 });

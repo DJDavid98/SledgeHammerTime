@@ -17,10 +17,10 @@ const selectedDate = computed(() => {
     if (currentDateValue) {
       const currentTimezoneValue = ts?.currentTimezone.value;
       if (currentTimezoneValue) {
-        return DTL.getValueForIsoZonedDate(
+        return DTL.convertIsoToLocalizedDateInputValue(
           currentDateValue,
-          currentTimezoneValue,
-        ).setLocale(dateLibLocale.value.name).formatDateInputDisplay();
+          dateLibLocale.value.name,
+        );
       }
     }
   }

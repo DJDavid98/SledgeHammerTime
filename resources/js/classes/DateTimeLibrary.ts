@@ -4,7 +4,8 @@ import { LanguageConfig } from '@/model/language-config';
 import { TimezoneSelection } from '@/model/timezone-selection';
 import { AvailableLanguage } from '@/utils/language-settings';
 
-export interface DateTimeLibrary<T = unknown, L = void> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Needed for testing
+export interface DateTimeLibrary<T = any, L = any> {
   isoTimeFormat: string;
   isoFormattingDateFormat: string;
   isoParsingDateFormat: string;
@@ -24,7 +25,7 @@ export interface DateTimeLibrary<T = unknown, L = void> {
 
   getDefaultInitialTimezoneSelection(hint?: string): TimezoneSelection;
 
-  getMeridiemLabel(isAm: boolean, minutes?: number): string;
+  getMeridiemLabel(isAm: boolean, minutes?: number, locale?: string): string;
 
   getDefaultInitialDateTime(
     timezone: TimezoneSelection,
@@ -42,6 +43,11 @@ export interface DateTimeLibrary<T = unknown, L = void> {
   convertIsoToLocalizedDateTimeInputValue(
     date: string,
     time: string,
+    locale: string,
+  ): string;
+
+  convertIsoToLocalizedDateInputValue(
+    date: string,
     locale: string,
   ): string;
 
@@ -73,7 +79,7 @@ export interface DateTimeLibrary<T = unknown, L = void> {
 
   fromIsoString(iso: string): DateTimeLibraryValue<T>;
 
-  fromTimestampUtc(number: number): DateTimeLibraryValue<T>;
+  fromTimestampMsUtc(number: number): DateTimeLibraryValue<T>;
 }
 
 

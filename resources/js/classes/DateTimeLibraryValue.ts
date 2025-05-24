@@ -52,10 +52,6 @@ export abstract class DateTimeLibraryValue<T = unknown> {
 
   abstract formatCalendarContext(): string;
 
-  abstract formatDateInputDisplay(): string;
-
-  abstract formatTimeInputDisplay(): string;
-
   abstract formatHoursDisplay(): string;
 
   abstract formatMinutesDisplay(): string;
@@ -93,7 +89,6 @@ export abstract class DateTimeLibraryValue<T = unknown> {
   abstract setMinutes(minutes: number): DateTimeLibraryValue<T>;
 
   abstract setSeconds(seconds: number): DateTimeLibraryValue<T>;
-
 
   protected mapDefaultWeekday(weekday: number) {
     if (weekday >= 0 && weekday <= 6) {

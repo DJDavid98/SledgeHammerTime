@@ -1,4 +1,4 @@
 import { DateTimeLibrary } from '@/classes/DateTimeLibrary';
 import { MomentDTL } from '@/classes/MomentDTL';
 
-export const DTL = MomentDTL as DateTimeLibrary;
+export const DTL: DateTimeLibrary = new MomentDTL();

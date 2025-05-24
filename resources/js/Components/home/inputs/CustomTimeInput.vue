@@ -16,13 +16,10 @@ const selectedTime = computed(() => {
   if (dateLibLocale.value) {
     const currentTimeValue = ts?.currentTime.value;
     if (currentTimeValue) {
-      const currentTimezoneValue = ts?.currentTimezone.value;
-      if (currentTimezoneValue) {
-        return DTL.getValueForIsoZonedTime(
-          currentTimeValue,
-          currentTimezoneValue,
-        ).setLocale(dateLibLocale.value.name).formatTimeInputDisplay();
-      }
+      return DTL.convertIsoToLocalizedTimeInputValue(
+        currentTimeValue,
+        dateLibLocale.value.name,
+      );
     }
   }
 
