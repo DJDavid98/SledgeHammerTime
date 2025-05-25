@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import SyntaxDisplay from '@/Components/home/table/SyntaxDisplay.vue';
 import TimestampPreview from '@/Components/home/table/TimestampPreview.vue';
-import { timestamp } from '@/injection-keys';
+import { dateTimeLibraryInject, timestamp } from '@/injection-keys';
 import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import HtTable from '@/Reusable/HtTable.vue';
-import { DTL } from '@/utils/dtl';
 import { faCalendar as faRegularCalendar } from '@fortawesome/free-regular-svg-icons';
 import { faCalendar, faClock, faCode, faUserClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { computed, inject } from 'vue';
 
 const ts = inject(timestamp);
+const dtl = inject(dateTimeLibraryInject);
 
-const currentTimestamp = computed(() => ts?.currentTimezone.value && DTL.getValueForIsoZonedDateTime(ts?.currentDate.value, ts?.currentTime.value, ts.currentTimezone.value));
+const currentTimestamp = computed(() => ts?.currentTimezone.value && dtl?.value && dtl.value.getValueForIsoZonedDateTime(ts?.currentDate.value, ts?.currentTime.value, ts.currentTimezone.value));
 
 const unixTs = computed(() => currentTimestamp.value?.getUnixSeconds());
 </script>

@@ -4,7 +4,7 @@ import {
   TimezoneSelectionByOffset,
   TimeZoneSelectionType,
 } from '@/model/timezone-selection';
-import { DTL } from '@/utils/dtl';
+import { DefaultDTL } from '@/utils/dtl';
 import {
   coerceToTwelveHours,
   getUtcOffsetString,
@@ -135,7 +135,7 @@ describe('rangeLimit', () => {
 
 describe('getDefaultInitialMoment', () => {
   it('should return a date with the seconds set to 0', () => {
-    const result = DTL.getDefaultInitialDateTime({
+    const result = DefaultDTL.getDefaultInitialDateTime({
       type: TimeZoneSelectionType.ZONE_NAME,
       name: 'UTC',
     }, undefined);
@@ -143,7 +143,7 @@ describe('getDefaultInitialMoment', () => {
     expect(result[1]).toMatch(/:00$/);
   });
   it('should return the same timestamp when passed an initial value', () => {
-    const result = DTL.getDefaultInitialDateTime({
+    const result = DefaultDTL.getDefaultInitialDateTime({
       type: TimeZoneSelectionType.ZONE_NAME,
       name: 'UTC',
     }, '1970-01-01T00:00:55');
@@ -154,7 +154,7 @@ describe('getDefaultInitialMoment', () => {
 
 describe('DTL.getDefaultInitialTimezoneSelection', () => {
   const mockGuessedTimezone = 'Mock/Guess';
-  const mockGuessedTimezoneReturnValue: ReturnType<typeof DTL.getDefaultInitialTimezoneSelection> = {
+  const mockGuessedTimezoneReturnValue: ReturnType<typeof DefaultDTL.getDefaultInitialTimezoneSelection> = {
     type: TimeZoneSelectionType.ZONE_NAME,
     name: mockGuessedTimezone,
   };
@@ -182,7 +182,7 @@ describe('DTL.getDefaultInitialTimezoneSelection', () => {
     try {
       const mockZone = {} as MomentZone;
       momentTzZoneSpy.mockReturnValue(mockZone);
-      const result = DTL.getDefaultInitialTimezoneSelection();
+      const result = DefaultDTL.getDefaultInitialTimezoneSelection();
       expect(result).toEqual({ ...mockGuessedTimezoneReturnValue, name: mockTimezone });
     } finally {
       systemApiSpy.mockRestore();
@@ -191,8 +191,8 @@ describe('DTL.getDefaultInitialTimezoneSelection', () => {
 
   it('should return the guessed timezone when there is no matching moment timezone', () => {
     momentTzZoneSpy.mockReturnValue(null);
-    const result = DTL.getDefaultInitialTimezoneSelection();
-    const expected: ReturnType<typeof DTL.getDefaultInitialTimezoneSelection> = {
+    const result = DefaultDTL.getDefaultInitialTimezoneSelection();
+    const expected: ReturnType<typeof DefaultDTL.getDefaultInitialTimezoneSelection> = {
       type: TimeZoneSelectionType.ZONE_NAME,
       name: mockGuessedTimezone,
     };
@@ -206,7 +206,7 @@ describe('DTL.getDefaultInitialTimezoneSelection', () => {
       throw mockError;
     });
     try {
-      const result = DTL.getDefaultInitialTimezoneSelection();
+      const result = DefaultDTL.getDefaultInitialTimezoneSelection();
       expect(result).toEqual(mockGuessedTimezoneReturnValue);
       expect(consoleErrorSpy).toHaveBeenCalledOnce();
       expect(consoleErrorSpy).toHaveBeenCalledWith(mockError);
@@ -242,7 +242,7 @@ describe('DTL.getDefaultInitialTimezoneSelection', () => {
       hours: expectedHours,
       minutes: expectedMinutes,
     };
-    expect(DTL.getDefaultInitialTimezoneSelection(input)).toEqual(expected);
+    expect(DefaultDTL.getDefaultInitialTimezoneSelection(input)).toEqual(expected);
   });
 });
 
@@ -261,7 +261,7 @@ describe('getUtcOffsetString', () => {
 
 describe('DTLValue.replaceZone', () => {
   it('should return a moment timestamp with the correct utc offset', () => {
-    const now = DTL.fromTimestampMsUtc(0);
+    const now = DefaultDTL.fromTimestampMsUtc(0);
     const defaultObject: TimezoneSelectionByOffset = {
       type: TimeZoneSelectionType.OFFSET,
       hours: 0,
@@ -280,7 +280,7 @@ describe('DTLValue.replaceZone', () => {
     }).getUtcOffsetMinutes()).toEqual(-870);
   });
   it('should return a moment timestamp with the correct zone name', () => {
-    const now = DTL.fromTimestampMsUtc(0);
+    const now = DefaultDTL.fromTimestampMsUtc(0);
     const defaultObject: TimezoneSelectionByName = {
       type: TimeZoneSelectionType.ZONE_NAME,
       name: 'Europe/Budapest',

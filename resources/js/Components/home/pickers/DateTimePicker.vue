@@ -8,11 +8,13 @@ import DatePickerInputs from '@/Components/home/pickers/DatePickerInputs.vue';
 import TimePickerInputs from '@/Components/home/pickers/TimePickerInputs.vue';
 import { useDatePicker } from '@/composables/useDatePicker';
 import { useTimePicker } from '@/composables/useTimePicker';
+import { dateTimeLibraryInject } from '@/injection-keys';
 import HtFormInputGroup from '@/Reusable/HtFormInputGroup.vue';
 import { DialMode } from '@/utils/dial';
 import { limitDate, limitHours, limitMinutesSeconds, limitMonth, limitToTwelveHours } from '@/utils/time';
-import { useTemplateRef, watch } from 'vue';
+import { inject, useTemplateRef, watch } from 'vue';
 
+const dtl = inject(dateTimeLibraryInject);
 const {
   year,
   month,
@@ -45,7 +47,7 @@ const {
   getSelectedTime,
   openTimePicker,
   closeTimePicker,
-} = useTimePicker();
+} = useTimePicker(dtl);
 
 const emit = defineEmits<{
   (e: 'selected', date: string): void;

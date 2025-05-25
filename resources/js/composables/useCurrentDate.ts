@@ -1,5 +1,6 @@
-import { DTL } from '@/utils/dtl';
-import { computed, ComputedRef, onUnmounted, ref } from 'vue';
+import { DateTimeLibrary } from '@/classes/DateTimeLibrary';
+import { DateTimeLibraryMonth } from '@/classes/DateTimeLibraryValue';
+import { computed, ComputedRef, DeepReadonly, onUnmounted, ref } from 'vue';
 
 export type CurrentDateRef = ComputedRef<{
   year: number;
@@ -7,11 +8,11 @@ export type CurrentDateRef = ComputedRef<{
   date: number;
 }>
 
-export function useCurrentDate(): CurrentDateRef {
-  const currentDate = ref(DTL.now());
+export function useCurrentDate(dtl: DeepReadonly<ComputedRef<DateTimeLibrary>> | undefined): CurrentDateRef {
+  const currentDate = ref(dtl?.value.now());
 
   const intervalId = setInterval(() => {
-    currentDate.value = DTL.now();
+    currentDate.value = dtl?.value.now();
   }, 60e3);
 
   onUnmounted(() => {
@@ -19,8 +20,8 @@ export function useCurrentDate(): CurrentDateRef {
   });
 
   return computed(() => ({
-    year: currentDate.value.getFullYear(),
-    month: currentDate.value.getMonth(),
-    date: currentDate.value.getDayOfMonth(),
+    year: currentDate.value?.getFullYear() ?? 1970,
+    month: currentDate.value?.getMonth() ?? DateTimeLibraryMonth.January,
+    date: currentDate.value?.getDayOfMonth() ?? 1,
   }));
 }

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { DateTimeLibraryMonth, DateTimeLibraryWeekday } from '@/classes/DateTimeLibraryValue';
+import { DateTimeLibraryMonth, DateTimeLibraryValue, DateTimeLibraryWeekday } from '@/classes/DateTimeLibraryValue';
 import { useCurrentDate } from '@/composables/useCurrentDate';
 import { useDateLibraryLocale } from '@/composables/useDateLibraryLocale';
+import { dateTimeLibraryInject } from '@/injection-keys';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtButtonGroup from '@/Reusable/HtButtonGroup.vue';
 import HtFormControlGroup from '@/Reusable/HtFormControlGroup.vue';
 import { CalendarDay, generateCalendar, getWeekdayItems, WeekdayItem, WEEKEND_DAYS } from '@/utils/calendar';
-import { DTL } from '@/utils/dtl';
 import { faBackwardFast, faChevronLeft, faChevronRight, faForwardFast } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { usePage } from '@inertiajs/vue3';
 import classNames from 'classnames';
-import { computed, getCurrentInstance, ref } from 'vue';
+import { computed, getCurrentInstance, inject, ref } from 'vue';
 
 const props = defineProps<{
   selectedYear: number,
@@ -28,7 +28,8 @@ const month = ref(props.selectedMonth);
 const date = ref(props.selectedDate);
 
 const locale = computed(() => usePage().props.app.locale);
-const dateLibLocale = useDateLibraryLocale(getCurrentInstance());
+const dtl = inject(dateTimeLibraryInject);
+const dateLibLocale = useDateLibraryLocale(dtl, getCurrentInstance());
 
 const firstDayOfWeek = computed(() => {
   switch (locale.value) {
@@ -42,16 +43,18 @@ const firstDayOfWeek = computed(() => {
 const weekdaysItems = computed(() => getWeekdayItems(dateLibLocale.value?.getShortWeekdays() ?? [], firstDayOfWeek.value));
 
 const calendar = computed(() => generateCalendar({
+  dtl: dtl?.value,
+  locale: dateLibLocale.value,
   year: year.value,
   month: month.value - 1,
   firstDayOfWeek: firstDayOfWeek.value,
 }));
 
-const dateTime = computed(() => {
-  return DTL.getValueForDate(year.value, month.value - 1, date.value);
+const dateTime = computed((): DateTimeLibraryValue | null => {
+  return dtl?.value.getValueForDate(year.value, month.value - 1, date.value) ?? null;
 });
 
-const currentDate = useCurrentDate();
+const currentDate = useCurrentDate(dtl);
 
 const isShowingCurrentMonth = computed(() => {
   return month.value === currentDate.value.month + 1 && year.value === currentDate.value.year;
@@ -153,7 +156,12 @@ defineExpose<DatePickerCalendarApi>({
         />
       </HtButton>
     </HtButtonGroup>
-    <span class="calendar-context">{{ dateTime.setLocale(locale).formatCalendarContext() }}</span>
+    <span
+      v-if="dateLibLocale && dateTime"
+      class="calendar-context"
+    >{{
+      dateTime.setLocale(dateLibLocale).formatCalendarContext()
+    }}</span>
     <HtButtonGroup>
       <HtButton
         :aria-label="$t('timestampPicker.picker.tooltip.nextMonth')"

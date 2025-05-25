@@ -16,8 +16,10 @@ export interface HourCycleInfo extends WithFallbackIndicator {
   hourCycle: Intl.LocaleOptions['hourCycle'];
 }
 
-export abstract class DateTimeLibraryLocale {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required for type compatibility
+export abstract class DateTimeLibraryLocale<L = any> {
   abstract readonly name: string;
+  abstract readonly lowLevelValue: L | undefined;
 
   abstract getWeekInfo(): WeekInfo;
 

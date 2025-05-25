@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import TimestampDisplay from '@/Components/home/TimestampDisplay.vue';
 import UsefulLinks from '@/Components/home/UsefulLinks.vue';
-import { timestamp } from '@/injection-keys';
-import Layout from '@/Layouts/DefaultLayout.vue';
-import { TimezoneSelection } from '@/model/timezone-selection';
-import { DTL } from '@/utils/dtl';
+import { dateTimeLibraryInject, timestamp } from '@/injection-keys';
+import { TimezoneSelection, TimeZoneSelectionType } from '@/model/timezone-selection';
 import { convertTimeZoneSelectionToString } from '@/utils/time';
-import { Head, router, usePage } from '@inertiajs/vue3';
-import { computed, provide, readonly, Ref, ref, watch } from 'vue';
+import { router, usePage } from '@inertiajs/vue3';
+import { computed, inject, provide, readonly, Ref, ref, watch } from 'vue';
 
 const page = usePage();
+const dtl = inject(dateTimeLibraryInject);
 
 const props = computed(() => {
   const url = new URL(page.url, typeof window !== 'undefined' ? window.location.href : page.props.ziggy.location);
@@ -21,12 +20,15 @@ const props = computed(() => {
   };
 });
 
-const currentTimezone: Ref<TimezoneSelection> = ref(DTL.getDefaultInitialTimezoneSelection(props.value.defaultTimezone));
-const [initialDate, initialTime] = DTL.getDefaultInitialDateTime(currentTimezone.value, props.value.defaultDateTime);
+const currentTimezone: Ref<TimezoneSelection> = ref(dtl?.value.getDefaultInitialTimezoneSelection(props.value.defaultTimezone) ?? {
+  type: TimeZoneSelectionType.ZONE_NAME,
+  name: 'Etc/UTC',
+});
+const [initialDate, initialTime] = dtl?.value.getDefaultInitialDateTime(currentTimezone.value, props.value.defaultDateTime) ?? ['', ''];
 const dateString = ref(initialDate);
 const timeString = ref(initialTime);
 
-const currentTimestamp = computed(() => DTL.getValueForIsoZonedDateTime(dateString.value, timeString.value, currentTimezone.value));
+const currentTimestamp = computed(() => dtl?.value.getValueForIsoZonedDateTime(dateString.value, timeString.value, currentTimezone.value) ?? null);
 
 const changeDateString = (value: string) => {
   dateString.value = value;
@@ -43,7 +45,11 @@ const changeTimezone = (value: TimezoneSelection) => {
   currentTimezone.value = value;
 };
 const setCurrentTime = () => {
-  const [newDateString, newTimeString] = DTL.getInitialDateTime(currentTimezone.value);
+  if (!dtl?.value) {
+    console.error('setCurrentTime: dtl missing');
+    return;
+  }
+  const [newDateString, newTimeString] = dtl.value.getInitialDateTime(currentTimezone.value);
   changeDateString(newDateString);
   changeTimeString(newTimeString);
 };
@@ -70,11 +76,7 @@ watch([dateString, timeString, currentTimezone], () => {
 </script>
 
 <template>
-  <Head title="" />
+  <TimestampDisplay />
 
-  <Layout>
-    <TimestampDisplay />
-
-    <UsefulLinks />
-  </Layout>
+  <UsefulLinks />
 </template>

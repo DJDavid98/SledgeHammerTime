@@ -34,39 +34,39 @@ class MomentDTLValue extends DateTimeLibraryValue<Moment> {
     return `[object MomentDTLValue(${this.toISOString()})}]`;
   }
 
-  setLocale(locale: string) {
+  setLocale(locale: DateTimeLibraryLocale<moment.Locale>) {
     return new MomentDTLValue(this.value, locale);
   }
 
   getLocale() {
-    if (this._locale == null) {
+    if (this.locale == null) {
       throw new Error('locale is needed but not set');
     }
-    return this._locale;
+    return this.locale;
   }
 
   local() {
-    return new MomentDTLValue(this.value.local());
+    return new MomentDTLValue(this.value.local(), this.locale);
   }
 
   fromNow() {
-    return this.value.locale(this.getLocale()).fromNow();
+    return this.value.locale(this.getLocale().name).fromNow();
   }
 
   addDays(days: number) {
-    return new MomentDTLValue(moment(this.value).add(days, 'days'));
+    return new MomentDTLValue(moment(this.value).add(days, 'days'), this.locale);
   }
 
   addYears(years: number) {
-    return new MomentDTLValue(moment(this.value).add(years, 'years'));
+    return new MomentDTLValue(moment(this.value).add(years, 'years'), this.locale);
   }
 
   toDate() {
     return this.value.toDate();
   }
 
-  formatDiscordTimestamp(format: MessageTimestampFormat) {
-    return this.value.format(discordFormatMap[format]);
+  formatDiscordTimestamp(mtf: MessageTimestampFormat) {
+    return this.value.format(discordFormatMap[mtf]);
   }
 
   toISOString() {
@@ -75,6 +75,10 @@ class MomentDTLValue extends DateTimeLibraryValue<Moment> {
 
   toISODateString() {
     return this.value.format(isoFormattingDateFormat);
+  }
+
+  toISOTimeString() {
+    return this.value.format(isoTimeFormat);
   }
 
   getWeekday() {
@@ -140,9 +144,9 @@ class MomentDTLValue extends DateTimeLibraryValue<Moment> {
   replaceZone(zone: TimezoneSelection) {
     switch (zone.type) {
       case TimeZoneSelectionType.OFFSET:
-        return new MomentDTLValue(moment.utc(this.value).utcOffset(getUtcOffsetString(zone)));
+        return new MomentDTLValue(moment.utc(this.value).utcOffset(getUtcOffsetString(zone)), this.locale);
       case TimeZoneSelectionType.ZONE_NAME:
-        return new MomentDTLValue(moment.tz(this.value, zone.name));
+        return new MomentDTLValue(moment.tz(this.value, zone.name), this.locale);
     }
   }
 
@@ -168,11 +172,6 @@ const timezoneNames = moment.tz
   .sort((a, b) => a.localeCompare(b));
 
 export class MomentDTL implements DateTimeLibrary<Moment, moment.Locale> {
-  readonly isoTimeFormat = isoTimeFormat;
-  readonly isoFormattingDateFormat = isoFormattingDateFormat;
-  readonly isoParsingDateFormat = isoParsingDateFormat;
-  readonly isoFormat = isoFormat;
-  readonly urlFormat = urlFormat;
   readonly timezoneNames = timezoneNames;
 
   getLocaleNameFromLanguage(language: AvailableLanguage): string {
@@ -184,20 +183,21 @@ export class MomentDTL implements DateTimeLibrary<Moment, moment.Locale> {
     return languageConfig?.momentLocale ?? language ?? FALLBACK_LANGUAGE;
   }
 
-  async loadLocaleLowLevel(locale: string): Promise<moment.Locale | undefined> {
-    if (!(locale in momentLocaleMap)) {
-      console.warn(`No moment locale loader found by key ${locale}`);
+  async loadLocaleLowLevel(localeName: string): Promise<moment.Locale | undefined> {
+    if (!(localeName in momentLocaleMap)) {
+      console.warn(`No moment locale loader found by key ${localeName}`);
       return;
     }
-    await momentLocaleMap[locale as keyof typeof momentLocaleMap]();
-    return moment.localeData(locale);
+    await momentLocaleMap[localeName as keyof typeof momentLocaleMap]();
+    return moment.localeData(localeName);
   }
 
   async localeLoader(localeName: string): Promise<DateTimeLibraryLocale> {
-    await this.loadLocaleLowLevel(localeName);
+    const value = await this.loadLocaleLowLevel(localeName);
 
     return {
       name: localeName,
+      lowLevelValue: value,
       getShortWeekdays() {
         return moment.localeData(localeName).weekdaysShort();
       },
@@ -281,24 +281,24 @@ export class MomentDTL implements DateTimeLibrary<Moment, moment.Locale> {
     return [dateString, timeString];
   }
 
-  getMeridiemLabel(isAm: boolean, minutes = 0, locale?: string): string {
-    return moment.localeData(locale).meridiem(isAm ? 10 : 22, minutes, false);
+  getMeridiemLabel(isAm: boolean, minutes = 0, locale: DateTimeLibraryLocale<moment.Locale> | undefined): string {
+    return moment.localeData(locale?.name).meridiem(isAm ? 10 : 22, minutes, false);
   }
 
   now(): DateTimeLibraryValue<Moment> {
     return new MomentDTLValue(moment());
   }
 
-  convertIsoToLocalizedDateTimeInputValue(date: string, time: string, locale: string): string {
-    return moment(`${date} ${time}`, isoFormat).locale(locale).format('LLL');
+  convertIsoToLocalizedDateTimeInputValue(date: string, time: string, locale: DateTimeLibraryLocale<moment.Locale>): string {
+    return moment(`${date} ${time}`, isoFormat).locale(locale.name).format('LLL');
   }
 
-  convertIsoToLocalizedDateInputValue(date: string, locale: string): string {
-    return moment(date, isoParsingDateFormat).locale(locale).format('LL');
+  convertIsoToLocalizedDateInputValue(date: string, locale: DateTimeLibraryLocale<moment.Locale>): string {
+    return moment(date, isoParsingDateFormat).locale(locale.name).format('LL');
   }
 
-  convertIsoToLocalizedTimeInputValue(time: string, locale: string): string {
-    return moment(time, isoTimeFormat).locale(locale).format('LTS');
+  convertIsoToLocalizedTimeInputValue(time: string, locale: DateTimeLibraryLocale<moment.Locale>): string {
+    return moment(time, isoTimeFormat).locale(locale.name).format('LTS');
   }
 
   getValueForIsoZonedDate(date: string, timezone: TimezoneSelection): DateTimeLibraryValue<Moment> {

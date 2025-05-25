@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import TimePicker, { TimePickerPopupApi } from '@/Components/home/pickers/TimePicker.vue';
 import { useDateLibraryLocale } from '@/composables/useDateLibraryLocale';
-import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
+import { dateTimeLibraryInject, formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
 import { DialMode } from '@/utils/dial';
-import { DTL } from '@/utils/dtl';
 import { keyboardOrMouseEventHandlerFactory } from '@/utils/events';
 import { computed, getCurrentInstance, inject, provide, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
+const dtl = inject(dateTimeLibraryInject);
 
-const dateLibLocale = useDateLibraryLocale(getCurrentInstance());
+const dateLibLocale = useDateLibraryLocale(dtl, getCurrentInstance());
 const selectedTime = computed(() => {
-  if (dateLibLocale.value) {
+  if (dtl?.value && dateLibLocale.value) {
     const currentTimeValue = ts?.currentTime.value;
     if (currentTimeValue) {
-      return DTL.convertIsoToLocalizedTimeInputValue(
+      return dtl.value.convertIsoToLocalizedTimeInputValue(
         currentTimeValue,
-        dateLibLocale.value.name,
+        dateLibLocale.value,
       );
     }
   }
@@ -31,7 +31,11 @@ const inputEl = useTemplateRef<InputApi>('input-el');
 const openPopup = keyboardOrMouseEventHandlerFactory((e: KeyboardEvent | MouseEvent, viaKeyboard) => {
   if (!ts) return;
 
-  const currentTsWithTimezone = ts.currentTimestamp.value.replaceZone(ts.currentTimezone.value);
+  const currentTsWithTimezone = ts.currentTimestamp.value?.replaceZone(ts.currentTimezone.value);
+  if (!currentTsWithTimezone) {
+    console.error('Could not get current timestamp with timezone');
+    return;
+  }
   timepicker.value?.open(currentTsWithTimezone, viaKeyboard ? inputEl.value?.inputEl : null);
   window.requestAnimationFrame(() => {
     timepicker.value?.changeFocus(DialMode.Hours, true);

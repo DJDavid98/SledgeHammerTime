@@ -11,7 +11,7 @@ import { LegalSectionIds } from '@/utils/legal';
 import { Link } from '@inertiajs/vue3';
 
 defineProps<{
-  lastUpdated: DateTimeLibraryValue;
+  lastUpdated: DateTimeLibraryValue | undefined;
 }>();
 </script>
 
@@ -24,7 +24,7 @@ defineProps<{
       >
         {{ $t('legal.privacy.heading') }}
       </LegalHeading>
-      <p>
+      <p v-if="lastUpdated">
         <HtTranslate i18n-key="legal.lastUpdated">
           <template #1>
             <TimestampPreview

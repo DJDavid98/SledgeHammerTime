@@ -1,3 +1,6 @@
+import { DateFnsDTL } from '@/classes/DateFnsDTL';
+import { DateTimeLibrary } from '@/classes/DateTimeLibrary';
+import { MomentDTL } from '@/classes/MomentDTL';
 import { IDDQD, useCheatCode } from '@/composables/useCheatCode';
 import { useIsLightTheme } from '@/composables/useIsLightTheme';
 import { useLocalSettings } from '@/composables/useLocalSettings';
@@ -5,6 +8,7 @@ import { useSidebarState } from '@/composables/useSidebarState';
 import {
   CurrentLanguageData,
   currentLanguageInject,
+  dateTimeLibraryInject,
   devModeInject,
   localSettings,
   pagePropsInject,
@@ -14,10 +18,9 @@ import {
 } from '@/injection-keys';
 import { PageProps } from '@/types';
 import { computeCurrentLanguage } from '@/utils/app';
-import { DTL } from '@/utils/dtl';
 import { router, usePage } from '@inertiajs/vue3';
 import { loadLanguageAsync } from 'laravel-vue-i18n';
-import { onMounted, onUnmounted, provide, readonly, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, provide, readonly, ref, watch } from 'vue';
 
 export const useLayout = () => {
   const pagePropsRef = ref<PageProps>(usePage().props);
@@ -45,6 +48,14 @@ export const useLayout = () => {
 
   const currentLanguage = ref<CurrentLanguageData>(computeCurrentLanguage(pagePropsRef.value));
   provide(currentLanguageInject, currentLanguage);
+  
+  const localSettingsValue = readonly(useLocalSettings(currentLanguage));
+  provide(sidebarState, readonly(useSidebarState(localSettingsValue)));
+  provide(localSettings, localSettingsValue);
+
+  const dateTimeLibrary = computed((): DateTimeLibrary => localSettingsValue.dateFnsEnabled ? new DateFnsDTL() : new MomentDTL());
+  provide(dateTimeLibraryInject, readonly(dateTimeLibrary));
+
   watch(pagePropsRef, (currentPage) => {
     currentLanguage.value = computeCurrentLanguage(currentPage);
     const { locale, languageConfig } = currentLanguage.value;
@@ -52,9 +63,9 @@ export const useLayout = () => {
       document.documentElement.dir = languageConfig?.rtl ? 'rtl' : 'ltr';
     }
 
-    const localeName = DTL.getLocaleNameFromLanguageConfig(locale, languageConfig);
+    const localeName = dateTimeLibrary.value.getLocaleNameFromLanguageConfig(locale, languageConfig);
     if (localeName) {
-      DTL.loadLocaleLowLevel(localeName);
+      dateTimeLibrary.value.loadLocaleLowLevel(localeName);
     }
 
     const laravelLocale = languageConfig?.laravelLocale ?? locale;
@@ -67,11 +78,6 @@ export const useLayout = () => {
 
   const isLightTheme = useIsLightTheme();
   provide(theme, readonly({ isLightTheme }));
-
-  const localSettingsValue = readonly(useLocalSettings(currentLanguage));
-  provide(sidebarState, readonly(useSidebarState(localSettingsValue)));
-  provide(localSettings, localSettingsValue);
-
 
   let scrollFunction: ((progress?: number) => void) | null = null;
   const scrollMaxFrames = 2;

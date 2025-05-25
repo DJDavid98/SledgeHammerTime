@@ -5,12 +5,14 @@ const splitPrefKey = 'split-input';
 const customPrefKey = 'custom-input';
 const sidebarPrefKey = 'sidebar-right';
 const sidebarOffDesktopPrefKey = 'sidebar-off-desktop';
+const legacyDateLibPrefKey = 'legacy-date-lib';
 
 export const useLocalSettings = (currentLanguage?: Ref<CurrentLanguageData>) => {
   const customInputEnabled = ref<boolean | null>(null);
   const combinedInputsEnabled = ref<boolean | null>(null);
   const sidebarOnRight = ref<boolean | null>(null);
   const sidebarOffDesktop = ref<boolean | null>(null);
+  const dateFnsEnabled = ref<boolean | null>(null);
 
   const effectiveSidebarOnRight = computed(() => (
     currentLanguage?.value.languageConfig?.rtl ? !sidebarOnRight.value : sidebarOnRight.value
@@ -27,6 +29,9 @@ export const useLocalSettings = (currentLanguage?: Ref<CurrentLanguageData>) => 
   });
   watch(sidebarOffDesktop, (newValue) => {
     localStorage.setItem(sidebarOffDesktopPrefKey, newValue ? 'true' : 'false');
+  });
+  watch(dateFnsEnabled, (newValue) => {
+    localStorage.setItem(legacyDateLibPrefKey, newValue ? 'true' : 'false');
   });
 
   const setInitialCombinedInput = () => {
@@ -55,8 +60,13 @@ export const useLocalSettings = (currentLanguage?: Ref<CurrentLanguageData>) => 
   };
   const setInitialSidebarOffDesktop = () => {
     const storedPref = localStorage.getItem(sidebarOffDesktopPrefKey);
-    // Sidebar is on the left by default
+    // Sidebar is shown on desktop by default
     sidebarOffDesktop.value = storedPref === 'true';
+  };
+  const setInitialDateFnsEnabled = () => {
+    const storedPref = localStorage.getItem(legacyDateLibPrefKey);
+    // Feature is enabled by default
+    dateFnsEnabled.value = storedPref === 'true';
   };
 
   onMounted(() => {
@@ -64,6 +74,7 @@ export const useLocalSettings = (currentLanguage?: Ref<CurrentLanguageData>) => 
     setInitialCustomInput();
     setInitialSidebarOnRight();
     setInitialSidebarOffDesktop();
+    setInitialDateFnsEnabled();
   });
 
   return {
@@ -72,6 +83,7 @@ export const useLocalSettings = (currentLanguage?: Ref<CurrentLanguageData>) => 
     sidebarOnRight: effectiveSidebarOnRight,
     rawSidebarOnRight: sidebarOnRight,
     sidebarOffDesktop,
+    dateFnsEnabled,
     toggleCustomInput(e: Event) {
       if (!(e.target instanceof HTMLInputElement)) return;
 
@@ -85,11 +97,13 @@ export const useLocalSettings = (currentLanguage?: Ref<CurrentLanguageData>) => 
     toggleSidebarOnRight() {
       sidebarOnRight.value = !sidebarOnRight.value;
     },
-    toggleSidebarOffDesktop() {
-      sidebarOffDesktop.value = !sidebarOffDesktop.value;
-    },
     setSidebarOffDesktop(value: boolean) {
       sidebarOffDesktop.value = value;
+    },
+    toggleDateFnsEnabled(e: Event) {
+      if (!(e.target instanceof HTMLInputElement)) return;
+
+      dateFnsEnabled.value = e.target.checked;
     },
   };
 };

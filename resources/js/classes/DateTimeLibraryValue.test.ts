@@ -1,3 +1,5 @@
+import { DateFnsDTL } from '@/classes/DateFnsDTL';
+import { DateTimeLibrary } from '@/classes/DateTimeLibrary';
 import {
   DateTimeLibraryMonth,
   DateTimeLibraryValue,
@@ -6,32 +8,38 @@ import {
 import { MomentDTL } from '@/classes/MomentDTL';
 import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import { TimezoneSelection, TimeZoneSelectionType } from '@/model/timezone-selection';
+import { DefaultDTL } from '@/utils/dtl';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 describe('DateTimeLibraryValue', () => {
-  // Define implementations to test
   const implementations = [
-    ['MomentDTL', new MomentDTL()],
-  ] as const;
+    ['moment', new MomentDTL()],
+    ['date-fns', new DateFnsDTL()],
+  ] as const satisfies [string, DateTimeLibrary][];
 
   // Test implementations
-  describe.each(implementations)('Implementation: %s', (_, dtl) => {
+  describe.each(implementations)('Implementation: %s', async (dtlName, dtl) => {
     // Create a fixed timestamp for testing
     const testTimestamp = new Date('2025-01-15T12:30:45Z').getTime();
     const utcTimezone: TimezoneSelection = {
       type: TimeZoneSelectionType.ZONE_NAME,
-      name: 'UTC',
+      name: 'Etc/UTC',
     };
+    const enLocale = await dtl.localeLoader('en');
 
     describe('Initialization and Basic Methods', () => {
       it('should create a value instance correctly', () => {
         const value = dtl.fromTimestampMsUtc(testTimestamp);
-        expect(value.toISOString()).toBe('2025-01-15T12:30:45.000Z');
+        const expected = {
+          'date-fns': '2025-01-15T12:30:45.000+00:00',
+          'moment': '2025-01-15T12:30:45.000Z',
+        };
+        expect(value.toISOString()).toBe(expected[dtlName]);
       });
 
       it('should have proper string representation', () => {
         const value = dtl.fromTimestampMsUtc(testTimestamp);
-        expect(value.toString()).toMatch(/\[object MomentDTLValue\(2025-01-15T12:30:45\.000Z\)/);
+        expect(value.toString()).toMatch(/\[object [A-Za-z]+DTLValue\(2025-01-15T12:30:45\.000(Z|\+00:00)\)/);
       });
 
       it('should convert to Date object correctly', () => {
@@ -53,10 +61,10 @@ describe('DateTimeLibraryValue', () => {
         expect(() => value.getLocale()).toThrow('locale is needed but not set');
       });
 
-      it('should allow setting and getting locale', () => {
+      it('should allow setting and getting locale', async () => {
         const value = dtl.fromTimestampMsUtc(testTimestamp);
-        const newValue = value.setLocale('en-US');
-        expect(newValue.getLocale()).toBe('en-US');
+        const newInstance = value.setLocale(enLocale);
+        expect(newInstance.getLocale()).toBe(enLocale);
       });
     });
 
@@ -151,35 +159,35 @@ describe('DateTimeLibraryValue', () => {
 
     describe('toISOString', () => {
       it('should format ISO string correctly', () => {
-        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale('en');
-        expect(value.toISOString()).toBe('2025-01-15T12:30:45.000Z');
+        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale(enLocale);
+        expect(value.toISOString()).toMatch(/2025-01-15T12:30:45\.000(Z|\+00:00)/);
       });
     });
 
     describe('toISODateString', () => {
       it('should format ISO date string correctly', () => {
-        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale('en');
+        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale(enLocale);
         expect(value.toISODateString()).toBe('2025-01-15');
       });
     });
 
     describe('formatHoursDisplay', () => {
       it('should format hours display correctly', () => {
-        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale('en');
+        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale(enLocale);
         expect(value.formatHoursDisplay()).toBe('12');
       });
     });
 
     describe('formatMinutesDisplay', () => {
       it('should format minutes display correctly', () => {
-        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale('en');
+        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale(enLocale);
         expect(value.formatMinutesDisplay()).toBe('30');
       });
     });
 
     describe('formatSecondsDisplay', () => {
       it('should format seconds display correctly', () => {
-        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale('en');
+        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale(enLocale);
         expect(value.formatSecondsDisplay()).toBe('45');
       });
     });
@@ -188,7 +196,7 @@ describe('DateTimeLibraryValue', () => {
       let value: DateTimeLibraryValue;
 
       beforeEach(() => {
-        value = dtl.fromTimestampMsUtc(testTimestamp).setLocale('en');
+        value = dtl.fromTimestampMsUtc(testTimestamp).setLocale(enLocale);
       });
 
       it('should format Discord short date timestamp correctly', () => {
@@ -214,7 +222,7 @@ describe('DateTimeLibraryValue', () => {
 
     describe('formatCalendarDateDisplay', () => {
       it('should format calendar date display correctly', () => {
-        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale('en');
+        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale(enLocale);
         const result = value.formatCalendarDateDisplay();
         // Expect something like "15" or locale equivalent
         expect(result).toContain('15');
@@ -223,7 +231,7 @@ describe('DateTimeLibraryValue', () => {
 
     describe('formatCalendarContext', () => {
       it('should format calendar context correctly', () => {
-        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale('en');
+        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale(enLocale);
         const result = value.formatCalendarContext();
         // Calendar context usually includes month and year
         expect(result).toContain('January');
@@ -304,7 +312,7 @@ describe('DateTimeLibraryValue', () => {
     describe('fromNow', () => {
       it('should provide relative time with fromNow for past dates', () => {
         // Create a date in the past (1 day ago)
-        const pastValue = dtl.now().addDays(-1).setLocale('en');
+        const pastValue = dtl.now().addDays(-1).setLocale(enLocale);
 
         // When running tests, pastValue will always be in the past relative to the current time
         const result = pastValue.fromNow();
@@ -314,7 +322,7 @@ describe('DateTimeLibraryValue', () => {
 
       it('should provide relative time with fromNow for future dates', () => {
         // Create a date in the future (1 day ahead)
-        const futureValue = dtl.now().addDays(1).setLocale('en');
+        const futureValue = dtl.now().addDays(1).setLocale(enLocale);
 
         // When running tests, futureValue will always be in the future relative to the current time
         const result = futureValue.fromNow();
@@ -325,7 +333,7 @@ describe('DateTimeLibraryValue', () => {
 
     describe('local', () => {
       it('should provide local time representation', () => {
-        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale('en');
+        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale(enLocale);
 
         // First set a non-local timezone
         const europeTimezone: TimezoneSelection = {
@@ -350,7 +358,7 @@ describe('DateTimeLibraryValue', () => {
 
     describe('getUnixSeconds', () => {
       it('should return Unix timestamp in seconds', () => {
-        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale('en');
+        const value = dtl.fromTimestampMsUtc(testTimestamp).setLocale(enLocale);
         const unixSeconds = value.getUnixSeconds();
         expect(unixSeconds).toBe(Math.floor(testTimestamp / 1000));
       });
@@ -358,9 +366,8 @@ describe('DateTimeLibraryValue', () => {
 
     describe('getUtcOffsetMinutes', () => {
       let value: DateTimeLibraryValue;
-
       beforeEach(() => {
-        value = dtl.fromTimestampMsUtc(testTimestamp).setLocale('en');
+        value = dtl.fromTimestampMsUtc(testTimestamp).setLocale(enLocale);
       });
 
       it('should return UTC offset minutes for UTC timezone', () => {
@@ -412,9 +419,11 @@ describe('DateTimeLibraryValue Direct Tests', () => {
       expect(() => instance.getLocale()).toThrow('locale is needed but not set');
     });
 
-    it('should allow setting and getting locale', () => {
-      const newInstance = instance.setLocale('en-US');
-      expect(newInstance.getLocale()).toBe('en-US');
+    it('should allow setting and getting locale', async () => {
+      const locale = await DefaultDTL.localeLoader('en');
+      expect(locale).toBeDefined();
+      const newInstance = instance.setLocale(locale);
+      expect(newInstance.getLocale()).toBe(locale);
     });
   });
 

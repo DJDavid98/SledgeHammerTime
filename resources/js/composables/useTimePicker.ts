@@ -1,12 +1,13 @@
+import { DateTimeLibrary } from '@/classes/DateTimeLibrary';
 import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
 import { TimePickerDialAPI } from '@/Components/home/pickers/controls/TimePickerDial.vue';
 import { useDateLibraryLocale } from '@/composables/useDateLibraryLocale';
 import { DialMode } from '@/utils/dial';
 import { pad } from '@/utils/pad';
 import { toTwelveHours, toTwentyFourHours } from '@/utils/time';
-import { computed, getCurrentInstance, ref } from 'vue';
+import { computed, ComputedRef, DeepReadonly, getCurrentInstance, ref } from 'vue';
 
-export const useTimePicker = () => {
+export const useTimePicker = (dtl: DeepReadonly<ComputedRef<DateTimeLibrary>> | undefined) => {
   const hours = ref(0);
   const minutes = ref(0);
   const seconds = ref(0);
@@ -18,7 +19,7 @@ export const useTimePicker = () => {
   const renderDial = ref(false);
 
   const instance = getCurrentInstance();
-  const dateLibLocale = useDateLibraryLocale(instance);
+  const dateLibLocale = useDateLibraryLocale(dtl, instance);
   const twelveHourMode = computed(() => dateLibLocale.value?.getHourCycleInfo().hourCycle === 'h12');
 
   const setHours = (value: number, isAmValue?: boolean) => {

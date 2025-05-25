@@ -1,7 +1,8 @@
+import { DateTimeLibrary } from '@/classes/DateTimeLibrary';
+import { DateTimeLibraryLocale } from '@/classes/DateTimeLibraryLocale';
 import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
-import { DTL } from '@/utils/dtl';
 import { getPositionAngleInElement, Point2D } from '@/utils/math';
-import { Ref } from 'vue';
+import { DeepReadonly, Ref } from 'vue';
 
 export enum DialMode {
   Hours = 'hours',
@@ -42,7 +43,7 @@ export interface DialRingSettings {
    * When defined, determines if the ring will result in an AM/PM output value
    */
   isAm?: boolean;
-  textGetter: (momentInstance: DateTimeLibraryValue, value: number) => string;
+  textGetter: (dateTime: DateTimeLibraryValue, value: number) => string;
 }
 
 export interface DialSettings {
@@ -60,6 +61,8 @@ export interface DialColors {
 }
 
 export interface DialEnvironment {
+  dtl?: DeepReadonly<DateTimeLibrary>;
+  locale: DateTimeLibraryLocale | null;
   mode: Ref<DialMode>;
   colors: Ref<DialColors>;
   isAm: boolean;
@@ -68,6 +71,16 @@ export interface DialEnvironment {
 }
 
 export const drawIndividualDial = (env: DialEnvironment, settings: DialSettings, debugResolutionMultiplier = 0) => {
+  const { dtl, locale } = env;
+  if (!dtl) {
+    console.warn('drawIndividualDial: dtl missing');
+    return;
+  }
+  if (!locale) {
+    console.warn('drawIndividualDial: locale missing');
+    return;
+  }
+
   const ctx = settings.canvasRef.value?.getContext('2d');
   if (!ctx) return;
 
@@ -122,7 +135,7 @@ export const drawIndividualDial = (env: DialEnvironment, settings: DialSettings,
         .translate(0, -labelCenterOffset)
         .transformPoint(transformOrigin),
     );
-    const tempDateTime = DTL.now();
+    const tempDateTime = dtl.now().setLocale(locale);
     labelPoints.forEach((point, i) => {
       const ringProgressPercent = (i / labelCount);
       const value = Math.round((minValue + ((maxValue - minValue) * ringProgressPercent)) * 100) / 100;
@@ -154,7 +167,7 @@ export const drawIndividualDial = (env: DialEnvironment, settings: DialSettings,
         ctx.closePath();
         ctx.font = `bold ${fontSize}px ${fontFamily}`;
         ctx.fillStyle = env.colors.value.numbers;
-        drawTextAt(ctx, origin, DTL.getMeridiemLabel(env.isAm, env.minutes), fontSize);
+        drawTextAt(ctx, origin, dtl.getMeridiemLabel(env.isAm, env.minutes), fontSize);
         ctx.beginPath();
       }
 

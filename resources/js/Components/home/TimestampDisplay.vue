@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import DateTimePicker from '@/Components/home/DateTimePicker.vue';
 import TimestampTable from '@/Components/home/table/TimestampTable.vue';
+import { dateTimeLibraryInject } from '@/injection-keys';
 import HtAlert from '@/Reusable/HtAlert.vue';
 import HtCard from '@/Reusable/HtCard.vue';
-import { DTL } from '@/utils/dtl';
 import { AvailableLanguage } from '@/utils/language-settings';
 import { usePage } from '@inertiajs/vue3';
 import Cookies from 'js-cookie';
 import { wTrans } from 'laravel-vue-i18n';
-import { computed, onMounted, ref } from 'vue';
+import { computed, inject, onMounted, ref } from 'vue';
 
+const dtl = inject(dateTimeLibraryInject);
 const page = usePage();
 const locale = computed(() => page.props.app.locale as AvailableLanguage);
 const showHowTo = ref(false);
@@ -18,7 +19,7 @@ const howToCookieValue = 'how-to-dismiss';
 
 const handleHowToClose = () => {
   Cookies.set(howToCookieName, howToCookieValue, {
-    expires: DTL.now().addYears(2).toDate(),
+    expires: dtl?.value.now().addYears(2).toDate(),
   });
   showHowTo.value = false;
 };

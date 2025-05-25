@@ -9,7 +9,7 @@ import HtTranslate from '@/Reusable/HtTranslate.vue';
 import { LegalSectionIds } from '@/utils/legal';
 
 defineProps<{
-  lastUpdated: DateTimeLibraryValue;
+  lastUpdated: DateTimeLibraryValue | undefined;
 }>();
 </script>
 
@@ -22,7 +22,7 @@ defineProps<{
       >
         {{ $t('legal.terms.heading') }}
       </LegalHeading>
-      <p>
+      <p v-if="lastUpdated">
         <HtTranslate i18n-key="legal.lastUpdated">
           <template #1>
             <TimestampPreview

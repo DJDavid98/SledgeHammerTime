@@ -1,26 +1,26 @@
 <script setup lang="ts">
 import DateTimePicker, { DateTimePickerApi } from '@/Components/home/pickers/DateTimePicker.vue';
 import { useDateLibraryLocale } from '@/composables/useDateLibraryLocale';
-import { formControlId, positionAnchor, timestamp } from '@/injection-keys';
+import { dateTimeLibraryInject, formControlId, positionAnchor, timestamp } from '@/injection-keys';
 import HtInput, { InputApi } from '@/Reusable/HtInput.vue';
-import { DTL } from '@/utils/dtl';
 import { keyboardOrMouseEventHandlerFactory } from '@/utils/events';
 import { computed, getCurrentInstance, inject, provide, useTemplateRef } from 'vue';
 
 const ts = inject(timestamp);
 const id = inject(formControlId);
+const dtl = inject(dateTimeLibraryInject);
 
-const dateLibLocale = useDateLibraryLocale(getCurrentInstance());
+const dateLibLocale = useDateLibraryLocale(dtl, getCurrentInstance());
 const selectedDateTime = computed(() => {
-  if (dateLibLocale.value) {
+  if (dtl?.value && dateLibLocale.value) {
     const currentDateValue = ts?.currentDate.value;
     if (currentDateValue) {
       const currentTimeValue = ts?.currentTime.value;
       if (currentTimeValue) {
-        return DTL.convertIsoToLocalizedDateTimeInputValue(
+        return dtl.value.convertIsoToLocalizedDateTimeInputValue(
           currentDateValue,
           currentTimeValue,
-          dateLibLocale.value.name,
+          dateLibLocale.value,
         );
       }
     }
@@ -34,7 +34,12 @@ const inputEl = useTemplateRef<InputApi>('input-el');
 const openPopup = keyboardOrMouseEventHandlerFactory((e: KeyboardEvent | MouseEvent, viaKeyboard: boolean) => {
   if (!ts) return;
 
-  datetimepicker.value?.open(ts.currentTimestamp.value, viaKeyboard ? inputEl.value?.inputEl : null);
+  const currentTs = ts.currentTimestamp.value;
+  if (!currentTs) {
+    console.error('Could not get current timestamp with timezone');
+    return;
+  }
+  datetimepicker.value?.open(currentTs, viaKeyboard ? inputEl.value?.inputEl : null);
   window.requestAnimationFrame(() => {
     datetimepicker.value?.changeFocus('year', true);
   });

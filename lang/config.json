@@ -47,7 +47,6 @@
       "emoji": "\uD83C\uDDE8\uD83C\uDDF3",
       "crowdinLocale": "zh-CN",
       "momentLocale": "zh-cn",
-      "dayjsLocale": "zh-cn",
       "laravelLocale": "zh_CN",
       "calendarLabelFormat": "YYYY年MMM",
       "calendarYearLabelFormat": "YYYY年",
@@ -72,7 +71,6 @@
       "countryCode": "TW",
       "emoji": "\uD83C\uDDF9\uD83C\uDDFC",
       "momentLocale": "zh-tw",
-      "dayjsLocale": "zh-tw",
       "laravelLocale": "zh_TW",
       "calendarLabelFormat": "YYYY年MMM",
       "calendarYearLabelFormat": "YYYY年",
@@ -147,7 +145,6 @@
       "countryCode": "GB",
       "emoji": "\uD83C\uDDEC\uD83C\uDDE7",
       "momentLocale": "en-gb",
-      "dayjsLocale": "en-gb",
       "laravelLocale": "en_GB"
     },
     "en": {
@@ -466,7 +463,6 @@
       "countryCode": "BR",
       "emoji": "\uD83C\uDDE7\uD83C\uDDF7",
       "momentLocale": "pt-br",
-      "dayjsLocale": "pt-br",
       "laravelLocale": "pt_BR",
       "calendarWeekdayFormat": "ddd",
       "credits": [

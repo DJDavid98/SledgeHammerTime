@@ -1,11 +1,15 @@
+import { DateTimeLibrary } from '@/classes/DateTimeLibrary';
+import { DateTimeLibraryLocale } from '@/classes/DateTimeLibraryLocale';
 import {
   DateTimeLibraryMonth,
   DateTimeLibraryValue,
   DateTimeLibraryWeekday,
 } from '@/classes/DateTimeLibraryValue';
-import { DTL } from '@/utils/dtl';
+import { DeepReadonly } from 'vue';
 
 export interface GenerateCalendarOptions {
+  dtl: DeepReadonly<DateTimeLibrary> | undefined;
+  locale: DateTimeLibraryLocale | null;
   year: number;
   month: DateTimeLibraryMonth | number;
   firstDayOfWeek?: DateTimeLibraryWeekday;
@@ -106,14 +110,23 @@ export const getWeekdayItems = (weekdays: string[] | undefined, firstDayOfWeek: 
 };
 
 export const generateCalendar = ({
+  dtl,
+  locale,
   year,
   month,
   firstDayOfWeek = DateTimeLibraryWeekday.Monday,
 }: GenerateCalendarOptions): Calendar => {
+  if (!dtl || !locale) {
+    return {
+      days: [],
+      firstDayOfWeek,
+    };
+  }
+
   if (month < DateTimeLibraryMonth.January || month > DateTimeLibraryMonth.December) {
     throw new Error('Month is out of bounds');
   }
-  const firstDayOfMonthDateTime = DTL.getValueForDate(year, month, FIRST_DAY_OF_MONTH);
+  const firstDayOfMonthDateTime = dtl.getValueForDate(year, month, FIRST_DAY_OF_MONTH);
 
   const firstDayOfWeekOffset = getFirstDayOfWeekOffset(firstDayOfMonthDateTime, firstDayOfWeek);
   const gridSize = {
@@ -130,7 +143,7 @@ export const generateCalendar = ({
         date: weekDayDateTime.getDayOfMonth(),
         weekday: weekDayDateTime.getWeekday(),
         month: weekDayDateTime.getMonth(),
-        display: weekDayDateTime.formatCalendarDateDisplay(),
+        display: weekDayDateTime.setLocale(locale).formatCalendarDateDisplay(),
       };
       dayOffset++;
     }

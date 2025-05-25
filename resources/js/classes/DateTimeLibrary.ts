@@ -6,11 +6,6 @@ import { AvailableLanguage } from '@/utils/language-settings';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Needed for testing
 export interface DateTimeLibrary<T = any, L = any> {
-  isoTimeFormat: string;
-  isoFormattingDateFormat: string;
-  isoParsingDateFormat: string;
-  isoFormat: string;
-  urlFormat: string;
   timezoneNames: string[];
 
   getLocaleNameFromLanguage(language: AvailableLanguage): string;
@@ -19,13 +14,13 @@ export interface DateTimeLibrary<T = any, L = any> {
 
   loadLocaleLowLevel(localeName: string): Promise<L | undefined>;
 
-  localeLoader(localeName: string): Promise<DateTimeLibraryLocale>;
+  localeLoader(localeName: string): Promise<DateTimeLibraryLocale<L>>;
 
   guessInitialTimezoneName(): string;
 
   getDefaultInitialTimezoneSelection(hint?: string): TimezoneSelection;
 
-  getMeridiemLabel(isAm: boolean, minutes?: number, locale?: string): string;
+  getMeridiemLabel(isAm: boolean, minutes?: number, locale?: DateTimeLibraryLocale<L>): string;
 
   getDefaultInitialDateTime(
     timezone: TimezoneSelection,
@@ -38,48 +33,48 @@ export interface DateTimeLibrary<T = any, L = any> {
     zeroSeconds?: boolean,
   ): [string, string];
 
-  now(): DateTimeLibraryValue<T>;
+  now(): DateTimeLibraryValue<T, L>;
 
   convertIsoToLocalizedDateTimeInputValue(
     date: string,
     time: string,
-    locale: string,
+    locale: DateTimeLibraryLocale<L>,
   ): string;
 
   convertIsoToLocalizedDateInputValue(
     date: string,
-    locale: string,
+    locale: DateTimeLibraryLocale<L>,
   ): string;
 
   convertIsoToLocalizedTimeInputValue(
     time: string,
-    locale: string,
+    locale: DateTimeLibraryLocale<L>,
   ): string;
 
   getValueForIsoZonedDate(
     date: string,
     timezone: TimezoneSelection,
-  ): DateTimeLibraryValue<T>;
+  ): DateTimeLibraryValue<T, L>;
 
   getValueForIsoZonedTime(
     time: string,
     timezone: TimezoneSelection,
-  ): DateTimeLibraryValue<T>;
+  ): DateTimeLibraryValue<T, L>;
 
   getValueForIsoZonedDateTime(
     date: string,
     time: string,
     timezone: TimezoneSelection,
-  ): DateTimeLibraryValue<T>;
+  ): DateTimeLibraryValue<T, L>;
 
   /**
    * Months are 0-indexed
    */
-  getValueForDate(year: number, month: number, date: number): DateTimeLibraryValue<T>;
+  getValueForDate(year: number, month: number, date: number): DateTimeLibraryValue<T, L>;
 
-  fromIsoString(iso: string): DateTimeLibraryValue<T>;
+  fromIsoString(iso: string): DateTimeLibraryValue<T, L>;
 
-  fromTimestampMsUtc(number: number): DateTimeLibraryValue<T>;
+  fromTimestampMsUtc(number: number): DateTimeLibraryValue<T, L>;
 }
 
 

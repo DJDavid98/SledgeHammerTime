@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { dateTimeLibraryInject } from '@/injection-keys';
 import HtFormCombobox, { FormComboboxApi } from '@/Reusable/HtFormCombobox.vue';
 import { ComboboxOption } from '@/utils/combobox';
-import { DTL } from '@/utils/dtl';
 import { getTimezoneValue } from '@/utils/time';
-import { useTemplateRef } from 'vue';
+import { computed, inject, useTemplateRef } from 'vue';
 
 const props = defineProps<{
   'class'?: string;
@@ -11,7 +11,9 @@ const props = defineProps<{
   tabindex?: string | number;
 }>();
 
-const timezones = DTL.timezoneNames.map(getTimezoneValue);
+
+const dtl = inject(dateTimeLibraryInject);
+const timezones = computed(() => dtl?.value.timezoneNames.map(getTimezoneValue) ?? []);
 
 const model = defineModel<string>();
 const emit = defineEmits<{

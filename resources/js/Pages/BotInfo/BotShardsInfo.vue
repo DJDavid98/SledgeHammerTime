@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
 import TimestampPreview from '@/Components/home/table/TimestampPreview.vue';
+import { dateTimeLibraryInject } from '@/injection-keys';
 import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import HtCard from '@/Reusable/HtCard.vue';
 import HtTable from '@/Reusable/HtTable.vue';
-import { DTL } from '@/utils/dtl';
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 
 export interface BotShard {
   id: number;
@@ -27,12 +27,14 @@ const props = defineProps<{
   shards: BotShard[];
 }>();
 
+const dtl = inject(dateTimeLibraryInject);
+
 const enhancedShards = computed(() => props.shards.map((shard): EnhancedBotShard => {
   return {
     id: shard.id,
     serverCount: shard.serverCount,
-    startedAt: shard.startedAt ? DTL.fromIsoString(shard.startedAt) : undefined,
-    updatedAt: shard.updatedAt ? DTL.fromIsoString(shard.updatedAt) : undefined,
+    startedAt: shard.startedAt && dtl?.value ? dtl.value.fromIsoString(shard.startedAt) : undefined,
+    updatedAt: shard.updatedAt && dtl?.value ? dtl.value.fromIsoString(shard.updatedAt) : undefined,
   };
 }));
 </script>

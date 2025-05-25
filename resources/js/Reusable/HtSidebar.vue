@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import LanguageSelector from '@/Components/LanguageSelector.vue';
 import InputSettings from '@/Components/sidebar/InputSettings.vue';
+import LocalSettings from '@/Components/sidebar/LocalSettings.vue';
 import SidebarCredits from '@/Components/sidebar/SidebarCredits.vue';
 import UserInfo from '@/Components/UserInfo.vue';
 import { localSettings, sidebarState } from '@/injection-keys';
@@ -33,6 +34,7 @@ const close = () => {
     <hr class="sidebar-divider">
     <div class="sidebar-content">
       <InputSettings />
+      <LocalSettings />
       <SidebarCredits />
     </div>
     <hr class="sidebar-divider">

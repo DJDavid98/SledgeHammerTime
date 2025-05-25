@@ -5,10 +5,12 @@ import PickerFormActions from '@/Components/home/pickers/controls/PickerFormActi
 import TimePickerDial from '@/Components/home/pickers/controls/TimePickerDial.vue';
 import TimePickerInputs from '@/Components/home/pickers/TimePickerInputs.vue';
 import { useTimePicker } from '@/composables/useTimePicker';
+import { dateTimeLibraryInject } from '@/injection-keys';
 import HtFormInputGroup from '@/Reusable/HtFormInputGroup.vue';
 import { limitHours, limitMinutesSeconds, limitToTwelveHours } from '@/utils/time';
-import { useTemplateRef } from 'vue';
+import { inject, useTemplateRef } from 'vue';
 
+const dtl = inject(dateTimeLibraryInject);
 const {
   hours,
   minutes,
@@ -28,7 +30,7 @@ const {
   getSelectedTime,
   openTimePicker,
   closeTimePicker,
-} = useTimePicker();
+} = useTimePicker(dtl);
 
 const emit = defineEmits<{
   (e: 'selected', time: string): void

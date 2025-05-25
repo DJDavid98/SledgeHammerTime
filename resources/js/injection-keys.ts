@@ -1,12 +1,13 @@
+import { DateTimeLibrary } from '@/classes/DateTimeLibrary';
 import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
 import { LanguageConfig } from '@/model/language-config';
 import { TimezoneSelection } from '@/model/timezone-selection';
 import { PageProps } from '@/types';
 import { AvailableLanguage } from '@/utils/language-settings';
-import { ComputedRef, InjectionKey, Ref } from 'vue';
+import { ComputedRef, DeepReadonly, InjectionKey, Ref } from 'vue';
 
 export const timestamp = Symbol('timestamp') as InjectionKey<{
-  currentTimestamp: ComputedRef<DateTimeLibraryValue>,
+  currentTimestamp: ComputedRef<DateTimeLibraryValue | null>,
   currentDate: Readonly<Ref<string>>,
   currentTime: Readonly<Ref<string>>,
   currentTimezone: Ref<TimezoneSelection>,
@@ -35,10 +36,11 @@ export interface LocalSettingsValue {
   readonly rawSidebarOnRight: boolean | null;
   readonly sidebarOnRight: boolean | null;
   readonly sidebarOffDesktop: boolean | null;
+  readonly dateFnsEnabled: boolean | null;
   readonly toggleCustomInput: (e: Event) => void;
   readonly toggleSeparateInputs: (e: Event) => void;
+  readonly toggleDateFnsEnabled: (e: Event) => void;
   readonly toggleSidebarOnRight: VoidFunction;
-  readonly toggleSidebarOffDesktop: VoidFunction;
   readonly setSidebarOffDesktop: (value: boolean) => void;
 }
 
@@ -65,3 +67,5 @@ export const devModeInject = Symbol('devModeInject') as InjectionKey<Ref<boolean
 export type ScrollToSectionFunction = (id: string | undefined) => void;
 
 export const scrollToAnchorInject = Symbol('scrollToSectionInject') as InjectionKey<ScrollToSectionFunction>;
+
+export const dateTimeLibraryInject = Symbol('dateTimeLibraryInject') as InjectionKey<DeepReadonly<ComputedRef<DateTimeLibrary>>>;

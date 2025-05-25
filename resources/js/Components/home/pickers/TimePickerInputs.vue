@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { TimePickerDialAPI } from '@/Components/home/pickers/controls/TimePickerDial.vue';
+import { dateTimeLibraryInject } from '@/injection-keys';
 import HtFormSelect from '@/Reusable/HtFormSelect.vue';
 import HtInput from '@/Reusable/HtInput.vue';
 import { inputRangeLimitBlurHandlerFactory } from '@/utils/app';
 import { DialMode } from '@/utils/dial';
-import { DTL } from '@/utils/dtl';
 import { coerceToTwelveHours } from '@/utils/time';
+import { inject } from 'vue';
 
 const hours = defineModel<number>('hours', { required: true });
 const minutes = defineModel<number>('minutes', { required: true });
@@ -16,6 +17,8 @@ const dial = defineModel<TimePickerDialAPI | undefined>('dial', { required: true
 const hoursInput = defineModel<HTMLInputElement | null>('hoursInput');
 const minutesInput = defineModel<HTMLInputElement | null>('minutesInput');
 const secondsInput = defineModel<HTMLInputElement | null>('secondsInput');
+
+const dtl = inject(dateTimeLibraryInject);
 
 const hoursFocused = () => dial.value?.setMode(DialMode.Hours);
 const minutesFocused = () => dial.value?.setMode(DialMode.Minutes);
@@ -83,15 +86,15 @@ const handleAmPmSelectKeydown = (e: KeyboardEvent) => {
     @blur.passive="handleSecondsBlur"
   />
   <HtFormSelect
-    v-if="twelveHourMode"
+    v-if="twelveHourMode && dtl"
     v-model="isAm"
     @keydown="handleAmPmSelectKeydown"
   >
     <option :value="true">
-      {{ DTL.getMeridiemLabel(true, minutes) }}
+      {{ dtl.getMeridiemLabel(true, minutes) }}
     </option>
     <option :value="false">
-      {{ DTL.getMeridiemLabel(false, minutes) }}
+      {{ dtl.getMeridiemLabel(false, minutes) }}
     </option>
   </HtFormSelect>
 </template>

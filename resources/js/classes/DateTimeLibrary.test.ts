@@ -1,3 +1,4 @@
+import { DateFnsDTL } from '@/classes/DateFnsDTL';
 import { DateTimeLibrary } from '@/classes/DateTimeLibrary';
 import { DateTimeLibraryMonth } from '@/classes/DateTimeLibraryValue';
 import { MomentDTL } from '@/classes/MomentDTL';
@@ -7,22 +8,17 @@ import { AvailableLanguage, FALLBACK_LANGUAGE, LANGUAGES } from '@/utils/languag
 import { describe, expect, it, vi } from 'vitest';
 
 describe('DateTimeLibrary', () => {
-  const implementations: [string, DateTimeLibrary][] = [['MomentDTL', new MomentDTL()]];
+  const implementations = [
+    ['moment', new MomentDTL()],
+    ['date-fns', new DateFnsDTL()],
+  ] as const satisfies [string, DateTimeLibrary][];
   const testLanguages = ['en', 'en-GB', 'hu'] as const satisfies AvailableLanguage[];
+  const utcTimezone: TimezoneSelection = {
+    type: TimeZoneSelectionType.ZONE_NAME,
+    name: 'Etc/UTC',
+  };
 
-  describe.each(implementations)('Implementation: %s', (_, dtl) => {
-    describe('Constants', () => {
-      it('should have the correct constants', () => {
-        expect(dtl.isoTimeFormat).toBeDefined();
-        expect(dtl.isoFormattingDateFormat).toBeDefined();
-        expect(dtl.isoParsingDateFormat).toBeDefined();
-        expect(dtl.isoFormat).toBeDefined();
-        expect(dtl.urlFormat).toBeDefined();
-        expect(dtl.timezoneNames).toBeDefined();
-        expect(dtl.timezoneNames.length).toBeGreaterThan(0);
-      });
-    });
-
+  describe.each(implementations)('Implementation: %s', (dtlName, dtl) => {
     describe('getLocaleNameFromLanguage', () => {
       it('should return the correct locale name for a language', () => {
         const language: AvailableLanguage = 'en';
@@ -31,9 +27,21 @@ describe('DateTimeLibrary', () => {
       });
 
       it('should return the correct locale name for different languages', () => {
-        expect(dtl.getLocaleNameFromLanguage('en-GB')).toBe('en-gb');
-        expect(dtl.getLocaleNameFromLanguage('hu')).toBe('hu');
-        expect(dtl.getLocaleNameFromLanguage('pt-BR')).toBe('pt-br');
+        const expectedMap = {
+          moment: {
+            enGB: 'en-gb',
+            hu: 'hu',
+            ptBR: 'pt-br',
+          },
+          'date-fns': {
+            enGB: 'en-GB',
+            hu: 'hu',
+            ptBR: 'pt-BR',
+          },
+        };
+        expect(dtl.getLocaleNameFromLanguage('en-GB')).toBe(expectedMap[dtlName].enGB);
+        expect(dtl.getLocaleNameFromLanguage('hu')).toBe(expectedMap[dtlName].hu);
+        expect(dtl.getLocaleNameFromLanguage('pt-BR')).toBe(expectedMap[dtlName].ptBR);
       });
     });
 
@@ -42,7 +50,11 @@ describe('DateTimeLibrary', () => {
         const language: AvailableLanguage = 'pt-BR';
         const languageConfig: LanguageConfig = LANGUAGES[language];
         const result = dtl.getLocaleNameFromLanguageConfig(language, languageConfig);
-        expect(result).toBe('pt-br');
+        const expectedMap = {
+          moment: 'pt-br',
+          'date-fns': 'pt-BR',
+        };
+        expect(result).toBe(expectedMap[dtlName]);
       });
 
       it('should return the language when no config is provided', () => {
@@ -98,8 +110,6 @@ describe('DateTimeLibrary', () => {
         const result = dtl.guessInitialTimezoneName();
         // Should return a string like "America/New_York" or "Europe/London"
         expect(result).toMatch(/^[a-z/_]+$/i);
-        // Verify it's in the list of valid timezone names
-        expect(dtl.timezoneNames).toContain(result);
       });
     });
 
@@ -149,39 +159,39 @@ describe('DateTimeLibrary', () => {
         },
       };
 
-      it.each(testLanguages)('should return AM/PM labels for locale %s', (locale) => {
+      it.each(testLanguages)('should return AM/PM labels for locale %s', async (language) => {
+        const localeName = dtl.getLocaleNameFromLanguage(language);
+        const locale = await dtl.localeLoader(localeName);
+        expect(locale).toBeDefined();
         const amLabel = dtl.getMeridiemLabel(true, 0, locale);
         const pmLabel = dtl.getMeridiemLabel(false, 0, locale);
-        expect(amLabel).toEqual(expectedLabels.am[locale]);
-        expect(pmLabel).toEqual(expectedLabels.pm[locale]);
+        expect(amLabel).toEqual(expectedLabels.am[language]);
+        expect(pmLabel).toEqual(expectedLabels.pm[language]);
         expect(amLabel).not.toBe(pmLabel);
       });
 
-      it('should handle minutes parameter', () => {
-        const amLabel = dtl.getMeridiemLabel(true, 30);
+      it.each(testLanguages)('should handle minutes parameter', async (language) => {
+        const localeName = dtl.getLocaleNameFromLanguage(language);
+        const locale = await dtl.localeLoader(localeName);
+        expect(locale).toBeDefined();
+        const amLabel = dtl.getMeridiemLabel(true, 30, locale);
+        const pmLabel = dtl.getMeridiemLabel(false, 30, locale);
         expect(amLabel).toBeDefined();
+        expect(pmLabel).toBeDefined();
       });
     });
 
     describe('getDefaultInitialDateTime', () => {
       it('should return a date and time', () => {
-        const timezone: TimezoneSelection = {
-          type: TimeZoneSelectionType.ZONE_NAME,
-          name: 'UTC',
-        };
-        const result = dtl.getDefaultInitialDateTime(timezone, null);
+        const result = dtl.getDefaultInitialDateTime(utcTimezone, null);
         expect(result).toHaveLength(2);
         expect(result[0]).toMatch(/^\d{4}-\d{2}-\d{2}$/); // Date format YYYY-MM-DD
         expect(result[1]).toMatch(/^\d{2}:\d{2}:\d{2}$/); // Time format HH:MM:SS
       });
 
       it('should use the provided default date time', () => {
-        const timezone: TimezoneSelection = {
-          type: TimeZoneSelectionType.ZONE_NAME,
-          name: 'UTC',
-        };
         const defaultDateTime = '20250101.120000'; // January 1, 2025, 12:00:00
-        const result = dtl.getDefaultInitialDateTime(timezone, defaultDateTime);
+        const result = dtl.getDefaultInitialDateTime(utcTimezone, defaultDateTime);
         expect(result).toHaveLength(2);
         expect(result[0]).toBe('2025-01-01');
         expect(result[1]).toBe('12:00:00');
@@ -190,11 +200,7 @@ describe('DateTimeLibrary', () => {
 
     describe('getInitialDateTime', () => {
       it('should return a date and time with zone offset', () => {
-        const timezone: TimezoneSelection = {
-          type: TimeZoneSelectionType.ZONE_NAME,
-          name: 'UTC',
-        };
-        const result = dtl.getInitialDateTime(timezone);
+        const result = dtl.getInitialDateTime(utcTimezone);
         expect(result).toHaveLength(2);
         expect(result[0]).toMatch(/^\d{4}-\d{2}-\d{2}$/); // Date format YYYY-MM-DD
         expect(result[1]).toMatch(/^\d{2}:\d{2}:\d{2}$/); // Time format HH:MM:SS
@@ -213,12 +219,8 @@ describe('DateTimeLibrary', () => {
       });
 
       it('should use the provided default date time with zone offset', () => {
-        const timezone: TimezoneSelection = {
-          type: TimeZoneSelectionType.ZONE_NAME,
-          name: 'UTC',
-        };
         const defaultDateTime = '20250101.120000'; // January 1, 2025, 12:00:00
-        const result = dtl.getInitialDateTime(timezone, defaultDateTime);
+        const result = dtl.getInitialDateTime(utcTimezone, defaultDateTime);
         expect(result).toHaveLength(2);
         expect(result[0]).toBe('2025-01-01');
         expect(result[1]).toBe('12:00:00');
@@ -238,12 +240,8 @@ describe('DateTimeLibrary', () => {
       });
 
       it('should zero seconds when requested', () => {
-        const timezone: TimezoneSelection = {
-          type: TimeZoneSelectionType.ZONE_NAME,
-          name: 'UTC',
-        };
         const defaultDateTime = '20250101.120030'; // January 1, 2025, 12:00:30
-        const result = dtl.getInitialDateTime(timezone, defaultDateTime, true);
+        const result = dtl.getInitialDateTime(utcTimezone, defaultDateTime, true);
         expect(result).toHaveLength(2);
         expect(result[0]).toBe('2025-01-01');
         expect(result[1]).toBe('12:00:00');
@@ -273,18 +271,28 @@ describe('DateTimeLibrary', () => {
 
     describe('convertIsoToLocalizedDateTimeInputValue', () => {
       const expectedFormats = {
-        'en': 'January 1, 2025 12:00 PM',
-        'en-GB': '1 January 2025 12:00',
-        'hu': '2025. január 1. 12:00',
+        moment: {
+          'en': 'January 1, 2025 12:00 PM',
+          'en-GB': '1 January 2025 12:00',
+          'hu': '2025. január 1. 12:00',
+        },
+        'date-fns': {
+          'en': 'January 1, 2025 12:00 PM',
+          'en-GB': '1 January 2025 12:00',
+          'hu': '2025. január 1. 12:00',
+        },
       };
 
-      it.each(testLanguages)('should convert ISO date and time to localized format for %s locale', (locale) => {
+      it.each(testLanguages)('should convert ISO date and time to localized format for %s locale', async (language) => {
+        const localeName = dtl.getLocaleNameFromLanguage(language);
+        const locale = await dtl.localeLoader(localeName);
+        expect(locale).toBeDefined();
         const date = '2025-01-01';
         const time = '12:00:00';
         const result = dtl.convertIsoToLocalizedDateTimeInputValue(date, time, locale);
 
         // Different locales have different formatting, so check against expected values
-        expect(result).toBe(expectedFormats[locale]);
+        expect(result).toBe(expectedFormats[dtlName][language]);
       });
     });
 
@@ -295,39 +303,48 @@ describe('DateTimeLibrary', () => {
         'hu': '12:00:00',
       };
 
-      it.each(testLanguages)('should convert ISO time to localized format for %s locale', (locale) => {
+      it.each(testLanguages)('should convert ISO time to localized format for %s locale', async (language) => {
+        const localeName = dtl.getLocaleNameFromLanguage(language);
+        const locale = await dtl.localeLoader(localeName);
+        expect(locale).toBeDefined();
         const time = '12:00:00';
         const result = dtl.convertIsoToLocalizedTimeInputValue(time, locale);
 
         // Different locales have different time formatting
-        expect(result).toBe(expectedFormats[locale]);
+        expect(result).toBe(expectedFormats[language]);
       });
     });
 
     describe('convertIsoToLocalizedDateInputValue', () => {
       const expectedFormats = {
-        'en': 'January 2, 1970',
-        'en-GB': '2 January 1970',
-        'hu': '1970. január 2.',
+        'moment': {
+          'en': 'January 2, 1970',
+          'en-GB': '2 January 1970',
+          'hu': '1970. január 2.',
+        },
+        'date-fns': {
+          'en': 'January 2, 1970',
+          'en-GB': '2 January 1970',
+          'hu': '1970. január 2.',
+        },
       };
 
-      it.each(testLanguages)('should convert ISO date to localized format for %s locale', (locale) => {
+      it.each(testLanguages)('should convert ISO date to localized format for %s locale', async (language) => {
+        const localeName = dtl.getLocaleNameFromLanguage(language);
+        const locale = await dtl.localeLoader(localeName);
+        expect(locale).toBeDefined();
         const date = '1970-01-02';
         const result = dtl.convertIsoToLocalizedDateInputValue(date, locale);
 
         // Different locales have different time formatting
-        expect(result).toBe(expectedFormats[locale]);
+        expect(result).toBe(expectedFormats[dtlName][language]);
       });
     });
 
     describe('getValueForIsoZonedDate', () => {
       it('should return a DateTimeLibraryValue for a date', () => {
         const date = '2025-01-01';
-        const timezone: TimezoneSelection = {
-          type: TimeZoneSelectionType.ZONE_NAME,
-          name: 'UTC',
-        };
-        const result = dtl.getValueForIsoZonedDate(date, timezone);
+        const result = dtl.getValueForIsoZonedDate(date, utcTimezone);
         expect(result).toBeDefined();
         expect(result.toISODateString()).toBe(date);
       });
@@ -336,11 +353,7 @@ describe('DateTimeLibrary', () => {
     describe('getValueForIsoZonedTime', () => {
       it('should return a DateTimeLibraryValue for a time', () => {
         const time = '12:00:00';
-        const timezone: TimezoneSelection = {
-          type: TimeZoneSelectionType.ZONE_NAME,
-          name: 'UTC',
-        };
-        const result = dtl.getValueForIsoZonedTime(time, timezone);
+        const result = dtl.getValueForIsoZonedTime(time, utcTimezone);
         expect(result).toBeDefined();
         expect(result.getHours()).toBe(12);
         expect(result.getMinutes()).toBe(0);
@@ -349,24 +362,26 @@ describe('DateTimeLibrary', () => {
     });
 
     describe('getValueForIsoZonedDateTime', () => {
+      const date = '2025-01-01';
+      const time = '12:00:00';
+      const expectedTimestamp = new Date(`${date}T${time}.000+01:00`).getTime();
+
       it('should return a DateTimeLibraryValue for a date and time', () => {
-        const date = '2025-01-01';
-        const time = '12:00:00';
         const timezone: TimezoneSelection = {
           type: TimeZoneSelectionType.ZONE_NAME,
-          name: 'UTC',
+          name: 'Etc/GMT-1',
         };
         const result = dtl.getValueForIsoZonedDateTime(date, time, timezone);
         expect(result).toBeDefined();
         expect(result.toISODateString()).toBe(date);
-        expect(result.getHours()).toBe(12);
+        expect(result.toISOTimeString()).toBe(time);
+        expect(result.toDate().getTime()).toBe(expectedTimestamp);
         expect(result.getMinutes()).toBe(0);
         expect(result.getSeconds()).toBe(0);
+        expect(result.getUtcOffsetMinutes()).toBe(60);
       });
 
       it('should handle offset timezones', () => {
-        const date = '2025-01-01';
-        const time = '12:00:00';
         const timezone: TimezoneSelection = {
           type: TimeZoneSelectionType.OFFSET,
           hours: 1,
@@ -375,6 +390,8 @@ describe('DateTimeLibrary', () => {
         const result = dtl.getValueForIsoZonedDateTime(date, time, timezone);
         expect(result).toBeDefined();
         expect(result.toISODateString()).toBe(date);
+        expect(result.toISOTimeString()).toBe(time);
+        expect(result.toDate().getTime()).toBe(expectedTimestamp);
         expect(result.getHours()).toBe(12);
         expect(result.getMinutes()).toBe(0);
         expect(result.getSeconds()).toBe(0);

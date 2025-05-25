@@ -1,3 +1,4 @@
+import { DateTimeLibraryLocale } from '@/classes/DateTimeLibraryLocale';
 import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import { TimezoneSelection } from '@/model/timezone-selection';
 
@@ -26,27 +27,28 @@ export enum DateTimeLibraryMonth {
   December,
 }
 
-export abstract class DateTimeLibraryValue<T = unknown> {
-  constructor(protected value: T, protected _locale: string | null = null) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required to allow extension
+export abstract class DateTimeLibraryValue<T = any, L = any> {
+  constructor(protected value: T, protected locale: DateTimeLibraryLocale<L> | null = null) {
   }
 
   abstract toString(): string;
 
-  abstract setLocale(locale: string): DateTimeLibraryValue<T>;
+  abstract setLocale(locale: DateTimeLibraryLocale<L>): DateTimeLibraryValue<T, L>;
 
-  abstract getLocale(): string;
+  abstract getLocale(): DateTimeLibraryLocale<L>;
 
-  abstract local(): DateTimeLibraryValue<T>;
+  abstract local(): DateTimeLibraryValue<T, L>;
 
   abstract fromNow(): string;
 
-  abstract addDays(days: number): DateTimeLibraryValue<T>;
+  abstract addDays(days: number): DateTimeLibraryValue<T, L>;
 
-  abstract addYears(years: number): DateTimeLibraryValue<T>;
+  abstract addYears(years: number): DateTimeLibraryValue<T, L>;
 
   abstract toDate(): Date;
 
-  abstract formatDiscordTimestamp(format: MessageTimestampFormat): string;
+  abstract formatDiscordTimestamp(mtf: MessageTimestampFormat): string;
 
   abstract formatCalendarDateDisplay(): string;
 
@@ -61,6 +63,8 @@ export abstract class DateTimeLibraryValue<T = unknown> {
   abstract toISOString(): string;
 
   abstract toISODateString(): string;
+
+  abstract toISOTimeString(): string;
 
   abstract getWeekday(): DateTimeLibraryWeekday;
 
@@ -82,13 +86,13 @@ export abstract class DateTimeLibraryValue<T = unknown> {
 
   abstract daysInMonth(): number;
 
-  abstract replaceZone(zone: TimezoneSelection): DateTimeLibraryValue<T>;
+  abstract replaceZone(zone: TimezoneSelection): DateTimeLibraryValue<T, L>;
 
-  abstract setHours(hours: number): DateTimeLibraryValue<T>;
+  abstract setHours(hours: number): DateTimeLibraryValue<T, L>;
 
-  abstract setMinutes(minutes: number): DateTimeLibraryValue<T>;
+  abstract setMinutes(minutes: number): DateTimeLibraryValue<T, L>;
 
-  abstract setSeconds(seconds: number): DateTimeLibraryValue<T>;
+  abstract setSeconds(seconds: number): DateTimeLibraryValue<T, L>;
 
   protected mapDefaultWeekday(weekday: number) {
     if (weekday >= 0 && weekday <= 6) {

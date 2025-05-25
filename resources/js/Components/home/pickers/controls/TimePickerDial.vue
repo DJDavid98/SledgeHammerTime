@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
-import { theme } from '@/injection-keys';
+import { useDateLibraryLocale } from '@/composables/useDateLibraryLocale';
+import { dateTimeLibraryInject, theme } from '@/injection-keys';
 import {
   DialColors,
   DialEnvironment,
@@ -10,7 +11,7 @@ import {
   drawIndividualDial,
 } from '@/utils/dial';
 import { getPositionAngleInElement, integerInRangeByAngle, Point2D } from '@/utils/math';
-import { computed, inject, onMounted, onUnmounted, ref, watchEffect } from 'vue';
+import { computed, getCurrentInstance, inject, onMounted, onUnmounted, ref, watchEffect } from 'vue';
 
 const hoursCanvas = ref<HTMLCanvasElement>();
 const minutesCanvas = ref<HTMLCanvasElement>();
@@ -37,6 +38,8 @@ const emit = defineEmits<{
 }>();
 
 const themeData = inject(theme);
+const dtl = inject(dateTimeLibraryInject);
+const dateLibLocale = useDateLibraryLocale(dtl, getCurrentInstance());
 
 const colors = computed((): DialColors => ({
   numbers: themeData?.isLightTheme ? '#333' : '#ccc',
@@ -126,6 +129,8 @@ const draw = () => {
     isAm: props.isAm,
     twelveHourMode: props.twelveHourMode,
     minutes: props.minutes,
+    dtl: dtl?.value,
+    locale: dateLibLocale?.value,
   };
   dialSetup.value.keys.forEach(key => {
     drawIndividualDial(dialEnv, {

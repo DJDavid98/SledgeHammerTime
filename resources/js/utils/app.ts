@@ -1,7 +1,6 @@
 import { CurrentLanguageData } from '@/injection-keys';
 import { LanguageConfig } from '@/model/language-config';
 import { PageProps } from '@/types';
-import { DTL } from '@/utils/dtl';
 import { AvailableLanguage, LANGUAGES } from '@/utils/language-settings';
 import { rangeLimitInput } from '@/utils/time';
 import { ModelRef, Ref } from 'vue';
@@ -12,8 +11,8 @@ export const DEVELOPER_URL = 'https://went.tf';
 export const DEVELOPER_CONTACT_URL = `${DEVELOPER_URL}/#contact`;
 export const DEVELOPER_AVATAR_URL = 'https://gravatar.com/avatar/f341ebe7cfc73b35ff4ec66897b5c30d?size=64';
 
-export const TERMS_UPDATE_DATE = DTL.fromIsoString("2025-05-11T04:15:14.251Z");
-export const PRIVACY_UPDATE_DATE = DTL.fromIsoString("2025-05-11T04:15:14.251Z");
+export const TERMS_UPDATE_DATE_ISO = "2025-05-11T04:15:14.251Z";
+export const PRIVACY_UPDATE_DATE_ISO = "2025-05-11T04:15:14.251Z";
 
 export const inputRangeLimitBlurHandlerFactory = (numberRef: Ref<number> | ModelRef<number>) => (e: FocusEvent): void => {
   const limitedValue = rangeLimitInput(e.target);

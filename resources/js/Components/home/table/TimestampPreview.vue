@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
 import { useDateLibraryLocale } from '@/composables/useDateLibraryLocale';
+import { dateTimeLibraryInject } from '@/injection-keys';
 import { MessageTimestampFormat } from '@/model/message-timestamp-format';
-import { computed, getCurrentInstance, ref, watch } from 'vue';
+import { computed, getCurrentInstance, inject, ref, watch } from 'vue';
 
 const props = defineProps<{
   ts: DateTimeLibraryValue | undefined,
@@ -12,7 +13,8 @@ const props = defineProps<{
 const updateInterval = ref<ReturnType<typeof setInterval> | null>(null);
 const instance = getCurrentInstance();
 
-const dateLibLocale = useDateLibraryLocale(instance);
+const dtl = inject(dateTimeLibraryInject);
+const dateLibLocale = useDateLibraryLocale(dtl, instance);
 
 const fromNow = computed(() => props.format === MessageTimestampFormat.RELATIVE);
 
@@ -38,14 +40,14 @@ const localTimestamp = computed(() => props.ts?.local());
 <template>
   <time
     v-if="localTimestamp && dateLibLocale"
-    :title="localTimestamp.setLocale(dateLibLocale.name).formatDiscordTimestamp(MessageTimestampFormat.LONG_FULL)"
+    :title="localTimestamp.setLocale(dateLibLocale).formatDiscordTimestamp(MessageTimestampFormat.LONG_FULL)"
     :datetime="localTimestamp.toISOString()"
   >
     <template v-if="fromNow">
-      {{ localTimestamp.setLocale(dateLibLocale.name).fromNow() }}
+      {{ localTimestamp.setLocale(dateLibLocale).fromNow() }}
     </template>
     <template v-else-if="format">
-      {{ localTimestamp.setLocale(dateLibLocale.name).formatDiscordTimestamp(format) }}
+      {{ localTimestamp.setLocale(dateLibLocale).formatDiscordTimestamp(format) }}
     </template>
   </time>
 </template>
