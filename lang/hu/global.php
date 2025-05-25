@@ -30,6 +30,13 @@ return [
         'label' => 'Külön beviteli mezők',
         'description' => "Két különböző mezőt jelenít meg a dátumnak és az időnek egy összevont helyett (ami néhány böngészőben nem támogatott)",
       ],
+      'newDateTimeLibrary' => [
+        'label' => 'Use modern datetime library',
+        'description' => 'The library used by the application to calculate timestamps is not maintained anymore, so it needs to be replaced. This option lets you preview the new library before it goes live.',
+      ],
+    ],
+    'localSettings' => [
+      'title' => 'Local Settings',
     ],
     'credits' => [
       'title' => 'Névjegy',
