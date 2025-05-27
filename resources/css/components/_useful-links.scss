@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../design";
 
 .useful-links-card {
@@ -34,8 +35,9 @@
 
       .link-card {
         border-radius: design.app-value('card-border-radius');
-        padding: design.app-value('card-padding');
         background-color: rgba(255, 255, 255, .05);
+        padding: design.app-value('useful-link-padding');
+        text-align: center;
       }
 
       @media (min-width: 576px) {
@@ -50,7 +52,7 @@
         flex: 0 0 auto;
         position: relative;
         height: 0;
-        padding-top: 61.58%;
+        padding-top: #{math.div(9, 16) * 100%};
 
         &,
         * {
@@ -72,18 +74,18 @@
         flex-flow: column nowrap;
         justify-content: center;
         align-items: center;
-        padding-top: design.app-value('card-spacing');
+        padding: design.app-value('useful-link-spacing');
       }
 
       .link-name {
-        margin-bottom: design.app-value('card-spacing');
+        margin-bottom: design.app-value('useful-link-spacing');
         font-weight: bold;
         text-decoration: underline;
-        text-align: center;
       }
 
       .link-desc {
-        text-align: center;
+        font-size: design.app-value('useful-link-desc-font-size');
+        line-height: design.app-value('useful-link-desc-line-height');
       }
     }
   }

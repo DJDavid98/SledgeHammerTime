@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import UsefulLinkItem from '@/Components/home/UsefulLinkItem.vue';
+import { currentLanguageInject } from '@/injection-keys';
 import HtCard from '@/Reusable/HtCard.vue';
 import HtTranslate from '@/Reusable/HtTranslate.vue';
+import { inject } from 'vue';
+
+const currentLanguage = inject(currentLanguageInject);
 </script>
 
 <template>
@@ -17,14 +21,20 @@ import HtTranslate from '@/Reusable/HtTranslate.vue';
         :desc="$t('timestampPicker.usefulLinks.server.p')"
         href="discord"
         :is-local="true"
-        image="/useful-links/server.png?v=3"
+        image="/useful-links/server.png?v=4"
       />
       <UsefulLinkItem
         :name="$t('timestampPicker.usefulLinks.bot.header')"
         :desc="$t('timestampPicker.usefulLinks.bot.p')"
         href="botInfo"
         :is-local="true"
-        image="/useful-links/bot.png?v=2"
+        image="/useful-links/bot.png?v=3"
+      />
+      <UsefulLinkItem
+        :name="$t('timestampPicker.usefulLinks.oldSite.header')"
+        :desc="$t('timestampPicker.usefulLinks.oldSite.p')"
+        :href="'https://hammertime.cyou' + (!currentLanguage || currentLanguage.locale === 'en' ? '' : '/' + currentLanguage.locale)"
+        image="/useful-links/oldsite.png"
       />
       <UsefulLinkItem
         :desc="$t('timestampPicker.usefulLinks.textColor.p')"
@@ -39,6 +49,12 @@ import HtTranslate from '@/Reusable/HtTranslate.vue';
           </HtTranslate>
         </template>
       </UsefulLinkItem>
+      <UsefulLinkItem
+        :name="$t('timestampPicker.usefulLinks.subreddit.header')"
+        :desc="$t('timestampPicker.usefulLinks.subreddit.p')"
+        href="https://reddit.com/r/SplitSecond"
+        image="/useful-links/subreddit.png"
+      />
     </div>
   </HtCard>
 </template>

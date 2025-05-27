@@ -1,5 +1,5 @@
 {
-  "meta": "Generated at 2025-05-24T23:07:36.373Z",
+  "meta": "Generated at 2025-05-27T17:27:10.794Z",
   "users": {
     "25282": {
       "username": "Liggli",
@@ -140,7 +140,7 @@
     },
     "13617551": {
       "username": "WentTheFox",
-      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/13617551/medium/b5733ac4b768dead8b474091a6a73a96.jpg",
+      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/13617551/medium/ba0be38edc4ca1fbe203ab719441d6ac.jpg",
       "languages": [
         "ar",
         "bg",
@@ -1021,8 +1021,8 @@
       "translation": 22
     },
     "en-GB": {
-      "approval": 100,
-      "translation": 100
+      "approval": 98,
+      "translation": 98
     },
     "es": {
       "approval": 0,
@@ -1049,8 +1049,8 @@
       "translation": 0
     },
     "hu": {
-      "approval": 100,
-      "translation": 100
+      "approval": 98,
+      "translation": 98
     },
     "id": {
       "approval": 0,
