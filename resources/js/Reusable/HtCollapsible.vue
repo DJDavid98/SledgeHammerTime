@@ -7,7 +7,7 @@ const props = withDefaults(defineProps<{
   maxHeight?: number;
 }>(), {
   'class': undefined,
-  maxHeight: 0,
+  maxHeight: undefined,
 });
 
 const isSsr = typeof window === 'undefined';
@@ -19,7 +19,7 @@ const handleResize = () => {
   if (isTransitioning.value) return;
 
   if (collapsibleRef.value) {
-    height.value = Math.min(props.maxHeight, collapsibleRef.value.scrollHeight);
+    height.value = Math.min(props.maxHeight ?? Infinity, collapsibleRef.value.scrollHeight);
   }
 };
 const resizeObserver = !isSsr ? new ResizeObserver(handleResize) : undefined;
