@@ -37,9 +37,17 @@ return [
       'header' => 'HammerTime App',
       'p' => 'Generálj időbélyegeket slash parancsok használatával',
     ],
+    'oldSite' => [
+      'header' => 'HammerTime Old Website',
+      'p' => 'The old website of the project, still available until this Beta goes live',
+    ],
     'textColor' => [
       'header' => 'Rebane <1>Színezett</1> Szöveg Generálója',
       'p' => 'Egy egyszerű oldal, ami ANSI színkódokkal színezett Discord üzeneteket készít',
+    ],
+    "subreddit" => [
+      "header" => "r/SplitSecond",
+      "p" => "The community hosting weekly challenges for an underrated racing game that inspired the creation of this project",
     ],
   ],
 ];
