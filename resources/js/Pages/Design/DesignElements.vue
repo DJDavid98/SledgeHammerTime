@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { localSettings, sidebarState } from '@/injection-keys';
+import DesignBadges from '@/Pages/Design/DesignBadges.vue';
 import HtAlert from '@/Reusable/HtAlert.vue';
 import HtButton from '@/Reusable/HtButton.vue';
 import HtCard from '@/Reusable/HtCard.vue';
@@ -132,6 +133,19 @@ const localSettingsValue = inject(localSettings);
       >
         <FontAwesomeIcon :icon="faClipboard" />
       </HtButton>
+    </div>
+    <div>&nbsp;</div>
+    <div>
+      <DesignBadges />
+      <div>&nbsp;</div>
+      <DesignBadges prefix="Prefixed" />
+      <div>&nbsp;</div>
+      <DesignBadges suffix="Suffixed" />
+      <div>&nbsp;</div>
+      <DesignBadges
+        prefix="Prefixed"
+        suffix="Suffixed"
+      />
     </div>
   </HtCard>
   <HtCard>

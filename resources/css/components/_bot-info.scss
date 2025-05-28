@@ -46,12 +46,16 @@
   .bot-command-options {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: design.app-value('card-spacing');
+    gap: design.app-value('card-spacing') calc(#{design.app-value('card-spacing')} * 1.5);
 
     .bot-command-option-name {
       &.required {
         font-weight: bold;
       }
     }
+  }
+
+  .bot-command-option-choices {
+    list-style: circle inside;
   }
 }

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DiscordBotCommandOptionType;
 use App\Http\Requests\BotLoginRequest;
 use App\Http\Requests\SaveShardStatsRequest;
 use App\Http\Requests\UpdateBotCommandsRequest;
 use App\Http\Requests\UpdateBotTimezonesRequest;
 use App\Models\BotCommand;
 use App\Models\BotCommandOption;
+use App\Models\BotCommandOptionChoice;
 use App\Models\BotShard;
 use App\Models\BotTimezone;
 use App\Models\DiscordUser;
@@ -116,6 +118,10 @@ class BotApiController extends Controller {
             'description' => $optionData['description'],
             'type' => $optionData['type'],
             'required' => $optionData['required'] ?? false,
+            'min_value' => $optionData['min_value'] ?? null,
+            'max_value' => $optionData['max_value'] ?? null,
+            'min_length' => $optionData['min_length'] ?? null,
+            'max_length' => $optionData['max_length'] ?? null,
             'order' => $order,
           ]);
           if (!empty($optionData['name_localizations'])){
@@ -140,6 +146,38 @@ class BotApiController extends Controller {
               );
             }
           }
+
+          switch ($option->type){
+            case DiscordBotCommandOptionType::STRING->value:
+            case DiscordBotCommandOptionType::NUMBER->value:
+            case DiscordBotCommandOptionType::INTEGER->value:
+              if (!empty($optionData['choices'])){
+                foreach ($optionData['choices'] as $choiceData){
+                  /**
+                   * @var BotCommandOptionChoice $choice
+                   */
+                  $choice = $option->choices()->updateOrCreate([
+                    'value' => json_encode($choiceData['value']),
+                  ], [
+                    'value' => $choiceData['value'],
+                    'name' => $choiceData['name'],
+                  ]);
+                  if (!empty($choiceData['name_localizations'])){
+                    foreach ($choiceData['name_localizations'] as $locale => $value){
+                      $this->saveLocalizations(
+                        command: $command,
+                        locale: $locale,
+                        field: 'name',
+                        value: $value,
+                        optionId: $option->id,
+                        choiceId: $choice->id,
+                      );
+                    }
+                  }
+                }
+              }
+            break;
+          }
         }
       }
       $commands[] = $command;
@@ -148,10 +186,11 @@ class BotApiController extends Controller {
     return response()->json($commands);
   }
 
-  protected function saveLocalizations(BotCommand $command, string $locale, string $field, string $value, string $optionId = null):void {
+  protected function saveLocalizations(BotCommand $command, string $locale, string $field, string $value, string $optionId = null, string $choiceId = null):void {
     $queryBy = [
       'command_id' => $command->id,
       'option_id' => $optionId,
+      'choice_id' => $choiceId,
       'locale' => $locale,
       'field' => $field,
     ];

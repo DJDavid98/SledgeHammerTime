@@ -88,6 +88,12 @@ $value-map: (
   useful-link-spacing: .5rem,
   useful-link-desc-font-size: .875rem,
   useful-link-desc-line-height: 1.55,
+  badge-border: .1rem,
+  badge-border-radius: .5rem,
+  badge-padding-horozontal: .3rem,
+  badge-spacing: .2rem,
+  badge-grooup-spacing: .3rem,
+  badge-font-size: .9rem,
 );
 
 $_text-color-light: #313131;
@@ -97,6 +103,14 @@ $_button-primary-bg-light: color.adjust($_button-primary-bg-dark, $lightness: 22
 $_bg-gradient-start: #585ef2;
 $_bg-gradient-mid: #5865f2;
 $_bg-gradient-end: #a55ea5;
+$_badge-base-color-light: hsl(219, 50%, 55%);
+$_badge-base-color-dark: hsl(219, 50%, 30%);
+$_badge-lightness-adjust: 50%;
+$_badge_muted_lightness_adjust: 15%;
+$_badge-green-hue: -60;
+$_badge-cyan-hue: -25;
+$_badge-purple-hue: 50;
+$_badge-red-hue: 120;
 
 $color-map: (
   layout-bg: (
@@ -330,6 +344,66 @@ $color-map: (
   add-app-link-description: (
     light: #5C5E66,
     dark: #969ba4,
+  ),
+  badge-default-color: (
+    light: color.adjust($_badge-base-color-light, $lightness: $_badge-lightness-adjust, $saturation: -100%),
+    dark: color.adjust($_badge-base-color-dark, $lightness: -$_badge-lightness-adjust, $saturation: -100%),
+  ),
+  badge-default-bg: (
+    light: color.adjust($_badge-base-color-light, $lightness: -$_badge-lightness-adjust, $saturation: -100%),
+    dark: color.adjust($_badge-base-color-dark, $lightness: $_badge-lightness-adjust, $saturation: -100%),
+  ),
+  badge-secondary-bg: (
+    light: rgba(0, 0, 0, .2),
+    dark: rgba(0, 0, 0, .15),
+  ),
+  badge-muted-color: (
+    light: color.adjust($_badge-base-color-light, $lightness: $_badge-lightness-adjust - $_badge_muted_lightness_adjust, $saturation: -100%),
+    dark: color.adjust($_badge-base-color-dark, $lightness: -$_badge-lightness-adjust - $_badge_muted_lightness_adjust, $saturation: -100%),
+  ),
+  badge-muted-bg: (
+    light: color.adjust($_badge-base-color-light, $lightness: -$_badge-lightness-adjust - $_badge_muted_lightness_adjust, $saturation: -100%),
+    dark: color.adjust($_badge-base-color-dark, $lightness: $_badge-lightness-adjust - $_badge_muted_lightness_adjust, $saturation: -100%),
+  ),
+  badge-green-color: (
+    light: color.adjust($_badge-base-color-light, $lightness: $_badge-lightness-adjust, $hue: $_badge-green-hue),
+    dark: color.adjust($_badge-base-color-dark, $lightness: -$_badge-lightness-adjust, $hue: $_badge-green-hue),
+  ),
+  badge-green-bg: (
+    light: color.adjust($_badge-base-color-light, $lightness: -$_badge-lightness-adjust, $hue: $_badge-green-hue),
+    dark: color.adjust($_badge-base-color-dark, $lightness: $_badge-lightness-adjust, $hue: $_badge-green-hue),
+  ),
+  badge-blue-color: (
+    light: color.adjust($_badge-base-color-light, $lightness: $_badge-lightness-adjust),
+    dark: color.adjust($_badge-base-color-dark, $lightness: -$_badge-lightness-adjust),
+  ),
+  badge-blue-bg: (
+    light: color.adjust($_badge-base-color-light, $lightness: -$_badge-lightness-adjust),
+    dark: color.adjust($_badge-base-color-dark, $lightness: $_badge-lightness-adjust),
+  ),
+  badge-cyan-color: (
+    light: color.adjust($_badge-base-color-light, $lightness: $_badge-lightness-adjust, $hue: $_badge-cyan-hue),
+    dark: color.adjust($_badge-base-color-dark, $lightness: -$_badge-lightness-adjust, $hue: $_badge-cyan-hue),
+  ),
+  badge-cyan-bg: (
+    light: color.adjust($_badge-base-color-light, $lightness: -$_badge-lightness-adjust, $hue: $_badge-cyan-hue),
+    dark: color.adjust($_badge-base-color-dark, $lightness: $_badge-lightness-adjust, $hue: $_badge-cyan-hue),
+  ),
+  badge-purple-color: (
+    light: color.adjust($_badge-base-color-light, $lightness: $_badge-lightness-adjust, $hue: $_badge-purple-hue),
+    dark: color.adjust($_badge-base-color-dark, $lightness: -$_badge-lightness-adjust, $hue: $_badge-purple-hue),
+  ),
+  badge-purple-bg: (
+    light: color.adjust($_badge-base-color-light, $lightness: -$_badge-lightness-adjust, $hue: $_badge-purple-hue),
+    dark: color.adjust($_badge-base-color-dark, $lightness: $_badge-lightness-adjust, $hue: $_badge-purple-hue),
+  ),
+  badge-red-color: (
+    light: color.adjust($_badge-base-color-light, $lightness: $_badge-lightness-adjust, $hue: $_badge-red-hue),
+    dark: color.adjust($_badge-base-color-dark, $lightness: -$_badge-lightness-adjust, $hue: $_badge-red-hue),
+  ),
+  badge-red-bg: (
+    light: color.adjust($_badge-base-color-light, $lightness: -$_badge-lightness-adjust, $hue: $_badge-red-hue),
+    dark: color.adjust($_badge-base-color-dark, $lightness: $_badge-lightness-adjust, $hue: $_badge-red-hue),
   ),
 );
 

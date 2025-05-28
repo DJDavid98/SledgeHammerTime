@@ -30,7 +30,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <article :class="['alert', type]">
+  <div :class="['alert', type]">
     <div
       v-if="icon"
       class="alert-icon"
@@ -57,5 +57,5 @@ const emit = defineEmits<{
         <FontAwesomeIcon :icon="faTimes" />
       </HtButton>
     </div>
-  </article>
+  </div>
 </template>

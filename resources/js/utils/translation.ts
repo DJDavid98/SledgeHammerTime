@@ -46,12 +46,14 @@ export interface BotCommandTranslation {
 interface GetBotCommandTranslationKeyOptions {
   commandId: string;
   optionId?: string | null;
+  choiceId?: string | null;
   field: string;
 }
 
 export const getBotCommandTranslationKey = ({
   commandId,
   optionId = null,
+  choiceId = null,
   field,
 }: GetBotCommandTranslationKeyOptions) =>
-  `${commandId}.${optionId}.${field}`;
+  `${commandId}.${optionId}.${choiceId}.${field}`;

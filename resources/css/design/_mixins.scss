@@ -103,7 +103,7 @@
 }
 
 @mixin button-color-variation($color) {
-  &.color-#{$color} {
+  &.button-#{$color} {
     color: functions.app-color-light('button-' + $color + '-color');
     background-color: functions.app-color-light('button-' + $color + '-bg');
     --button-border-color: #{functions.app-color-light('button-' + $color + '-border-color')};
@@ -112,6 +112,20 @@
       color: functions.app-color-dark('button-' + $color + '-color');
       background-color: functions.app-color-dark('button-' + $color + '-bg');
       --button-border-color: #{functions.app-color-dark('button-' + $color + '-border-color')};
+    }
+  }
+}
+
+@mixin badge-color-variation($color) {
+  &.badge-#{$color} {
+    color: functions.app-color-light('badge-' + $color + '-color');
+    background-color: functions.app-color-light('badge-' + $color + '-bg');
+    border-color: #{functions.app-color-light('badge-' + $color + '-bg')};
+
+    @include if-dark {
+      color: functions.app-color-dark('badge-' + $color + '-color');
+      background-color: functions.app-color-dark('badge-' + $color + '-bg');
+      border-color: #{functions.app-color-dark('badge-' + $color + '-bg')};
     }
   }
 }

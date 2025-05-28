@@ -13,7 +13,7 @@ export interface GetButtonClassesOptions {
 export const getButtonClasses = (props: GetButtonClassesOptions) => {
   const propsClass = Array.isArray(props.class) ? props.class : [props.class];
   return ['button', ...propsClass, {
-    [`color-${props.color}`]: props.color,
+    [`button-${props.color}`]: props.color,
     block: props.block,
     pressed: props.pressed,
     loading: props.loading,

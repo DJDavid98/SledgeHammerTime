@@ -7,6 +7,7 @@ use App\Enums\DiscordBotCommandType;
 use App\Rules\ValidBotLocaleKeys;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
 class UpdateBotCommandsRequest extends FormRequest {
@@ -37,11 +38,26 @@ class UpdateBotCommandsRequest extends FormRequest {
       '*.options.*.name' => 'required|string|min:1|max:32',
       '*.options.*.type' => ['required', 'integer', new Enum(DiscordBotCommandOptionType::class)],
       '*.options.*.required' => 'boolean',
+      '*.options.*.min_value' => 'nullable|numeric',
+      '*.options.*.max_value' => 'nullable|numeric',
+      '*.options.*.min_length' => 'nullable|integer|min:0|max:100',
+      '*.options.*.max_length' => 'nullable|integer|min:1|max:100',
       '*.options.*.name_localizations' => ['nullable', 'array', new ValidBotLocaleKeys()],
       '*.options.*.name_localizations.*' => 'string|min:1|max:32',
       '*.options.*.description' => 'nullable|string|min:1|max:100',
       '*.options.*.description_localizations' => ['nullable', 'array', new ValidBotLocaleKeys()],
       '*.options.*.description_localizations.*' => 'string|min:1|max:100',
+      '*.options.*.choices.*' => 'array|nullable|min:1|max:25',
+      '*.options.*.choices.*.name' => 'string|min:1|max:32',
+      '*.options.*.choices.*.name_localizations' => ['nullable', 'array', new ValidBotLocaleKeys()],
+      '*.options.*.choices.*.name_localizations.*' => 'string|min:1|max:100',
+      '*.options.*.choices.*.value' => [
+        'required',
+        Rule::anyOf([
+          'string|min:1|max:100',
+          'numeric',
+        ]),
+      ],
     ];
   }
 }

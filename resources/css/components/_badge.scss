@@ -1,0 +1,57 @@
+@use "../design";
+
+.badge {
+  color: design.app-color-light('badge-default-color');
+  background-color: design.app-color-light('badge-default-bg');
+  border-radius: design.app-value('badge-border-radius');
+  overflow: hidden;
+  font-weight: normal;
+  border: design.app-value('badge-border') solid design.app-color-light('badge-default-bg');
+  display: inline-flex;
+  font-size: design.app-value('badge-font-size');
+
+  @include design.if-dark {
+    color: design.app-color-dark('badge-default-color');
+    background-color: design.app-color-dark('badge-default-bg');
+    border-color: design.app-color-dark('badge-default-bg');
+  }
+
+  > * {
+    padding: 0 design.app-value('badge-spacing');
+  }
+
+  .badge-prefix, .badge-suffix {
+    background-color: design.app-color-light('badge-secondary-bg');
+
+    @include design.if-dark {
+      background-color: design.app-color-dark('badge-secondary-bg');
+    }
+  }
+
+  .badge-prefix {
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+
+  .badge-suffix {
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+
+  @include design.badge-color-variation('green');
+  @include design.badge-color-variation('blue');
+  @include design.badge-color-variation('cyan');
+  @include design.badge-color-variation('purple');
+  @include design.badge-color-variation('red');
+  @include design.badge-color-variation('muted');
+
+  code {
+    @include design.monospace-font;
+  }
+}
+
+.badge-group {
+  display: flex;
+  flex-flow: row wrap;
+  gap: design.app-value('badge-grooup-spacing');
+}

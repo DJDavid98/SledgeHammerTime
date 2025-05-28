@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Concerns\HasVersion4Uuids as HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,6 +17,10 @@ class BotCommandOption extends Model {
     'description',
     'required',
     'order',
+    'min_value',
+    'max_value',
+    'min_length',
+    'max_length',
   ];
 
   function command():BelongsTo {
@@ -25,5 +29,9 @@ class BotCommandOption extends Model {
 
   function translations():HasMany {
     return $this->hasMany(BotCommandTranslation::class, 'option_id');
+  }
+
+  public function choices():HasMany {
+    return $this->hasMany(BotCommandOptionChoice::class);
   }
 }
