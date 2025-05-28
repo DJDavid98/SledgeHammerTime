@@ -88,7 +88,7 @@ const hasMaxLength = typeof props.option.max_length === 'number';
             <template #0>
               <code>{{ option.min_value }}</code>
             </template>
-            <template #1>
+            <template #2>
               <code>{{ option.max_value }}</code>
             </template>
           </HtTranslate>
@@ -119,7 +119,7 @@ const hasMaxLength = typeof props.option.max_length === 'number';
             <template #0>
               <code>{{ option.min_length }}</code>
             </template>
-            <template #1>
+            <template #2>
               <code>{{ option.max_length }}</code>
             </template>
           </HtTranslate>
