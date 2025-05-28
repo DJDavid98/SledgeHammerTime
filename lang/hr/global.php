@@ -30,6 +30,13 @@ return [
         'label' => 'Separate inputs',
         'description' => "Display two different inputs for date and time instead of a combined one (which is not supported in some browsers)",
       ],
+      'newDateTimeLibrary' => [
+        'label' => 'Use modern datetime library',
+        'description' => 'The library used by the application to calculate timestamps is not maintained anymore, so it needs to be replaced. This option lets you preview the new library before it goes live.',
+      ],
+    ],
+    'localSettings' => [
+      'title' => 'Local Settings',
     ],
     'credits' => [
       'title' => 'Credits',

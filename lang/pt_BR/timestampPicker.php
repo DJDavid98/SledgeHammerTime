@@ -37,9 +37,17 @@ return [
       'header' => 'HammerTime App',
       'p' => 'Generate timestamps from within Discord using slash commands',
     ],
+    'oldSite' => [
+      'header' => 'HammerTime Old Website',
+      'p' => 'The old website of the project, still available until this Beta goes live',
+    ],
     'textColor' => [
       'header' => 'Rebane\'s <1>Colored</1> Text Generator',
       'p' => 'A simple app that creates colored Discord messages using ANSI color codes',
+    ],
+    "subreddit" => [
+      "header" => "r/SplitSecond",
+      "p" => "The community hosting weekly challenges for an underrated racing game that inspired the creation of this project",
     ],
   ],
 ];
