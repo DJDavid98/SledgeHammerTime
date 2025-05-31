@@ -11,6 +11,7 @@ class BotCommand extends Model {
     'name',
     'description',
     'type',
+    'deleted_at',
   ];
 
   protected $casts = [
@@ -25,5 +26,9 @@ class BotCommand extends Model {
 
   function translations():HasMany {
     return $this->hasMany(BotCommandTranslation::class, 'command_id')->whereNull('option_id');
+  }
+
+  function telemetryExecutions():HasMany {
+    return $this->hasMany(TelemetryCommandExecution::class);
   }
 }

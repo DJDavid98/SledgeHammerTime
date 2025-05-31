@@ -21,6 +21,7 @@ class BotCommandOption extends Model {
     'max_value',
     'min_length',
     'max_length',
+    'deleted_at',
   ];
 
   function command():BelongsTo {
@@ -33,5 +34,9 @@ class BotCommandOption extends Model {
 
   public function choices():HasMany {
     return $this->hasMany(BotCommandOptionChoice::class);
+  }
+
+  function telemetryUses():HasMany {
+    return $this->hasMany(TelemetryCommandOptionUse::class);
   }
 }

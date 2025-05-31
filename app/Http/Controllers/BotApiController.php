@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\DiscordBotCommandOptionType;
 use App\Http\Requests\BotLoginRequest;
 use App\Http\Requests\SaveShardStatsRequest;
+use App\Http\Requests\TelemetryRequest;
 use App\Http\Requests\UpdateBotCommandsRequest;
 use App\Http\Requests\UpdateBotTimezonesRequest;
 use App\Models\BotCommand;
@@ -209,5 +210,29 @@ class BotApiController extends Controller {
     }
 
     return response(status: 204);
+  }
+
+  public function commandTelemetry(TelemetryRequest $request) {
+    $data = $request->validated();
+
+    $command = BotCommand::find($data['commandId']);
+    if ($command){
+      $command->telemetryExecutions()->create();
+    }
+
+    foreach ($data['options'] as $optionData){
+      $option = BotCommandOption::firstOrCreate([
+        'name' => $optionData['name'],
+        'deleted_at' => null,
+      ], $optionData);
+      $option->telemetryUses()->create();
+    }
+
+    $executionNumber = $command->telemetryExecutions()->count();
+
+    return response()->json([
+      'executionNumber' => $executionNumber,
+      'privacyPolicyUrl' => Url::route('legal', ['locale' => $data['locale']]),
+    ]);
   }
 }

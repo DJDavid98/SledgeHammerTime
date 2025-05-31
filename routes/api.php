@@ -23,5 +23,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/shard-statistics', [BotApiController::class, 'updateShardStats']);
     Route::put('/bot-commands', [BotApiController::class, 'updateBotCommands']);
     Route::put('/bot-timezones', [BotApiController::class, 'updateBotTimezones']);
+    Route::post('/command-telemetry', [BotApiController::class, 'commandTelemetry']);
   });
 });

@@ -1,5 +1,5 @@
 {
-  "meta": "Generated at 2025-05-28T01:24:48.957Z",
+  "meta": "Generated at 2025-05-31T16:52:48.437Z",
   "users": {
     "25282": {
       "username": "Liggli",
@@ -985,6 +985,14 @@
       "languages": [
         "zh"
       ]
+    },
+    "17134580": {
+      "username": "nathanfurry-neku",
+      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/17134580/medium/eb6e6cd93aadfd88194852939be2db53.png",
+      "fullName": "Nathan LAX",
+      "languages": [
+        "fr"
+      ]
     }
   },
   "progress": {
@@ -1018,11 +1026,11 @@
     },
     "el": {
       "approval": 0,
-      "translation": 21
+      "translation": 100
     },
     "en-GB": {
-      "approval": 96,
-      "translation": 96
+      "approval": 94,
+      "translation": 94
     },
     "es": {
       "approval": 0,
@@ -1034,7 +1042,7 @@
     },
     "fr": {
       "approval": 0,
-      "translation": 0
+      "translation": 9
     },
     "he": {
       "approval": 0,
@@ -1049,8 +1057,8 @@
       "translation": 0
     },
     "hu": {
-      "approval": 96,
-      "translation": 96
+      "approval": 94,
+      "translation": 94
     },
     "id": {
       "approval": 0,
@@ -1106,7 +1114,7 @@
     },
     "ro": {
       "approval": 0,
-      "translation": 98
+      "translation": 100
     },
     "ru": {
       "approval": 0,
@@ -1142,7 +1150,7 @@
     },
     "zh": {
       "approval": 0,
-      "translation": 10
+      "translation": 21
     }
   }
 }
