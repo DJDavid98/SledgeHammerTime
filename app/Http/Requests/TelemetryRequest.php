@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\DiscordBotCommandOptionType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\Enum;
 
 class TelemetryRequest extends FormRequest {
   /**
@@ -26,7 +24,6 @@ class TelemetryRequest extends FormRequest {
       'commandId' => 'required|numeric',
       'options' => 'nullable|array|max:25',
       'options.*.name' => 'required|string|min:1|max:32',
-      'options.*.type' => ['required', 'integer', new Enum(DiscordBotCommandOptionType::class)],
     ];
   }
 }

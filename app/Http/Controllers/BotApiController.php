@@ -221,11 +221,10 @@ class BotApiController extends Controller {
     }
 
     foreach ($data['options'] as $optionData){
-      $option = BotCommandOption::firstOrCreate([
-        'name' => $optionData['name'],
-        'deleted_at' => null,
-      ], $optionData);
-      $option->telemetryUses()->create();
+      $option = $command->options()->where('name', $optionData['name'])->whereNull('deleted_at')->first();
+      if ($option){
+        $option->telemetryUses()->create();
+      }
     }
 
     $executionNumber = $command->telemetryExecutions()->count();
