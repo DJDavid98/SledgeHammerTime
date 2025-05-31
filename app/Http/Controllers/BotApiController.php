@@ -232,7 +232,9 @@ class BotApiController extends Controller {
 
     return response()->json([
       'executionNumber' => $executionNumber,
-      'privacyPolicyUrl' => Url::route('legal', ['locale' => $data['locale']]),
+      'privacyPolicyUrl' => Url::route('legal', ['locale' => $data['locale']]).'#telemetry-statistics',
+      'commandName' => $command->name,
+      'commandId' => (string)$command->id,
     ]);
   }
 }
