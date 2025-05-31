@@ -18,6 +18,14 @@
   box-sizing: border-box;
   border-bottom: design.app-value('header-border') solid design.app-color-light('header-border');
 
+  &.non-stick {
+    position: absolute;
+
+    ~ * {
+      margin-top: design.app-value('header-height');
+    }
+  }
+
   @media print {
     display: none;
   }

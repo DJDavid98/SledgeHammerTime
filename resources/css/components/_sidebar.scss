@@ -6,6 +6,7 @@
   top: 0;
   bottom: 0;
   padding: design.app-value('sidebar-spacing');
+  margin: 0 !important;
   overflow: auto;
   width: 100%;
   max-width: design.app-value('sidebar-max-width');
