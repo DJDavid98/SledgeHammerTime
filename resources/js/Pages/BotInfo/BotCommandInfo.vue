@@ -1,8 +1,13 @@
 <script setup lang="ts">
 
+import { useNumberFormatter } from '@/composables/useNumberFormatter';
 import BotCommandOptionInfo, { BotCommandOption } from '@/Pages/BotInfo/BotCommandOptionInfo.vue';
 import HtAlert from '@/Reusable/HtAlert.vue';
+import HtBadge from '@/Reusable/HtBadge.vue';
+import HtBadgeGroup from '@/Reusable/HtBadgeGroup.vue';
 import { getBotCommandTranslationKey } from '@/utils/translation';
+import { faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { wTrans } from 'laravel-vue-i18n';
 import { computed } from 'vue';
 
@@ -27,12 +32,15 @@ export interface BotCommand {
   description: string;
   options?: BotCommandOption[];
   type: DiscordBotCommandType;
+  total_executions: number | null;
 }
 
 const props = defineProps<{
   command: BotCommand,
   translations: Record<string, string>,
 }>();
+
+const nf = useNumberFormatter();
 
 const localizedName = computed(() => {
   const key = getBotCommandTranslationKey({
@@ -53,16 +61,31 @@ const localizedDescription = computed(() => {
 const additionalDescriptionI18nKey = `botInfo.commandsReference.additionalDescription.commands.${props.command.name}`;
 const additionalDescription = wTrans(additionalDescriptionI18nKey);
 const hasDescription = computed(() => localizedDescription.value || additionalDescription.value !== additionalDescriptionI18nKey);
+const totalExecutions = computed(() => props.command.total_executions ?? 0);
 </script>
 
 <template>
   <div class="bot-command-info">
     <h3 class="bot-command-name">
       {{ (command.type === DiscordBotCommandType.ChatInput ? '/' : '') + localizedName }}
-      <small class="bot-command-type">
-        ({{ $t('botInfo.commandsReference.commandType.' + command.type) }})
-      </small>
+      <small class="bot-command-type" />
     </h3>
+
+    <HtBadgeGroup>
+      <HtBadge
+        color="purple"
+        :prefix="$t('botInfo.commandsReference.commandType')"
+      >
+        {{ $t('botInfo.commandsReference.commandTypeNames.' + command.type) }}
+      </HtBadge>
+      <HtBadge
+        :color="totalExecutions > 0 ? undefined : 'muted'"
+        :title="$t('botInfo.commandsReference.totalExecutions')"
+      >
+        <FontAwesomeIcon :icon="faChartLine" />
+        {{ nf.format(totalExecutions) }}
+      </HtBadge>
+    </HtBadgeGroup>
 
     <template v-if="hasDescription">
       <template v-if="localizedDescription">

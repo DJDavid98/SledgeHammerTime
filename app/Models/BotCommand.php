@@ -12,6 +12,7 @@ class BotCommand extends Model {
     'description',
     'type',
     'deleted_at',
+    'total_executions',
   ];
 
   protected $casts = [

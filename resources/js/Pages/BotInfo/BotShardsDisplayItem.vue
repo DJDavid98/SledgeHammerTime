@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { DateTimeLibraryValue } from '@/classes/DateTimeLibraryValue';
 import TimestampPreview from '@/Components/home/table/TimestampPreview.vue';
-import { currentLanguageInject, dateTimeLibraryInject, devModeInject } from '@/injection-keys';
+import { useNumberFormatter } from '@/composables/useNumberFormatter';
+import { dateTimeLibraryInject, devModeInject } from '@/injection-keys';
 import { MessageTimestampFormat } from '@/model/message-timestamp-format';
 import { faCubesStacked, faHashtag, faPlay, faRefresh } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -35,10 +36,7 @@ const serversShareMultiplier = computed(() => (props.shard.serverCount / props.t
 
 const isDev = inject(devModeInject);
 
-const currentLanguage = inject(currentLanguageInject);
-const nf = computed(() => {
-  return new Intl.NumberFormat(currentLanguage?.value?.locale ?? 'en-US');
-});
+const nf = useNumberFormatter();
 </script>
 
 <template>

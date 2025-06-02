@@ -5,12 +5,16 @@ const props = defineProps<{
   prefix?: string;
   suffix?: string;
   class?: string;
+  title?: string;
   color?: BadgeColor;
 }>();
 </script>
 
 <template>
-  <span :class="['badge', { [`badge-${color}`]: color }, props.class]">
+  <span
+    :class="['badge', { [`badge-${color}`]: color }, props.class]"
+    :title="title"
+  >
     <span
       v-if="prefix"
       class="badge-prefix"
