@@ -67,7 +67,7 @@ const shardClass = computed(() => idle.value ? 'bot-shard-inactive' : 'bot-shard
             :icon="faCubesStacked"
             :fixed-width="true"
           />
-          {{ $t('botInfo.shardStats.serversOnShard') }}
+          {{ $t('botInfo.shardStats.assignedServers') }}
         </strong>
         <span>{{ nf.format(shard.serverCount) }}</span>
       </p>
