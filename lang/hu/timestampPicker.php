@@ -38,8 +38,8 @@ return [
       'p' => 'Generálj időbélyegeket slash parancsok használatával',
     ],
     'oldSite' => [
-      'header' => 'HammerTime Old Website',
-      'p' => 'The old website of the project, still available until this Beta goes live',
+      'header' => 'HammerTime Régi Weboldal',
+      'p' => 'A projekt régi weboldala, amely még mindig elérhető, amíg a Béta nem élesedik',
     ],
     'textColor' => [
       'header' => 'Rebane <1>Színezett</1> Szöveg Generálója',
@@ -47,7 +47,7 @@ return [
     ],
     "subreddit" => [
       "header" => "r/SplitSecond",
-      "p" => "The community hosting weekly challenges for an underrated racing game that inspired the creation of this project",
+      "p" => "Egy alulértékelt autóversenyzős játék közössége, mely heti kihívások házigazdája, és a projekt létrejöttét ihlette",
     ],
   ],
 ];
