@@ -49,7 +49,6 @@
     "ziggy-js": "^2.5.2"
   },
   "dependencies": {
-    "date-fns": "^4.1.0",
     "@date-fns/tz": "^1.2.0",
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -57,6 +56,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/vue-fontawesome": "^3.0.8",
+    "date-fns": "^4.1.0",
     "js-levenshtein": "^1.1.6",
     "lorem-ipsum": "^2.0.8",
     "the-new-css-reset": "^1.11.3"
