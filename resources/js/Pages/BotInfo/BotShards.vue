@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useNumberFormatter } from '@/composables/useNumberFormatter';
 import BotShardsDisplay, { BotShard } from '@/Pages/BotInfo/BotShardsDisplay.vue';
 import HtCard from '@/Reusable/HtCard.vue';
 import { computed } from 'vue';
@@ -8,7 +9,8 @@ export type BotShardData = BotShard[];
 const props = defineProps<{
   shards: BotShardData;
 }>();
-const totalServerCount = computed(() => String(props.shards.reduce((total, shard) => total + shard.serverCount, 0)));
+const nf = useNumberFormatter();
+const totalServerCount = computed(() => nf.value.format(props.shards.reduce((total, shard) => total + shard.serverCount, 0)));
 </script>
 
 <template>
