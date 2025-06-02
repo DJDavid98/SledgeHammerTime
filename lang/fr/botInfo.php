@@ -20,11 +20,13 @@ return [
   'commandsReference' => [
     'title' => 'Commands Reference',
     'description' => 'Below you will find a list of all commands and their options for your reference. This page currently shows the same descriptions that you would see in Discord as you are running the command, but it might be extended with additional information and examples later on.',
-    'commandType' => [
+    'commandType' => 'Type',
+    'commandTypeNames' => [
       1 => 'slash command',
       2 => 'user context menu command',
       3 => 'message context menu command',
     ],
+    'totalExecutions' => 'Total number of times used (since we started counting)',
     'shortDescription' => 'Short Description',
     'commandOptions' => 'Options',
     'requiredOption' => 'Required',
