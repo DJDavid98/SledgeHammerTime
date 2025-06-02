@@ -12,7 +12,7 @@ return [
   'shardStats' => [
     'title' => 'Shard Statistics',
     'description' => 'After an app reaches a certain number of servers where it is installed, Discord requires apps to use sharding, which essentially means splitting up the handling of interactions between multiple processes.',
-    'boxesDescription' => 'Below you can see some rectangles representing all shards currently used by the application. Their width is proportional to the number of servers the bot is assigned to out of the total (:totalServerCount). Hover over any one of them to see more information about the shard.',
+    'boxesDescription' => 'Below you can see some rectangles representing all shards currently used by the application. Their width is proportional to the number of servers a given shard is assigned to out of the total (:totalServerCount). Hover over any one of them to see more information about the shard.',
     'shardId' => 'Shard ID',
     'assignedServers' => 'Assigned Servers',
     'startupTime' => 'Startup Time',
