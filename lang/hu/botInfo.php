@@ -11,10 +11,10 @@ return [
   'shareableLink' => 'Az alábbi linket is megoszthatod másokkal, amivel bármilyen zavaró tényező nélkül hozzá tudják adni az appot:',
   'shardStats' => [
     'title' => 'Shard Statisztikák',
-    'description' => 'After an app reaches a certain number of servers where it is installed, Discord requires apps to use sharding, which essentially means splitting up the handling of interactions between multiple processes.',
-    'boxesDescription' => 'Below you can see some rectangles representing all shards currently used by the application. Their width is proportional to the number of servers the bot is assigned to out of the total (:totalServerCount). Hover over any one of them to see more information about the shard.',
+    'description' => 'Miután egy app elér egy bizonyos számú szervert, ahol teleptyve van, a Discord kötelezővé tesz ia shard-olás használatát, ami lényegében a parancsok több különálló folyamat általi feldolgozását jelenti.',
+    'boxesDescription' => 'Below you can see some rectangles representing all shards currently used by the application. Their width is proportional to the number of servers a given shard is assigned to out of the total (:totalServerCount). Hover over any one of them to see more information about the shard.',
     'shardId' => 'Shard Szám',
-    'assignedServers' => 'Assigned Servers',
+    'assignedServers' => 'Hozzárendelt Szerverek',
     'startupTime' => 'Indítás Ideje',
     'lastUpdateTime' => 'Utóljára Frissítve',
   ],
