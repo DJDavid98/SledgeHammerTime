@@ -20,11 +20,13 @@ return [
   'commandsReference' => [
     'title' => 'Parancsok Listája',
     'description' => 'Lentebb találsz egy listát az összes parancsról és a paramétereikről. Ez az oldal jelenleg a parancs futtatása közben a Discord felületen látható leírásokkal azonos, de a jövőben további információval és példákkal bővülhet.',
-    'commandType' => [
-      1 => 'slash parancs',
-      2 => 'felhasználó környezeti menü parancs',
-      3 => 'üzenet környezeti menü parancs',
+    'commandType' => 'Type',
+    'commandTypeNames' => [
+      1 => 'slash command',
+      2 => 'user context menu command',
+      3 => 'message context menu command',
     ],
+    'totalExecutions' => 'Total number of times used (since we started counting)',
     'shortDescription' => 'Short Description',
     'commandOptions' => 'Paraméterek',
     'requiredOption' => 'Required',
