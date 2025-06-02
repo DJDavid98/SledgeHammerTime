@@ -94,6 +94,10 @@ $value-map: (
   badge-spacing: .2rem,
   badge-grooup-spacing: .3rem,
   badge-font-size: .9rem,
+  bot-shards-display-font-size: 0.75rem,
+  bot-shard-spacing: .5em,
+  bot-shard-max-width: 16em,
+  bot-shard-info-max-width: 15em,
 );
 
 $_text-color-light: #313131;
@@ -404,6 +408,22 @@ $color-map: (
   badge-red-bg: (
     light: color.adjust($_badge-base-color-light, $lightness: -$_badge-lightness-adjust, $hue: $_badge-red-hue),
     dark: color.adjust($_badge-base-color-dark, $lightness: $_badge-lightness-adjust, $hue: $_badge-red-hue),
+  ),
+  bot-shard-actvie-color: (
+    light: #080,
+    dark: #cfc,
+  ),
+  bot-shard-actvie-bg: (
+    light: #cfc,
+    dark: #080,
+  ),
+  bot-shard-inactvie-color: (
+    light: color.adjust(#080, $saturation: -100%),
+    dark: color.adjust(#cfc, $saturation: -100%),
+  ),
+  bot-shard-inactvie-bg: (
+    light: color.adjust(#cfc, $saturation: -100%),
+    dark: color.adjust(#080, $saturation: -100%),
   ),
 );
 

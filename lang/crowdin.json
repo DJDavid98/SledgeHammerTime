@@ -1,5 +1,5 @@
 {
-  "meta": "Generated at 2025-05-31T16:52:48.437Z",
+  "meta": "Generated at 2025-06-02T17:31:02.036Z",
   "users": {
     "25282": {
       "username": "Liggli",
@@ -993,6 +993,13 @@
       "languages": [
         "fr"
       ]
+    },
+    "17136840": {
+      "username": "cfif126",
+      "avatarUrl": "https://crowdin-static.cf-downloads.crowdin.com/avatar/17136840/medium/78edae24163b25d912524a77cb3468c5.jpg",
+      "languages": [
+        "ru"
+      ]
     }
   },
   "progress": {
@@ -1118,7 +1125,7 @@
     },
     "ru": {
       "approval": 0,
-      "translation": 0
+      "translation": 25
     },
     "sr": {
       "approval": 0,
@@ -1130,7 +1137,7 @@
     },
     "th": {
       "approval": 0,
-      "translation": 0
+      "translation": 25
     },
     "tr": {
       "approval": 0,

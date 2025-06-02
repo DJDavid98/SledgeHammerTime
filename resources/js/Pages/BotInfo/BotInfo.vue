@@ -2,7 +2,7 @@
 import Layout from '@/Layouts/DefaultLayout.vue';
 import { BotCommand } from '@/Pages/BotInfo/BotCommandInfo.vue';
 import BotInfoCard from '@/Pages/BotInfo/BotInfoCard.vue';
-import BotShardsInfo, { BotShard } from '@/Pages/BotInfo/BotShardsInfo.vue';
+import BotShards, { BotShardData } from '@/Pages/BotInfo/BotShards.vue';
 import CommandsReference from '@/Pages/BotInfo/CommandsReference.vue';
 import { BotCommandTranslation, getBotCommandTranslationKey } from '@/utils/translation';
 import { Head } from '@inertiajs/vue3';
@@ -12,7 +12,7 @@ const props = defineProps<{
   discordAppId: string;
   commands: BotCommand[];
   translations: BotCommandTranslation[];
-  shards: BotShard[];
+  shards: BotShardData;
 }>();
 
 const flatTranslations = computed(() => props.translations.reduce((acc, translation) => {
@@ -29,7 +29,7 @@ const flatTranslations = computed(() => props.translations.reduce((acc, translat
   <Layout>
     <BotInfoCard :discord-app-id="discordAppId" />
 
-    <BotShardsInfo :shards="shards" />
+    <BotShards :shards="shards" />
 
     <CommandsReference
       :commands="commands"
