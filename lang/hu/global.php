@@ -30,6 +30,13 @@ return [
         'label' => 'Külön beviteli mezők',
         'description' => "Két különböző mezőt jelenít meg a dátumnak és az időnek egy összevont helyett (ami néhány böngészőben nem támogatott)",
       ],
+      'newDateTimeLibrary' => [
+        'label' => 'Modern dátum-idő könyvtár használata',
+        'description' => 'Az alkalmazás által az időbélyegek kiszámításához használt könyvtárat már nem karbantartják, ezért le kell cserélni. Ez a lehetőség lehetővé teszi az új könyvtár kipróbálását, mielőtt az élesbe kerülne.',
+      ],
+    ],
+    'localSettings' => [
+      'title' => 'Helyi Beállítások',
     ],
     'credits' => [
       'title' => 'Névjegy',
@@ -38,6 +45,9 @@ return [
       'fontAwesomeFree' => 'Font Awesome Free',
       'laravel' => 'Laravel',
       'vueJs' => 'Vue.js',
+      'momentJs' => 'Moment.js',
+      'dateFns' => 'date-fns',
+      'vueTippy' => 'VueTippy',
       'translatedBy' => 'Fordítók: <1></1>',
       'openSourceSoftware' => 'Nyílt forráskódú szoftver',
       'viewSourceCode' => 'Forráskód megtekintése',
