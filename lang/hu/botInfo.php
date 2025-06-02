@@ -12,7 +12,7 @@ return [
   'shardStats' => [
     'title' => 'Shard Statisztikák',
     'description' => 'Miután egy app elér egy bizonyos számú szervert, ahol teleptyve van, a Discord kötelezővé tesz ia shard-olás használatát, ami lényegében a parancsok több különálló folyamat általi feldolgozását jelenti.',
-    'boxesDescription' => 'Below you can see some rectangles representing all shards currently used by the application. Their width is proportional to the number of servers a given shard is assigned to out of the total (:totalServerCount). Hover over any one of them to see more information about the shard.',
+    'boxesDescription' => 'Alább néhány téglalap látható, amelyek az alkalmazás által jelenleg használt shard-okat képviselik. Szélességük arányos azzal, hogy az adott shard hány szerverhez van hozzárendelve az összesből (:totalServerCount). Rámutatás után további információk jelennek meg az adott shardról.',
     'shardId' => 'Shard Szám',
     'assignedServers' => 'Hozzárendelt Szerverek',
     'startupTime' => 'Indítás Ideje',
