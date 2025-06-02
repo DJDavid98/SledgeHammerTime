@@ -7,24 +7,10 @@
   align-items: stretch;
 
   @include design.if-ltr {
-    .copyable-text-button {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-    .copyable-text-data {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
+    @include design.combined-border-radius;
   }
   @include design.if-rtl {
-    .copyable-text-button {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-    .copyable-text-data {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
+    @include design.combined-border-radius-inverted;
   }
 
   .copyable-text-data {

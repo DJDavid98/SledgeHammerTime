@@ -96,8 +96,9 @@ $value-map: (
   badge-font-size: .9rem,
   bot-shards-display-font-size: 0.75rem,
   bot-shard-spacing: .5em,
-  bot-shard-max-width: 16em,
-  bot-shard-info-max-width: 15em,
+  bot-shard-tick-height: 2em,
+  bot-shard-tick-gap: .25em,
+  bot-shard-tick-border-radius: .25em,
 );
 
 $_text-color-light: #313131;

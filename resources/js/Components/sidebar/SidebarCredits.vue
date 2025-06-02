@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import DeveloperCredit from '@/Components/sidebar/DeveloperCredit.vue';
 import TranslationCredits from '@/Components/sidebar/TranslationCredits.vue';
-import { currentLanguageInject } from '@/injection-keys';
+import { currentLanguageInject, localSettings } from '@/injection-keys';
 import HtExternalLink from '@/Reusable/HtExternalLink.vue';
 import HtTranslate from '@/Reusable/HtTranslate.vue';
 import { reportData } from '@/utils/crowdin';
@@ -21,6 +21,8 @@ const translationCredits = computed(() => {
     .map((c) => normalizeCredit(c, reportData))
     .sort((cr1, cr2) => cr1.displayName.localeCompare(cr2.displayName));
 });
+
+const settings = inject(localSettings);
 </script>
 
 <template>
@@ -71,6 +73,21 @@ const translationCredits = computed(() => {
               <li>
                 <HtExternalLink href="https://vuejs.org/">
                   {{ $t('global.sidebar.credits.vueJs') }}
+                </HtExternalLink>
+              </li>
+              <li v-if="settings?.dateFnsEnabled">
+                <HtExternalLink href="https://date-fns.org/">
+                  {{ $t('global.sidebar.credits.dateFns') }}
+                </HtExternalLink>
+              </li>
+              <li v-else>
+                <HtExternalLink href="https://momentjs.com/">
+                  {{ $t('global.sidebar.credits.momentJs') }}
+                </HtExternalLink>
+              </li>
+              <li>
+                <HtExternalLink href="https://vue-tippy.netlify.app/">
+                  {{ $t('global.sidebar.credits.vueTippy') }}
                 </HtExternalLink>
               </li>
             </ul>

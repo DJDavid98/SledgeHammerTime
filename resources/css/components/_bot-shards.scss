@@ -2,58 +2,88 @@
 
 .bot-shards-display {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
+  flex-flow: row nowrap;
+  justify-content: stretch;
   align-items: center;
   --shard-servers-share-multiplier: .25;
-  gap: design.app-value('bot-shard-spacing');
-  font-size: design.app-value('bot-shards-display-font-size');
+  gap: design.app-value('bot-shard-tick-gap');
 
-  .bot-shard {
+  .bot-shard-tick {
     display: flex;
     flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    flex: 0 1 calc(var(--shard-servers-share-multiplier) * 100%);
-    color: design.app-color-light('bot-shard-actvie-color');
-    background-color: design.app-color-light('bot-shard-actvie-bg');
-    padding: design.app-value('bot-shard-spacing');
-    border-radius: design.app-value('bot-shard-spacing');
+    flex: 1 1 calc(var(--shard-servers-share-multiplier) * 100%);
+    height: design.app-value('bot-shard-tick-height');
+    border-radius: design.app-value('bot-shard-tick-border-radius');
+    cursor: help;
+
+    @include design.if-ltr {
+      @include design.combined-border-radius;
+    }
+    @include design.if-rtl {
+      @include design.combined-border-radius-inverted;
+    }
+  }
+}
+
+.bot-shard-active, .tippy-box[data-theme~='active-shard'] {
+  color: design.app-color-light('bot-shard-actvie-color');
+  background-color: design.app-color-light('bot-shard-actvie-bg');
+
+  @include design.if-dark {
+    color: design.app-color-dark('bot-shard-actvie-color');
+    background-color: design.app-color-dark('bot-shard-actvie-bg');
+  }
+}
+
+.bot-shard-inactive {
+  color: design.app-color-light('bot-shard-inactvie-color');
+  background-color: design.app-color-light('bot-shard-inactvie-bg');
+
+  @include design.if-dark {
+    color: design.app-color-dark('bot-shard-inactvie-color');
+    background-color: design.app-color-dark('bot-shard-inactvie-bg');
+  }
+}
+
+.tippy-box[data-theme~="shard-tooltip"] {
+  border-radius: calc(#{design.app-value('bot-shard-spacing')} * 1.5);
+
+  > .tippy-content {
+    padding: design.app-value('bot-shard-tick-gap');
+  }
+}
+
+.bot-shard-tooltip {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 calc(var(--shard-servers-share-multiplier) * 100%);
+  padding: design.app-value('bot-shard-spacing');
+  border-radius: design.app-value('bot-shard-spacing');
+  gap: design.app-value('bot-shard-spacing');
+  font-size: design.app-value('bot-shards-display-font-size');
+  box-sizing: border-box;
+
+  .bot-shard-info {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
     gap: design.app-value('bot-shard-spacing');
-    max-width: design.app-value('bot-shard-max-width');
+    width: 100%;
+    filter: drop-shadow(0 0.0625em 0.0625em rgba(0, 0, 0, .5));
+    white-space: nowrap;
 
-    @include design.if-dark {
-      color: design.app-color-dark('bot-shard-actvie-color');
-      background-color: design.app-color-dark('bot-shard-actvie-bg');
+    strong {
+      font-weight: bold;
     }
 
-    &.idle {
-      color: design.app-color-light('bot-shard-inactvie-color');
-      background-color: design.app-color-light('bot-shard-inactvie-bg');
-
-      @include design.if-dark {
-        color: design.app-color-dark('bot-shard-inactvie-color');
-        background-color: design.app-color-dark('bot-shard-inactvie-bg');
+    > :last-child {
+      @include design.if-ltr {
+        text-align: right;
       }
-    }
-
-    .bot-shard-info {
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: space-between;
-      gap: design.app-value('bot-shard-spacing');
-      width: 100%;
-      max-width: design.app-value('bot-shard-info-max-width');
-      filter: drop-shadow(0 0.0625em 0.0625em rgba(0, 0, 0, .5));
-      white-space: nowrap;
-
-      > :last-child {
-        @include design.if-ltr {
-          text-align: right;
-        }
-        @include design.if-rtl {
-          text-align: left;
-        }
+      @include design.if-rtl {
+        text-align: left;
       }
     }
   }

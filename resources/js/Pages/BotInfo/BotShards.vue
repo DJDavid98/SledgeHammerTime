@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import BotShardsDisplay, { BotShard } from '@/Pages/BotInfo/BotShardsDisplay.vue';
 import HtCard from '@/Reusable/HtCard.vue';
+import { computed } from 'vue';
 
 export type BotShardData = BotShard[];
 
-defineProps<{
+const props = defineProps<{
   shards: BotShardData;
 }>();
+const totalServerCount = computed(() => String(props.shards.reduce((total, shard) => total + shard.serverCount, 0)));
 </script>
 
 <template>
@@ -17,6 +19,10 @@ defineProps<{
 
     <p class="mb-3">
       {{ $t('botInfo.shardStats.description') }}
+    </p>
+
+    <p class="mb-3">
+      {{ $t('botInfo.shardStats.boxesDescription', { totalServerCount }) }}
     </p>
 
     <BotShardsDisplay :shards="shards" />

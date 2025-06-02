@@ -22,6 +22,7 @@ export default defineConfig(({ mode }) => {
         '~@picocss': resolve(__dirname, 'node_modules/@picocss'),
         '~the-new-css-reset': resolve(__dirname, 'node_modules/the-new-css-reset'),
         '~@fortawesome': resolve(__dirname, 'node_modules/@fortawesome'),
+        '~tippy.js': resolve(__dirname, 'node_modules/tippy.js'),
         '@': resolve(__dirname, 'resources/js'),
       },
     },

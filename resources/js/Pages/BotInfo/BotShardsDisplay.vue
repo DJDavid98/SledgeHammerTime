@@ -2,6 +2,7 @@
 import { dateTimeLibraryInject } from '@/injection-keys';
 import BotShardsDisplayItem, { EnhancedBotShard } from '@/Pages/BotInfo/BotShardsDisplayItem.vue';
 import { computed, inject } from 'vue';
+import { TippySingleton } from 'vue-tippy';
 
 export interface BotShard {
   id: number;
@@ -32,12 +33,14 @@ const totalServerCount = computed(() => props.shards.reduce((totalCount, shard) 
 
 <template>
   <div class="bot-shards-display">
-    <BotShardsDisplayItem
-      v-for="shard in enhancedShards"
-      :key="shard.id"
-      :shard="shard"
-      :total-server-count="totalServerCount"
-    />
+    <TippySingleton>
+      <BotShardsDisplayItem
+        v-for="(shard, i) in enhancedShards"
+        :key="i"
+        :shard="shard"
+        :total-server-count="totalServerCount"
+      />
+    </TippySingleton>
   </div>
 </template>
 
