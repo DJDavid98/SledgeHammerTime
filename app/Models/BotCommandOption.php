@@ -22,6 +22,7 @@ class BotCommandOption extends Model {
     'min_length',
     'max_length',
     'deleted_at',
+    'total_uses',
   ];
 
   function command():BelongsTo {

@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { useNumberFormatter } from '@/composables/useNumberFormatter';
 import BotCommandOptionChoices, { BotCommandOptionChoiceList } from '@/Pages/BotInfo/BotCommandOptionChoices.vue';
 import HtBadge from '@/Reusable/HtBadge.vue';
 import HtBadgeGroup from '@/Reusable/HtBadgeGroup.vue';
 import HtTranslate from '@/Reusable/HtTranslate.vue';
 import { BadgeColor } from '@/utils/badges';
 import { getBotCommandTranslationKey } from '@/utils/translation';
+import { faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { computed } from 'vue';
 
 export interface BotCommandOption {
@@ -18,6 +21,7 @@ export interface BotCommandOption {
   min_length: number | null;
   max_length: number | null;
   choices?: BotCommandOptionChoiceList;
+  total_uses: number | null;
 }
 
 const props = defineProps<{
@@ -25,6 +29,7 @@ const props = defineProps<{
   option: BotCommandOption,
   translations: Record<string, string>,
 }>();
+const nf = useNumberFormatter();
 
 const localizedName = computed(() => {
   const key = getBotCommandTranslationKey({
@@ -52,10 +57,11 @@ const optionColors: Partial<Record<number, BadgeColor>> = {
   10: 'cyan',
 };
 
-const hasMinValue = typeof props.option.min_value === 'number';
-const hasMaxValue = typeof props.option.max_value === 'number';
-const hasMinLength = typeof props.option.min_length === 'number';
-const hasMaxLength = typeof props.option.max_length === 'number';
+const hasMinValue = computed(() => typeof props.option.min_value === 'number');
+const hasMaxValue = computed(() => typeof props.option.max_value === 'number');
+const hasMinLength = computed(() => typeof props.option.min_length === 'number');
+const hasMaxLength = computed(() => typeof props.option.max_length === 'number');
+const totalUses = computed(() => props.option.total_uses ?? 0);
 </script>
 
 <template>
@@ -139,6 +145,13 @@ const hasMaxLength = typeof props.option.max_length === 'number';
           <code>{{ option.max_length }}</code>
         </HtBadge>
       </template>
+      <HtBadge
+        :color="totalUses > 0 ? undefined : 'muted'"
+        :title="$t('botInfo.commandsReference.totalUses')"
+      >
+        <FontAwesomeIcon :icon="faChartLine" />
+        {{ nf.format(totalUses) }}
+      </HtBadge>
     </HtBadgeGroup>
     <BotCommandOptionChoices
       v-if="option.choices && option.choices.length > 0"

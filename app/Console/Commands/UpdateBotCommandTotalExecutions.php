@@ -19,7 +19,7 @@ class UpdateBotCommandTotalExecutions extends Command {
    *
    * @var string
    */
-  protected $description = 'Command description';
+  protected $description = 'Update total executions for bot commands';
 
   /**
    * Execute the console command.
@@ -30,7 +30,7 @@ class UpdateBotCommandTotalExecutions extends Command {
     foreach ($executionData as $execution){
       $command = BotCommand::find($execution['bot_command_id']);
       if ($command === null){
-        $this->warn("Command with ID {$execution['id']} not found");
+        $this->warn("Command with ID {$execution['bot_command_id']} not found");
         continue;
       }
       $command->total_executions = $execution['total_executions'];

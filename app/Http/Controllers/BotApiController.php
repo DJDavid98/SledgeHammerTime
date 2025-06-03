@@ -221,6 +221,9 @@ class BotApiController extends Controller {
     }
 
     foreach ($data['options'] as $optionData){
+      /**
+       * @var BotCommandOption|null $option
+       */
       $option = $command->options()->where('name', $optionData['name'])->whereNull('deleted_at')->first();
       if ($option){
         $option->telemetryUses()->create();
