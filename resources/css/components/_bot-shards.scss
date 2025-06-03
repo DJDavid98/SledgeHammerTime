@@ -35,7 +35,11 @@
   @include design.monospace-font;
 }
 
-.bot-shard-active, .tippy-box[data-theme~='active-shard'] {
+.bot-shard-tick-id, .bot-shard-info {
+  filter: drop-shadow(0 0.0625em 0.0625em rgba(0, 0, 0, .5));
+}
+
+.bot-shard-active {
   color: design.app-color-light('bot-shard-actvie-color');
   background-color: design.app-color-light('bot-shard-actvie-bg');
 
@@ -81,7 +85,6 @@
     justify-content: space-between;
     gap: design.app-value('bot-shard-spacing');
     width: 100%;
-    filter: drop-shadow(0 0.0625em 0.0625em rgba(0, 0, 0, .5));
     white-space: nowrap;
 
     strong {

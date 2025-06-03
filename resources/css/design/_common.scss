@@ -411,20 +411,20 @@ $color-map: (
     dark: color.adjust($_badge-base-color-dark, $lightness: $_badge-lightness-adjust, $hue: $_badge-red-hue),
   ),
   bot-shard-actvie-color: (
-    light: #080,
-    dark: #cfc,
+    light: #559933,
+    dark: #efe,
   ),
   bot-shard-actvie-bg: (
-    light: #cfc,
-    dark: #080,
+    light: #efe,
+    dark: #559933,
   ),
   bot-shard-inactvie-color: (
-    light: color.adjust(#080, $saturation: -100%),
-    dark: color.adjust(#cfc, $saturation: -100%),
+    light: color.adjust(#559933, $saturation: -100%),
+    dark: color.adjust(#efe, $saturation: -100%),
   ),
   bot-shard-inactvie-bg: (
-    light: color.adjust(#cfc, $saturation: -100%),
-    dark: color.adjust(#080, $saturation: -100%),
+    light: color.adjust(#efe, $saturation: -100%),
+    dark: color.adjust(#559933, $saturation: -100%),
   ),
 );
 
