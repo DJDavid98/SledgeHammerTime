@@ -49,6 +49,13 @@ const shardClass = computed(() => idle.value ? 'bot-shard-inactive' : 'bot-shard
     theme="shard-tooltip"
     :animation="false"
   >
+    <span class="bot-shard-tick-id">
+      <FontAwesomeIcon
+        :icon="faHashtag"
+        :fixed-width="true"
+      />
+      <span class="bot-shard-id">{{ shard.id }}</span>
+    </span>
     <template #content>
       <p class="bot-shard-info">
         <strong>
@@ -58,7 +65,7 @@ const shardClass = computed(() => idle.value ? 'bot-shard-inactive' : 'bot-shard
           />
           {{ $t('botInfo.shardStats.shardId') }}
         </strong>
-        <span>{{ shard.id }}</span>
+        <span class="bot-shard-id">{{ shard.id }}</span>
       </p>
       <p
         class="bot-shard-info"

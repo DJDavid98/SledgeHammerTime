@@ -11,6 +11,8 @@
   .bot-shard-tick {
     display: flex;
     flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
     flex: 1 1 calc(var(--shard-servers-share-multiplier) * 100%);
     height: design.app-value('bot-shard-tick-height');
     border-radius: design.app-value('bot-shard-tick-border-radius');
@@ -22,7 +24,15 @@
     @include design.if-rtl {
       @include design.combined-border-radius-inverted;
     }
+
+    .bot-shard-tick-id {
+      font-size: design.app-value('bot-shards-display-font-size');
+    }
   }
+}
+
+.bot-shard-id {
+  @include design.monospace-font;
 }
 
 .bot-shard-active, .tippy-box[data-theme~='active-shard'] {
