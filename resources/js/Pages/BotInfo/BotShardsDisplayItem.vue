@@ -47,6 +47,7 @@ const shardClass = computed(() => idle.value ? 'bot-shard-inactive' : 'bot-shard
     :content-class="`bot-shard-tooltip ${shardClass}`"
     :follow-cursor="true"
     theme="shard-tooltip"
+    :animation="false"
   >
     <template #content>
       <p class="bot-shard-info">
