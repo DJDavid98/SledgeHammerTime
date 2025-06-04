@@ -22,7 +22,7 @@ const props = defineProps<{
 }>();
 
 const dtl = inject(dateTimeLibraryInject);
-const maxUpdateTimeBeforeIdleSeconds = 1.5 * 60 * 60;
+const maxUpdateTimeBeforeIdleSeconds = 1.5 * 5 * 60;
 
 const idle = computed(() => {
   if (!props.shard.updatedAt || !dtl) return false;
