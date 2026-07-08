@@ -87,6 +87,9 @@ return [
       'sesh' => [
         'p' => 'Create Discord markdown timestamps from within the Sesh scheduling bot ecosystem by Tunks',
       ],
+      'discordTimestampGenerator' => [
+        'p' => 'Simple, fast Discord timestamp generator with instant preview and all format options',
+],
     ],
   ],
 ];
