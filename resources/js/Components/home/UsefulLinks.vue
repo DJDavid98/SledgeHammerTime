@@ -7,6 +7,7 @@ import usefulLinksBot from '@img/useful-links/bot.png';
 import dabric from '@img/useful-links/dabric.png';
 import discordTimestampCom from '@img/useful-links/discordTimestampCom.png';
 import discordTimestampOrg from '@img/useful-links/discordTimestampOrg.png';
+import discordTimestampGenerator from '@img/useful-links/discordTimestampGenerator.png';
 import usefulLinksOldsite from '@img/useful-links/oldsite.png';
 import r3vfi from '@img/useful-links/r3vfi.png';
 import usefulLinksServer from '@img/useful-links/server.png';
@@ -106,6 +107,12 @@ const currentLanguage = inject(currentLanguageInject);
       :image="seshFyi"
       :allow-referrer="true"
     />
+    <UsefulLinkItem
+        :desc="$t('timestampPicker.usefulLinks.competitors.discordTimestampGenerator.p')"
+        href="https://discordtimestampgenerator.com/"
+        :image="discordTimestampGenerator"
+        :allow-referrer="true"
+     />
   </UsefulLinksCard>
 </template>
 
