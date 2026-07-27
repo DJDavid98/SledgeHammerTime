@@ -2,16 +2,16 @@
 
 return [
   'heading' => 'ページ閲覧の分析',
-  'description' => 'This page contains basic analytics (both stored and displayed without any personally identifiable details) for aggregate total page views in the app over the last :days days.',
-  'collectionMethod' => 'The data is collected on the server side, based on responses sent to a limited set of pages. The page views are recorded individually but aggregated daily by a background process.',
-  'lastUpdated' => 'The information on this page is cached for a short period to reduce server load. The data you see was last updated <1/>.',
+  'description' => 'このページには過去:days日間の総ページ閲覧数に関する基本的なアナリティクス（保存・表示ともに個人を特定可能な詳細情報は含んでいません）が表示されます。',
+  'collectionMethod' => 'データは特定のページに対して送られたレスポンスに基づいてサーバー側で集計されています。ページの閲覧数は個別に記録されていますが、バックグラウンドプロセスにおいて日単位で総計されています。',
+  'lastUpdated' => 'サーバー負荷を軽減するため、このページの情報は短期間キャッシュされています。現在表示中のデータの最終更新は<1/>です。',
   'charts' => [
-    'dailyTotal' => 'Daily Total Page Views',
-    'breakdown' => 'Page Views Breakdown',
-    'byPage' => 'By Pages',
-    'byLanguage' => 'By Language',
+    'dailyTotal' => '日別ページ閲覧数',
+    'breakdown' => 'ページ閲覧数の内訳',
+    'byPage' => 'ページ別',
+    'byLanguage' => '言語別',
   ],
   'values' => [
-    'unknown' => 'Unknown',
+    'unknown' => '不明',
   ],
 ];

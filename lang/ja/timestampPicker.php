@@ -34,15 +34,15 @@ return [
   'table' => [
     'syntaxColumn' => 'メッセージの構文',
     'resultColumn' => '例',
-    'editFormats' => 'Customize formats',
-    'resetFormats' => 'Reset to defaults',
-    'hideFormat' => 'Hide this format',
-    'showFormat' => 'Show this format',
-    'unhideInProfile' => 'Unhide in profile settings',
+    'editFormats' => 'フォーマットをカスタマイズ',
+    'resetFormats' => 'デフォルトに戻す',
+    'hideFormat' => 'このフォーマットを非表示',
+    'showFormat' => 'このフォーマットを表示',
+    'unhideInProfile' => 'プロフィール設定で非表示を解除',
   ],
   'faq' => [
-    'title' => 'Frequently Asked Questions',
-    'description' => 'This section is English-only for now, and it\'s heavily based on content from <1>our Discord server</1>. Some links might not work as expected unless you are a member.',
+    'title' => 'よくある質問',
+    'description' => 'この節は現在英語のみとなっており、またこれは<1>私たちのDiscordサーバー</1> の上の内容に基づいています。メンバーでない場合、一部のリンクが正しく機能しない場合があります。',
   ],
   'usefulLinks' => [
     'lead' => '関連するもの',
@@ -67,25 +67,25 @@ return [
     ],
     'competitors' => [
       'lead' => [
-        'p1' => 'Did you know that HammerTime is not the only tool for generating timestamps?',
-        'p2' => 'You may want to check out these other Discord timestamp generators to find one that works best for you:',
+        'p1' => 'HammarTime以外のタイムスタンプ生成ツールはご存知ですか？',
+        'p2' => '以下のDiscordのタイムスタンプ生成ツールから、最適なものを探してみてください：',
       ],
       '3vfi' => [
         'header' => '',
-        'p' => 'A simple and fast timestamp generator by 3ventic',
+        'p' => 'シンプルで高速なタイムスタンプ生成ツール（開発：3ventic）',
       ],
       'dabric' => [
         'header' => '',
-        'p' => 'Natural language Discord timestamp generator by dabric',
+        'p' => '自然言語形式のDiscordタイムスタンプ生成ツール（開発：dabric）',
       ],
       'discordtimestampCom' => [
-        'p' => 'Free Discord timestamp generator with local timezone support by Sellframe Ltd.',
+        'p' => 'ローカルのタイムゾーンに対応した無料のDiscordタイムスタンプ生成ツール（開発：Sellframe Ltd）',
       ],
       'discordtimestampOrg' => [
-        'p' => 'Discord timestamp generator and time converter by DiscordTimestamp.org',
+        'p' => 'Discordのタイムスタンプ生成・時刻変換ツール（開発：DiscordTimestamp.org）',
       ],
       'sesh' => [
-        'p' => 'Create Discord markdown timestamps from within the Sesh scheduling bot ecosystem by Tunks',
+        'p' => '日程調整ボットSeshと同開発元のタイムスタンプ生成ツール（開発：Tunks）',
       ],
     ],
   ],

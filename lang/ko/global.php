@@ -29,9 +29,9 @@ return [
   'incompleteTranslations' => '번역 미완료',
   'contributeTranslations' => '기여하기',
   'timezoneBadge' => [
-    'currently' => 'Observed currently',
-    'atPickedDate' => 'Observed at picked time',
-    'currentlyAndAtPickedDate' => 'Observed currently & at picked time',
+    'currently' => '현재 기준',
+    'atPickedDate' => '지정된 시점 기준',
+    'currentlyAndAtPickedDate' => '현재 및 지정된 시점 기준',
   ],
   'copyToClipboard' => '클립보드에 복사',
   'copiedToClipboard' => '클립보드에 복사했습니다!',
@@ -50,7 +50,7 @@ return [
       'title' => '입력 설정',
       'naturalLanguageInput' => [
         'label' => '@시간 입력 필드',
-        'description' => 'Allow manipulating the selected timestamp with natural language (e.g. “in 5 hours”) via an additional free-text input. Similar to the new Discord @time tag. Only a limited number of languages are supported.',
+        'description' => '선택한 타임스탬프를 자유 텍스트 입력을 통해 자연어(예: "5시간 후")로 수정할 수 있습니다. Discord의 @time 태그와 비슷합니다. 이 기능은 몇몇 언어에서만 지원합니다.',
       ],
       'customDateInput' => [
         'label' => '사용자 날짜 입력',
@@ -74,7 +74,7 @@ return [
       ],
       'hourCycle' => [
         'label' => 'Time format',
-        'description' => 'Change how time is displayed across the app, including the custom time input and previews.',
+        'description' => '사용자 지정 시간 입력 및 미리 보기 등을 포함하여 앱 전체에서 시간이 표시되는 방식을 변경합니다.',
         'options' => [
           'default' => '기본 언어',
           'h12' => '12시간',
