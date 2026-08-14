@@ -53,6 +53,7 @@ English and Hungarian translations have been included, so no translators will be
   - [FTVTC\_ Alex.`](https://crowdin.com/profile/htcqqcomm)
   - [Hoshub](https://crowdin.com/profile/Hoshub)
   - [Jack Batele](https://crowdin.com/profile/BateleJack)
+  - [Toth.](https://crowdin.com/profile/Toth.)
   - [User670](https://crowdin.com/profile/User670)
   - [xianxiaojiu](https://crowdin.com/profile/xianxiaojiu)
   - [姓甚名谁](https://crowdin.com/profile/febilly)
@@ -64,6 +65,7 @@ English and Hungarian translations have been included, so no translators will be
   - [sfgbfdce](https://crowdin.com/profile/3582452209)
   - [呂宥廷](https://crowdin.com/profile/avery11111102)
   - [煇煇](https://crowdin.com/profile/huihuila)
+  - [神風神鵝 エホバ神魔狼](https://crowdin.com/profile/lalauya1122)
 - 🇭🇷 Croatian
   - [net-tech-](https://crowdin.com/profile/net-tech-)
   - [tovhov](https://crowdin.com/profile/tovhov)
@@ -82,6 +84,7 @@ English and Hungarian translations have been included, so no translators will be
   - [Lennart Christiansen](https://crowdin.com/profile/LennartDenmark)
   - [Lucas](https://crowdin.com/profile/LucasFromDK)
   - [MikeyDK](https://crowdin.com/profile/MikeyDK)
+  - [Nicklas Plum](https://crowdin.com/profile/mastermustachejp)
 - 🇳🇱 Dutch
   - [🐧 Nico](https://crowdin.com/profile/nico_everywhere)
   - [1soldier1pro1](https://crowdin.com/profile/1soldier1pro1)
@@ -188,6 +191,7 @@ English and Hungarian translations have been included, so no translators will be
   - [Appie](https://crowdin.com/profile/Appie_0)
   - [AwayFrom-Keyboard](https://crowdin.com/profile/AwayFrom-Keyboard)
   - [Bin](https://crowdin.com/profile/cheesepickle12345678)
+  - [Dicomu](https://crowdin.com/profile/Dicomu)
   - [Drawingpasu](https://crowdin.com/profile/Drawingpasu)
   - [haav](https://crowdin.com/profile/haav)
   - [Hweesang W.](https://crowdin.com/profile/hwswoo)
