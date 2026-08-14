@@ -5,7 +5,7 @@ return [
   'intro' => 'プロフィールページでは、当ウェブサイトに関連するアカウント情報を管理できます。Discordアプリのデフォルト設定やその他の設定を変更する場所をお探しの場合は、<1>アプリ設定</1>ページをご覧ください。',
   'information' => [
     'heading' => 'プロフィール情報',
-    'description' => "プロフィール情報を変更する。",
+    'description' => "プロフィール情報を変更します。",
     'displayName' => '表示名',
     'hiddenFormats' => '選択テーブルから非表示のフォーマット',
     'saveSuccess' => 'プロフィールが正常に更新されました。',
@@ -17,7 +17,7 @@ return [
     'crowdin' => 'Crowdinアカウント',
     'noConnectedAccounts' => '現在、接続されているアカウントはありません',
     'linkAdditional' => [
-      'heading' => '追加アカウントをリンクする',
+      'heading' => '連携アカウントの追加',
       'description' => '以下のボタンを使用して、現在のHammerTimeアカウントに追加のアカウントを接続してください。',
       'discord' => [
         'description' => 'プロフィール画像や表示名が変更された場合、既に連携済みのDiscordアカウントについても、この方法で情報を更新できます。',

@@ -8,7 +8,7 @@ return [
       'time' => '時間',
       'dateAndTime' => '日期和時間',
       'timezone' => '時區',
-      'naturalLanguageInput' => '@time input',
+      'naturalLanguageInput' => '@時間輸入',
       'modeOffset' => '絕對位移',
       'modeZoneName' => '區域名稱',
     ],
@@ -28,21 +28,21 @@ return [
       'nextDecade' => '下一個十年',
     ],
     'validation' => [
-      'naturalLanguageParseError' => 'Could not parse natural language input'
+      'naturalLanguageParseError' => '無法解析自然語言輸入'
     ]
   ],
   'table' => [
     'syntaxColumn' => '聊天語法',
     'resultColumn' => '結果範例',
-    'editFormats' => 'Customize formats',
-    'resetFormats' => 'Reset to defaults',
-    'hideFormat' => 'Hide this format',
-    'showFormat' => 'Show this format',
-    'unhideInProfile' => 'Unhide in profile settings',
+    'editFormats' => '自訂格式',
+    'resetFormats' => '還原為預設值',
+    'hideFormat' => '隱藏此格式',
+    'showFormat' => '顯示此格式',
+    'unhideInProfile' => '在個人檔案設定中取消隱藏',
   ],
   'faq' => [
-    'title' => 'Frequently Asked Questions',
-    'description' => 'This section is English-only for now, and it\'s heavily based on content from <1>our Discord server</1>. Some links might not work as expected unless you are a member.',
+    'title' => '常見問題',
+    'description' => '本節目前僅提供英文版本，內容主要參考自 <1>我們的 Discord 伺服器</1> 。除非您是該伺服器的成員，否則部分連結可能無法正常運作。',
   ],
   'usefulLinks' => [
     'lead' => '您可能也會發現這些資訊很有用：',
@@ -56,7 +56,7 @@ return [
     ],
     'oldSite' => [
       'header' => 'HammerTime 測試版網站',
-      'p' => 'The old website of the project, still available until further notice',
+      'p' => '該專案的舊版網站，在另行通知前仍可繼續使用',
     ],
     'textColor' => [
       'header' => 'Rebane 的<1>彩色</1>文字產生器',
@@ -67,25 +67,25 @@ return [
     ],
     'competitors' => [
       'lead' => [
-        'p1' => 'Did you know that HammerTime is not the only tool for generating timestamps?',
-        'p2' => 'You may want to check out these other Discord timestamp generators to find one that works best for you:',
+        'p1' => '您知道 HammerTime 不是產生時間戳記的唯一工具嗎？',
+        'p2' => '您不妨參考以下其他 Discord 時間戳記產生器，找出最適合您的那一個：',
       ],
       '3vfi' => [
         'header' => '',
-        'p' => 'A simple and fast timestamp generator by 3ventic',
+        'p' => '由 3ventic 開發的簡易且快速的時間戳記產生器',
       ],
       'dabric' => [
         'header' => '',
-        'p' => 'Natural language Discord timestamp generator by dabric',
+        'p' => '由 dabric 開發的自然語言 Discord 時間戳記產生器',
       ],
       'discordtimestampCom' => [
-        'p' => 'Free Discord timestamp generator with local timezone support by Sellframe Ltd.',
+        'p' => '由 Sellframe Ltd. 提供的免費 Discord 時間戳記產生器，支援本地時區。',
       ],
       'discordtimestampOrg' => [
-        'p' => 'Discord timestamp generator and time converter by DiscordTimestamp.org',
+        'p' => '由 DiscordTimestamp.org 提供的 Discord 時間戳記產生器與時間轉換器',
       ],
       'sesh' => [
-        'p' => 'Create Discord markdown timestamps from within the Sesh scheduling bot ecosystem by Tunks',
+        'p' => '透過 Tunks 開發的 Sesh 排程機器人生態系統，在系統內部建立 Discord Markdown 時間戳記',
       ],
     ],
   ],

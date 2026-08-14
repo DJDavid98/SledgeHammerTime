@@ -1,17 +1,17 @@
 <?php
 
 return [
-  'heading' => 'Page View Analytics',
-  'description' => 'This page contains basic analytics (both stored and displayed without any personally identifiable details) for aggregate total page views in the app over the last :days days.',
-  'collectionMethod' => 'The data is collected on the server side, based on responses sent to a limited set of pages. The page views are recorded individually but aggregated daily by a background process.',
-  'lastUpdated' => 'The information on this page is cached for a short period to reduce server load. The data you see was last updated <1/>.',
+  'heading' => '頁面瀏覽分析',
+  'description' => '本頁面包含過去 :days 天內應用程式中總頁面瀏覽量的基本分析數據（無論是儲存或顯示的數據，均不含任何可識別個人身分的詳細資訊）。',
+  'collectionMethod' => '資料是在伺服器端收集的，依據傳送至特定頁面集的回應進行。頁面瀏覽次數會逐一記錄，但會由背景程序每日進行彙總。',
+  'lastUpdated' => '本頁面的資訊會暫存一段短時間，以減輕伺服器負載。您所看到的資料最後更新於 <1/>。',
   'charts' => [
-    'dailyTotal' => 'Daily Total Page Views',
-    'breakdown' => 'Page Views Breakdown',
-    'byPage' => 'By Pages',
-    'byLanguage' => 'By Language',
+    'dailyTotal' => '每日總瀏覽量',
+    'breakdown' => '頁面瀏覽量明細',
+    'byPage' => '按頁數',
+    'byLanguage' => '按語言分類',
   ],
   'values' => [
-    'unknown' => 'Unknown',
+    'unknown' => '未知',
   ],
 ];

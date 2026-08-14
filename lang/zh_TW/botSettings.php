@@ -16,7 +16,7 @@ return [
       'displayName' => '格式',
     ],
     'formatMinimalReply' => [
-      'displayName' => 'Preview-only reply when using format option',
+      'displayName' => '使用格式選項時，僅顯示預覽回覆',
     ],
     'columns' => [
       'displayName' => '欄位',

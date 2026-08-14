@@ -1,7 +1,7 @@
 <?php
 
 return [
-  'seoDescription' => 'Generování ukazatelů časových razítek pro zprávy chatu Discord',
+  'seoDescription' => 'Generujte časová razítka pro zprávy v chatu na Discordu',
   'changeLanguage' => 'Změnit jazyk',
   "notFound" => [
     "heading" => "Stránka nenalezena",
