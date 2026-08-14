@@ -4,7 +4,7 @@ return [
   "title" => "Vælg, hvor du gerne vil tilføje appen",
   "user" => [
     "title" => "Føj til Mine Apps",
-    "description" => "Use this app everywhere!",
+    "description" => "Brug denne app overalt!",
   ],
   "guild" => [
     "title" => "Føj til server",

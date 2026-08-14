@@ -42,7 +42,7 @@ return [
   ],
   'faq' => [
     'title' => 'Preguntas frequentes',
-    'description' => 'This section is English-only for now, and it\'s heavily based on content from <1>our Discord server</1>. Some links might not work as expected unless you are a member.',
+    'description' => 'Por enquanto, esta seção está disponível apenas em inglês e é baseada, em grande parte, no conteúdo do <1>nosso servidor do Discord</1>. Alguns links podem não funcionar como esperado caso você não seja membro.',
   ],
   'usefulLinks' => [
     'lead' => 'Você também pode achar isto útil:',
@@ -85,7 +85,7 @@ return [
         'p' => 'Gerador e conversor de tempo para o timestamp do Discord por DiscordTimestamp.org',
       ],
       'sesh' => [
-        'p' => 'Create Discord markdown timestamps from within the Sesh scheduling bot ecosystem by Tunks',
+        'p' => 'Crie carimbos de timestamps no formato Markdown do Discord a partir do ecossistema de bots de agendamento Sesh, da Tunks',
       ],
     ],
   ],

@@ -29,9 +29,9 @@ return [
   'incompleteTranslations' => 'Vertalingen zijn onvolledig',
   'contributeTranslations' => 'Draag bij',
   'timezoneBadge' => [
-    'currently' => 'Observed currently',
-    'atPickedDate' => 'Observed at picked time',
-    'currentlyAndAtPickedDate' => 'Observed currently & at picked time',
+    'currently' => 'Momenteel waargenomen',
+    'atPickedDate' => 'Waargenomen op de gekozen tijd',
+    'currentlyAndAtPickedDate' => 'Momenteel waargenomen & op de gekozen tijd',
   ],
   'copyToClipboard' => 'Kopiëren naar klembord',
   'copiedToClipboard' => 'Naar klembord gekopieerd!',
@@ -69,11 +69,11 @@ return [
         'description' => "Zet schaduw- en hoogte effecten uit op inputs en knoppen",
       ],
       'timezoneStickyHeaders' => [
-        'label' => 'Timezone group headers',
-        'description' => 'Show sticky group headers (e.g. America, Europe) in the timezone selector dropdown.',
+        'label' => 'Kopteksten voor groepen van tijdzones',
+        'description' => 'Laat kopteksten zien voor groepen van tijdzones (bijv. "America" of "Europe") in het dropdown selectiemenu van de tijdzones.',
       ],
       'hourCycle' => [
-        'label' => 'Time format',
+        'label' => 'Tijdnotatie',
         'description' => 'Change how time is displayed across the app, including the custom time input and previews.',
         'options' => [
           'default' => 'Taal standaard',
